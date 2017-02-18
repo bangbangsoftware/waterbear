@@ -1,6 +1,7 @@
 import store from '../../store.js'
 import template from './feed.html'
 import Vue from 'vue'
+Vue.use(require('vue-moment'))
 
 const feedComp = {
   name: 'feed',

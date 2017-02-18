@@ -79,6 +79,7 @@
     "url-loader": "^0.5.7",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^10.3.0",
+    "vue-moment": "^2.0.2",
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.1.10",
     "vue-template-loader": "^0.2.2",
