@@ -4,8 +4,7 @@
         <div class="phone-viewport">
             <md-list>
                 <md-list-item v-for="item in feeds">
-                      <span>{{item.date}}</span>
-                      <span>{{item.message}}</span>
+                      <span>{{item.date | time }} - {{item.message}}</span>
                 </md-list-item>
             </md-list>    
     </md-whiteframe>

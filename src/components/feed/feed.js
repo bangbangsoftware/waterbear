@@ -1,14 +1,18 @@
 import store from '../../store.js'
 import template from './feed.html'
 import Vue from 'vue'
-Vue.use(require('vue-moment'))
 
 const feedComp = {
   name: 'feed',
   template,
-  data () {
+  data() {
     return {
       feeds: store.state.feeds
+    }
+  },
+  filters: {
+    time: date => {
+      return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
     }
   },
   methods: {
