@@ -1,0 +1,12 @@
+<div class="feed">
+    <md-whiteframe>
+        <h1>The Feed</h1> 
+        <div class="phone-viewport">
+            <md-list>
+                <md-list-item v-for="item in feeds">
+                      <span>{{item.date}}</span>
+                      <span>{{item.message}}</span>
+                </md-list-item>
+            </md-list>    
+    </md-whiteframe>
+</div>

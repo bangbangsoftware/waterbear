@@ -1,0 +1,154 @@
+<div class="signup">
+    <md-layout :md-gutter="24">
+        <md-layout>
+        </md-layout>
+
+        <md-layout>
+            <md-layout md-align="center">
+
+                <transition name="fade">
+
+                    <md-whiteframe v-if="stage==='one'" md-elevation="24">
+                        <md-card md-with-hover>
+
+                            <md-card-header>
+                                <div class="md-title">
+                                    <h1>Quick Start Up</h1></div>
+                                <div class="md-subhead">Get a project up and running</div>
+                            </md-card-header>
+
+                            <h2>{{ msg }}</h2>
+
+                            <md-card-content md-ratio="1:3">
+                                <md-input-container>
+                                    <label>What is your email address?</label>
+                                    <md-input tabindex="0" v-model="email" placeholder="Email"></md-input>
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Choose a password</label>
+                                    <md-input type="password" v-model="pw" placeholder="Password"></md-input>
+                                </md-input-container>
+                            </md-card-content>
+
+                            <md-card-actions>
+                                <div v-on:click="createUser(stage='two',email,pw)" v-on:keyup.enter="next(stage='two')">
+                                    <md-button class="md-raised md-primary">Next</md-button>
+                                </div>
+                            </md-card-actions>
+
+                        </md-card>
+                    </md-whiteframe>
+                </transition>
+                <transition name="fade">
+
+                    <md-whiteframe v-if="stage==='two'" md-elevation="24">
+                        <md-card md-with-hover>
+
+                            <md-card-header>
+                                <div class="md-title">
+                                    <h1>Project details</h1></div>
+                                <div class="md-subhead">Few project details</div>
+                            </md-card-header>
+
+                            <h2>{{ msg }}</h2>
+
+                            <md-card-content md-ratio="1:3">
+                                <md-input-container>
+                                    <label>What is the project called</label>
+                                    <md-input tabindex="0" v-model="projectName" placeholder="Project name"></md-input>
+                                </md-input-container>
+                            </md-card-content>
+
+                            <md-card-actions>
+                                <div v-on:click="project(stage='three',projectName)" v-on:keyup.enter="next(stage='three')">
+                                    <md-button class="md-raised md-primary">Next</md-button>
+                                </div>
+                            </md-card-actions>
+
+                        </md-card>
+                    </md-whiteframe>
+                </transition>
+
+                <transition name="fade">
+
+                    <md-whiteframe v-if="stage==='three'" md-elevation="24">
+                        <md-card md-with-hover>
+
+                            <md-card-header>
+                                <div class="md-title">
+                                    <h1>About you</h1></div>
+                                <div class="md-subhead"></div>
+                            </md-card-header>
+
+                            <h2>{{ msg }}</h2>
+
+                            <md-card-content md-ratio="1:3">
+                                <md-input-container>
+                                    <label>What is your name?</label>
+                                    <md-input tabindex="0" v-model="name" placeholder="name"></md-input>
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>What is your role in the project</label>
+                                    <md-input tabindex="0" v-model="role" placeholder="role"></md-input>
+                                </md-input-container>
+                            </md-card-content>
+
+                            <md-card-actions>
+                                <div v-on:click="owner(stage='four',name,role)" v-on:keyup.enter="next(stage='four')">
+                                    <md-button class="md-raised md-primary">Next</md-button>
+                                </div>
+                            </md-card-actions>
+
+                        </md-card>
+                    </md-whiteframe>
+                </transition>
+
+                <transition name="fade">
+
+                    <md-whiteframe v-if="stage==='four'" md-elevation="24">
+                        <md-card md-with-hover>
+
+                            <md-card-header>
+                                <div class="md-title">
+                                    <h1>About the team</h1></div>
+                                <div class="md-subhead"></div>
+                            </md-card-header>
+
+                            <h2>{{ msg }}</h2>
+
+                            <md-card-content md-ratio="1:3">
+                                <md-input-container>
+                                    <label>What is your name?</label>
+                                    <md-input tabindex="0" v-model="role" placeholder="name"></md-input>
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>What is your role in the project</label>
+                                    <md-input tabindex="0" v-model="email" placeholder="email"></md-input>
+                                </md-input-container>
+                            </md-card-content>
+
+                            <md-card-actions>
+                                <div v-on:click="team(done=true)" v-on:keyup.enter="next(done=true)">
+                                    <md-button class="md-raised md-primary">Definition of done</md-button>
+                                </div>
+                                <div v-on:click="next(done=true)" v-on:keyup.enter="next(done=true)">
+                                    <md-button class="md-raised md-primary">Enter some stories</md-button>
+                                </div>
+                            </md-card-actions>
+
+                        </md-card>
+                    </md-whiteframe>
+                </transition>
+
+
+            </md-layout>
+        </md-layout>
+
+        <md-layout>
+        </md-layout>
+
+        <md-layout>
+            <feed></feed>
+        </md-layout>
+    </md-layout>
+</div>
