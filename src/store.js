@@ -11,7 +11,13 @@ const store = new Vuex.Store({
   mutations: {
     increment: state => state.count++,
     decrement: state => state.count--,
-    log: (state, item) => state.feeds.push(item)
+    log: (state, message) => {
+      const item = {
+        date: new Date(),
+        message
+      }
+      state.feeds.push(item)
+    }
   }
 })
 

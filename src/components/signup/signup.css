@@ -17,6 +17,10 @@ a {
     color: #42b983;
 }
 
+.error {
+    color: red;
+}
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .5s

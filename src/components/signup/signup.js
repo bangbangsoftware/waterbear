@@ -9,26 +9,32 @@ const name = 'waterbear'
 const error = err => console.error(err);
 const remoteCoach = 'http://localhost:5984/' + name
 const pouchOpts = {
-    skipSetup: true,
-    live: true
+  skipSetup: true,
+  live: true
 }
 const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-authentication'))
 
 const db = new PouchDB(remoteCoach, pouchOpts, error)
- 
+
 export default {
   name: 'signup',
-  data () {
+  directives: {
+    focus
+  },
+  data() {
     return {
       msg: '',
       email: '',
       pw: '',
       projectName: '',
       name: '',
-      role: '',      
+      role: '',
       team: [],
-      stage: 'one' 
+      state: {
+        stage: 'user',
+        error: ''
+      }
     }
   },
   watch: {
@@ -38,34 +44,76 @@ export default {
     }
   },
   methods: {
-    createUser: (stage,email,pw) => {
-      if (stage === 'two'){
-        db.signup(email, pw, {
-          metadata : {
-              email : '',
-              birthday : '',
-              currentProjectID: -1,
-              skills: [],
-              asperations: []
-            }
-        }, function (err, response) {
-          // etc.
-        });
-      }      
-      const log = {date:new Date(),message:email+" now has a user"}      
-      store.commit('log',log);
+    createUser: (email, pw) => {
+      if (email.length === 0) {
+        const emailElement = document.getElementById('email')
+        emailElement.focus()
+        return {
+          stage: 'user',
+          error: 'Missing email'
+        };
+      }
+      if (pw.length === 0) {
+        const pwElement = document.getElementById('password')
+        pwElement.focus()
+        return {
+          stage: 'user',
+          error: 'Missing password'
+        };
+      }
+      db.signup(email, pw, {
+        metadata: {
+          email: '',
+          birthday: '',
+          currentProjectID: -1,
+          skills: [],
+          asperations: []
+        }
+      }, function(err, response) {
+        // etc.
+      });
+      store.commit('log', email + ' is a new owner');
+      Vue.nextTick(() =>{
+        const element = document.getElementById('projectName')
+        element.focus()
+      })      
+      return {
+        stage: 'project',
+        error: ''
+      };
     },
-    project: (stage,name) => {
-      const log = {date:new Date(),message:" "+name+" project has begun"}      
-      store.commit('log',log);
+    project: (name) => {
+      if (name.length === 0) {
+        const element = document.getElementById('projectName')
+        element.focus()
+        return {
+          stage: 'project',
+          error: 'Missing project name'
+        };
+      }
+      store.commit('log', name + ' project has begun');
+       Vue.nextTick(() =>{
+        const element = document.getElementById('ownerName')
+        element.focus()
+      })      
+      return {
+        stage: 'owner',
+        error: ''
+      };
     },
-    owner: (stage,name,role) => {
-      const log = {date:new Date(),message:name+" is the owner"}      
-      store.commit('log',log);
+    owner: (name, role) => {
+      store.commit('log', 'Hi ' + name);
+      return {
+        stage: 'team',
+        error: ''
+      };
     },
-    team: (stage,team) => {
-      const log = {date:new Date(),message:"Initial team has been defined"}      
-      store.commit('log',log);
+    team: (team) => {
+      const log = {
+        date: new Date(),
+        message: 'Initial team has been defined'
+      }
+      store.commit('log', projectName + " has a team of " + team.length + " members.");
     }
   }
 }

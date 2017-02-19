@@ -2,6 +2,14 @@ import store from '../../store.js'
 import template from './feed.html'
 import Vue from 'vue'
 
+const zeroFill = val => {
+  if (val < 10) {
+    return '0' + val
+  } else {
+    return val
+  }
+}
+
 const feedComp = {
   name: 'feed',
   template,
@@ -12,19 +20,12 @@ const feedComp = {
   },
   filters: {
     time: date => {
-      return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+      return zeroFill(date.getHours()) +
+        ':' +
+        zeroFill(date.getMinutes()) +
+        ':' +
+        zeroFill(date.getSeconds())
     }
-  },
-  methods: {
-    next: () => {
-      console.log('going up ' + store.state.count)
-      store.commit('increment')
-    },
-    down: event => {
-      console.log('going down ' + store.state.count)
-      store.commit('decrement')
-    }
-
   }
 }
 

@@ -15,6 +15,7 @@
   "dependencies": {
     "style-loader": "^0.13.1",
     "vue": "^2.1.10",
+    "vue-focus": "^2.1.0",
     "vue-material": "^0.7.1",
     "vue-router": "^2.2.0",
     "vue-template-loader": "^0.2.2",
