@@ -133,26 +133,28 @@
                                     </md-table-row>
                                 </md-table-body>
                             </md-table>
-                            <form v-on:keyup.enter="state = owner(name,role)">
+
+                    <h2 v-if="state.error" class="error">{{ state.error }}</h2>
+                            <form v-on:keyup.enter="state = addMember(state.teamName,state.teamRole,state.teamEmail,state.members)">
                                 <md-input-container>
                                     <label>What is their name</label>
-                                    <md-input tabindex="0" autofocus id='teamName' v-model="name" placeholder="name"></md-input>
+                                    <md-input tabindex="0" autofocus id='teamName' v-model="state. teamName" placeholder="name"></md-input>
                                 </md-input-container>
-                                <md-input-container>
-                                    <label for="teamRole">What is your role in the project</label>
-                                    <md-select name="teamRole" id="teamRole" v-model="teamRole">
-                                        <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
-                                    </md-select>
-                                </md-input-container>
-
                                 <md-input-container>
                                     <label>What is their email?</label>
-                                    <md-input id='teamEmail' v-model="email" placeholder="email"></md-input>
+                                    <md-input id='teamEmail' v-model="state.teamEmail" placeholder="email"></md-input>
+                                </md-input-container>
+ 
+                                <md-input-container>
+                                    <label for="teamRole">What is your role in the project</label>
+                                    <md-select name="teamRole" id="teamRole" v-model="state.teamRole">
+                                        <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
+                                    </md-select>
                                 </md-input-container>
                             </form>
                         </md-card-content>
                         <md-card-actions>
-                            <div v-on:click="state = addmember(teamName,teamRole,teamEmail,state)">
+                            <div v-on:click="state = addMember(state.teamName,state.teamRole,state.teamEmail,state.members)">
                                     <md-button class="md-raised md-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></md-button>
                             </div>
                         </md-card-actions>
