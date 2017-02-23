@@ -83,15 +83,18 @@
                                 <label>What is your name?</label>
                                 <md-input tabindex="0" autofocus id='ownerName' v-model="name" placeholder="name"></md-input>
                             </md-input-container>
+
                             <md-input-container>
-                                <label>What is your role in the project</label>
-                                <md-input id='ownerRole' v-model="role" placeholder="role"></md-input>
+                                <label for="ownerRole">What is your role in the project</label>
+                                <md-select name="ownerRole" id="ownerRole" v-model="ownerRole">
+                                    <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
+                                </md-select>
                             </md-input-container>
                         </form>
                     </md-card-content>
 
                     <md-card-actions>
-                        <div v-on:click="state = owner(name,role)">
+                        <div v-on:click="state = owner(name,ownerRole)">
                             <md-button class="md-raised md-primary">Next</md-button>
                         </div>
 
@@ -113,21 +116,47 @@
                         </md-card-header>
 
                         <md-card-content md-ratio="1:3">
+                                <md-table v-if="state.members.length > 0" md-sort="name">
+                                <md-table-header>
+                                    <md-table-row>
+                                        <md-table-head md-sort-by="name">Name</md-table-head>
+                                        <md-table-head md-sort-by="email" md-tooltip="We'll send them an invite">Email</md-table-head>
+                                        <md-table-head md-sort-by="role">Role</md-table-head>
+                                    </md-table-row>
+                                </md-table-header>
+
+                                <md-table-body>
+                                    <md-table-row v-for="(position, index) in state.members" :key="index">
+                                        <md-table-cell>{{position.name}}</md-table-cell>
+                                        <md-table-cell>{{position.email}}</md-table-cell>
+                                        <md-table-cell>{{position.role}}</md-table-cell>
+                                    </md-table-row>
+                                </md-table-body>
+                            </md-table>
                             <form v-on:keyup.enter="state = owner(name,role)">
                                 <md-input-container>
                                     <label>What is their name</label>
                                     <md-input tabindex="0" autofocus id='teamName' v-model="name" placeholder="name"></md-input>
                                 </md-input-container>
                                 <md-input-container>
-                                    <label>What is their role in the project</label>
-                                    <md-input id='teamRole' v-model="role" placeholder="name"></md-input>
+                                    <label for="teamRole">What is your role in the project</label>
+                                    <md-select name="teamRole" id="teamRole" v-model="teamRole">
+                                        <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
+                                    </md-select>
                                 </md-input-container>
+
                                 <md-input-container>
                                     <label>What is their email?</label>
                                     <md-input id='teamEmail' v-model="email" placeholder="email"></md-input>
                                 </md-input-container>
                             </form>
                         </md-card-content>
+                        <md-card-actions>
+                            <div v-on:click="state = addmember(teamName,teamRole,teamEmail,state)">
+                                    <md-button class="md-raised md-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></md-button>
+                            </div>
+                        </md-card-actions>
+
 
                         <md-card-actions>
                             <div v-on:click="team(done=true)">

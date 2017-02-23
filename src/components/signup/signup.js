@@ -1,7 +1,9 @@
 import store from '../../store.js'
+import defaults from '../../defaults.js'
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
+import 'font-awesome/css/font-awesome.css'
 
 import Password from 'vue-password-strength-meter'
 
@@ -34,10 +36,12 @@ export default {
          projectName: '',
          name: '',
          role: '',
-         team: [],
+         ownerRole: '',
+         roles: defaults.roles,     
          state: {
             stage: 'user',
-            error: ''
+            error: '',
+            members: []     
          }
       }
    },
@@ -76,6 +80,10 @@ export default {
             stage: 'team',
             error: ''
          };
+      },
+      addmember: (name,role,email,state) =>{
+         state.members.push[{name,role,email}]
+         return state;
       },
       team: (team) => {
          const log = {
