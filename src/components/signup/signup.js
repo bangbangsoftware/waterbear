@@ -8,20 +8,9 @@ import 'font-awesome/css/font-awesome.css'
 import Password from 'vue-password-strength-meter'
 
 import Create from './user/create.js'
+import Team from './project/team.js'
 
 Vue.use(VueMaterial)
-
-const name = 'waterbear'
-const error = err => console.error(err);
-const remoteCoach = 'http://localhost:5984/' + name
-const pouchOpts = {
-   skipSetup: true,
-   live: true
-}
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-authentication'))
-
-const db = new PouchDB(remoteCoach, pouchOpts, error)
 
 export default {
    name: 'signup',
@@ -85,43 +74,7 @@ export default {
          };
       },
       addMember: (name, role, email, members) => {
-          const errorState = {
-            stage: 'team',
-            error: 'What\'s their name?',
-            members,
-            teamName: name,
-            teamRole: role,
-            teamEmail: email 
-         };
-         if (name.length === 0) {
-            const element = document.getElementById('teamName')
-            element.focus()
-            return errorState
-         }
-         if (email.length === 0) {
-            const element = document.getElementById('teamEmail')
-            errorState.error = 'What\'s their email?'     
-            element.focus()
-            return errorState
-         }
- 
-         const newMember = {
-            name,
-            role,
-            email
-         }
-         members.push(newMember);
-         const element = document.getElementById('teamName')
-         element.focus()
-         const newState = {
-            stage: 'team',
-            error: '',
-            members,
-            teamName: '',
-            teamRole: '',
-            teamEmail: ''
-         };
-         return newState;
+         return Team.addMember(name, role, email, members)
       },
       team: (team) => {
          const log = {
