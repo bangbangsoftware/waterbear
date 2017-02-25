@@ -1,0 +1,28 @@
+<md-card md-with-hover>
+
+    <md-card-header>
+        <div class="md-title">
+            <h1>Quick Start Up</h1></div>
+        <div class="md-subhead">Get a project up and running</div>
+    </md-card-header>
+
+    <h2 v-if="error" class="error">{{ error }}</h2>
+
+    <md-card-content md-ratio="1:3">
+        <form v-on:keyup.enter="error = createUser(email,pw)">
+            <md-input-container>
+                <label>What is your email address?</label>
+                <md-input tabindex="0" autofocus id="email" v-model="email" placeholder="Email"></md-input>
+            </md-input-container>
+            <label>Choose a password</label>
+            <password id="password" type="password" v-model="pw"></password>
+        </form>
+    </md-card-content>
+
+    <md-card-actions>
+        <div v-on:click="error = createUser(email,pw)" v-on:keyup.enter="error = createUser(email,pw)">
+            <md-button class="md-raised md-primary">Next</md-button>
+        </div>
+    </md-card-actions>
+
+</md-card>

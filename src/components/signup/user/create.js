@@ -43,6 +43,14 @@ export default {
          db.login(email, pw).then(me => {
             console.log('There you are...')
             console.log(me)
+               /**          const meta = {
+                           metadata: {
+                       skills: fred.skills,
+                       currentProjectID: projectName
+                }
+                         };
+                         return this.projectDB.putUser(user.name, meta);
+                **/
          }).catch(err => {
             console.log(err)
          })

@@ -1,0 +1,45 @@
+<md-card md-with-hover>
+
+    <md-card-header>
+        <div class="md-title">
+            <h1>About the team</h1></div>
+        <div class="md-subhead"></div>
+    </md-card-header>
+
+    <md-card-content md-ratio="1:3">
+        <h2 v-if="state.error" class="error">{{ state.error }}</h2>
+        <form v-on:keyup.enter="state = addMember(state.teamName,state.teamRole,state.teamEmail,state.members)">
+            <md-input-container>
+                <label>What is their name</label>
+                <md-input tabindex="0" autofocus id='teamName' v-model="state.teamName" placeholder="name"></md-input>
+            </md-input-container>
+            <md-input-container>
+                <label>What is their email?</label>
+                <md-input id='teamEmail' v-model="state.teamEmail" placeholder="email"></md-input>
+            </md-input-container>
+
+            <md-input-container>
+                <label for="teamRole">What is your role in the project</label>
+                <md-select name="teamRole" id="teamRole" v-model="state.teamRole">
+                    <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
+                </md-select>
+            </md-input-container>
+        </form>
+    </md-card-content>
+    <md-card-actions>
+        <div v-on:click="state = addMember(state.teamName,state.teamRole,state.teamEmail,state.members)">
+            <md-button class="md-raised md-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></md-button>
+        </div>
+    </md-card-actions>
+
+
+    <md-card-actions>
+        <div v-on:click="team(done=true)">
+            <md-button class="md-raised md-primary">Definition of done</md-button>
+        </div>
+        <div v-on:click="next(done=true)">
+            <md-button class="md-raised md-primary">Enter some stories</md-button>
+        </div>
+    </md-card-actions>
+
+</md-card>

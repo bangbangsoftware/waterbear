@@ -1,0 +1,29 @@
+<div class="project">
+    <md-whiteframe>
+        <h1>summary{{project.name}} </h1>
+        <div class="phone-viewport">
+            <md-list>
+                <md-list-item>
+                    <span>Owner</span>
+                    <md-table v-if="members.length > 0" md-sort="name">
+                        <md-table-header>
+                            <md-table-row>
+                                <md-table-head md-sort-by="name">Name</md-table-head>
+                                <md-table-head md-sort-by="email" md-tooltip="We'll send them an invite">Email</md-table-head>
+                                <md-table-head md-sort-by="role">Role</md-table-head>
+                            </md-table-row>
+                        </md-table-header>
+
+                        <md-table-body>
+                            <md-table-row v-for="(position, index) in members" :key="index">
+                                <md-table-cell>{{position.name}}</md-table-cell>
+                                <md-table-cell>{{position.email}}</md-table-cell>
+                                <md-table-cell>{{position.role}}</md-table-cell>
+                            </md-table-row>
+                        </md-table-body>
+                    </md-table>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-whiteframe>
+</div>

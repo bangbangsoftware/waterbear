@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+<!--    <img src="./assets/logo.png"> -->
+Tardigrade - little log on the far left -
     <router-view></router-view>
   </div>
 </template>
