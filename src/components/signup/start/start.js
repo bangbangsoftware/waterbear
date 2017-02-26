@@ -29,7 +29,8 @@ const comp = {
       return {
          error: '',
          email: '',
-         pw: ''
+         pw: '',
+         session: store.state.session
       }
    },
    create: () => {
@@ -37,7 +38,24 @@ const comp = {
       element.focus()
    },
    methods: {
+      oops: (err, email, where) => {
+         console.error(where)
+         console.error(err)
+         if (err.status === 409) {
+            const emailElement = document.getElementById('email')
+            emailElement.focus()
+            this.error = email + ' is already in use'
+         } else {
+            const emailElement = document.getElementById('email')
+            emailElement.focus()
+            this.error = err.error + ' ' + err.reason + ' (' + err.status + ')'
+         }
+         store.commit('error', this.error)
+         return this.error
+      },
       createUser: (email, pw) => {
+//         console.log(comp)
+//         Vue.set(comp.data, 'error', 'sdfgdfg')
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
             emailElement.focus()
@@ -65,26 +83,15 @@ const comp = {
             db.login(email, pw).then(me => {
                console.log('There you are...')
                console.log(me)
-                  /**          const meta = {
-                              metadata: {
-                          skills: fred.skills,
-                          currentProjectID: projectName
-                   }
-                            };
-                            return this.projectDB.putUser(user.name, meta);
-                   **/
-            }).catch(err => {
-               console.log(err)
-            })
-         }).catch(err => {
-            console.log(err)
-         })
-         store.commit('log', email + ' is a new owner')
-         store.commit('db', db)
-         store.commit('stage', {
-            email
-         })
-         return ''
+               store.commit('user', me)
+               store.commit('log', email + ' is a new owner')
+               store.commit('db', db)
+               store.commit('stage', {
+                  email
+               })
+               return ''
+            }).catch(err => comp.methods.oops(err, email, 'login'))
+         }).catch(err => comp.methods.oops(err, email, 'signup'))
       }
    }
 }

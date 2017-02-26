@@ -10,12 +10,11 @@ const store = new Vuex.Store({
       members: [],
       signup: {
          stages: []
-      }
+      },
+      session: {}
    },
    mutations: {
       stage: (state, newStage) => {
-         console.log('STORE - signupchanged to ')
-         console.log(newStage)
          state.signup.stages.push(newStage)
       },
       member: (state, newMember) => {
@@ -23,6 +22,16 @@ const store = new Vuex.Store({
       },
       db: (state, database) => {
          state.db = database
+      },
+      error: (state, error) => {
+         console.log('session now has this error:' + error)
+         state.session.error = error
+      },
+      project: (state, project) => {
+         state.session.project = project
+      },
+      user: (state, user) => {
+         state.session.user = user
       },
       log: (state, message) => {
          const item = {
