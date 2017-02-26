@@ -43,6 +43,11 @@ const comp = {
             emailElement.focus()
             return 'Missing email'
          }
+         if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+            const emailElement = document.getElementById('email')
+            emailElement.focus()
+            return 'Email looks a bit wrong'
+         }
          if (pw.length === 0) {
             const pwElement = document.getElementById('password')
             pwElement.focus()

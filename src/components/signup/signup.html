@@ -26,20 +26,25 @@
 
         </md-layout>
 
-        <md-layout >
+        <md-layout>
             <project-summary></project-summary>
         </md-layout>
 
     </md-layout>
-    <md-layout v-if="stages.length === 3" md-align="center" md-gutter="16">
+
+    <md-layout>
+        <div>&nbsp;</div>
+    </md-layout>
+
+    <md-layout v-if="stages.length === 3" md-align="center" >
         <md-layout md-flex="20">
             <div v-on:click="team(done=true)">
-                <md-button class="md-raised md-primary">Definition of done</md-button>
+                <md-button class="md-raised md-primary">Define of done</md-button>
             </div>
         </md-layout>
         <md-layout md-flex="20">
             <div v-on:click="next(done=true)">
-                <md-button class="md-raised md-primary">Enter some stories</md-button>
+                <md-button class="md-raised md-primary">Enter stories</md-button>
             </div>
         </md-layout>
     </md-layout>

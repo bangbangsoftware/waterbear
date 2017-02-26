@@ -11,12 +11,9 @@ const comp = {
          error: ''
       }
    },
-   create: () => {
-      Vue.nextTick(() => {
-         console.log('Should be focusing projectName???')
-         const element = document.getElementById('projectName')
-         element.focus()
-      })
+   mounted: () => {
+      const element = document.getElementById('projectName')
+      element.focus()
    },
    methods: {
       project: (name) => {

@@ -12,7 +12,7 @@
         <form v-on:keyup.enter="error = createUser(email,pw)">
             <md-input-container>
                 <label>What is your email address?</label>
-                <md-input tabindex="0" autofocus id="email" v-model="email" placeholder="Email"></md-input>
+                <md-input tabindex="0" type="email" autofocus id="email" v-model="email" placeholder="Email"></md-input>
             </md-input-container>
             <label>Choose a password</label>
             <password id="password" type="password" v-model="pw"></password>

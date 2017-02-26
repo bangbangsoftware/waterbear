@@ -17,8 +17,8 @@ const comp = {
          roles: defaults.roles
       }
    },
-   create: () => {
-      const element = document.getElementById('projectName')
+   mounted: () => {
+      const element = document.getElementById('teamName')
       element.focus()
    },
    methods: {
@@ -37,6 +37,12 @@ const comp = {
          if (email.length === 0) {
             const element = document.getElementById('teamEmail')
             errorState.error = 'What\'s their email?'
+            element.focus()
+            return errorState
+         }
+         if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+            const element = document.getElementById('teamEmail')
+            errorState.error = 'Email looks a bit wrong'
             element.focus()
             return errorState
          }

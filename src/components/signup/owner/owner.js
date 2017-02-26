@@ -14,14 +14,14 @@ const comp = {
          error: ''
       }
    },
-   create: () => {
-      const element = document.getElementById('ownerName')
+   mounted: () => {
+      const element = document.getElementById('ownername')
       element.focus()
    },
    methods: {
       owner: (name, role) => {
          if (name.length === 0) {
-            const element = document.getElementById('ownerName')
+            const element = document.getElementById('ownername')
             element.focus()
             return 'What\'s your name'
          }
