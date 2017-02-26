@@ -54,8 +54,6 @@ const comp = {
          return this.error
       },
       createUser: (email, pw) => {
-//         console.log(comp)
-//         Vue.set(comp.data, 'error', 'sdfgdfg')
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
             emailElement.focus()

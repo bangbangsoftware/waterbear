@@ -11,7 +11,9 @@ const store = new Vuex.Store({
       signup: {
          stages: []
       },
-      session: {}
+      session: {
+         error: ''
+      }
    },
    mutations: {
       stage: (state, newStage) => {
