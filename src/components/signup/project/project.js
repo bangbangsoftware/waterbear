@@ -12,8 +12,11 @@ const comp = {
       }
    },
    create: () => {
-      const element = document.getElementById('projectName')
-      element.focus()
+      Vue.nextTick(() => {
+         console.log('Should be focusing projectName???')
+         const element = document.getElementById('projectName')
+         element.focus()
+      })
    },
    methods: {
       project: (name) => {
@@ -23,10 +26,6 @@ const comp = {
             return 'Missing project name'
          }
          store.commit('log', name + ' project has begun')
-         store.commit('project', {
-            name,
-            members: []
-         })
          store.commit('stage', {
             name
          })

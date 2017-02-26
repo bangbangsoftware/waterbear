@@ -1,10 +1,10 @@
 <div class="signup">
 
     <md-layout>
-        <md-layout md-gutter="1">
+        <md-layout md-gutter>
             <feed></feed>
         </md-layout>
-        <md-layout md-align="center" md-gutter="1">
+        <md-layout md-align="center" md-flex="50">
 
             <md-whiteframe v-if="stages.length === 0" md-elevation="14">
                 <start></start>
@@ -26,10 +26,23 @@
 
         </md-layout>
 
-        <md-layout md-gutter="1">
+        <md-layout >
             <project-summary></project-summary>
         </md-layout>
 
     </md-layout>
+    <md-layout v-if="stages.length === 3" md-align="center" md-gutter="16">
+        <md-layout md-flex="20">
+            <div v-on:click="team(done=true)">
+                <md-button class="md-raised md-primary">Definition of done</md-button>
+            </div>
+        </md-layout>
+        <md-layout md-flex="20">
+            <div v-on:click="next(done=true)">
+                <md-button class="md-raised md-primary">Enter some stories</md-button>
+            </div>
+        </md-layout>
+    </md-layout>
+
 
 </div>

@@ -6,7 +6,7 @@
         <div class="md-subhead">Few project details</div>
     </md-card-header>
 
-    <h2 v-if="error" class="error">{{ state.error }}</h2>
+    <h2 v-if="error" class="error">{{ error }}</h2>
 
     <md-card-content md-ratio="1:3">
         <form v-on:keyup.enter="error = project(projectName)">

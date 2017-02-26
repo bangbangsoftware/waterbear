@@ -1,7 +1,12 @@
 <template>
   <div id="app">
 <!--    <img src="./assets/logo.png"> -->
-Tardigrade - little log on the far left -
+
+<md-layout md-align="end" md-gutter="16">
+  <md-layout md-flex="33">
+		Tardigrade - little log on the far left -
+  </md-layout>
+  </md-layout>
     <router-view></router-view>
   </div>
 </template>
