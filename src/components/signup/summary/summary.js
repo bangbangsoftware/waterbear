@@ -7,7 +7,7 @@ const comp = {
    template,
    data() {
       return {
-         project: store.state.project,
+         stages: store.state.signup.stages,
          members: store.state.members
       }
    }

@@ -1,29 +1,39 @@
-<div class="project">
+<div v-if="stages.length > 0" class="summary">
     <md-whiteframe>
-        <h1>summary </h1>
+        <h1 v-if="stages.length === 1">Summary </h1>
+        <h1 v-if="stages.length > 1">{{stages[1].name}} Summary </h1>
         <div class="phone-viewport">
-            <md-list>
-                <md-list-item>
-                    <span>Owner</span>
-                    <md-table v-if="members.length > 0" md-sort="name">
-                        <md-table-header>
-                            <md-table-row>
-                                <md-table-head md-sort-by="name">Name</md-table-head>
-                                <md-table-head md-sort-by="email" md-tooltip="We'll send them an invite">Email</md-table-head>
-                                <md-table-head md-sort-by="role">Role</md-table-head>
-                            </md-table-row>
-                        </md-table-header>
+            <md-layout v-if="stages.length === 1 || stages.length === 2">
+                Owner's email address is {{stages[0].email}}
+            </md-layout>
 
-                        <md-table-body>
-                            <md-table-row v-for="(position, index) in members" :key="index">
-                                <md-table-cell>{{position.name}}</md-table-cell>
-                                <md-table-cell>{{position.email}}</md-table-cell>
-                                <md-table-cell>{{position.role}}</md-table-cell>
-                            </md-table-row>
-                        </md-table-body>
-                    </md-table>
-                </md-list-item>
-            </md-list>
+            <md-layout v-if="stages.length ===3">
+                This project is owned by the {{stages[2].role}}: <a :href="'mailto:' + stages[0].email">{{stages[2].name}}</a>
+            </md-layout>
+
+            <md-layout>
+                <md-list>
+                    <md-list-item>
+                        <md-table v-if="members.length > 0" >
+                            <md-table-header>
+                                <md-table-row>
+                                    <md-table-head >Name</md-table-head>
+                                    <md-table-head md-tooltip="We'll send them an invite">Email</md-table-head>
+                                    <md-table-head >Role</md-table-head>
+                                </md-table-row>
+                            </md-table-header>
+
+                            <md-table-body>
+                                <md-table-row v-for="(position, index) in members" :key="index">
+                                    <md-table-cell>{{position.name}}</md-table-cell>
+                                    <md-table-cell>{{position.email}}</md-table-cell>
+                                    <md-table-cell>{{position.role}}</md-table-cell>
+                                </md-table-row>
+                            </md-table-body>
+                        </md-table>
+                    </md-list-item>
+                </md-list>
+            </md-layout>
         </div>
     </md-whiteframe>
 </div>
