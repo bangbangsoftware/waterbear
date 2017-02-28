@@ -26,6 +26,10 @@ const comp = {
             return 'What\'s your name'
          }
          store.commit('log', 'Hi ' + name)
+         store.commit('owner', {
+            name,
+            role
+         })
          store.commit('stage', {
             name,
             role

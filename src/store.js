@@ -21,6 +21,26 @@ const store = new Vuex.Store({
       },
       member: (state, newMember) => {
          state.members.push(newMember)
+         store.state.db.get(state.session.project._id)
+            .then(prj => {
+               prj.members = state.members
+               return store.state.db.put(prj)
+            }).then(proj => {
+               console.log('Member added to db -  ' + state.session.project._id)
+               proj._id = state.session.project._id
+               state.session.project = proj
+            })
+      },
+      owner: (state, owner) => {
+         store.state.db.get(state.session.project._id)
+            .then(prj => {
+               prj.owner = owner
+               return store.state.db.put(prj)
+            }).then(proj => {
+               console.log('Member owner to db -  ' + state.session.project._id)
+               proj._id = state.session.project._id
+               state.session.project = proj
+            })
       },
       db: (state, database) => {
          state.db = database

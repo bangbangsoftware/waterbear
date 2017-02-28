@@ -13,6 +13,7 @@ const comp = {
       }
    },
    mounted: () => {
+      store.commit('error', '')
       const element = document.getElementById('projectName')
       element.focus()
    },
@@ -56,6 +57,7 @@ const comp = {
                store.state.db.putUser(user.name, meta)
                   .catch(err => comp.methods.oops(err, name))
 
+               proj._id = name
                store.commit('project', proj)
                store.commit('log', name + ' project has begun')
                store.commit('stage', {

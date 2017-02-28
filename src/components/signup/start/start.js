@@ -74,7 +74,6 @@ const comp = {
                metadata: {
                   email: '',
                   birthday: '',
-                  currentProjectID: -1,
                   skills: [],
                   asperations: []
                }
