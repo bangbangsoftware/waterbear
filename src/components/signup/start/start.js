@@ -69,27 +69,29 @@ const comp = {
             pwElement.focus()
             return 'Missing password'
          }
-         db.signup(email, pw, {
-            metadata: {
-               email: '',
-               birthday: '',
-               currentProjectID: -1,
-               skills: [],
-               asperations: []
-            }
-         }).then(() => {
-            db.login(email, pw).then(me => {
-               console.log('There you are...')
-               console.log(me)
-               store.commit('user', me)
-               store.commit('log', email + ' is a new owner')
-               store.commit('db', db)
-               store.commit('stage', {
-                  email
-               })
-               return ''
-            }).catch(err => comp.methods.oops(err, email, 'login'))
-         }).catch(err => comp.methods.oops(err, email, 'signup'))
+         db.logout().then(() =>
+            db.signup(email, pw, {
+               metadata: {
+                  email: '',
+                  birthday: '',
+                  currentProjectID: -1,
+                  skills: [],
+                  asperations: []
+               }
+            }).then(() => {
+               db.login(email, pw).then(me => {
+                  console.log('There you are...')
+                  console.log(me)
+                  store.commit('user', me)
+                  store.commit('log', email + ' is a new owner')
+                  store.commit('db', db)
+                  store.commit('stage', {
+                     email
+                  })
+                  return ''
+               }).catch(err => comp.methods.oops(err, email, 'login'))
+            }).catch(err => comp.methods.oops(err, email, 'signup'))
+         ).catch(err => comp.methods.oops(err, email, 'logout'))
       }
    }
 }

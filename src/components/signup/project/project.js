@@ -8,7 +8,8 @@ const comp = {
    data() {
       return {
          projectName: '',
-         error: ''
+         error: '',
+         session: store.state.session
       }
    },
    mounted: () => {
