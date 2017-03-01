@@ -1,7 +1,6 @@
 import store from '../../../store.js'
 import Vue from 'vue'
 import template from './owner.html'
-import defaults from '../../../defaults.js'
 
 const comp = {
    name: 'owner',
@@ -10,7 +9,7 @@ const comp = {
       return {
          ownerName: '',
          ownerRole: '',
-         roles: defaults.roles,
+         roles: store.state.defaults.roles,
          error: ''
       }
    },

@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import defaults from './defaults.js'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
       },
       session: {
          error: ''
-      }
+      },
+      defaults
    },
    mutations: {
       stage: (state, newStage) => {

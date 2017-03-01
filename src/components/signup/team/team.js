@@ -1,7 +1,6 @@
 import template from './team.html'
 import store from '../../../store.js'
 import Vue from 'vue'
-import defaults from '../../../defaults.js'
 
 const comp = {
    name: 'team',
@@ -14,7 +13,7 @@ const comp = {
             teamRole: '',
             teamEmail: ''
          },
-         roles: defaults.roles
+         roles: store.state.defaults.roles
       }
    },
    mounted: () => {
