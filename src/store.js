@@ -37,9 +37,11 @@ const store = new Vuex.Store({
          store.state.db.get(state.session.project._id)
             .then(prj => {
                prj.owner = owner
+               prj.defaults = state.defaults
                return store.state.db.put(prj)
             }).then(proj => {
                console.log('Member owner to db -  ' + state.session.project._id)
+               console.log('And added defaults')
                proj._id = state.session.project._id
                state.session.project = proj
             })
