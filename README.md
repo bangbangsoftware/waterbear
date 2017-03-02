@@ -31,3 +31,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 To setup local couch db instance for this project using docker
 > ./dockercouch.sh
+to start on subsequent run just
+> docker start my-couchdb-app
+
+you'll need to initialise datbase by doing a put to this
+http://127.0.0.1:5984/waterbear/
