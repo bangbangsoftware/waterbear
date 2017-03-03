@@ -24,15 +24,17 @@ export default {
             stage: 'start'
          },
 
-         navigateTo: function(nav) {
-            // Do what you want here.
-            // this.saveTheThing()
-            console.log(Router)
+      }
+   },
+   methods: {
+      navigateTo: function(nav) {
+         // Do what you want here.
+         // this.saveTheThing()
+         console.log(Router)
 
-            Vue.$router.go({
-               path: nav
-            })
-         }
+         Vue.$router.go({
+            path: nav
+         })
       }
    }
 }
