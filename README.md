@@ -8,6 +8,9 @@
 # install dependencies
 npm install
 
+# To setup local couch db instance for this project using docker
+npm run docker
+
 # serve with hot reload at localhost:8080
 npm run dev
 
@@ -29,5 +32,3 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-To setup local couch db instance for this project using docker
-> ./dockercouch.sh
