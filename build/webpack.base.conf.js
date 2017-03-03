@@ -58,6 +58,7 @@ module.exports = {
             }, {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                query: { presets: ['es2015'] },
                 include: [resolve('src'), resolve('test')]
             }, {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

@@ -16,7 +16,7 @@ Vue.use(VueMaterial)
 
 export default {
    name: 'signup',
-   data() {
+   data: () => {
       return {
          stages: store.state.signup.stages,
          signup: {
