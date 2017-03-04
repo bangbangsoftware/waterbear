@@ -14,7 +14,7 @@ import './team/team'
 
 Vue.use(VueMaterial)
 
-export default {
+const comp = {
    name: 'signup',
    data: function() {
       return {
@@ -25,16 +25,6 @@ export default {
          },
 
       }
-   },
-   methods: {
-      navigateTo: function(nav) {
-         // Do what you want here.
-         // this.saveTheThing()
-         console.log(Router)
-
-         Vue.$router.go({
-            path: nav
-         })
-      }
    }
 }
+export default comp 

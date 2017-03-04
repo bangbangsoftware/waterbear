@@ -38,14 +38,14 @@
 
     <md-layout v-if="stages.length === 3" md-align="center">
         <md-layout md-flex="20">
-            <div v-on:click="navigateTo('dod')">
+            <router-link to="/done">
                 <md-button class="md-raised md-primary">Define of done</md-button>
-            </div>
+            </router-link>
         </md-layout>
         <md-layout md-flex="20">
-            <div v-on:click="next(done=true)">
+            <router-link to="/story">
                 <md-button class="md-raised md-primary">Enter stories</md-button>
-            </div>
+            </router-link>
         </md-layout>
     </md-layout>
 
