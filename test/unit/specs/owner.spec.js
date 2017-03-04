@@ -1,5 +1,6 @@
 import owner from 'src/components/signup/owner/owner'
 import store from 'src/store.js'
+import Vue from 'vue'
 
 describe('owner.vue', () => {
    beforeEach(() => {
@@ -16,14 +17,15 @@ describe('owner.vue', () => {
          },
          put: prj => {
             return new Promise((resolve, reject) => {
-               resolve(project)
+               console.log(prj)
+               resolve(prj)
             })
          }
       }
       store.commit('db', fakeDB)
    })
 
-  it('should set owner up with blank fields', () => {
+   it('should set owner up with blank fields', () => {
       const data = owner.data()
       expect(data.ownerName).to.equal('')
       expect(data.ownerRole).to.equal('')
@@ -44,5 +46,12 @@ describe('owner.vue', () => {
    it('should validate owner\'s name', () => {
       const poster = owner.methods.owner
       expect(poster('Fred', '')).to.equal('')
+      Vue.nextTick(() => {
+         expect(store.state.project.owner).to.equal('Fred')
+         const defaults = store.state.defaults.roles
+         expect(store.state.project.defaults.roles.length).to.equal(defaults.length)
+         expect(store.state.stages.length).to.equal(1)
+         expect(store.state.stages[0].name).to.equal('Fred')
+      })
    })
 })
