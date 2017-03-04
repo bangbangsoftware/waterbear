@@ -41,14 +41,13 @@ const comp = {
       oops: (err, email, where) => {
          console.error(where)
          console.error(err)
+         this.error = err.error + ' ' + err.reason + ' (' + err.status + ')'
          if (err.status === 409) {
-            const emailElement = document.getElementById('email')
-            emailElement.focus()
             this.error = email + ' is already in use'
-         } else {
-            const emailElement = document.getElementById('email')
+         }
+         const emailElement = document.getElementById('email')
+         if (emailElement) {
             emailElement.focus()
-            this.error = err.error + ' ' + err.reason + ' (' + err.status + ')'
          }
          store.commit('error', this.error)
          return this.error
@@ -56,43 +55,52 @@ const comp = {
       createUser: (email, pw) => {
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
-            emailElement.focus()
+            if (emailElement) {
+               emailElement.focus()
+            }
             return 'Missing email'
          }
          if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             const emailElement = document.getElementById('email')
-            emailElement.focus()
+            if (emailElement) {
+               emailElement.focus()
+            }
             return 'Email looks a bit wrong'
          }
          if (pw.length === 0) {
             const pwElement = document.getElementById('password')
-            pwElement.focus()
+            if (pwElement) {
+               pwElement.focus()
+            }
             return 'Missing password'
          }
-         db.logout().then(() =>
-            db.signup(email, pw, {
-               metadata: {
+         db.logout().then(() => {
+               const metadata = {
                   email: '',
                   birthday: '',
                   skills: [],
                   asperations: []
                }
-            }).then(() => {
-               db.login(email, pw).then(me => {
-                  console.log('There you are...')
-                  console.log(me)
-                  store.commit('user', me)
-                  store.commit('log', email + ' is a new owner')
-                  store.commit('db', db)
-                  store.commit('stage', {
-                     email
-                  })
-                  return ''
-               }).catch(err => comp.methods.oops(err, email, 'login'))
+               return db.signup(email, pw, {
+                  metadata
+               })
+            }).catch(err => comp.methods.oops(err, email, 'logout'))
+            .then(() => {
+               return db.login(email, pw)
             }).catch(err => comp.methods.oops(err, email, 'signup'))
-         ).catch(err => comp.methods.oops(err, email, 'logout'))
+            .then(me => {
+               console.log('There you are...')
+               console.log(me)
+               store.commit('user', me)
+               store.commit('log', email + ' is a new owner')
+               store.commit('db', db)
+               store.commit('stage', {
+                  email
+               })
+            }).catch(err => comp.methods.oops(err, email, 'login'))
       }
    }
 }
 
 Vue.component('start', comp)
+export default comp
