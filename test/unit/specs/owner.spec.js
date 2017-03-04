@@ -52,6 +52,8 @@ describe('owner.vue', () => {
          expect(store.state.project.defaults.roles.length).to.equal(defaults.length)
          expect(store.state.stages.length).to.equal(1)
          expect(store.state.stages[0].name).to.equal('Fred')
+         expect(store.state.feed.length).to.equal(1)
+         expect(store.state.feed[0].message).to.equal('Hi Fred')
       })
    })
 })
