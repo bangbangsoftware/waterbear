@@ -30,3 +30,4 @@ const feedComp = {
 }
 
 Vue.component('feed', feedComp)
+export default feedComp
