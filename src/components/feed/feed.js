@@ -13,7 +13,7 @@ const zeroFill = val => {
 const feedComp = {
   name: 'feed',
   template,
-  data() {
+  data: () => {
     return {
       feeds: store.state.feeds
     }

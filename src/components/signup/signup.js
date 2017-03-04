@@ -4,8 +4,6 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import 'font-awesome/css/font-awesome.css'
 
-import Router from 'vue-router'
-
 import './start/start'
 import './project/project'
 import './summary/summary'
@@ -14,7 +12,7 @@ import './team/team'
 
 Vue.use(VueMaterial)
 
-const comp = {
+export default {
    name: 'signup',
    data: function() {
       return {
@@ -22,9 +20,7 @@ const comp = {
          signup: {
             error: '',
             stage: 'start'
-         },
-
+         }
       }
    }
 }
-export default comp 

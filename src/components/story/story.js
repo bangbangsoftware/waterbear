@@ -1,5 +1,5 @@
-import store from '../../store.js'
-import Vue from 'vue'
+// import store from '../../store.js'
+// import Vue from 'vue'
 
 export default {
    name: 'story',
