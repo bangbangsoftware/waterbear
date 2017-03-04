@@ -69,3 +69,4 @@ const comp = {
    }
 }
 Vue.component('project', comp)
+export default comp

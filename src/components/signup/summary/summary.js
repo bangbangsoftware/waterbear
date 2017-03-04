@@ -14,3 +14,4 @@ const comp = {
 }
 
 Vue.component('projectSummary', comp)
+export default comp

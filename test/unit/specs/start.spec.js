@@ -20,6 +20,14 @@ describe('start.vue', () => {
                resolve(prj)
             })
          },
+         login: (email, pw) => {
+            return new Promise((resolve, reject) => {
+               const you = {
+                  email
+               }
+               resolve(you)
+            })
+         },
          signup: (email, pw) => {
             if (email === 'already@have.com') {
                return new Promise((resolve, reject) => {
@@ -73,7 +81,12 @@ describe('start.vue', () => {
       const create = start.methods.createUser
       create('what@what.com', 'ffffff')
       Vue.nextTick(() => {
+         console.log('next tick')
+         expect(store.state.user.email).to.be('whiat@what.com')
          expect(store.state.feed.length).to.be(1)
+         expect(store.state.feed[0]).to.be('what@what.com is a new owner')
+         expect(store.state.stages.length).to.be(1)
+         expect(store.state.stages[0].email).to.be('what@what.com')
       })
    })
 })
