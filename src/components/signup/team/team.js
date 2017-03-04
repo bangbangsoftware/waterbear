@@ -13,7 +13,8 @@ const comp = {
             teamRole: '',
             teamEmail: ''
          },
-         roles: store.state.defaults.roles
+         roles: store.state.defaults.roles,
+         newrole: 'Add Role'
       }
    },
    mounted: () => {
@@ -61,6 +62,9 @@ const comp = {
             teamEmail: ''
          }
          return newState
+      },
+      addrole: function () {
+        store.state.defaults.roles.push(this.newrole)
       }
    }
 }
