@@ -56,4 +56,18 @@ describe('owner.vue', () => {
          expect(store.state.feed[0].message).to.equal('Hi Fred')
       })
    })
+
+   it('should validate owner\'s name and role', () => {
+      const poster = owner.methods.owner
+      expect(poster('Dick', 'Superman')).to.equal('')
+      Vue.nextTick(() => {
+         const defaults = store.state.defaults.roles
+         expect(store.state.project.defaults.roles.length).to.equal(defaults.length)
+         expect(store.state.stages.length).to.equal(1)
+         expect(store.state.stages[0].name).to.equal('Dick')
+         expect(store.state.stages[0].role).to.equal('Superman')
+         expect(store.state.feed.length).to.equal(1)
+         expect(store.state.feed[0].message).to.equal('Hi Dick')
+      })
+   })
 })
