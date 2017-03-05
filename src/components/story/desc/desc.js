@@ -3,11 +3,16 @@ import Vue from 'vue'
 import template from './desc.html'
 
 const comp = {
-   name: 'desc',
+   name: 'storyDesc',
    template,
    data: function() {
-      return {}
+      return {
+         title: '',
+         descAs: '',
+         descWant: '',
+         descThat: ''
+      }
    }
 }
-Vue.component('desc', comp)
+Vue.component('storyDesc', comp)
 export default comp
