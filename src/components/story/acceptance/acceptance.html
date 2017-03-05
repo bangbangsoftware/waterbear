@@ -1,102 +1,23 @@
-<div class="story">
+<div class="acceptance">
     <md-card>
         <md-card-content>
-
-            <form id="storyForm" v-on:keyup.enter="error = submit()">
-                <md-input-container>
-                    <label>What is the title of the story?</label>
-                    <md-input id="title" required placeholder="Story Title" v-model="title" tabindex="0"></md-input>
-                </md-input-container>
-                <label>Story description</label>
-                <md-input-container>
-                    <md-input-container>
-                        <label>As...</label>
-                        <md-input id="descAs" required placeholder="As" v-model="descAs"></md-input>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>I want...</label>
-                        <md-input id="descWant" required placeholder="I want" v-model="descWant"></md-input>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>so that...</label>
-                        <md-input id="descThat" required placeholder="so that" v-model="descThat"></md-input>
-                    </md-input-container>
-
-                </md-input-container>
-                <label v-if="tags && tags.length > 0">Tags</label>
-                <div>
-                    <div v-for="(tag, index) in tags">{{index+1}}. {{tag}}
-                        <button type="button" v-on:click="removeTag(it)" md-mini-fab>
-                            <md-icon class="md-24">-</md-icon>
-                        </button>
-                    </div>
-                    <div>
-                        <md-select>
-                            <md-option selected></md-option>
-                            <md-option v-for="tName in session.defaults.tags">{{tName}}</md-option>
-                        </md-select>
-                        <button type="button" v-on:click="addTag(newTag)" md-mini-fab><i class="material-icons" md-24>add</i>
-                        </button>
-                    </div>
-                </div>
-
-                <label v-if="arcs && acs.length > 0">Acceptance Criteria</label>
-                <label v-if="needAcs">This story need acceptance criteria</label>
-                <div>
-                    <div v-for="(ac, i) in acs">{{i+1}}. {{ac}}
-                        <button type="button" v-on:click="removeCriteria(i)" md-mini-fab>
-                            <md-icon class="md-24">-</md-icon>
-                        </button>
-                    </div>
-                    <div>
-                        <md-input #acceptance id="newAC" v-on:keyup.tab="tab($event)" class="ac-input"
-                            v:on:change="checkAC()" placeholder="Acceptance Criteria"
-                            v-model="newAC">
-                        </md-input>
-                        <button type="button" id="acButton" v-on:click="addCriteria(newAc)" md-mini-fab><i class="material-icons" md-24>add</i>
-                        </button>
-                    </div>
-                </div>
-                <br>
-                <div class="grid">
-                    <md-grid-list cols="8" rowHeight="25px" gutterSize="8px">
-                        <md-grid-tile v-for="(colour,c) in colours" v-on:click="selectColour(c)"
-                            v-blind:class="{'selected': c===selectedColour,'unselected': c!==selectedColour}"
-                            v-bind:class="coloursClass[c]">{{colour}}</md-grid-tile>
-                    </md-grid-list>
-                </div>
-                <br>
-                <md-card-actions align="end">
-                    <button type="button" md-raised-button color="primary" v-on:click="clearStory()">Clear Story</button>
-                    <button md-raised-button color="primary" type="submit" [disabled]="!storyForm.valid || (acs.length === 0 && newAC.value.length === 0)">Add Story</button>
-                </md-card-actions>
-            </form>
-        </md-card-content>
-    </md-card>
-
-    <div class="card-container">
-        <div>
-            <label>List</label>
-            <md-select (change)="listID = listNo">
-                <md-option v-for="(list,listNo) in session.project.stories">{{list.name}}</md-option>
-            </md-select>
-        </div>
-    </div>
-    <div class="card-container">
-        <md-card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in session.project.stories[listID].items.slice().reverse()">
-            <md-card-title>{{session.project.stories[listID].items.length-c}}. {{story.title}}</md-card-title>
+            <label v-if="arcs && acs.length > 0">Acceptance Criteria</label>
+            <label v-if="needAcs">This story need acceptance criteria</label>
             <div>
-                As {{story.descAs}}, I want {{story.descWant}}, so that {{story.descThat}}
+                <div v-for="(ac, i) in acs">{{i+1}}. {{ac}}
+                    <button type="button" v-on:click="removeCriteria(i)" md-mini-fab>
+                            <md-icon class="md-24">-</md-icon>
+                        </button>
+                </div>
+                <div>
+                    <md-input #acceptance id="newAC" v-on:keyup.tab="tab($event)" class="ac-input"
+                        v:on:change="checkAC()" placeholder="Acceptance Criteria" v-model="newAC">
+                    </md-input>
+                    <button type="button" id="acButton" v-on:click="addCriteria(newAc)" md-mini-fab><i class="material-icons" md-24>add</i>
+                        </button>
+                </div>
             </div>
             <br>
-            <md-card-content v-for="ac in story.acs">
-                <i>{{i+1}}. {{ac.descWhen}} {{ac.descDo}} {{ac.descExpect}}</i>
-            </md-card-content>
-            <md-card-actions align="end">
-                <button md-button v-on:click="editStory(story)" color="primary">EDIT</button>
-                <button md-button v-on:click="removeStory(story)" color="primary">DELETE</button>
-                <button md-button v-on:click="breakStory(story)" color="primary">BREAK DOWN</button>
-            </md-card-actions>
-        </md-card>
-    </div>
+        </md-card-content>
+    </md-card>
 </div>

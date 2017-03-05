@@ -1,10 +1,10 @@
 import store from '../../store.js'
 // import Vue from 'vue'
 
-// import './tags/tags'
-// import './list/list'
-// import './colours/colours'
-// import './acceptance/acceptance'
+import './tags/tags'
+import './list/list'
+import './colours/colours'
+import './acceptance/acceptance'
 import './desc/desc'
 
 export default {
