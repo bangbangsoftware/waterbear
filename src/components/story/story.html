@@ -1,8 +1,24 @@
-<div class="start">
+<div class="story">
+    <md-card>
+        <md-card-content>
+            <form id="storyForm" v-on:keyup.enter="error = submit()">
+                <desc></desc>
+                <tags></tags>
+                <acceptance></acceptance>
+                <colours></colours>
+                <br>
+                <md-card-actions align="end">
+                    <md-button type="button" class="md-raised md-primary" v-on:click="clearStory()">Clear Story</md-button>
+                    <!--                    <button md-raised-button color="primary" type="submit" :disabled="!storyForm.valid || (acs.length === 0 && newAC.value.length === 0)">Add Story</button>
+                    -->
+                </md-card-actions>
+            </form>
+        </md-card-content>
+    </md-card>
 
-    <md-layout>
-            <h1>Tell me a story</h1>
-    </md-layout>
-
-
+    </md-card>
+    <md-card-content>
+        <list></list>
+    </md-card-content>
+    </md-card>
 </div>

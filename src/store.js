@@ -9,6 +9,13 @@ const store = new Vuex.Store({
       feeds: [],
       db: null,
       members: [],
+      story: {
+         descAs: '',
+         descWant: '',
+         descThat: '',
+         tags: [],
+         colour: 'black'
+      },
       signup: {
          stages: []
       },
