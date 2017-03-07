@@ -1,4 +1,4 @@
-// import store from '../../store.js'
+import store from '../../../store.js'
 import Vue from 'vue'
 import template from './colours.html'
 
@@ -6,7 +6,12 @@ const comp = {
    name: 'colours',
    template,
    data: function() {
-      return {}
+      return {
+         colours: store.state.defaults.colours,
+         colourClasses: store.state.defaults.colourClasses,
+         coloursClass: 'black',
+         selectedColour: 'black'
+      }
    },
    methods: {
       navigateTo: function(nav) {

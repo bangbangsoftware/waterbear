@@ -1,13 +1,10 @@
 <div class="colours">
-    <md-card>
-        <md-card-content>
-            <div class="grid">
-                <md-grid-list cols="8" rowHeight="25px" gutterSize="8px">
-                    <md-grid-tile v-for="(colour,c) in colours" v-on:click="selectColour(c)" v-blind:class="{'selected': c===selectedColour,'unselected': c!==selectedColour}"
-                        v-bind:class="coloursClass[c]">{{colour}}</md-grid-tile>
-                </md-grid-list>
-            </div>
-            <br>
-        </md-card-content>
-    </md-card>
+    <md-layout :md-gutter="8">
+        <md-layout>
+            <md-button v-bind:class="[c === selectedColour ? 'selected' : 'unselected']" v-for="(colour,c) in colours"
+                :key="colour">
+                <span v-on:click="selectColour(c)" v-bind:class="colourClasses[c]">{{colour}}</span>
+            </md-button>
+        </md-layout>
+    </md-layout>
 </div>

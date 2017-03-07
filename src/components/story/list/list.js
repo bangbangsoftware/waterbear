@@ -1,4 +1,4 @@
-// import store from '../../store.js'
+import store from '../../../store.js'
 import Vue from 'vue'
 import template from './list.html'
 
@@ -6,7 +6,9 @@ const comp = {
    name: 'list',
    template,
    data: function() {
-      return {}
+      return {
+         project: store.state.session.project
+      }
    },
    methods: {
       navigateTo: function(nav) {

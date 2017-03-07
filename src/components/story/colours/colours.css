@@ -1,35 +1,31 @@
-h1,
-h2 {
-    font-weight: normal;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-a {
-    color: #42b983;
-}
-
-.error {
+*.red {
     color: red;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
+.yellow {
+    color: yellow;
 }
 
-.fade-enter,
-.fade-leave-to
-/* .fade-leave-active in <2.1.8 */
+.blue {
+    color: blue;
+}
 
-{
-    opacity: 0
+.orange {
+    color: orange;
+}
+
+.black {
+    color: black;
+}
+
+.green {
+    color: green;
+}
+
+.white {
+    color: white;
+}
+
+.brown {
+    color: brown;
 }

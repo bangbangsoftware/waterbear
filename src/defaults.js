@@ -1,22 +1,26 @@
 export default {
 
-   colours: [{
-      'yellow': 'yellow'
-   }, {
-      'red': 'red'
-   }, {
-      'blue': 'blue'
-   }, {
-      'orange': 'orange'
-   }, {
-      'black': 'black'
-   }, {
-      'green': 'green'
-   }, {
-      'white': 'white'
-   }, {
-      'brown': 'brown'
-   }],
+   colourClasses: [
+      'yellow',
+      'red',
+      'blue',
+      'orange',
+      'black',
+      'green',
+      'white',
+      'brown'
+   ],
+
+   colours: [
+      'yellow',
+      'red',
+      'blue',
+      'orange',
+      'black',
+      'green',
+      'white',
+      'brown'
+   ],
 
    consequences: ['Unusable', 'Unstable', 'Cosmetic'],
 

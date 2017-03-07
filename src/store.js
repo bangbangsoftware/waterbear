@@ -14,13 +14,17 @@ const store = new Vuex.Store({
          descWant: '',
          descThat: '',
          tags: [],
-         colour: 'black'
+         colour: 'black',
+         acs: []
       },
       signup: {
          stages: []
       },
       session: {
-         error: ''
+         error: '',
+         project: {
+            stories: []
+         }
       },
       defaults
    },
@@ -55,6 +59,12 @@ const store = new Vuex.Store({
       },
       db: (state, database) => {
          state.db = database
+      },
+      removeAcceptance: (state, index) => {
+         state.story.acs = state.story.acs.splice(index, 1)
+      },
+      acceptance: (state, crit) => {
+         state.story.acs.push(crit)
       },
       error: (state, error) => {
          console.log('session now has this error:' + error)

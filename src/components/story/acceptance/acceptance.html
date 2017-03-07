@@ -1,23 +1,30 @@
 <div class="acceptance">
-    <md-card>
-        <md-card-content>
-            <label v-if="arcs && acs.length > 0">Acceptance Criteria</label>
-            <label v-if="needAcs">This story need acceptance criteria</label>
-            <div>
-                <div v-for="(ac, i) in acs">{{i+1}}. {{ac}}
-                    <button type="button" v-on:click="removeCriteria(i)" md-mini-fab>
-                            <md-icon class="md-24">-</md-icon>
-                        </button>
-                </div>
-                <div>
-                    <md-input #acceptance id="newAC" v-on:keyup.tab="tab($event)" class="ac-input"
-                        v:on:change="checkAC()" placeholder="Acceptance Criteria" v-model="newAC">
-                    </md-input>
-                    <button type="button" id="acButton" v-on:click="addCriteria(newAc)" md-mini-fab><i class="material-icons" md-24>add</i>
-                        </button>
-                </div>
-            </div>
-            <br>
-        </md-card-content>
-    </md-card>
+    <div v-for="(ac, i) in acs">
+        <md-layout md-align="center">
+            <md-layout md-flex="20">{{i+1}}. {{ac}}
+            </md-layout>
+            <md-layout md-flex="20">
+                <md-button class="md-raised " id="acRemoveButton">
+                    <i v-on:click="removeCriteria(i)" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                </md-button>
+            </md-layout>
+        </md-layout>
+    </div>
+    <h1 v-if="state.error" class="error">{{state.error}}</h1>
+    <md-layout md-align="center">
+        <md-layout md-flex="60">
+            <md-input-container>
+                <label>Add Criteria</label>
+                <md-input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" v-on:keyup.tab="tab($event)"
+                    class="ac-input" v:on:change="checkAC()" placeholder="Acceptance Criteria"
+                    v-model="state.newAc">
+                </md-input>
+            </md-input-container>
+        </md-layout>
+        <md-layout md-flex="10">
+            <md-button class="md-raised md-primary" id="acButton">
+                <i v-on:click="state = addCriteria(state.newAc)" class="fa fa-plus-square-o" aria-hidden="true"></i>
+            </md-button>
+        </md-layout>
+    </md-layout>
 </div>
