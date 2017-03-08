@@ -1,31 +1,38 @@
-*.red {
-    color: red;
-}
-
-.yellow {
-    color: yellow;
-}
-
-.blue {
-    color: blue;
-}
-
-.orange {
-    color: orange;
-}
-
-.black {
-    color: black;
-}
-
-.green {
-    color: green;
-}
-
-.white {
+.red {
+    background-color: red;
     color: white;
 }
 
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+    color: gray;
+}
+
+.orange {
+    background-color: orange;
+    color: gray;
+}
+
+.black {
+    color: gray;
+    background-color: black;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.white {
+    background-color: white;
+    color: gray;
+}
+
 .brown {
-    color: brown;
+    background-color: brown;
+    color: white;
 }

@@ -1,11 +1,11 @@
 <div class="acceptance">
-    <div v-for="(ac, i) in acs">
+    <div v-for="(ac, i) in state.acs">
         <md-layout md-align="center">
-            <md-layout md-flex="20">{{i+1}}. {{ac}}
+            <md-layout md-flex="60">{{i+1}}. {{ac}}
             </md-layout>
             <md-layout md-flex="20">
                 <md-button class="md-raised " id="acRemoveButton">
-                    <i v-on:click="removeCriteria(i)" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                    <i v-on:click="state = removeCriteria(i)" class="fa fa-minus-square-o" aria-hidden="true"></i>
                 </md-button>
             </md-layout>
         </md-layout>
@@ -21,7 +21,7 @@
                 </md-input>
             </md-input-container>
         </md-layout>
-        <md-layout md-flex="10">
+        <md-layout md-flex="20">
             <md-button class="md-raised md-primary" id="acButton">
                 <i v-on:click="state = addCriteria(state.newAc)" class="fa fa-plus-square-o" aria-hidden="true"></i>
             </md-button>

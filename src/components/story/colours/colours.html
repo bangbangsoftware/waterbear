@@ -1,9 +1,9 @@
 <div class="colours">
     <md-layout :md-gutter="8">
         <md-layout>
-            <md-button v-bind:class="[c === selectedColour ? 'selected' : 'unselected']" v-for="(colour,c) in colours"
+            <md-button v-bind:class="colourClasses[c]" v-for="(colour,c) in colours"
                 :key="colour">
-                <span v-on:click="selectColour(c)" v-bind:class="colourClasses[c]">{{colour}}</span>
+                <div v-on:click="selectColour(c)" v-bind:class="[c === selectedColour ? 'selected' : 'unselected']">{{colour}}</div>
             </md-button>
         </md-layout>
     </md-layout>

@@ -7,9 +7,9 @@ const comp = {
    template,
    data: function() {
       return {
-         acs: store.state.story.acs,
          state: {
             newAc: '',
+            acs: store.state.story.acs,
             error: ''
          }
       }
@@ -30,11 +30,17 @@ const comp = {
          }
          return {
             newAc: '',
+            acs: store.state.story.acs,
             error: ''
          }
       },
       removeCriteria: acNo => {
          store.commit('removeAcceptance', acNo)
+         return {
+            newAc: '',
+            acs: store.state.story.acs,
+            error: ''
+         }
       }
 
    }

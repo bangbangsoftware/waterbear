@@ -1,6 +1,7 @@
 import store from '../../../store.js'
 import Vue from 'vue'
 import template from './colours.html'
+import './colours.css'
 
 const comp = {
    name: 'colours',

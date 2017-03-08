@@ -61,7 +61,7 @@ const store = new Vuex.Store({
          state.db = database
       },
       removeAcceptance: (state, index) => {
-         state.story.acs = state.story.acs.splice(index, 1)
+         state.story.acs.splice(index, 1)
       },
       acceptance: (state, crit) => {
          state.story.acs.push(crit)
