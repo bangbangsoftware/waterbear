@@ -1,20 +1,14 @@
 import Vue from 'vue'
 
-import store from '../../../store.js'
+import store from '../../store.js'
+import db from '../../dbase.js'
 
-import template from './start.html'
-import './start.css'
-
-import db from '../../../dbase.js'
-
-import Password from 'vue-password-strength-meter'
+import template from './login.html'
+import './login.css'
 
 const comp = {
-   name: 'start',
+   name: 'login',
    template,
-   components: {
-      Password
-   },
    data() {
       return {
          error: '',
@@ -42,7 +36,7 @@ const comp = {
          store.commit('error', this.error)
          return this.error
       },
-      createUser: (email, pw) => {
+      login: (email, pw) => {
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
             if (emailElement) {
@@ -65,32 +59,18 @@ const comp = {
             return 'Missing password'
          }
          db.logout().then(() => {
-               const metadata = {
-                  email: '',
-                  birthday: '',
-                  skills: [],
-                  asperations: []
-               }
-               return db.signup(email, pw, {
-                  metadata
-               })
-            }).catch(err => comp.methods.oops(err, email, 'logout'))
-            .then(() => {
                return db.login(email, pw)
-            }).catch(err => comp.methods.oops(err, email, 'signup'))
+            }).catch(err => comp.methods.oops(err, email, 'logout'))
             .then(me => {
                console.log('There you are...')
                console.log(me)
                store.commit('user', me)
                store.commit('log', email + ' is a new owner')
                store.commit('db', db)
-               store.commit('stage', {
-                  email
-               })
             }).catch(err => comp.methods.oops(err, email, 'login'))
       }
    }
 }
 
-Vue.component('start', comp)
+Vue.component('login', comp)
 export default comp

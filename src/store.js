@@ -14,7 +14,7 @@ const store = new Vuex.Store({
          descWant: '',
          descThat: '',
          tags: [],
-         colour: 'black',
+         colourNo: 4,
          acs: []
       },
       signup: {
@@ -62,6 +62,9 @@ const store = new Vuex.Store({
       },
       removeAcceptance: (state, index) => {
          state.story.acs.splice(index, 1)
+      },
+      colour: (state, no) => {
+         state.story.colourNo = no
       },
       acceptance: (state, crit) => {
          state.story.acs.push(crit)

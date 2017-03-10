@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import signup from '../components/signup/signup.vue'
 import story from '../components/story/story.vue'
+import login from '../components/login/login.js'
 import '../components/feed/feed.js'
 
 /**
@@ -20,6 +21,10 @@ Vue.use(VueMaterial)
 export default new Router({
    routes: [{
          path: '/',
+         name: 'login',
+         component: login
+      }, {
+         path: '/start',
          name: 'signup',
          component: signup
       }, {

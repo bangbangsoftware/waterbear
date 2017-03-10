@@ -1,6 +1,6 @@
 .red {
     background-color: red;
-    color: white;
+    color: black;
 }
 
 .yellow {
@@ -9,30 +9,41 @@
 
 .blue {
     background-color: blue;
-    color: gray;
+    color: black;
 }
 
 .orange {
     background-color: orange;
-    color: gray;
+    color: black;
 }
 
 .black {
-    color: gray;
+    color: yellow;
     background-color: black;
 }
 
 .green {
     background-color: green;
-    color: white;
+    color: black;
 }
 
-.white {
-    background-color: white;
-    color: gray;
+.gray {
+    background-color: gray;
+    color: yellow;
 }
 
 .brown {
     background-color: brown;
-    color: white;
+    color: black;
 }
+
+.unselected {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.selected {
+    border-style: solid;
+    border-width: 2px;
+    font-weight: bold;
+}
+

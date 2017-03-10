@@ -9,8 +9,8 @@ import './desc/desc'
 
 export default {
    name: 'story',
-   methods: {
-       valid: function() {
+   computed: {
+      watch: function() {
          if (store.state.story.descAs.length === 0) {
             return false
          }
@@ -27,7 +27,9 @@ export default {
             return false
          }
          return true
-      },
+      }
+   },
+   methods: {
       navigateTo: function(nav) {
          this.$router.go({
             path: nav

@@ -10,11 +10,15 @@ const comp = {
       return {
          colours: store.state.defaults.colours,
          colourClasses: store.state.defaults.colourClasses,
-         coloursClass: 'black',
-         selectedColour: 'black'
+         selectedColour: store.state.story.colourNo
       }
    },
    methods: {
+      changeColour: no => {
+         console.log('Selecting colour ' + no)
+         store.commit('colour', no)
+         return no
+      },
       navigateTo: function(nav) {
          this.$router.go({
             path: nav
