@@ -25,6 +25,7 @@
 npm-debug.log
 testem.log
 /typings
+test/unit/coverage
 
 # e2e
 /e2e/*.js
