@@ -1,20 +1,20 @@
 <div class="story-desc">
     <md-input-container>
         <label>What is the title of the story?</label>
-        <md-input id="title" required placeholder="Story Title" v-model="title" tabindex="0"></md-input>
+        <md-input v-on:change="storeTitle(title)"   id="title" required placeholder="Story Title" v-model="title" tabindex="0"></md-input>
     </md-input-container>
     <md-input-container>
         <md-input-container>
             <label>As...</label>
-            <md-textarea id="descAs" required placeholder="As" v-model="descAs"></md-textarea>
+            <md-textarea v-on:change="storeDesc(descAs,descWant,descThat)" id="descAs" required placeholder="As" v-model="descAs"></md-textarea>
         </md-input-container>
         <md-input-container>
             <label>I want...</label>
-            <md-textarea id="descWant" required placeholder="I want" v-model="descWant"></md-textarea>
+            <md-textarea  v-on:change="storeDesc(descAs,descWant,descThat)" id="descWant" required placeholder="I want" v-model="descWant"></md-textarea>
         </md-input-container>
         <md-input-container>
             <label>so that...</label>
-            <md-textarea id="descThat" required placeholder="so that" v-model="descThat"></md-textarea>
+            <md-textarea  v-on:change="storeDesc(descAs,descWant,descThat)" id="descThat" required placeholder="so that" v-model="descThat"></md-textarea>
         </md-input-container>
     </md-input-container>
 </div>

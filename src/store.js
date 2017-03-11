@@ -10,12 +10,12 @@ const store = new Vuex.Store({
       db: null,
       members: [],
       story: {
-         descAs: '',
-         descWant: '',
-         descThat: '',
+         title: '',
+         desc: '',
          tags: [],
          colourNo: 4,
-         acs: []
+         acs: [],
+         valid: false
       },
       signup: {
          stages: []
@@ -28,6 +28,7 @@ const store = new Vuex.Store({
       },
       defaults
    },
+   methods: {},
    mutations: {
       stage: (state, newStage) => {
          state.signup.stages.push(newStage)
@@ -60,14 +61,55 @@ const store = new Vuex.Store({
       db: (state, database) => {
          state.db = database
       },
+      validStory: (state) => {
+         state.story.valid = false
+         if (state.story.title.length === 0) {
+            state.story.error = 'invalid story - missing title'
+            return false
+         }
+
+         if (state.story.desc.length === 0) {
+            state.story.error = 'invalid story - missing description'
+            return false
+         }
+
+         if (state.story.acs.length === 0) {
+            state.story.error = 'invalid story - missing acceptance critera'
+            return false
+         }
+         state.story.valid = true
+         state.story.error = ''
+         return true
+      },
+      postStory: (state) => {
+         state.session.project.stories.push(state.story)
+         state.story = {
+            title: '',
+            desc: '',
+            tags: [],
+            colourNo: 4,
+            acs: [],
+            valid: false
+         }
+      },
+      title: (state, title) => {
+         state.story.title = title
+         store.commit('validStory')
+      },
+      desc: (state, desc) => {
+         state.story.desc = desc
+         store.commit('validStory')
+      },
       removeAcceptance: (state, index) => {
          state.story.acs.splice(index, 1)
-      },
-      colour: (state, no) => {
-         state.story.colourNo = no
+         store.commit('validStory')
       },
       acceptance: (state, crit) => {
          state.story.acs.push(crit)
+         store.commit('validStory')
+      },
+      colour: (state, no) => {
+         state.story.colourNo = no
       },
       error: (state, error) => {
          console.log('session now has this error:' + error)

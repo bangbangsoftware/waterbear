@@ -9,27 +9,19 @@ import './desc/desc'
 
 export default {
    name: 'story',
-   computed: {
-      valid: function() {
-         if (store.state.story.descAs.length === 0) {
-            return false
-         }
-
-         if (store.state.story.descWant.length === 0) {
-            return false
-         }
-
-         if (store.state.story.descThat.length === 0) {
-            return false
-         }
-
-         if (store.state.story.acceptance.length === 0) {
-            return false
-         }
-         return true
+   data: () => {
+      return {
+         story: store.state.story
       }
    },
    methods: {
+      postStory: () => {
+         console.log('Post Story')
+         store.commit('validStory')
+         if (store.state.story.valid) {
+            store.commit('postStory')
+         }
+      },
       navigateTo: function(nav) {
          this.$router.go({
             path: nav

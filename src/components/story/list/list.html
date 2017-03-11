@@ -1,29 +1,32 @@
 <div class="list">
     <md-card>
         <md-card-content>
-                <label>List</label>
+            <label>List</label>
             <!--            <md-select >
                 <md-option v-for="(list,listNo) in project.stories">{{list.name}}</md-option>
             </md-select>
             -->
         </md-card-content>
         <md-card-content>
-                <!--
+            <!--
             <md-card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories[listID].items.slice().reverse()">
                 -->
-            <md-card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories" :key="story">
-                    <md-card-title>{{project.stories.length}}. {{story.title}}</md-card-title>
+            <md-card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories"
+                :key="story">
+                <md-card-header>
+                    {{project.stories.length}}. {{story.title}}
+                </md-card-header>
                 <div>
-                    As {{story.descAs}}, I want {{story.descWant}}, so that {{story.descThat}}
+                    As {{story.desc}}
                 </div>
                 <br>
-                <md-card-content v-for="ac in story.acs" :key='ac'>
-                    <i>{{i+1}}. {{ac.descWhen}} {{ac.descDo}} {{ac.descExpect}}</i>
+                <md-card-content v-for="(ac, i) in story.acs" :key='ac'>
+                    <i>{{i+1}}. {{ac}} </i>
                 </md-card-content>
                 <md-card-actions align="end">
-                    <button md-button v-on:click="editStory(story)" color="primary">EDIT</button>
-                    <button md-button v-on:click="removeStory(story)" color="primary">DELETE</button>
-                    <button md-button v-on:click="breakStory(story)" color="primary">BREAK DOWN</button>
+                    <md-button v-on:click="editStory(story)" color="primary">EDIT</md-button>
+                    <md-button v-on:click="removeStory(story)" color="primary">DELETE</md-button>
+                    <md-button v-on:click="breakStory(story)" color="primary">BREAK DOWN</md-button>
                 </md-card-actions>
             </md-card>
         </md-card-content>
