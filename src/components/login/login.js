@@ -77,6 +77,7 @@ const comp = {
                   try {
                      console.log('HOW DO I direct the route????')
                      console.log(router)
+                     window.location.href = '#/story'
                   } catch (er) {
                      console.log(er)
                   }
