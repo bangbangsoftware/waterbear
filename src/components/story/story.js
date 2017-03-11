@@ -10,7 +10,7 @@ import './desc/desc'
 export default {
    name: 'story',
    computed: {
-      watch: function() {
+      valid: function() {
          if (store.state.story.descAs.length === 0) {
             return false
          }
