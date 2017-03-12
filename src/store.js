@@ -13,7 +13,7 @@ const store = new Vuex.Store({
          title: '',
          desc: '',
          tags: [],
-         colourNo: 4,
+         colourNo: 6,
          acs: [],
          valid: false
       },

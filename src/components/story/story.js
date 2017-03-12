@@ -22,6 +22,9 @@ export default {
             store.commit('postStory')
          }
       },
+      whatsNeeded: () => {
+         story.commit('validStory')
+      },
       navigateTo: function(nav) {
          this.$router.go({
             path: nav
