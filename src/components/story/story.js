@@ -17,12 +17,9 @@ export default {
    methods: {
       postStory: function() {
          console.log('Post Story')
-         let err = store.commit('validStory')
+         store.commit('validStory')
          if (store.state.story.valid) {
             store.commit('postStory')
-            return ''
-         } else {
-            return err
          }
       },
       whatsNeeded: function() {

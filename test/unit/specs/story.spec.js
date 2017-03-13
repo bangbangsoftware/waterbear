@@ -39,8 +39,12 @@ describe('story.vue', () => {
       expect(store.state.session.project.stories.length).to.equal(0)
    })
 
-   it('should NOT add an invalid story', () => {
-      var err = story.methods.postStory()
-      expect(err).to.equal('basho')
+   it('should add a valid story', () => {
+      store.commit('title','tester')
+      store.commit('desc','tesc desc')
+      var crit = {}     
+      store.commit('acceptance',crit)
+      story.methods.postStory()
+      expect(store.state.session.project.stories.length).to.equal(1)
    })
 })
