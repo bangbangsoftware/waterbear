@@ -6,7 +6,8 @@ describe('owner.vue', () => {
    beforeEach(() => {
       // store setup
       const project = {
-         _id: 'faker'
+         _id: 'faker',
+         stories: []
       }
       store.commit('project', project)
       const fakeDB = {

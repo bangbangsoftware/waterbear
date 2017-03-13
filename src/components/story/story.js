@@ -9,21 +9,24 @@ import './desc/desc'
 
 export default {
    name: 'story',
-   data: () => {
+   data: function() {
       return {
          story: store.state.story
       }
    },
    methods: {
-      postStory: () => {
+      postStory: function() {
          console.log('Post Story')
-         store.commit('validStory')
+         let err = store.commit('validStory')
          if (store.state.story.valid) {
             store.commit('postStory')
+            return ''
+         } else {
+            return err
          }
       },
-      whatsNeeded: () => {
-         story.commit('validStory')
+      whatsNeeded: function() {
+         store.commit('validStory')
       },
       navigateTo: function(nav) {
          this.$router.go({

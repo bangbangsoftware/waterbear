@@ -12,7 +12,7 @@
                     <!--
                         <md-button align="start" class="md-raised md-primary" v-on:click="clearStory()">Clear Story</md-button>
                             -->
-                    <md-button v-on:mouseover="whatsNeeded" align="end" class="md-raised md-primary" :disabled="!story.valid">
+                    <md-button v-on:mouseover="whatsNeeded()" align="end" class="md-raised md-primary" :disabled="!story.valid">
                         <div v-on:click="postStory()">Add Story</div>
                     </md-button>
                 </md-card-actions>

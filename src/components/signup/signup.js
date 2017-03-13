@@ -1,5 +1,4 @@
 import store from '../../store.js'
-import Vue from 'vue'
 
 import './start/start'
 import './project/project'
