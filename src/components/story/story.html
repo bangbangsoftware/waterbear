@@ -1,23 +1,29 @@
 <div class="story">
-    <md-layout md-align="center" md-flex="50">
-        <md-card>
-            <md-card-content>
-                <h1 v-if="story.error">{{story.error}}</h1>
-                <story-desc></story-desc>
-                <acceptance></acceptance>
-                <tags></tags>
-                <colours></colours>
-                <br>
-                <md-card-actions>
-                    <!--
+    <md-layout>
+        <md-layout md-align="center" md-flex="80">
+            <md-card>
+                <md-card-content>
+                    <h1 v-if="story.error">{{story.error}}</h1>
+                    <story-desc></story-desc>
+                    <acceptance></acceptance>
+                    <tags></tags>
+                    <colours></colours>
+                    <br>
+                    <md-card-actions>
+                        <!--
                         <md-button align="start" class="md-raised md-primary" v-on:click="clearStory()">Clear Story</md-button>
                             -->
-                    <md-button v-on:mouseover="whatsNeeded()" align="end" class="md-raised md-primary" :disabled="!story.valid">
-                        <div v-on:click="postStory()">Add Story</div>
-                    </md-button>
-                </md-card-actions>
-            </md-card-content>
-        </md-card>
+                        <md-button v-on:mouseover="whatsNeeded()" align="end" class="md-raised md-primary"
+                            :disabled="!story.valid">
+                            <div v-on:click="postStory()">Add Story</div>
+                        </md-button>
+                    </md-card-actions>
+                </md-card-content>
+            </md-card>
+        </md-layout>
+        <md-layout md-gutter>
+            <feed></feed>
+        </md-layout>
     </md-layout>
 
     <md-card>

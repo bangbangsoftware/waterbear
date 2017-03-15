@@ -83,6 +83,7 @@ const store = new Vuex.Store({
       },
       postStory: (state) => {
          state.session.project.stories.push(state.story)
+         store.log('Added "' + state.story.title + '"')
          state.story = {
             title: '',
             desc: '',
