@@ -15,8 +15,7 @@
         <md-layout md-flex="60">
             <md-input-container>
                 <label>Add Criteria</label>
-                <md-input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" v-on:keyup.tab="tab($event)"
-                    class="ac-input" v:on:change="checkAC()" placeholder="Acceptance Criteria"
+                <md-input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" class="ac-input" placeholder="Acceptance Criteria"
                     v-model="state.newAc">
                 </md-input>
             </md-input-container>

@@ -69,7 +69,9 @@ const comp = {
                   email: '',
                   birthday: '',
                   skills: [],
-                  asperations: []
+                  asperations: [],
+                  hours: [],
+                  holidays: []
                }
                return db.signup(email, pw, {
                   metadata

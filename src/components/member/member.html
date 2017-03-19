@@ -1,0 +1,19 @@
+<md-layout v-if="session.user" md-align="center" md-flex="50">
+
+    <h1 v-if="session.error" class="error">{{session.error}}</h1>
+    <md-card md-with-hover>
+        <md-card-header>
+            <div class="md-title">
+                <h1>{{session.user.name}}</h1></div>
+            <div class="md-subhead">Getting to know how you work</div>
+        </md-card-header>
+
+        <h2 v-if="session.error" class="error"> {{ session.error }}</h2>
+        <md-card-content md-ratio="1:3">
+            <hours></hours>
+            <skills></skills>
+        </md-card-content>
+
+    </md-card>
+
+</md-layout>

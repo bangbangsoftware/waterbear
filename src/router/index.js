@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import signup from '../components/signup/signup.vue'
 import story from '../components/story/story.vue'
 import login from '../components/login/login.js'
+import member from '../components/member/member.js'
 import '../components/feed/feed.js'
 
 /**
@@ -27,6 +28,10 @@ export default new Router({
          path: '/start',
          name: 'signup',
          component: signup
+      }, {
+         path: '/member',
+         name: 'member',
+         component: member
       }, {
          path: '/story',
          name: 'story',

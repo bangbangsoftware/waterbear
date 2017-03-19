@@ -6,7 +6,7 @@ import db from '../../dbase.js'
 import template from './login.html'
 import './login.css'
 
-import router from '../../router/index.js'
+import gotoNext from '../../direct.js'
 
 const comp = {
    name: 'login',
@@ -72,15 +72,9 @@ const comp = {
                   console.log('There you are...')
                   console.log(me)
                   store.commit('user', me)
-                  store.commit('log', email + ' is a new owner')
+                  store.commit('log', email + ' logged on')
                   store.commit('db', db)
-                  try {
-                     console.log('HOW DO I direct the route????')
-                     console.log(router)
-                     window.location.href = '#/story'
-                  } catch (er) {
-                     console.log(er)
-                  }
+                  gotoNext(me)
                }
             }).catch(err => comp.methods.oops(err, email, 'logout'))
       }
