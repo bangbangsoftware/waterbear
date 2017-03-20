@@ -49,8 +49,10 @@ const comp = {
             to: ''
          })
       }
-      const element = document.getElementById('from')
-      element.focus()
+      Vue.nextTick(() => {
+         const element = document.getElementById('0-from')
+         element.focus()
+      })
    },
    methods: {
       change: (index, dayHours) => {

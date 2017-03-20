@@ -4,9 +4,9 @@
         <md-layout md-align="center">
             <md-layout md-flex="60">{{dayHours.name}}
                 <md-input-container>
-                    <label>{{dayHours.name}}</label>
-                    <md-input v-bind:id="i+'-from'" placeholder="From" v-model="dayHours.from"></md-input>
-                    <md-input v-bind:id="i+'-to'" placeholder="To" v-model="dayHours.to"></md-input>
+                    <label>Work from and until</label>
+                    <md-input v-bind:id="i+'-from'" type="number" placeholder="From" v-model="dayHours.from"></md-input>
+                    <md-input v-bind:id="i+'-to'" type="number" placeholder="To" v-model="dayHours.to"></md-input>
                 </md-input-container>
             </md-layout>
             <md-layout md-flex="20">
