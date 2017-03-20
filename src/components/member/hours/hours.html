@@ -3,8 +3,11 @@
     <div v-for="(dayHours, i) in session.user.hours">
         <md-layout md-align="center">
             <md-layout md-flex="60">{{dayHours.name}}
-                <md-input v-bind:id="i+'-from'" placeholder="From" v-model="dayHours.from" />
-                <md-input v-bind:id="i+'-to'" placeholder="To" v-model="dayHours.to" />
+                <md-input-container>
+                    <label>{{dayHours.name}}</label>
+                    <md-input v-bind:id="i+'-from'" placeholder="From" v-model="dayHours.from"></md-input>
+                    <md-input v-bind:id="i+'-to'" placeholder="To" v-model="dayHours.to"></md-input>
+                </md-input-container>
             </md-layout>
             <md-layout md-flex="20">
                 <md-button class="md-raised " id="changeButton">

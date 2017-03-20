@@ -122,6 +122,12 @@ const store = new Vuex.Store({
       user: (state, user) => {
          state.session.user = user
       },
+      hours: (state, hours) => {
+         if (!state.session.user.hours) {
+            state.session.user.hours = []
+         }
+         state.session.user.hours.push(hours)
+      },
       log: (state, message) => {
          const item = {
             date: new Date(),

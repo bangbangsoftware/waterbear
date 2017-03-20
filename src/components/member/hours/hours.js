@@ -10,43 +10,43 @@ const comp = {
          session: store.state.session
       }
    },
-   create: () => {
+   beforeCreate: () => {
       const user = store.state.session.user
-      if (typeof user.hours === 'undefined' || user.hours.length === 0) {
+      if (typeof user.hours === 'undefined' || user.hours.length === '') {
          store.commit('hours', {
             'name': 'Sunday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Monday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Tuesday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Wednesday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Thursdday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Friday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
          store.commit('hours', {
             'name': 'Saturday',
-            from: 0,
-            to: 0
+            from: '',
+            to: ''
          })
       }
       const element = document.getElementById('from')
