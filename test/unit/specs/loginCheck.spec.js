@@ -1,19 +1,16 @@
 import store from 'src/store.js'
-import loginCheck from 'src/loginCheck.js'
+import check from 'src/loginCheck.js'
 
-describe('login Check', () => {
-   it('should error if no database', () => {
-      const answer = loginCheck()
+describe('login check depends on db', () => {
+   it('should not be valid if no db ', () => {
+      const answer = check()
       expect(answer).to.equal(false)
       expect(store.state.session.error).to.equal('Need to login')
    })
-   it('should not error if database', () => {
-      store.commit('db', {
-         'fakedb': 'true'
-      })
-      const answer = loginCheck()
+   it('should be valid if there is a db ', () => {
+      store.commit('db', {})
+      const answer = check()
       expect(answer).to.equal(true)
       expect(store.state.session.error).to.equal('')
    })
-
 })
