@@ -1,70 +1,86 @@
 import store from '../../../store.js'
 import Vue from 'vue'
 import template from './hours.html'
+import './hours.css'
 
 const comp = {
    name: 'hours',
    template,
    data: function() {
       return {
-         session: store.state.session
+         session: store.state.session,
+         days: store.state.session.user.days
+      }
+   },
+   defaultHours: (name, off) => {
+      const dayHours = ['7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
+      const nightHours = ['8pm', '9pm', '10pm', '11pm', '12pm', '1am', '2am', '3am', '4am', '5am', '6am']
+
+      let on = false
+      const day = dayHours.map(h => {
+         if (off) {
+            return {
+               'name': h,
+               on
+            }
+         }
+         if (h === '9am' || h === '1pm') {
+            on = true
+         }
+         if (h === '12am' || h === '6pm') {
+            on = false
+         }
+         return {
+            'name': h,
+            on
+         }
+      })
+      on = false
+      const night = nightHours.map(h => {
+         return {
+            'name': h,
+            on
+         }
+      })
+      return {
+         name,
+         day,
+         night
       }
    },
    beforeCreate: () => {
-      const user = store.state.session.user
-      if (typeof user.hours === 'undefined' || user.hours.length === '') {
-         store.commit('hours', {
-            'name': 'Sunday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Monday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Tuesday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Wednesday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Thursdday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Friday',
-            from: '',
-            to: ''
-         })
-         store.commit('hours', {
-            'name': 'Saturday',
-            from: '',
-            to: ''
-         })
+      const storedDays = store.state.session.user.days
+      if (typeof storedDays !== 'undefined' && storedDays.length > 0) {
+         console.log('Already have default working hours')
+         console.log(store.state.session.user)
+         return
       }
-      Vue.nextTick(() => {
-         const element = document.getElementById('0-from')
-         element.focus()
+      console.log('Setting up default working hours')
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+         // for a test
+         // for (let i = 0; i < 100; i++) {
+         //   days.push('test day ' + i)
+         // }
+
+      days.forEach(name => {
+         const off = (name === 'Saturday' || name === 'Sunday')
+         const day = comp.defaultHours(name, off)
+         store.commit('day', day)
       })
    },
    methods: {
-      change: (index, dayHours) => {
-         if (dayHours) {
-            store.commit('hours', dayHours)
-         }
-         const element = document.getElementById('from')
-         if (element) {
-            element.focus()
-         }
+      toggleDay: (day, hour) => {
+         store.commit('toggleDay', {
+            day,
+            hour
+         })
+      },
+      toggleNight: (day, hour) => {
+         store.commit('toggleNight', {
+            day,
+            hour
+         })
       }
-
    }
 }
 Vue.component('hours', comp)

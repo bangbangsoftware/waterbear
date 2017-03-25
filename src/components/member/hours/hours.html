@@ -1,17 +1,13 @@
 <div class="hours">
-    <h1>What are your normal hours?</h1>
-    <div v-for="(dayHours, i) in session.user.hours">
+    <div v-for="(dayHours, hoursIndex) in days">
         <md-layout md-align="center">
-            <md-layout md-flex="60">{{dayHours.name}}
-                <md-input-container>
-                    <label>Work from and until</label>
-                    <md-input v-bind:id="i+'-from'" type="number" placeholder="From" v-model="dayHours.from"></md-input>
-                    <md-input v-bind:id="i+'-to'" type="number" placeholder="To" v-model="dayHours.to"></md-input>
-                </md-input-container>
-            </md-layout>
-            <md-layout md-flex="20">
-                <md-button class="md-raised " id="changeButton">
-                    <i v-on:click="state = change(i,dayHours)" class="fa fa-minus-square-o" aria-hidden="true"></i>
+            <h2>{{dayHours.name}}</h2>
+            <md-layout md-flex="100">
+                <md-button v-for="(hour,i) in dayHours.day" :key="hour.name" v-bind:id="i+'-amToggle'">
+                    <div v-on:click="toggleDay(hoursIndex,i)" v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
+                </md-button>
+                <md-button v-for="(hour,i) in dayHours.night" :key="hour.name" v-bind:id="i+'-pmToggle'" v-on:click="toggleNight(hoursIndex,i)">
+                    <div v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
                 </md-button>
             </md-layout>
         </md-layout>

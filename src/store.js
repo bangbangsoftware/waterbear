@@ -24,6 +24,9 @@ const store = new Vuex.Store({
          error: '',
          project: {
             stories: []
+         },
+         user: {
+            days: []
          }
       },
       defaults
@@ -122,11 +125,21 @@ const store = new Vuex.Store({
       user: (state, user) => {
          state.session.user = user
       },
-      hours: (state, hours) => {
-         if (!state.session.user.hours) {
-            state.session.user.hours = []
+      toggleNight: (state, time) => {
+         state.session.user.days[time.day].night[time.hour].on = !state.session.user.days[time.day].night[time.hour].on
+      },
+      toggleDay: (state, time) => {
+         const hour = state.session.user.days[time.day].day[time.hour]
+         hour.on = !hour.on
+         state.session.user.days[time.day].day[time.hour] = hour
+         state.session.change = time
+         return hour
+      },
+      day: (state, hours) => {
+         if (!state.session.user.days) {
+            state.session.user.days = []
          }
-         state.session.user.hours.push(hours)
+         state.session.user.days.push(hours)
       },
       log: (state, message) => {
          const item = {
