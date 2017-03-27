@@ -119,6 +119,9 @@ const store = new Vuex.Store({
          console.log('session now has this error:' + error)
          state.session.error = error
       },
+      nick: (state, name) => {
+         state.session.user.name = name
+      },
       project: (state, project) => {
          state.session.project = project
       },

@@ -10,6 +10,12 @@ const comp = {
          session: store.state.session
       }
    },
+   methods: {
+      newNick: name => {
+         console.log('New nick')
+         store.commit('nick', name)
+      }
+   },
    beforeCreate: function() {
       const element = document.getElementById('name')
       if (element) {
