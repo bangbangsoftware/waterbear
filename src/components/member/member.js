@@ -8,6 +8,7 @@ import './member.css'
 
 import './hours/hours.js'
 import './skills/skills.js'
+import './name/name.js'
 
 const comp = {
    name: 'member',

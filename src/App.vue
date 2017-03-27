@@ -1,6 +1,6 @@
 <template>
 <div id="app" >
-  <md-whiteframe md-tag="md-toolbar" md-elevation="2" md-theme="light-blue" >
+  <md-whiteframe v-if="menu" md-tag="md-toolbar" md-elevation="2" md-theme="light-blue" >
     <div class="md-toolbar-container">
       <md-button class="md-icon-button" @click.native="$refs.sidenav.toggle()">
         <md-icon>menu</md-icon>
@@ -12,7 +12,6 @@
       </md-layout>
     </div>
   </md-whiteframe>
-
   <router-view></router-view>
 <!--
   <md-sidenav md-theme="blue" class="md-left" ref="sidenav">
@@ -76,7 +75,14 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  computed: {
+    menu: () => {
+        console.log('path - ')
+        console.log(window.location)
+        return window.location.hash !== '#/'
+    }
+  }
 }
 </script>
 
