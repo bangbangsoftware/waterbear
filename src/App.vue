@@ -93,11 +93,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-<<<<<<< HEAD
   margin-top: 0px;
-=======
-  margin-top: 10px;
->>>>>>> c17179fb34161738fc2347e6ae0e71eda0018961
 }
 
 </style>
