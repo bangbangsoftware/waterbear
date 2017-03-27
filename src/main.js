@@ -11,10 +11,11 @@ console.log('Hello from %cTardigrade', 'font-size:300%; color:orange')
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: {
-    App
-  }
+   el: '#app',
+   router,
+   template: '<App/>',
+   components: {
+      App
+   }
 })
+

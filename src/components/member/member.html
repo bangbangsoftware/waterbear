@@ -3,16 +3,23 @@
     <h1 v-if="session.error" class="error">{{session.error}}</h1>
     <md-card md-with-hover>
         <md-card-header>
-            <div class="md-title">
-                <h1>{{session.user.name}}</h1></div>
-            <div class="md-subhead">Normal working hours</div>
+            <div class="md-subhead">Details</div>
         </md-card-header>
 
         <h2 v-if="session.error" class="error"> {{ session.error }}</h2>
         <md-card-content md-ratio="1:3">
-            <hours></hours>
+            <md-input-container>
+                <label>Your name</label>
+                <md-input id="name" v-model="name" placeholder="Your name"></md-input>
+            </md-input-container>
+            <md-input-container>
+                <label>Email</label>
+                <md-input id="email" v-model="session.user.name" placeholder="Email"></md-input>
+            </md-input-container>
             <div class="md-subhead">Your skills</div>
             <skills></skills>
+            <div class="md-subhead">Normal working hours</div>
+            <hours></hours>
         </md-card-content>
 
     </md-card>

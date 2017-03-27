@@ -14,12 +14,19 @@ const service = () => {
       db.getSession().then(session => {
             if (session) {
                const me = session.userCtx
-               console.log('There you are...')
-               console.log(me)
-               store.commit('user', me)
-               store.commit('log', me.name + ' logged on')
-               store.commit('db', db)
-               return true
+               if (me.name) {
+                  console.log('Back from the session you are...')
+                  console.log(me)
+
+                  store.commit('user', me)
+                  store.commit('log', me.name + ' logged on')
+                  store.commit('db', db)
+                  return true
+               } else {
+                  console.error('There is no me')
+                  runaway()
+                  return false
+               }
             }
             console.error('There is no me')
             runaway()

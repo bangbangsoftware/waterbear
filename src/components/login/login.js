@@ -69,7 +69,7 @@ const comp = {
             })
             .then(me => {
                if (me) {
-                  console.log('There you are...')
+                  console.log('Logged in ...')
                   console.log(me)
                   store.commit('user', me)
                   store.commit('log', email + ' logged on')

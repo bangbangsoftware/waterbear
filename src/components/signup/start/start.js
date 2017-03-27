@@ -81,7 +81,7 @@ const comp = {
                return db.login(email, pw)
             }).catch(err => comp.methods.oops(err, email, 'signup'))
             .then(me => {
-               console.log('There you are...')
+               console.log('Start login...')
                console.log(me)
                store.commit('user', me)
                store.commit('log', email + ' is a new owner')
