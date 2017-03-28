@@ -26,13 +26,16 @@ const comp = {
             }
             return 'What\'s your name?'
          }
-         store.commit('log', 'Hi ' + name)
+         const email = store.state.signup.stages[0].email
+         store.commit('log', 'Hi ' + name + ' (' + email + ')')
          store.commit('owner', {
             name,
+            email,
             role
          })
          store.commit('stage', {
             name,
+            email,
             role
          })
          return ''

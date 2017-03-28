@@ -1,7 +1,7 @@
-<div class="name" v-on:focus="newNick()" >
+<div class="name" >
         <md-input-container > 
         <label>Your name</label>
-        <md-input id="name" v-model="session.user.nick" placeholder="Your name"></md-input>
+        <md-input v-on:focus="newNick()" id="name" v-model="session.user.nick" placeholder="Your name"></md-input>
     </md-input-container>
     <md-input-container>
         <label>Email</label>
