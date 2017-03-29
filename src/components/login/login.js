@@ -61,22 +61,28 @@ const comp = {
             return 'Missing password'
          }
          db.logout().then(() => {
-               console.log('About to login')
-               return db.login(email, pw)
-            }).catch(err => {
-               comp.methods.oops(err, email, 'login')
-               return
-            })
-            .then(me => {
-               if (me) {
-                  console.log('Logged in ...')
-                  console.log(me)
-                  store.commit('user', me)
-                  store.commit('log', email + ' logged on')
-                  store.commit('db', db)
-                  gotoNext(me)
-               }
-            }).catch(err => comp.methods.oops(err, email, 'logout'))
+            console.log('About to login')
+            return db.login(email, pw)
+         }).catch(err => {
+            comp.methods.oops(err, email, 'logout')
+         }).then(me => {
+            return db.getUser(email)
+         }).catch(err => {
+            comp.methods.oops(err, email, 'login')
+         }).then(me => {
+            console.log('Logged in ...')
+            console.log(me)
+            store.commit('user', me)
+            store.commit('log', email + ' logged on')
+            store.commit('db', db)
+            return gotoNext(me)
+         }).catch(err => {
+            comp.methods.oops(err, email, 'getUser')
+         }).then(here => {
+            window.location.href = '#/' + here
+         }).catch(err => {
+            comp.methods.oops(err, email, err)
+         })
       }
    }
 }
