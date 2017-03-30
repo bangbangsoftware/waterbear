@@ -8,6 +8,21 @@ import './login.css'
 
 import gotoNext from '../../direct.js'
 
+const oops = (err, email, where) => {
+   console.error(where)
+   console.error(err)
+   let error = err.error + ' ' + err.reason + ' (' + err.status + ')'
+   if (err.status === 409) {
+      error = email + ' is already in use'
+   }
+   const emailElement = document.getElementById('email')
+   if (emailElement) {
+      emailElement.focus()
+   }
+   store.commit('error', error)
+   return error
+}
+
 const comp = {
    name: 'login',
    template,
@@ -24,20 +39,6 @@ const comp = {
       element.focus()
    },
    methods: {
-      oops: (err, email, where) => {
-         console.error(where)
-         console.error(err)
-         let error = err.error + ' ' + err.reason + ' (' + err.status + ')'
-         if (err.status === 409) {
-            error = email + ' is already in use'
-         }
-         const emailElement = document.getElementById('email')
-         if (emailElement) {
-            emailElement.focus()
-         }
-         store.commit('error', error)
-         return error
-      },
       login: (email, pw) => {
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
@@ -60,29 +61,14 @@ const comp = {
             }
             return 'Missing password'
          }
-         db.logout().then(() => {
-            console.log('About to login')
-            return db.login(email, pw)
-         }).catch(err => {
-            comp.methods.oops(err, email, 'logout')
-         }).then(me => {
-            return db.getUser(email)
-         }).catch(err => {
-            comp.methods.oops(err, email, 'login')
-         }).then(me => {
-            console.log('Logged in ...')
-            console.log(me)
-            store.commit('user', me)
-            store.commit('log', email + ' logged on')
-            store.commit('db', db)
-            return gotoNext(me)
-         }).catch(err => {
-            comp.methods.oops(err, email, 'getUser')
-         }).then(here => {
-            window.location.href = '#/' + here
-         }).catch(err => {
-            comp.methods.oops(err, email, err)
-         })
+         console.log('About to logout then in')
+         db.logout().then(() => db.login(email, pw))
+            .catch(err => oops(err, email, 'logout'))
+            .then(me => gotoNext(me))
+            .catch(err => oops(err, email, err))
+            .then(here => {
+               window.location.href = '#/' + here
+            })
       }
    }
 }
