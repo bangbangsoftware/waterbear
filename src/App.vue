@@ -75,14 +75,7 @@
 
 <script>
 export default {
-  name: 'app',
-  computed: {
-    menu: () => {
-        console.log('path - ')
-        console.log(window.location)
-        return window.location.hash !== '#/'
-    }
-  }
+  name: 'app'
 }
 </script>
 
