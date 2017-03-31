@@ -45,6 +45,10 @@ describe('owner.vue', () => {
    })
 
    it('should validate owner\'s name', () => {
+      const email = 'boom@boom.com'
+      store.commit('stage', {
+         email
+      })
       const poster = owner.methods.owner
       expect(poster('Fred', '')).to.equal('')
       Vue.nextTick(() => {
