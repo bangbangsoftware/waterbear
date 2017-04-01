@@ -1,4 +1,4 @@
-import router from './router/index.js'
+// import router from './router/index.js'
 import store from './store.js'
 import db from './dbase.js'
 
@@ -11,8 +11,11 @@ const whereNow = (user, resolve) => {
    }
 }
 
-const goProject = (me, resolve, reject) => {
+const goProject = (me, resolve, reject, db) => {
+   console.log('db....')
+   console.log(db)
    db.get(me.currentProject).then(project => {
+      console.log('Found ' + me.currentProject)
       store.commit('project', project)
       store.commit('log', me.email + ' logged on')
       store.commit('user', me)
@@ -36,12 +39,12 @@ const goProject = (me, resolve, reject) => {
    })
 }
 
-const loadUser = (me, resolve, reject) => {
+const loadUser = (me, resolve, reject, db) => {
    db.getUser(me.name).then(user => {
       if (typeof user.currentProject === 'undefined') {
          resolve('start')
       } else {
-         goProject(user, resolve, reject)
+         goProject(user, resolve, reject, db)
       }
    }).catch(error => {
       console.error(error)
@@ -49,15 +52,15 @@ const loadUser = (me, resolve, reject) => {
    })
 }
 
-const service = (me) => {
+const service = (me, database = db) => {
    return new Promise((resolve, reject) => {
       console.log('HOW DO I direct the route????')
-      console.log(router)
+      // console.log(router)
       console.log(me)
       if (typeof me.currentProject === 'undefined') {
-         loadUser(me, resolve, reject)
+         loadUser(me, resolve, reject, database)
       } else {
-         goProject(me, resolve, reject)
+         goProject(me, resolve, reject, database)
       }
    })
 }

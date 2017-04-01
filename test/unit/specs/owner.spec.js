@@ -2,7 +2,7 @@ import owner from 'src/components/signup/owner/owner'
 import store from 'src/store.js'
 import Vue from 'vue'
 
-describe('owner.vue', () => {
+describe('owner.spec.js', () => {
    beforeEach(() => {
       // store setup
       const project = {
@@ -13,6 +13,7 @@ describe('owner.vue', () => {
       const fakeDB = {
          get: id => {
             return new Promise((resolve, reject) => {
+               console.log(id)
                resolve(project)
             })
          },
@@ -44,7 +45,7 @@ describe('owner.vue', () => {
       expect(poster('', '')).to.equal('What\'s your name?')
    })
 
-   it('should validate owner\'s name', () => {
+   it('should validate owner\'s name', done => {
       const email = 'boom@boom.com'
       store.commit('stage', {
          email
@@ -60,9 +61,10 @@ describe('owner.vue', () => {
          expect(store.state.feed.length).to.equal(1)
          expect(store.state.feed[0].message).to.equal('Hi Fred')
       })
+      done()
    })
 
-   it('should validate owner\'s name and role', () => {
+   it('should validate owner\'s name and role', done => {
       const poster = owner.methods.owner
       expect(poster('Dick', 'Superman')).to.equal('')
       Vue.nextTick(() => {
@@ -74,5 +76,6 @@ describe('owner.vue', () => {
          expect(store.state.feed.length).to.equal(1)
          expect(store.state.feed[0].message).to.equal('Hi Dick')
       })
+      done()
    })
 })

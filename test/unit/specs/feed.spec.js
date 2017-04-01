@@ -1,7 +1,7 @@
 import feed from 'src/components/feed/feed'
 import store from 'src/store.js'
 
-describe('feed.vue', () => {
+describe('feed.spec.js', () => {
    it('should have a feed array', () => {
       const data = feed.data()
       expect(data.feeds.length).to.equal(0)
