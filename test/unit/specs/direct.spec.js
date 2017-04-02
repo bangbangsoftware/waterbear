@@ -20,7 +20,7 @@ describe('redirect.spec.js', () => {
          currentProject: 'missing'
       }
       direct(user, failFakeDB)
-         .then(() => done())
+         .then(ok => console.log('back with' + ok))
          .catch(err => expect(err).to.equal('missing just isn\'t there'))
 
       Vue.nextTick(() => {

@@ -52,7 +52,7 @@ const comp = {
             role,
             email
          }
-         store.commit('member', newMember)
+         store.commit('newMember', newMember)
          const element = document.getElementById('teamName')
          element.focus()
          const newState = {

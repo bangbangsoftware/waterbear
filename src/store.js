@@ -36,11 +36,25 @@ const store = new Vuex.Store({
       stage: (state, newStage) => {
          state.signup.stages.push(newStage)
       },
-      member: (state, newMember) => {
+      newMember: (state, newMember) => {
          state.members.push(newMember)
          store.state.db.get(state.session.project._id)
             .then(prj => {
                prj.members = state.members
+               return store.state.db.put(prj)
+            }).then(proj => {
+               console.log('Member added to db -  ' + state.session.project._id)
+               proj._id = state.session.project._id
+               state.session.project = proj
+            })
+      },
+      updateMember: (state, newMember) => {
+         store.state.db.get(state.session.project._id)
+            .then(prj => {
+               const memberList = prj.members
+                            .filter(member => member.email !== newMember.email)
+               memberList.push(newMember)
+               prj.members = memberList
                return store.state.db.put(prj)
             }).then(proj => {
                console.log('Member added to db -  ' + state.session.project._id)
@@ -127,6 +141,13 @@ const store = new Vuex.Store({
       },
       user: (state, user) => {
          state.session.user = user
+            // @TODO setup user in project
+         const owner = state.session.project.owner
+         if (owner.email === user.name) {
+            store.commit('owner', owner)
+         } else {
+            store.commit('updateMember', user)
+         }
       },
       toggleNight: (state, time) => {
          state.session.user.days[time.day].night[time.hour].on = !state.session.user.days[time.day].night[time.hour].on

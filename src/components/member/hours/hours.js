@@ -3,6 +3,43 @@ import Vue from 'vue'
 import template from './hours.html'
 import './hours.css'
 
+const defaultHours = (name, off) => {
+   const dayHours = ['7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
+   const nightHours = ['8pm', '9pm', '10pm', '11pm', '12pm', '1am', '2am', '3am', '4am', '5am', '6am']
+
+   let on = false
+   const day = dayHours.map(h => {
+      if (off) {
+         return {
+            'name': h,
+            on
+         }
+      }
+      if (h === '9am' || h === '1pm') {
+         on = true
+      }
+      if (h === '12am' || h === '6pm') {
+         on = false
+      }
+      return {
+         'name': h,
+         on
+      }
+   })
+   on = false
+   const night = nightHours.map(h => {
+      return {
+         'name': h,
+         on
+      }
+   })
+   return {
+      name,
+      day,
+      night
+   }
+}
+
 const comp = {
    name: 'hours',
    template,
@@ -12,47 +49,10 @@ const comp = {
          days: store.state.session.user.days
       }
    },
-   defaultHours: (name, off) => {
-      const dayHours = ['7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
-      const nightHours = ['8pm', '9pm', '10pm', '11pm', '12pm', '1am', '2am', '3am', '4am', '5am', '6am']
-
-      let on = false
-      const day = dayHours.map(h => {
-         if (off) {
-            return {
-               'name': h,
-               on
-            }
-         }
-         if (h === '9am' || h === '1pm') {
-            on = true
-         }
-         if (h === '12am' || h === '6pm') {
-            on = false
-         }
-         return {
-            'name': h,
-            on
-         }
-      })
-      on = false
-      const night = nightHours.map(h => {
-         return {
-            'name': h,
-            on
-         }
-      })
-      return {
-         name,
-         day,
-         night
-      }
-   },
    beforeCreate: () => {
       const storedDays = store.state.session.user.days
-      if (typeof storedDays !== 'undefined' && storedDays.length > 0) {
+      if (typeof storedDays !== 'undefined') {
          console.log('Already have default working hours')
-         console.log(store.state.session.user)
          return
       }
       console.log('Setting up default working hours')
@@ -64,7 +64,7 @@ const comp = {
 
       days.forEach(name => {
          const off = (name === 'Saturday' || name === 'Sunday')
-         const day = comp.defaultHours(name, off)
+         const day = defaultHours(name, off)
          store.commit('day', day)
       })
    },
@@ -80,6 +80,9 @@ const comp = {
             day,
             hour
          })
+      },
+      save: () => {
+         store.commit('updateMember', store.state.session)
       }
    }
 }

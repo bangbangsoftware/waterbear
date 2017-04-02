@@ -6,9 +6,9 @@ import beforeCreate from '../../loginCheck.js'
 import template from './member.html'
 import './member.css'
 
+import './name/name.js'
 import './hours/hours.js'
 import './skills/skills.js'
-import './name/name.js'
 
 const comp = {
    name: 'member',
