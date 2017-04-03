@@ -80,9 +80,6 @@ const comp = {
             day,
             hour
          })
-      },
-      save: () => {
-         store.commit('updateMember', store.state.session)
       }
    }
 }

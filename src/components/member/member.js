@@ -18,6 +18,11 @@ const comp = {
       return {
          session: store.state.session
       }
+   },
+   methods: {
+      save: () => {
+         store.commit('updateMember', store.state.session.user)
+      }
    }
 }
 
