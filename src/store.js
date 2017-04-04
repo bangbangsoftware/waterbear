@@ -139,11 +139,14 @@ const store = new Vuex.Store({
       project: (state, project) => {
          state.session.project = project
       },
+      signupUser: (state, user) => {
+         state.session.user = user
+      },
       user: (state, user) => {
          state.session.user = user
             // @TODO setup user in project
          const owner = state.session.project.owner
-         if (owner.email === user.name) {
+         if (owner.email === 'undefined' || owner.email === user.name) {
             store.commit('owner', owner)
          } else {
             store.commit('updateMember', user)

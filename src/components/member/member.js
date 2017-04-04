@@ -21,7 +21,7 @@ const comp = {
    },
    methods: {
       save: () => {
-         store.commit('updateMember', store.state.session.user)
+         store.commit('user', store.state.session.user)
       }
    }
 }
