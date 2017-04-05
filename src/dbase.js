@@ -1,5 +1,7 @@
+import store from './store.js'
+
 const name = 'waterbear'
-const remoteCoach = 'http://localhost:5984/' + name
+const remoteCoach = store.state.session.couchURL + name
 const pouchOpts = {
    skipSetup: true,
    live: true

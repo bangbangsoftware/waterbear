@@ -11,18 +11,21 @@ const whereNow = (user, resolve) => {
    }
 }
 
-const register = (me, project, resolve, reject) => {
-   console.log('Found ' + me.currentProject)
+const register = (user, project, resolve, reject) => {
+   console.log('Found...')
+   console.log(project)
+   console.log('For...')
+   console.log(user)
    store.commit('project', project)
-   store.commit('log', me.email + ' logged on')
-   store.commit('user', me)
+   store.commit('log', user.email + ' logged on')
+   store.commit('user', user)
    const owner = project.owner
-   if (owner.email === me.name) {
+   if (owner.name === user.name) {
       console.log('Owner has logged in')
       whereNow(owner, resolve)
    } else {
       console.log('A member has logged in?')
-      const memberList = project.members.filter(member => member.email === me.email)
+      const memberList = project.members.filter(member => member.name === user.name)
       if (memberList.length === 0) {
          reject('Not in project ' + project.name + '.')
       } else {

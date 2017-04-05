@@ -1,12 +1,10 @@
 import Vue from 'vue'
 
 import store from '../../store.js'
-import db from '../../dbase.js'
+import user from '../../user.js'
 
 import template from './login.html'
 import './login.css'
-
-import gotoNext from '../../direct.js'
 
 const oops = (err, email, where) => {
    console.error(where)
@@ -61,14 +59,11 @@ const comp = {
             }
             return 'Missing password'
          }
-         console.log('About to logout then in')
-         db.logout().then(() => db.login(email, pw))
-            .catch(err => oops(err, email, 'logout'))
-            .then(me => gotoNext(me))
-            .catch(err => oops(err, email, err))
+         user.login(email, pw)
             .then(here => {
                window.location.href = '#/' + here
             })
+            .catch(err => oops(err, email, err))
       }
    }
 }

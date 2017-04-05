@@ -27,7 +27,8 @@ const store = new Vuex.Store({
          },
          user: {
             days: []
-         }
+         },
+         couchURL: 'http://localhost:5984/'
       },
       defaults
    },
@@ -52,7 +53,7 @@ const store = new Vuex.Store({
          store.state.db.get(state.session.project._id)
             .then(prj => {
                const memberList = prj.members
-                            .filter(member => member.email !== newMember.email)
+                  .filter(member => member.email !== newMember.email)
                memberList.push(newMember)
                prj.members = memberList
                return store.state.db.put(prj)
@@ -147,7 +148,7 @@ const store = new Vuex.Store({
             // @TODO setup user in project
          const owner = state.session.project.owner
          if (owner.email === 'undefined' || owner.email === user.name) {
-            store.commit('owner', owner)
+            store.commit('owner', user)
          } else {
             store.commit('updateMember', user)
          }

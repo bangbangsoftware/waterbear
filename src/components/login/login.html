@@ -19,6 +19,10 @@
                     <label>Password</label>
                     <md-input v-on:keyup.enter="error = login(email,pw)" id="password" type="password" v-model="pw"></md-input>
                 </md-input-container>
+                 <md-input-container>
+                    <label>Database</label>
+                    <md-input id="dbase" type="string" v-model="session.couchURL"></md-input>
+                </md-input-container>
             </form>
         </md-card-content>
 

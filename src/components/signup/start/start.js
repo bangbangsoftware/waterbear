@@ -29,7 +29,7 @@ const oops = (err, email, where) => {
 
 const signup = (email, pw) => {
    const metadata = {
-      email: '',
+      name: '',
       birthday: '',
       skills: [],
       asperations: [],
@@ -95,7 +95,7 @@ const comp = {
          }
          db.logout().then(signup(email, pw))
             .catch(err => oops(err, email, 'logout'))
-            .then(() => db.login(email, pw))
+            .then(db.login(email, pw))
             .catch(err => oops(err, email, 'signup'))
             .then(register)
             .catch(err => oops(err, email, 'login'))
