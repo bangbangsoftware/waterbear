@@ -1,6 +1,7 @@
 import template from './team.html'
 import store from '../../../store.js'
 import Vue from 'vue'
+import user from '../../../user.js'
 
 const comp = {
    name: 'team',
@@ -52,7 +53,9 @@ const comp = {
             role,
             email
          }
-         store.commit('newMember', newMember)
+         const newList = store.state.session.project.members
+         newList.push(newMember)
+         user.storeMembers(newList)
          const element = document.getElementById('teamName')
          element.focus()
          const newState = {

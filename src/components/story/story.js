@@ -7,6 +7,8 @@ import './colours/colours'
 import './acceptance/acceptance'
 import './desc/desc'
 
+import valid from './valid.js'
+
 export default {
    name: 'story',
    data: function() {
@@ -17,13 +19,13 @@ export default {
    methods: {
       postStory: function() {
          console.log('Post Story')
-         store.commit('validStory')
+         valid()
          if (store.state.story.valid) {
             store.commit('postStory')
          }
       },
       whatsNeeded: function() {
-         store.commit('validStory')
+         valid()
       },
       navigateTo: function(nav) {
          this.$router.go({

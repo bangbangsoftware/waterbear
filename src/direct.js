@@ -1,6 +1,7 @@
 // import router from './router/index.js'
 import store from './store.js'
 import db from './dbase.js'
+import userService from './user.js'
 
 const whereNow = (user, resolve) => {
    store.commit('user', user)
@@ -22,6 +23,7 @@ const register = (user, project, resolve, reject) => {
    const owner = project.owner
    if (owner.name === user.name) {
       console.log('Owner has logged in')
+      userService.owner(user)
       whereNow(owner, resolve)
    } else {
       console.log('A member has logged in?')
@@ -29,6 +31,7 @@ const register = (user, project, resolve, reject) => {
       if (memberList.length === 0) {
          reject('Not in project ' + project.name + '.')
       } else {
+         userService.replaceMember(memberList, user)
          whereNow(memberList[0], resolve)
       }
    }
