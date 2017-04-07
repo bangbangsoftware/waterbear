@@ -1,6 +1,31 @@
 import template from './project.html'
 import store from '../../../store.js'
+import user from '../../../user.js'
 import Vue from 'vue'
+
+const register = proj => {
+   console.log('user....')
+   user.currentProject(store.state.session.user, proj.id)
+   store.commit('project', proj)
+   store.commit('log', proj.id + ' project has begun')
+   store.commit('stage', {
+      name: proj.id
+   })
+}
+
+const oops = (err, name) => {
+   console.error(err)
+   const nameElement = document.getElementById('projectName')
+   nameElement.focus()
+   let error = err.error + ' ' + err.reason + ' (' + err.status + ')'
+   if (err.status === 409) {
+      error = name + ' is already in use'
+   } else if (err.status === 404) {
+      error = 'couchDB (' + store.state.session.couchURL + ') has no "waterbear" databse'
+   }
+   store.commit('error', error)
+   return error
+}
 
 const comp = {
    name: 'project',
@@ -18,20 +43,6 @@ const comp = {
       element.focus()
    },
    methods: {
-      oops: (err, name) => {
-         console.error(err)
-         if (err.status === 409) {
-            const nameElement = document.getElementById('projectName')
-            nameElement.focus()
-            this.error = name + ' is already in use'
-         } else {
-            const nameElement = document.getElementById('projectName')
-            nameElement.focus()
-            this.error = err.error + ' ' + err.reason + ' (' + err.status + ')'
-         }
-         store.commit('error', this.error)
-         return this.error
-      },
       project: (name) => {
          if (name.length === 0) {
             const element = document.getElementById('projectName')
@@ -42,28 +53,8 @@ const comp = {
             '_id': name
          }
          store.state.db.put(project)
-            .then((proj) => {
-               console.log('user....')
-               const user = store.state.session.user
-               console.log(user)
-               const meta = {
-                  metadata: {
-                     birthday: '',
-                     skills: [],
-                     aspirations: [],
-                     currentProject: name
-                  }
-               }
-               store.state.db.putUser(user.name, meta)
-                  .catch(err => comp.methods.oops(err, name))
-
-               proj._id = name
-               store.commit('project', proj)
-               store.commit('log', name + ' project has begun')
-               store.commit('stage', {
-                  name
-               })
-            }).catch(err => comp.methods.oops(err, name))
+            .then(prj => register(prj))
+            .catch(err => oops(err, name))
          return ''
       }
    }

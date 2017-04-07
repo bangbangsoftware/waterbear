@@ -49,12 +49,16 @@ const comp = {
          }
 
          const newMember = {
-            name,
+            nick: name,
             role,
-            email
+            name: email
          }
-         const newList = store.state.session.project.members
+         let newList = store.state.session.project.members
+         if (typeof newList === 'undefined') {
+            newList = []
+         }
          newList.push(newMember)
+         store.commit('addMember', newMember)
          user.storeMembers(newList)
          const element = document.getElementById('teamName')
          element.focus()
@@ -66,8 +70,8 @@ const comp = {
          }
          return newState
       },
-      addrole: function () {
-        store.state.defaults.roles.push(this.newrole)
+      addrole: function() {
+         store.state.defaults.roles.push(this.newrole)
       }
    }
 }

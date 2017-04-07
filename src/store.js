@@ -25,7 +25,10 @@ const store = new Vuex.Store({
       session: {
          error: '',
          project: {
-            stories: []
+            stories: [],
+            members: [],
+            defaults: [],
+            owner: {}
          },
          user: {
             days: []
@@ -39,8 +42,11 @@ const store = new Vuex.Store({
       stage: (state, newStage) => {
          state.signup.stages.push(newStage)
       },
-     db: (state, database) => {
+      db: (state, database) => {
          state.db = database
+      },
+      addMember: (state, member) => {
+         state.members.push(member)
       },
       storyError: (state, message) => {
          state.story.error = message
@@ -86,19 +92,17 @@ const store = new Vuex.Store({
          state.session.error = error
       },
       nick: (state, name) => {
-         state.session.user.name = name
+         state.session.user.nick = name
       },
       project: (state, prj) => {
          state.session.project = prj
-      },
-      signupUser: (state, user) => {
-         state.session.user = user
       },
       user: (state, user) => {
          state.session.user = user
       },
       toggleNight: (state, time) => {
-         state.session.user.days[time.day].night[time.hour].on = !state.session.user.days[time.day].night[time.hour].on
+         const now = state.session.user.days[time.day].night[time.hour].on
+         state.session.user.days[time.day].night[time.hour].on = !now
       },
       toggleDay: (state, time) => {
          const hour = state.session.user.days[time.day].day[time.hour]

@@ -1,13 +1,12 @@
 import Vue from 'vue'
+import Password from 'vue-password-strength-meter'
 
 import store from '../../../store.js'
+import db from '../../../dbase.js'
+import user from '../../../user.js'
 
 import template from './start.html'
 import './start.css'
-
-import db from '../../../dbase.js'
-
-import Password from 'vue-password-strength-meter'
 
 const oops = (err, email, where) => {
    if (typeof err === 'undefined') {
@@ -27,29 +26,16 @@ const oops = (err, email, where) => {
    return error
 }
 
-const signup = (email, pw) => {
-   const metadata = {
-      name: '',
-      birthday: '',
-      skills: [],
-      asperations: [],
-      hours: [],
-      holidays: []
+const register = email => {
+   const me = {
+      name: email
    }
-   return db.signup(email, pw, {
-      metadata
-   })
-}
-
-const register = me => {
    console.log('Start login...')
    console.log(me)
-   store.commit('log', me.name + ' is a new owner')
+   store.commit('log', email + ' is a new owner')
    store.commit('db', db)
-   store.commit('signupUser', me)
-   store.commit('stage', {
-      email: me.name
-   })
+   store.commit('user', me)
+   store.commit('stage', me)
 }
 
 const comp = {
@@ -93,11 +79,11 @@ const comp = {
             }
             return 'Missing password'
          }
-         db.logout().then(signup(email, pw))
+         db.logout().then(user.signup(email, pw))
             .catch(err => oops(err, email, 'logout'))
             .then(db.login(email, pw))
             .catch(err => oops(err, email, 'signup'))
-            .then(register)
+            .then(register(email))
             .catch(err => oops(err, email, 'login'))
       }
    }

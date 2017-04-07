@@ -4,11 +4,11 @@
         <h1 v-if="stages.length > 1">{{stages[1].name}} Summary </h1>
         <div class="phone-viewport">
             <md-layout v-if="stages.length === 1 || stages.length === 2">
-                Owner's email address is {{stages[0].email}}
+                Owner's email address is {{stages[0].name}}
             </md-layout>
 
             <md-layout v-if="stages.length ===3">
-                This project is owned by the {{stages[2].role}}: <a :href="'mailto:' + stages[0].email">{{stages[2].name}}</a>
+                This project is owned by the {{stages[2].role}}: <a :href="'mailto:' + stages[0].name">{{stages[2].name}}</a>
             </md-layout>
 
             <md-layout>
