@@ -1,7 +1,18 @@
 import story from 'src/components/story/story'
 import store from 'src/store.js'
 
-describe('story.vue', () => {
+const blankStory = () => {
+   const myStory = {
+      title: '',
+      desc: '',
+      acs: []
+   }
+   store.commit('clearStory')
+   store.commit('story', myStory)
+   return myStory
+}
+
+describe('story.spec.js', () => {
    beforeEach(() => {
       // store setup
       const project = {
@@ -9,6 +20,7 @@ describe('story.vue', () => {
          stories: []
       }
       store.commit('project', project)
+      blankStory()
       const fakeDB = {
          get: id => {
             return new Promise((resolve, reject) => {
@@ -35,26 +47,30 @@ describe('story.vue', () => {
    })
 
    it('should NOT add an invalid story with no fields filled in', () => {
-      story.methods.postStory()
+      var myStory = blankStory()
+      story.methods.postStory(myStory)
       expect(store.state.session.project.stories.length).to.equal(0)
    })
 
    it('should NOT add an invalid story with one field filled in', () => {
       store.commit('title', 'tester')
-      story.methods.postStory()
+      story.methods.postStory(store.state.story)
       expect(store.state.session.project.stories.length).to.equal(0)
    })
 
    it('should NOT add an invalid story with two field filled in', () => {
+      store.commit('title', 'tester')
       store.commit('desc', 'tesc desc')
-      story.methods.postStory()
+      story.methods.postStory(store.state.story)
       expect(store.state.session.project.stories.length).to.equal(0)
    })
 
    it('should add a valid story', () => {
+      store.commit('title', 'tester')
+      store.commit('desc', 'tesc desc')
       var crit = {}
       store.commit('acceptance', crit)
-      story.methods.postStory()
+      story.methods.postStory(store.state.story)
       expect(store.state.session.project.stories.length).to.equal(1)
    })
 })

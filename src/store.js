@@ -56,9 +56,7 @@ const store = new Vuex.Store({
          state.story.error = ''
          state.story.valid = true
       },
-      postStory: (state) => {
-         state.session.project.stories.push(state.story)
-         store.commit('log', 'Added "' + state.story.title + '" story')
+      clearStory: (state) => {
          state.story = {
             title: '',
             desc: '',
@@ -68,21 +66,29 @@ const store = new Vuex.Store({
             valid: false
          }
       },
-      title: (state, title) => {
-         state.story.title = title
-         validStory()
+      postStory: (state) => {
+         state.session.project.stories.push(state.story)
+         store.commit('log', 'Added "' + state.story.title + '" story')
+         store.commit('clearStory')
+      },
+      story: (state, story) => {
+         state.store = story
+      },
+      title: (state, t) => {
+         state.story['title'] = t
+         validStory(state.story)
       },
       desc: (state, desc) => {
          state.story.desc = desc
-         validStory()
+         validStory(state.story)
       },
       removeAcceptance: (state, index) => {
          state.story.acs.splice(index, 1)
-         validStory()
+         validStory(state.story)
       },
       acceptance: (state, crit) => {
          state.story.acs.push(crit)
-         validStory()
+         validStory(state.story)
       },
       colour: (state, no) => {
          state.story.colourNo = no

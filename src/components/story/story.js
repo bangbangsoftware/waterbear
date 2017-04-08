@@ -17,15 +17,18 @@ export default {
       }
    },
    methods: {
-      postStory: function() {
-         console.log('Post Story')
-         valid()
-         if (store.state.story.valid) {
+      postStory: function(story) {
+         var ok = valid(story)
+         if (ok) {
+            console.log('posting Story')
             store.commit('postStory')
+         } else {
+            console.log('invalid story...')
+            console.log(story)
          }
       },
-      whatsNeeded: function() {
-         valid()
+      whatsNeeded: function(story) {
+         valid(story)
       },
       navigateTo: function(nav) {
          this.$router.go({

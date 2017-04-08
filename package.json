@@ -1,4 +1,4 @@
-{
+{ 
   "name": "waterbear",
   "version": "1.0.0",
   "description": "Agile engine",
@@ -9,6 +9,7 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "unit-watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "unit-debug": "node --inspect --debug-brk $(npm bin)/karma start test/unit/karma.conf.js --verbose",
     "docker": "./dockercouch.sh",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
