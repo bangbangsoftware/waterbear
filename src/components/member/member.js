@@ -4,6 +4,7 @@ import store from '../../store.js'
 import beforeCreate from '../../loginCheck.js'
 
 import template from './member.html'
+import user from '../../user.js'
 import './member.css'
 
 import './name/name.js'
@@ -16,12 +17,14 @@ const comp = {
    template,
    data: () => {
       return {
-         session: store.state.session
+         session: store.state.session,
+         menu: store.state.menu
       }
    },
    methods: {
       save: () => {
-         store.commit('user', store.state.session.user)
+         const session = store.state.session
+         user.updateUser(session.user, session.project)
       }
    }
 }

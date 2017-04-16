@@ -7,10 +7,13 @@ import './colours/colours'
 import './acceptance/acceptance'
 import './desc/desc'
 
+import beforeCreate from '../../loginCheck.js'
+
 import valid from './valid.js'
 
 export default {
    name: 'story',
+   beforeCreate,
    data: function() {
       return {
          story: store.state.story
@@ -22,6 +25,17 @@ export default {
          if (ok) {
             console.log('posting Story')
             store.commit('postStory')
+            const prj = store.state.session.project
+            console.log("Adding stories to..")
+            console.log(prj)
+            const db = store.state.db
+            db.get(prj._id)
+               .then(p => {
+                  p.stories = prj.stories
+                  return db.put(p)
+               })
+               .catch(err => console.error(err))
+
          } else {
             console.log('invalid story...')
             console.log(story)

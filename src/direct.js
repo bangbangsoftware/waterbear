@@ -3,13 +3,16 @@ import store from './store.js'
 import db from './dbase.js'
 import userService from './user.js'
 
-const whereNow = (user, resolve) => {
-   store.commit('user', user)
-   if (typeof user.hours === 'undefined' || user.hours.length === 0) {
+const whereNow = (project, user, resolve) => {
+   if (typeof user.days === 'undefined' || user.days.length === 0) {
       resolve('member')
-   } else {
-      resolve('story')
+      return
    }
+   if (typeof project.stories === 'undefined' || project.stories.length === 0) {
+      resolve('story')
+      return
+   }
+   resolve('story')
 }
 
 const register = (user, project, resolve, reject) => {
@@ -18,23 +21,11 @@ const register = (user, project, resolve, reject) => {
    console.log('For...')
    console.log(user)
    store.commit('project', project)
-   store.commit('log', user.email + ' logged on')
-   store.commit('user', user)
-   const owner = project.owner
-   if (owner.name === user.name) {
-      console.log('Owner has logged in')
-      userService.owner(user)
-      whereNow(owner, resolve)
-   } else {
-      console.log('A member has logged in?')
-      const memberList = project.members.filter(member => member.name === user.name)
-      if (memberList.length === 0) {
-         reject('Not in project ' + project.name + '.')
-      } else {
-         userService.replaceMember(memberList, user)
-         whereNow(memberList[0], resolve)
-      }
-   }
+   store.commit('log', user.name + ' logged on')
+
+   const projectsUser = userService.loadUser(user, project)
+   store.commit('user', projectsUser)
+   whereNow(project, projectsUser, resolve)
 }
 
 const unfoundProject = (me, err, resolve) => {

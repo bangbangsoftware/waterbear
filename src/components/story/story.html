@@ -1,4 +1,5 @@
 <div class="story">
+ a menu <menu></menu> menu a
     <md-layout>
         <md-layout md-align="center" md-flex="80">
             <md-card>
@@ -13,7 +14,8 @@
                         <!--
                         <md-button align="start" class="md-raised md-primary" v-on:click="clearStory()">Clear Story</md-button>
                             -->
-                        <md-button v-on:mouseover="whatsNeeded(story)" align="end" class="md-raised md-primary" :disabled="!story.valid">
+                        <md-button v-on:mouseover="whatsNeeded(story)" align="end" class="md-raised md-primary"
+                            :disabled="!story.valid">
                             <div v-on:click="postStory(story)">Add Story</div>
                         </md-button>
                     </md-card-actions>

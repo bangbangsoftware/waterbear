@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
    state: {
+      menu: false,
       feeds: [],
       db: null,
       members: [],
@@ -67,6 +68,9 @@ const store = new Vuex.Store({
          }
       },
       postStory: (state) => {
+         if (!state.session.project.stories) {
+            state.session.project.stories = []
+         }
          state.session.project.stories.push(state.story)
          store.commit('log', 'Added "' + state.story.title + '" story')
          store.commit('clearStory')
@@ -129,6 +133,12 @@ const store = new Vuex.Store({
             message
          }
          state.feeds.push(item)
+      },
+      menuOn: (state) => {
+         state.menu = true
+      },
+      menuOff: (state) => {
+         state.menu = false
       }
    }
 })

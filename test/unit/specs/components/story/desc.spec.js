@@ -1,10 +1,10 @@
 import comp from 'src/components/story/desc/desc.js'
 
-describe('tags.spec.js', () => {
+describe('desc.spec.js', () => {
    it('should have a bunch of functions', done => {
-      const app = comp.methods
-      expect(typeof app.storyTitle).to.equal('function')
-      expect(typeof app.storyDesc).to.equal('function')
+//      expect(comp.methods).to.equal('function')
+      expect(typeof comp.methods.storeTitle).to.equal('function')
+      expect(typeof comp.methods.storeDesc).to.equal('function')
       done()
    })
 })

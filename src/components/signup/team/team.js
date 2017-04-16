@@ -76,3 +76,4 @@ const comp = {
    }
 }
 Vue.component('team', comp)
+export default comp

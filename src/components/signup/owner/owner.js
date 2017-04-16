@@ -29,7 +29,7 @@ const comp = {
          }
          const email = store.state.signup.stages[0].name
          store.commit('log', 'Hi ' + nick + ' (' + email + ')')
-         user.owner({
+         user.ownerAndDefaults({
             nick,
             name: email,
             role

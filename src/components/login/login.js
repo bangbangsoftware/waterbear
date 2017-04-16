@@ -61,6 +61,7 @@ const comp = {
          }
          user.login(email, pw)
             .then(here => {
+               store.commit('menuOn')
                window.location.href = '#/' + here
             })
             .catch(err => oops(err, email, err))

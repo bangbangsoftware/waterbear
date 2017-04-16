@@ -8,13 +8,18 @@ const metadata = {
    birthday: '',
    skills: [],
    asperations: [],
-   hours: [],
+   days: [],
    holidays: []
 }
 
 const updateOwnerAndDefaults = (prj, owner) => {
    prj.owner = cleanUser(owner)
    prj.defaults = store.state.defaults
+   return db.put(prj)
+}
+
+const updateOwner = (prj, owner) => {
+   prj.owner = cleanUser(owner)
    return db.put(prj)
 }
 
@@ -42,7 +47,7 @@ const cleanUser = user => {
 }
 
 const service = {
-   owner: owner => {
+   ownerAndDefaults: owner => {
       return new Promise((resolve, reject) => {
          let prj = store.state.session.project
          db.get(prj.id)
@@ -56,6 +61,55 @@ const service = {
                console.log('And added defaults')
                store.commit('project', prj)
                resolve(prj)
+            })
+            .catch(err => reject(err))
+      })
+   },
+   loadUser: (user, project) => {
+      const owner = project.owner
+      if (owner.name === user.name) {
+         return owner
+      } else {
+         const memberList = project.members.filter(member => member.name === user.name)
+         if (memberList.length === 0) {
+            console.error(user)
+            console.error('Not in project')
+            console.error(project)
+         } else {
+            return memberList[0]
+         }
+      }
+   },
+   updateUser: (user, project) => {
+      const owner = project.owner
+      if (owner.name === user.name) {
+         return service.owner(user, project)
+      } else {
+         return new Promise((resolve, reject) => {
+            const memberList = project.members.filter(member => member.name === user.name)
+            if (memberList.length === 0) {
+               reject('Not in project ' + project.name + '.')
+            } else {
+               service.replaceMember(memberList, user).then(list => {
+                  const member = list[list.length] - 1
+                  resolve(member)
+               }).catch(err => reject(err))
+            }
+         })
+      }
+   },
+   owner: (owner, prj) => {
+      return new Promise((resolve, reject) => {
+         db.get(prj._id)
+            .then(p => {
+               prj = p
+               updateOwner(prj, owner)
+            })
+            .catch(err => reject(err))
+            .then(() => {
+               console.log('Owner owner to db -  ' + prj._id)
+               store.commit('project', prj)
+               resolve(owner)
             })
             .catch(err => reject(err))
       })

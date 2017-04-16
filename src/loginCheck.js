@@ -40,6 +40,7 @@ const service = () => {
          noDatabase(resolve, reject)
       } else {
          store.commit('error', '')
+         store.commit('menuOn')
          resolve(true)
          return
       }

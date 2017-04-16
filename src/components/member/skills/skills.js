@@ -1,4 +1,4 @@
-// import store from '../../../store.js'
+import store from '../../../store.js'
 import Vue from 'vue'
 import template from './skills.html'
 
@@ -7,7 +7,7 @@ const comp = {
    template,
    data: function() {
       return {
-         skills: [],
+         skills: store.state.session.user.skills,
          taglist: [] // store.state.defaults
       }
    }
