@@ -4,6 +4,7 @@ import signup from '../components/signup/signup.vue'
 import story from '../components/story/story.vue'
 import login from '../components/login/login.js'
 import member from '../components/member/member.js'
+import plan from '../components/plan/plan.js'
 import '../components/feed/feed.js'
 
 /**
@@ -36,7 +37,10 @@ export default new Router({
          path: '/story',
          name: 'story',
          component: story
+      }, {
+         path: '/plan',
+         name: 'plan',
+         component: plan
       }
-
    ]
 })
