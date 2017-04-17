@@ -1,14 +1,12 @@
 import Vue from 'vue'
 
 import store from '../../../store.js'
-import beforeCreate from '../../../loginCheck.js'
 import user from '../../../user.js'
 
 import template from './time.html'
 
 const comp = {
    name: 'time',
-   beforeCreate,
    template,
    data: () => {
       return {

@@ -1,0 +1,21 @@
+<div id="backlog">
+    List of the backlog stories (and tasks???) order-able?
+
+    <md-card v-if="project.stories.length > 0">
+        <md-card-content>
+            <label>The Backlog</label>
+        </md-card-content>
+        <md-card-content>
+            <md-layout md-align="center" md-flex="10" v-for="(story,c) in project.stories" :key="story">
+                <md-card v-on:click="editStory(story)">
+                    <div id='coloured' v-bind:class="colourClasses[story.colourNo]">
+                        <md-card-header>
+                            {{c+1}}. {{story.title}}
+                        </md-card-header>
+                    </div>
+                </md-card>
+            </md-layout>
+        </md-card-content>
+    </md-card>
+
+</div>

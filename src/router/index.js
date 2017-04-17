@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import signup from '../components/signup/signup.vue'
-import story from '../components/story/story.vue'
-import login from '../components/login/login.js'
-import member from '../components/member/member.js'
-import plan from '../components/plan/plan.js'
-import '../components/feed/feed.js'
+import signup from '../pages/signup/signup.vue'
+import story from '../pages/story/story.vue'
+import login from '../pages/login/login.js'
+import member from '../pages/member/member.js'
+import plan from '../pages/plan/plan.js'
+import '../common/feed/feed.js'
 
 /**
  @TOD Need to download them and fref locally

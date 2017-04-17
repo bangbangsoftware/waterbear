@@ -1,19 +1,17 @@
 import Vue from 'vue'
 
+import template from './backlog.html'
+
 import store from '../../../store.js'
-import beforeCreate from '../../../loginCheck.js'
 import user from '../../../user.js'
 
-import template from './task.html'
-
 const comp = {
-   name: 'task',
-   beforeCreate,
+   name: 'backlog',
    template,
    data: () => {
       return {
-         session: store.state.session,
-         menu: store.state.menu
+         project: store.state.session.project,
+         colourClasses: store.state.defaults.colourClasses
       }
    },
    methods: {
@@ -24,5 +22,5 @@ const comp = {
    }
 }
 
-Vue.component('task', comp)
+Vue.component('backlog', comp)
 export default comp

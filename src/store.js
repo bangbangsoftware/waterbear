@@ -2,7 +2,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import defaults from './defaults.js'
 
-import validStory from './components/story/valid.js'
+import validStory from './pages/story/valid.js'
 
 Vue.use(Vuex)
 

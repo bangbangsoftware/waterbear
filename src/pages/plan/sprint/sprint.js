@@ -1,14 +1,12 @@
 import Vue from 'vue'
 
 import store from '../../../store.js'
-import beforeCreate from '../../../loginCheck.js'
-
-import template from './backlog.html'
 import user from '../../../user.js'
 
+import template from './sprint.html'
+
 const comp = {
-   name: 'backlog',
-   beforeCreate,
+   name: 'sprint',
    template,
    data: () => {
       return {
@@ -24,5 +22,5 @@ const comp = {
    }
 }
 
-Vue.component('backlog', comp)
+Vue.component('sprint', comp)
 export default comp
