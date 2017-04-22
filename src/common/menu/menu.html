@@ -7,6 +7,9 @@
             <md-layout md-align="end" md-gutter="16">
                 <md-layout md-flex="33">
                     Tardigrade - little logo on the far left - :00000
+                        <md-button @click.native="go('')">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </md-button>
                 </md-layout>
             </md-layout>
         </div>
@@ -44,25 +47,17 @@
         </md-toolbar>
 
         <md-list>
-            <md-list-item @click.native="$refs.sidenav.toggle()" class="md-primary">
-                <md-icon>insert_drive_file</md-icon> <span>My files</span>
+            <md-list-item @click.native="go('story')" class="md-primary">
+                <i class="fa fa-shower" aria-hidden="true"></i>
+                <md-icon>Plan</md-icon>
+                <span>Stories</span>
             </md-list-item>
 
-            <md-list-item @click.native="$refs.sidenav.toggle()">
-                <md-icon>people</md-icon> <span>Shared with me</span>
+            <md-list-item @click.native="go('plan')">
+                <md-icon>Plan</md-icon>
+                <span>Plan</span>
             </md-list-item>
 
-            <md-list-item @click.native="$refs.sidenav.toggle()">
-                <md-icon>access_time</md-icon> <span>Recent</span>
-            </md-list-item>
-
-            <md-list-item @click.native="$refs.sidenav.toggle()">
-                <md-icon>start</md-icon> <span>Starred</span>
-            </md-list-item>
-
-            <md-list-item @click.native="$refs.sidenav.toggle()">
-                <md-icon>delete</md-icon> <span>Trash</span>
-            </md-list-item>
         </md-list>
     </md-sidenav>
 </div>

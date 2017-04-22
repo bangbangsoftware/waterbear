@@ -10,8 +10,7 @@ const comp = {
    template,
    data: () => {
       return {
-         session: store.state.session,
-         menu: store.state.menu
+         session: store.state.session
       }
    },
    methods: {

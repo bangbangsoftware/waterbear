@@ -33,6 +33,7 @@ const comp = {
       }
    },
    create: () => {
+      store.commit('loaded', false)
       const element = document.getElementById('email')
       element.focus()
    },

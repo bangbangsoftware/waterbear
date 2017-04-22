@@ -8,7 +8,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
    state: {
-      menu: false,
       feeds: [],
       db: null,
       members: [],
@@ -24,7 +23,11 @@ const store = new Vuex.Store({
          stages: []
       },
       session: {
+         loaded: false,
+         story: {},
+         menu: false,
          error: '',
+         currentStory: -1,
          project: {
             stories: [],
             members: [],
@@ -40,6 +43,10 @@ const store = new Vuex.Store({
    },
    methods: {},
    mutations: {
+      loaded: (state, l) => {
+         console.log('Loaded? ' + l)
+         state.session.loaded = l
+      },
       stage: (state, newStage) => {
          state.signup.stages.push(newStage)
       },
@@ -66,6 +73,18 @@ const store = new Vuex.Store({
             acs: [],
             valid: false
          }
+      },
+      selectStory: (state, selected) => {
+         const stories = state.session.project.stories
+         const selectedStories = stories.map((story, i) => {
+            story.selected = (i === selected)
+            return story
+         })
+         state.session.project.stories = selectedStories
+         store.commit('currentStory', selectedStories[selected])
+      },
+      currentStory: (state, story) => {
+         state.session.story = story
       },
       postStory: (state) => {
          if (!state.session.project.stories) {
@@ -135,10 +154,10 @@ const store = new Vuex.Store({
          state.feeds.push(item)
       },
       menuOn: (state) => {
-         state.menu = true
+         state.session.menu = true
       },
       menuOff: (state) => {
-         state.menu = false
+         state.session.menu = false
       }
    }
 })

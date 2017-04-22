@@ -1,8 +1,28 @@
 <div id=plan>
+    <md-layout v-if='session.loaded' md-gutter>
+        <md-layout md-column md-gutter>
+            <md-layout md-flex="20">
+                Wonder if it can be like tmux moving from section to section with zoom ?
+            </md-layout>
+            <md-layout>
+                <backlog></backlog>
+            </md-layout>
+        </md-layout>
 
-        Wonder if it can be like tmux moving from section to section with zoom ?
-    <backlog></backlog>
-    <task></task>
-    <time></time>
-    <sprint></sprint>
+        <md-layout md-column md-gutter>
+
+            <md-layout md-flex="50">
+                <task></task>
+            </md-layout>
+
+            <md-layout>
+                <time></time>
+            </md-layout>
+
+            <md-layout>
+                <sprint></sprint>
+            </md-layout>
+
+        </md-layout>
+    </md-layout>
 </div>

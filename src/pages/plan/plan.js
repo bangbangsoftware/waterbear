@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import store from '../../store.js'
-import beforeCreate from '../../loginCheck.js'
+import loginCheck from '../../loginCheck.js'
 
 import template from './plan.html'
 import user from '../../user.js'
@@ -13,12 +13,14 @@ import './time/time.js'
 
 const comp = {
    name: 'plan',
-   beforeCreate,
+   beforeCreate: () => {
+      console.log(new Date() + ' Plan created')
+      loginCheck()
+   },
    template,
    data: () => {
       return {
-         session: store.state.session,
-         menu: store.state.menu
+         session: store.state.session
       }
    },
    methods: {

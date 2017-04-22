@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "style-loader": "^0.13.1",
-    "vue": "^2.2.1",
+    "vue": "^2.2.6",
     "vue-focus": "^2.1.0",
     "vue-material": "^0.7.1",
-    "vue-router": "^2.2.0",
+    "vue-router": "^2.2.6",
     "vue-template-loader": "^0.2.2",
     "vuex": "^2.1.2"
   },
@@ -86,7 +86,7 @@
     "vue-loader": "^10.3.0",
     "vue-password-strength-meter": "^0.2.0",
     "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.2.1",
+    "vue-template-compiler": "^2.2.6",
     "vue-template-loader": "^0.2.2",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",

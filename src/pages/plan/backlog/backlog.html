@@ -1,21 +1,37 @@
 <div id="backlog">
-    List of the backlog stories (and tasks???) order-able?
-
-    <md-card v-if="project.stories.length > 0">
-        <md-card-content>
-            <label>The Backlog</label>
-        </md-card-content>
-        <md-card-content>
-            <md-layout md-align="center" md-flex="10" v-for="(story,c) in project.stories" :key="story">
-                <md-card v-on:click="editStory(story)">
-                    <div id='coloured' v-bind:class="colourClasses[story.colourNo]">
-                        <md-card-header>
-                            {{c+1}}. {{story.title}}
-                        </md-card-header>
+    <md-card-content v-if="project.stories.length > 0">
+        <label>The Backlog</label>
+        <md-card>
+            <md-layout md-align="end" md-column md-gutter>
+                <md-layout v-for="(story,c) in project.stories" :key="story">
+                    <div v-if="c === 0">
+                        <md-button class="md-toggle">
+                        </md-button>
                     </div>
-                </md-card>
-            </md-layout>
-        </md-card-content>
-    </md-card>
+                    <div v-else v-on:click="up(c)">
+                        <md-button>
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
 
+                    <div v-on:click="selectStory(c)">
+                        <md-button id="radioStory">
+                            {{c+1}}. {{story.title}}
+                        </md-button>
+                    </div>
+
+                    <div v-if="c+1 < project.stories.length" v-on:click="down(c)">
+                        <md-button>
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+                    <div v-else v-on:click="down(c)">
+                        <md-button class="md-toggle">
+                        </md-button>
+                    </div>
+
+                </md-layout>
+            </md-layout>
+        </md-card>
+    </md-card-content>
 </div>

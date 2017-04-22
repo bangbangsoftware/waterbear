@@ -16,7 +16,8 @@ export default {
    beforeCreate,
    data: function() {
       return {
-         story: store.state.story
+         story: store.state.story,
+         session: store.state.session
       }
    },
    methods: {

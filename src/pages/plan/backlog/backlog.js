@@ -18,6 +18,10 @@ const comp = {
       save: () => {
          const session = store.state.session
          user.updateUser(session.user, session.project)
+      },
+      selectStory: (i) => {
+         console.log('story selected is number ' + i)
+         store.commit('selectStory', i)
       }
    }
 }
