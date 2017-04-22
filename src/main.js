@@ -9,6 +9,29 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-authentication'))
 console.log('Hello from %cTardigrade', 'font-size:300%; color:orange')
 
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
+import 'font-awesome/css/font-awesome.css'
+
+Vue.use(VueMaterial)
+/**
+ @TOD Need to download them and fref locally
+import "//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"
+import "//fonts.googleapis.com/icon?family=Material+Icons"
+**/
+
+Vue.material.registerTheme({
+  app: {
+      primary: 'cyan'
+    },
+  about: {
+      primary: 'indigo'
+    },
+  contact: {
+      primary: 'teal'
+    }
+})
+
 /* eslint-disable no-new */
 new Vue({
    el: '#app',
@@ -18,4 +41,3 @@ new Vue({
       App
    }
 })
-

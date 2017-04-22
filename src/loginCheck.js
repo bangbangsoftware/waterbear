@@ -5,6 +5,7 @@ import resolveUser from './direct.js'
 
 const runaway = (reject, message) => {
    store.commit('error', 'Need to login')
+   store.commit('loaded', false)
    if (window) {
       window.location.href = '#/'
    }

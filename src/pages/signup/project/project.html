@@ -14,12 +14,14 @@
             <md-input-container>
                 <label>What is the project called</label>
                 <md-input id="projectName" v-model="projectName" placeholder="Project name"></md-input>
+                <label>Project Description</label>
+                <md-input id="projectDesc" v-model="projectDesc" placeholder="Project description"></md-input>
             </md-input-container>
         </form>
     </md-card-content>
 
     <md-card-actions>
-        <div v-on:click="error = project(projectName)">
+        <div v-on:click="error = project(projectName, projectDesc)">
             <md-button class="md-raised md-primary">Next</md-button>
         </div>
     </md-card-actions>

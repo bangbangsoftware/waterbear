@@ -43,14 +43,20 @@ const comp = {
       element.focus()
    },
    methods: {
-      project: (name) => {
+      project: (name, desc) => {
          if (name.length === 0) {
             const element = document.getElementById('projectName')
             element.focus()
             return 'Missing project name'
          }
+         if (desc.length === 0) {
+            const element = document.getElementById('projectDesc')
+            element.focus()
+            return 'Missing project description'
+         }
          const project = {
-            '_id': name
+            '_id': name,
+            'description': desc
          }
          store.state.db.put(project)
             .then(prj => register(prj))
