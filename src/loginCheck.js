@@ -4,8 +4,8 @@ import db from './dbase.js'
 import resolveUser from './direct.js'
 
 const runaway = (reject, message) => {
-   store.commit('error', 'Need to login')
    store.commit('loaded', false)
+   store.commit('error', 'Need to login')
    if (window) {
       window.location.href = '#/'
    }
@@ -44,7 +44,6 @@ const service = () => {
          noDatabase(resolve, reject)
       } else {
          store.commit('error', '')
-         store.commit('menuOn')
          store.commit('loaded', true)
          resolve(true)
          return

@@ -1,7 +1,37 @@
-<div id="task">
+<div id="session.task">
     Create a task from a story in backlog, skills are mandatory as is estimated time
     NB. If a user gets assigned to as task and they should have a skill match -
     maybe auto update aspirations if skills missing
+    <md-layout>
+        <md-card>
+            <md-card-content>
+                <h1>Task for</h1>
+                <h2>{{session.story.name}}</h2>
+                <h3>{{session.story.desc}}</h3>
+                <br>
+                <md-input-container>
+                    <label>Name</label>
+                    <md-input v-on:change="storeName(session.task.name)" id="name" required placeholder="Task Name"
+                        v-model="session.task.name" tabindex="0"></md-input>
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <md-input v-on:change="storeDesc(session.task.desc)" id="desc" required placeholder="Task Description"
+                        v-model="session.task.desc"></md-input>
+                </md-input-container>
+                <md-input-container>
+                    <label>Description</label>
+                    <md-input type=number v-on:change="storeEst(session.task.est)" id="est" required placeholder="Task Time estimation"
+                        v-model="session.task.est"></md-input>
+                </md-input-container>
 
-    {{session.story}}
+                <md-card-actions>
+                    <md-button v-on:mouseover="whatsNeeded(session.task.est)" align="end" class="md-raised md-primary"
+                        :disabled="!session.task.valid">
+                        <div v-on:click="postTask(session.task)">Add Task</div>
+                    </md-button>
+                </md-card-actions>
+            </md-card-content>
+        </md-card>
+    </md-layout>
 </div>

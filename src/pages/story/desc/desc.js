@@ -27,7 +27,11 @@ const comp = {
          if (typeof that === 'undefined') {
             that = ''
          }
-         const desc = as + want + that
+         const desc = {
+            as,
+            want,
+            that
+         }
          store.commit('desc', desc)
       }
    }

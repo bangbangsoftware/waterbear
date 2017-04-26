@@ -1,0 +1,47 @@
+import validTask from './pages/plan/task/valid.js'
+
+export default {
+   taskError: (state, message) => {
+      state.session.task.error = message
+      state.session.task.valid = false
+   },
+   taskOk: (state) => {
+      state.session.task.error = ''
+      state.session.task.valid = true
+   },
+   clearTask: (state) => {
+      state.session.task = {
+         error: '',
+         name: '',
+         desc: '',
+         est: 0,
+         valid: false
+      }
+   },
+   taskName: (state, name) => {
+      state.session.task.name = name
+      validTask(state.session.task)
+   },
+   taskDesc: (state, desc) => {
+      state.session.task.desc = desc
+      validTask(state.session.task)
+   },
+   taskEst: (state, est) => {
+      state.session.task.est = est
+      validTask(state.session.task)
+   },
+   task: (state, task) => {
+      const project = state.session.project
+      const stories = project.stories
+      const storyIndex = state.session.story.index
+      const story = stories[storeIndex]
+      let tasks = story.tasks
+      if (!tasks) {
+         tasks = []
+      }
+      tasks.push(task)
+      state.session.project.stories[storyIndex].task = tasks
+      store.commit('log', 'Added "' + task.name + '" to story "' + story.title + '"')
+      store.commit('clearTask')
+   }
+}
