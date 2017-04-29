@@ -1,4 +1,5 @@
 import validTask from './valid.js'
+import store from '../../../store.js'
 
 export default {
    taskError: (state, message) => {
@@ -14,6 +15,7 @@ export default {
          error: '',
          name: '',
          desc: '',
+         skill: '',
          est: 0,
          valid: false
       }
@@ -26,11 +28,26 @@ export default {
       state.session.task.desc = desc
       validTask(state.session.task)
    },
+   taskSkill: (state, skill) => {
+      state.session.task.skill = skill
+      validTask(state.session.task)
+   },
    taskEst: (state, est) => {
       state.session.task.est = est
       validTask(state.session.task)
    },
-   postTask: (state, task) => {
-
+   task: (state, task) => {
+      const project = state.session.project
+      const stories = project.stories
+      const storyIndex = state.session.story.index
+      const story = stories[storyIndex]
+      let tasks = story.tasks
+      if (!tasks) {
+         tasks = []
+      }
+      tasks.push(task)
+      state.session.project.stories[storyIndex].task = tasks
+      store.commit('log', 'Added "' + task.name + '" to story "' + story.title + '"')
+      store.commit('clearTask')
    }
 }

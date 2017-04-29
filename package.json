@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
+    "ship": "scp -r dist/* bobert@37.59.116.73:/var/www/waterbear/.",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "unit-watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
     "unit-debug": "node --inspect --debug-brk $(npm bin)/karma start test/unit/karma.conf.js --verbose",

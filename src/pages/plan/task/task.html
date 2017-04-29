@@ -20,9 +20,14 @@
                         v-model="session.task.desc"></md-input>
                 </md-input-container>
                 <md-input-container>
-                    <label>Description</label>
-                    <md-input type=number v-on:change="storeEst(session.task.est)" id="est" required placeholder="Task Time estimation"
-                        v-model="session.task.est"></md-input>
+                    <label>Time estimations</label>
+                    <md-input type=number v-on:change="storeEst(session.task.est)" id="est" required
+                        placeholder="Task Time estimation" v-model="session.task.est"></md-input>
+                </md-input-container>
+                <md-input-container>
+                    <label>Skill Needed</label>
+                    <md-input v-on:change="storeSkill(session.task.skill)" id="skill" required placeholder="Skill needed for the task"
+                        v-model="session.task.skill"></md-input>
                 </md-input-container>
 
                 <md-card-actions>

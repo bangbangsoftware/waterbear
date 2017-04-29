@@ -11,6 +11,11 @@ const service = (task) => {
       return false
    }
 
+   if (task.skill.length === 0) {
+      store.commit('taskError', 'invalid task - missing skill')
+      return false
+   }
+
    if (task.est === 0) {
       store.commit('taskError', 'invalid task - missing time estimation')
       return false

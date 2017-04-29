@@ -26,7 +26,10 @@ const comp = {
       storeEst: (value) => {
          store.commit('taskEst', value)
       },
-      postTask: (task) => {
+      storeSkill: (value) => {
+         store.commit('taskSkill', value)
+      },
+      postTask: function(task) {
          var ok = valid(task)
          if (!ok) {
             console.log('invalid task...')
