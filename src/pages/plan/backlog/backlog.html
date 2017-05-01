@@ -18,6 +18,22 @@
                         <md-button id="radioStory">
                             {{c+1}}. {{story.title}}
                         </md-button>
+                        <md-button align="end" class="md-raised md-primary" :disabled="session.sprintIndex === -1">
+                            <div v-on:click="addToSprint(session.task)">Add to Sprint</div>
+                        </md-button>
+
+                    </div>
+                    </br>
+                    <div v-for="(task,t) in story.tasks" :key="task">
+                        <div v-on:click="selectTask(c,task)">
+                            <md-button id="radioStory">
+                                {{t}}.{{task.name}}
+                            </md-button>
+                            <md-button align="end" class="md-raised md-primary" :disabled="session.sprintIndex === -1">
+                                <div v-on:click="addToSprint(session.task)">Add to Sprint</div>
+                            </md-button>
+
+                        </div>
                     </div>
 
                     <div v-if="c+1 < project.stories.length" v-on:click="down(c)">

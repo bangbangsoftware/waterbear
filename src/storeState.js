@@ -18,10 +18,14 @@ const session = {
    menu: false,
    error: '',
    currentStory: -1,
+   sprintIndex: -1,
+   sprint: {},
+   sprints: [],
    project: {
       stories: [],
       members: [],
       defaults: [],
+      sprints: [],
       owner: {}
    },
    user: {

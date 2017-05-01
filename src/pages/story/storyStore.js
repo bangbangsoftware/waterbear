@@ -33,6 +33,9 @@ export default {
       theStory.index = selected
       store.commit('currentStory', theStory)
    },
+   selectSprint: (state, i) => {
+      state.session.sprintIndex = i
+   },
    currentStory: (state, story) => {
       state.session.story = story
    },

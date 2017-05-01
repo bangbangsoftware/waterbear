@@ -3,15 +3,21 @@ import Vue from 'vue'
 import store from '../../../store.js'
 import user from '../../../user.js'
 
-import template from './time.html'
+import template from './team.html'
 
 const comp = {
    name: 'time',
    template,
+   beforeCreate: function() {
+      this.members = store.state.session.project.members
+      const owner = store.state.session.project.owner
+      owner.owner = true
+      this.members.push(owner)
+   },
    data: () => {
       return {
          session: store.state.session,
-         menu: store.state.menu
+         members: []
       }
    },
    methods: {
@@ -22,5 +28,5 @@ const comp = {
    }
 }
 
-Vue.component('time', comp)
+Vue.component('team-display', comp)
 export default comp

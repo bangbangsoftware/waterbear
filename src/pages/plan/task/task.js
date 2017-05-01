@@ -5,6 +5,24 @@ import store from '../../../store.js'
 import template from './task.html'
 import valid from './valid'
 
+const storeTask = (task) => {
+   const prj = store.state.session.project
+   console.log('Adding task to story')
+   console.log(prj)
+   const db = store.state.db
+   db.get(prj._id)
+      .then(p => {
+         let tasks = p.stories[this.session.story.index].tasks
+         if (!tasks) {
+            tasks = []
+         }
+         tasks.push(task)
+         p.stories[this.session.story.index].tasks = tasks
+         return db.put(p)
+      })
+      .catch(err => console.error(err))
+}
+
 const comp = {
    name: 'task',
    template,
@@ -38,21 +56,7 @@ const comp = {
          }
          console.log('posting task')
          store.commit('task', task)
-         const prj = this.session.project
-         console.log('Adding task to story')
-         console.log(prj)
-         const db = store.state.db
-         db.get(prj._id)
-            .then(p => {
-               let tasks = p.stories[this.session.story.index].tasks
-               if (!tasks) {
-                  tasks = []
-               }
-               tasks.push(task)
-               p.stories[this.session.story.index].tasks = tasks
-               return db.put(p)
-            })
-            .catch(err => console.error(err))
+         storeTask(task)
       }
    }
 }

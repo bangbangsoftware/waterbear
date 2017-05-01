@@ -9,7 +9,7 @@ import user from '../../user.js'
 import './task/task.js'
 import './backlog/backlog.js'
 import './sprint/sprint.js'
-import './time/time.js'
+import './team/team.js'
 
 const comp = {
    name: 'plan',

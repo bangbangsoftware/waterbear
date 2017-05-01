@@ -8,6 +8,7 @@
                 <h1>Task for</h1>
                 <h2>{{session.story.name}}</h2>
                 <h3>{{session.story.desc}}</h3>
+                <h2>{{session.sprint.name}}</h2>
                 <br>
                 <md-input-container>
                     <label>Name</label>
@@ -30,8 +31,8 @@
                         v-model="session.task.skill"></md-input>
                 </md-input-container>
 
-                <md-card-actions>
-                    <md-button v-on:mouseover="whatsNeeded(session.task.est)" align="end" class="md-raised md-primary"
+                <md-card-actions> 
+                   <md-button v-on:mouseover="whatsNeeded(session.task.est)" align="end" class="md-raised md-primary"
                         :disabled="!session.task.valid">
                         <div v-on:click="postTask(session.task)">Add Task</div>
                     </md-button>

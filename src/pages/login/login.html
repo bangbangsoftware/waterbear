@@ -10,16 +10,18 @@
         <h2 v-if="error" class="error">{{ error }}</h2>
         <h2 v-if="session.error" class="error"> {{ session.error }}</h2>
         <md-card-content md-ratio="1:3">
-            <form >
+            <form>
                 <md-input-container>
                     <label>What is your email address?</label>
                     <md-input tabindex="0" type="email" autofocus id="email" v-model="email" placeholder="Email"></md-input>
                 </md-input-container>
+                <div v-on:keyup.enter="error = login(email,pw)">
+                    <md-input-container>
+                        <label>Password</label>
+                        <md-input id="password" type="password" v-model="pw"></md-input>
+                    </md-input-container>
+                </div>
                 <md-input-container>
-                    <label>Password</label>
-                    <md-input v-on:keyup.enter="error = login(email,pw)" id="password" type="password" v-model="pw"></md-input>
-                </md-input-container>
-                 <md-input-container>
                     <label>Database</label>
                     <md-input id="dbase" type="string" v-model="session.couchURL"></md-input>
                 </md-input-container>

@@ -36,6 +36,10 @@ export default {
       state.session.task.est = est
       validTask(state.session.task)
    },
+   selectTask: (state, task) => {
+      state.session.task = task
+      validTask(state.session.task)
+   },
    task: (state, task) => {
       const project = state.session.project
       const stories = project.stories
@@ -45,6 +49,7 @@ export default {
       if (!tasks) {
          tasks = []
       }
+      task.index = tasks.length
       tasks.push(task)
       state.session.project.stories[storyIndex].task = tasks
       store.commit('log', 'Added "' + task.name + '" to story "' + story.title + '"')
