@@ -29,12 +29,12 @@ const noDatabase = (resolve, reject) => {
             store.commit('loaded', true)
             resolve(me)
          }).catch(err => {
-            runaway(err, err)
+            runaway(reject, err)
          })
       } else {
          runaway(reject, 'There is no me')
       }
-   }).catch(err => runaway(err, err))
+   }).catch(err => runaway(reject, err))
 }
 
 const service = () => {

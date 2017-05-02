@@ -12,12 +12,12 @@ const storeTask = (task) => {
    const db = store.state.db
    db.get(prj._id)
       .then(p => {
-         let tasks = p.stories[this.session.story.index].tasks
+         let tasks = p.stories[store.state.session.story.index].tasks
          if (!tasks) {
             tasks = []
          }
          tasks.push(task)
-         p.stories[this.session.story.index].tasks = tasks
+         p.stories[store.state.session.story.index].tasks = tasks
          return db.put(p)
       })
       .catch(err => console.error(err))

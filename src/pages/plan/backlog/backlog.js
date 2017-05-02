@@ -7,7 +7,7 @@ import user from '../../../user.js'
 
 const storeSprints = () => {
    const prj = store.state.session.project
-   console.log('Adding task to story')
+   console.log('Adding task to sprint')
    console.log(prj)
    const db = store.state.db
    db.get(prj._id)

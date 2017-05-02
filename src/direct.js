@@ -65,8 +65,6 @@ const loadUser = (me, resolve, reject, db) => {
 const service = (me, database = db) => {
    store.commit('db', db)
    return new Promise((resolve, reject) => {
-      console.log('HOW DO I direct the route????')
-         // console.log(router)
       console.log(me)
       if (typeof me.currentProject === 'undefined') {
          loadUser(me, resolve, reject, database)
