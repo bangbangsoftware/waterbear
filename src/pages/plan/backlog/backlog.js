@@ -1,6 +1,8 @@
 import Vue from 'vue'
 
 import template from './backlog.html'
+import './backlog.css'
+import '../../../../node_modules/vue-material/dist/components/mdList/index.css'
 
 import store from '../../../store.js'
 import user from '../../../user.js'

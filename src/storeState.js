@@ -12,6 +12,7 @@ const story = {
 }
 
 const session = {
+   planState: 'sprintSelect',
    loaded: false,
    story: {},
    task: {},

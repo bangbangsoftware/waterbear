@@ -4,11 +4,11 @@ import store from '../../store.js'
 import loginCheck from '../../loginCheck.js'
 
 import template from './plan.html'
-import user from '../../user.js'
 
 import './task/task.js'
 import './backlog/backlog.js'
 import './sprint/sprint.js'
+import './sprintBacklog/sprintBacklog.js'
 import './team/team.js'
 
 const comp = {
@@ -16,6 +16,7 @@ const comp = {
    beforeCreate: () => {
       console.log(new Date() + ' Plan created')
       loginCheck()
+      store.commit('planStore', 'selectSprint')
    },
    template,
    data: () => {
@@ -24,9 +25,9 @@ const comp = {
       }
    },
    methods: {
-      save: () => {
-         const session = store.state.session
-         user.updateUser(session.user, session.project)
+      deselect: () => {
+         store.commit('selectSprint', -1)
+         store.commit('planState', 'sprintSelect')
       }
    }
 }

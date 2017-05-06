@@ -1,36 +1,28 @@
 <div id=plan>
     <md-layout v-if='session.loaded' md-gutter>
-        <md-layout md-column md-gutter>
-            <md-layout md-flex="20">
+        <md-layout md-column>
+            <md-layout md-flex=50>
+                <md-layout md-align="center">
+                    <div v-if="session.sprintIndex > -1" v-on:click="deselect()">
+                        <md-button>
+                            Sprint: {{session.project.sprints[session.sprintIndex].name}}
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+                </md-layout>
+
+                <backlog></backlog>
                 Wonder if it can be like tmux moving from section to section with zoom ?
             </md-layout>
-            <md-layout>
-                <backlog></backlog>
-            </md-layout>
         </md-layout>
 
         <md-layout md-column md-gutter>
-
             <md-layout md-flex="50">
-                <task></task>
+                <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
+                <task v-if="session.planState === 'task'"></task>
+                <sprint v-if="session.planState === 'sprint'"></sprint>
             </md-layout>
-        </md-layout>
-
-        <md-layout md-column md-gutter>
-
-
-            <md-layout>
-                <team-display></team-display>
-            </md-layout>
-        </md-layout>
-
-        <md-layout md-column md-gutter>
-
-
-            <md-layout>
-                <sprint></sprint>
-            </md-layout>
-
         </md-layout>
     </md-layout>
+
 </div>

@@ -6,6 +6,7 @@ import taskMutations from './pages/plan/task/taskStore.js'
 import memberMutations from './pages/member/memberStore.js'
 import storyMutations from './pages/story/storyStore.js'
 import backlogMutations from './pages/plan/backlog/backlogStore.js'
+import planMutations from './pages/plan/planStore.js'
 
 import state from './storeState.js'
 
@@ -20,6 +21,7 @@ addToMutations(memberMutations)
 addToMutations(storyMutations)
 addToMutations(taskMutations)
 addToMutations(backlogMutations)
+addToMutations(planMutations)
 
 export default new Vuex.Store({
    state,
