@@ -1,82 +1,77 @@
 <div id="backlog">
 
     <md-card-content v-if="project.stories.length > 0">
-
-        <label>The Backlog</label>
-        <md-layout md-align="end">
-            <md-button title="Add story" class="md-icon-button md-raised md-warn">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </md-button>
+        <md-layout>
+            <label><span class="md-headline">The Backlog</span></label>
+            <md-layout md-align="end">
+                <md-button title="Add story" class="md-icon-button">
+                    <i class="fa fa-pencil-square-o fa-10" aria-hidden="true"></i>
+                </md-button>
+            </md-layout>
         </md-layout>
 
         <md-card>
-            <md-layout md-align="end" md-column md-gutter>
-                <md-layout>
 
-                    <div class="phone-viewport">
-                        <md-list>
-                            <md-list-item v-for="(story,c) in project.stories" :key="story">
-                                <!--     <md-icon>whatshot</md-icon> -->
-                                <div v-if="c === 0">
-                                    <md-button class="md-toggle">
-                                    </md-button>
+            <div class="phone-viewport">
+                <md-list>
+
+                    <md-list-item v-for="(story,c) in project.stories" :key="story">
+                        <div v-if="c === 0">
+                            <md-button class="md-toggle">
+                            </md-button>
+                        </div>
+                        <div v-else v-on:click="up(c)">
+                            <md-button title="Move Up">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+                        {{c+1}}. {{ story.title | truncate }}
+
+                        <md-layout md-align="end">
+                            <md-button align="end" class="md-raised md-primary" :disabled="session.sprintIndex === -1 || !story.tasks || story.tasks.length === 0">
+                                <div title="Add to Sprint" v-on:click="addToSprint(story,c)">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </div>
-                                <div v-else v-on:click="up(c)">
-                                    <md-button title="Move Up">
-                                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                                    </md-button>
-                                </div>
+                            </md-button>
+                        </md-layout>
 
-                                <span><div class="wrap"> {{c+1}}. {{story.title}}</div></span>
-                                <md-layout md-align="end">
-                                    <md-button align="end" class="md-raised md-primary" :disabled="session.sprintIndex === -1 || story.tasksi.length === 0">
-                                        <div title="Add to Sprint" v-on:click="addToSprint(session.task)">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                        </div>
-                                    </md-button>
-                                </md-layout>
+                        </br>
+                        <div v-on:click="tasks(c)">
+                            <md-button title="Add Task" class="md-icon-button md-raised md-warn">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
 
-                                </br>
-                                <div v-on:click="selectStory(c)">
-                                    <md-button title="Add Task" class="md-icon-button md-raised md-warn">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </md-button>
-                                </div>
+                        <md-list-expand>
+                            <md-list>
+                                <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
+                                    <div v-on:click="selectTask(c,task)">
+                                        <md-layout md-align="end">
+                                            {{t}}.{{task.name}}
+                                            <md-button title="Add story" class="md-icon-button">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </md-button>
+                                        </md-layout>
+                                    </div>
 
+                                </md-list-item>
+                            </md-list>
+                        </md-list-expand>
 
-                                <md-list-expand>
-                                    <md-list>
-                                        <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
-                                            <div v-on:click="selectTask(c,task)">
-                                                <md-layout md-align="end">
-                                                    {{t}}.{{task.name}}
-                                                    <md-button title="Add story" class="md-icon-button md-raised md-warn">
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                    </md-button>
-                                                </md-layout>
-                                            </div>
+                        <div v-if="c+1 < project.stories.length" v-on:click="down(c)">
+                            <md-button title="Move Down">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+                        <div v-else v-on:click="down(c)">
+                            <md-button class="md-toggle">
+                            </md-button>
+                        </div>
 
-                                        </md-list-item>
-                                    </md-list>
-                                </md-list-expand>
+                    </md-list-item>
 
-                                <div v-if="c+1 < project.stories.length" v-on:click="down(c)">
-                                    <md-button title="Move Down">
-                                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                    </md-button>
-                                </div>
-                                <div v-else v-on:click="down(c)">
-                                    <md-button class="md-toggle">
-                                    </md-button>
-                                </div>
-
-                            </md-list-item>
-
-                        </md-list>
-                    </div>
-
-                </md-layout>
-            </md-layout>
+                </md-list>
+            </div>
         </md-card>
     </md-card-content>
 </div>

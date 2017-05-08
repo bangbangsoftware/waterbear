@@ -1,9 +1,36 @@
 <div id="sprint">
     <md-card-content v-if="project.sprints.length > 0">
-        <label>Sprint Planning</label>
+        <md-layout md-align="center">
+            <div v-if="session.sprintIndex > -1" v-on:click="deselect()">
+                <md-button>
+                    <span class="md-subheading">Planning the "{{sprint.name}}" Sprint</span>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </md-button>
+            </div>
+        </md-layout>
+
         <md-card>
             <md-layout md-align="end" md-column md-gutter md-flux="100">
-                <md-layout v-for="(sprint,c) in project.sprints" :key="sprint">
+                <md-layout v-for="(story,c) in sprint.list" :key="sprint">
+                    {{ story.title | truncate }}
+
+                    <div v-on:click="tasks(c)">
+                        <md-button title="Add Task" class="md-icon-button md-raised md-warn">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+
+                    <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
+                        <div v-on:click="selectTask(c,task)">
+                            <md-layout md-align="end">
+                                {{t}}.{{task.name}}
+                                <md-button title="Add story" class="md-icon-button md-raised md-warn">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </md-button>
+                            </md-layout>
+                        </div>
+
+                    </md-list-item>
 
                 </md-layout>
             </md-layout>

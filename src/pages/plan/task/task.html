@@ -1,10 +1,11 @@
 <div id="session.task">
-   <md-layout>
+    <md-layout>
         <md-card>
             <md-card-content>
-         <p>Create a task from a story in backlog, skills are mandatory as is estimated time</br>
-        NB. If a user gets assigned to as task and they should have a skill match -</br>
-    maybe auto update aspirations if skills missing</p>
+                <p>Create a task from a story in backlog, skills are mandatory as
+                    is estimated time</br>
+                    NB. If a user gets assigned to as task and they should have a skill match -</br>
+                    maybe auto update aspirations if skills missing</p>
                 <h1>Task for</h1>
                 <h2>{{session.story.name}}</h2>
                 <h3>{{session.story.desc}}</h3>
@@ -17,7 +18,8 @@
                 </md-input-container>
                 <md-input-container>
                     <label>Description</label>
-                    <md-textarea v-on:change="storeDesc(session.task.desc)" id="desc" required placeholder="Task Description" v-model="session.task.desc"></md-textarea>
+                    <md-textarea v-on:change="storeDesc(session.task.desc)" id="desc" required placeholder="Task Description"
+                        v-model="session.task.desc"></md-textarea>
                 </md-input-container>
                 <md-input-container>
                     <label>Time estimations</label>
@@ -30,8 +32,15 @@
                         v-model="session.task.skill"></md-input>
                 </md-input-container>
 
-                <md-card-actions> 
-                   <md-button v-on:mouseover="whatsNeeded(session.task.est)" align="end" class="md-raised md-primary"
+                <md-card-actions>
+                    <div v-on:click="exit()">
+                        <md-button md-align="start" class="md-raised md-primary">
+                            Return
+                        </md-button>
+                    </div>
+
+
+                    <md-button v-on:mouseover="whatsNeeded(session.task.est)" align="end" class="md-raised md-primary"
                         :disabled="!session.task.valid">
                         <div v-on:click="postTask(session.task)">Add Task</div>
                     </md-button>

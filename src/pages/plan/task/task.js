@@ -4,6 +4,7 @@ import store from '../../../store.js'
 
 import template from './task.html'
 import valid from './valid'
+import next from '../next.js'
 
 const storeTask = (task) => {
    const prj = store.state.session.project
@@ -57,6 +58,10 @@ const comp = {
          console.log('posting task')
          store.commit('task', task)
          storeTask(task)
+      },
+      exit: function() {
+         const state = next(this.session)
+         store.commit('planState', state)
       }
    }
 }

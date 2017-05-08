@@ -20,7 +20,11 @@ const session = {
    error: '',
    currentStory: -1,
    sprintIndex: -1,
-   sprint: {},
+   sprint: {
+      name: '',
+      from: '',
+      to: ''
+   },
    sprints: [],
    project: {
       stories: [],

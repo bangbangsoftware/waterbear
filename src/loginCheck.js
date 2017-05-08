@@ -9,7 +9,7 @@ const runaway = (reject, message) => {
    if (window) {
       window.location.href = '#/'
    }
-   store.commit('loaded', true)
+//   store.commit('loaded', true)
    reject(message)
 }
 

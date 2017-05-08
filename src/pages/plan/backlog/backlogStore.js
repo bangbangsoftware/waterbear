@@ -1,8 +1,9 @@
 import store from '../../../store.js'
 
 export default {
-   addToSprint: (state, taskIndex) => {
+   addToSprint: (state, index) => {
       let sprint = state.session.sprints[state.session.sprintIndex]
+      const story = state.session.project.stories.splice(index, 1)[0]
       if (!sprint) {
          sprint = {
             name: 'unnamed',
@@ -10,8 +11,7 @@ export default {
          }
       }
       const sprintItem = {
-         storyIndex: state.session.story.index,
-         taskIndex: taskIndex
+         story
       }
       sprint.list.push(sprintItem)
       state.session.sprints[state.session.sprintIndex] = sprint

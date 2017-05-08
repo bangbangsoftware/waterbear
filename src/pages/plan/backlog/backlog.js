@@ -35,18 +35,21 @@ const comp = {
          const session = store.state.session
          user.updateUser(session.user, session.project)
       },
-      selectStory: (i) => {
+      tasks: (i) => {
          console.log('story selected is number ' + i)
          store.commit('selectStory', i)
+         store.commit('planState', 'task')
       },
       selectTask: (i, task) => {
          console.log('story selected is number ' + i)
          store.commit('selectStory', i)
          store.commit('selectTask', task)
+         store.commit('planState', 'task')
       },
-      addToSprint: function(task) {
-         store.commit('addToSprint', task.index)
+      addToSprint: function(index) {
+         store.commit('addToSprint', index)
          storeSprints()
+         store.commit('planState', 'sprint')
       }
    }
 }

@@ -14,22 +14,30 @@ import 'vue-material/dist/vue-material.css'
 import 'font-awesome/css/font-awesome.css'
 
 Vue.use(VueMaterial)
-/**
- @TOD Need to download them and fref locally
-import "//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"
-import "//fonts.googleapis.com/icon?family=Material+Icons"
-**/
+
+Vue.filter('truncate', function(value) {
+   if (!value) {
+      return ''
+   }
+   if (typeof value !== 'string') {
+      return value
+   }
+   if (value.length < 20) {
+      return value
+   }
+   return value.substring(0, 19) + '...'
+})
 
 Vue.material.registerTheme({
-  app: {
+   app: {
       primary: 'cyan'
-    },
-  about: {
+   },
+   about: {
       primary: 'indigo'
-    },
-  contact: {
+   },
+   contact: {
       primary: 'teal'
-    }
+   }
 })
 
 /* eslint-disable no-new */
