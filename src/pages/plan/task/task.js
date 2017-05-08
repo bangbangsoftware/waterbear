@@ -28,7 +28,9 @@ const comp = {
    name: 'task',
    template,
    beforeCreate: () => {
-      store.commit('clearTask')
+      if (!store.state.session.task) {
+         store.commit('clearTask')
+      }
    },
    data: () => {
       return {

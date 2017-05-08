@@ -42,6 +42,8 @@ const comp = {
       },
       selectTask: (i, task) => {
          console.log('story selected is number ' + i)
+         console.log('task selected...')
+         console.log(task)
          store.commit('selectStory', i)
          store.commit('selectTask', task)
          store.commit('planState', 'task')
