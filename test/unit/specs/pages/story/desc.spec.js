@@ -1,4 +1,4 @@
-import comp from 'src/components/story/desc/desc.js'
+import comp from 'src/pages/story/desc/desc.js'
 
 describe('desc.spec.js', () => {
    it('should have a bunch of functions', done => {

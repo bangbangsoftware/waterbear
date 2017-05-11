@@ -1,4 +1,4 @@
-import comp from 'src/components/signup/team/team.js'
+import comp from 'src/pages/signup/team/team.js'
 
 describe('team.spec.js', () => {
    xit('should have a bunch of functions  ', done => {

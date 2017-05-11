@@ -1,4 +1,4 @@
-import start from 'src/components/signup/start/start'
+import start from 'src/pages/signup/start/start'
 import store from 'src/store.js'
 import Vue from 'vue'
 

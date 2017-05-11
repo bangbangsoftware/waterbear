@@ -1,4 +1,4 @@
-import story from 'src/components/story/story'
+import story from 'src/pages/story/story'
 import store from 'src/store.js'
 
 const blankStory = () => {

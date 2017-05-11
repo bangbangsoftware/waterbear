@@ -1,4 +1,4 @@
-import project from 'src/components/signup/project/project'
+import project from 'src/pages/signup/project/project'
 import store from 'src/store.js'
 
 describe('project.spec.js', () => {

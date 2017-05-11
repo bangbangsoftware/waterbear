@@ -1,4 +1,4 @@
-import summary from 'src/components/signup/summary/summary'
+import summary from 'src/pages/signup/summary/summary'
 import store from 'src/store.js'
 
 describe('summary.vue', () => {

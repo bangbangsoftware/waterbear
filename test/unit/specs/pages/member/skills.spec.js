@@ -1,4 +1,4 @@
-import comp from 'src/components/member/skills/skills.js'
+import comp from 'src/pages/member/skills/skills.js'
 
 describe('skills.spec.js', () => {
    it('should have data', done => {

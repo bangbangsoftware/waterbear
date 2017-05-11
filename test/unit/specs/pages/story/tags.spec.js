@@ -1,4 +1,4 @@
-import comp from 'src/components/story/tags/tags.js'
+import comp from 'src/pages/story/tags/tags.js'
 
 describe('tags.spec.js', () => {
    it('should have a functions', done => {

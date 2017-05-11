@@ -1,4 +1,4 @@
-import feed from 'src/components/feed/feed'
+import feed from 'src/common/feed/feed'
 import store from 'src/store.js'
 
 describe('feed.spec.js', () => {

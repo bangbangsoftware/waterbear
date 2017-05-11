@@ -1,4 +1,4 @@
-import comp from 'src/components/member/hours/hours.js'
+import comp from 'src/pages/member/hours/hours.js'
 
 describe('hours.spec.js', () => {
    it('should have a bunch of functions', done => {

@@ -10,30 +10,68 @@
         </md-layout>
 
         <md-card>
-            <md-layout md-align="end" md-column md-gutter md-flux="100">
-                <md-layout v-for="(story,c) in sprint.list" :key="sprint">
-                    {{ story.title | truncate }}
 
-                    <div v-on:click="tasks(c)">
-                        <md-button title="Add Task" class="md-icon-button md-raised md-warn">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </md-button>
-                    </div>
+            <div class="phone-viewport">
+                <md-list>
 
-                    <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
-                        <div v-on:click="selectTask(c,task)">
-                            <md-layout md-align="end">
-                                {{t}}.{{task.name}}
-                                <md-button title="Add story" class="md-icon-button md-raised md-warn">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </md-button>
-                            </md-layout>
+                    <md-list-item v-for="(story,c) in sprint.list" :key="sprint">
+                        <div v-if="c === 0">
+                            <md-button class="md-toggle">
+                            </md-button>
+                        </div>
+                        <div v-else v-on:click="up(c)">
+                            <md-button title="Move Up">
+                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+                        {{c+1}}. {{ story.title | truncate }}
+
+                        <md-layout md-align="end">
+                            <md-button align="end" class="md-raised md-primary" >
+                                <div title="Remove from Sprint" v-on:click="removeFromSprint(story,c)">
+                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                </div>
+                            </md-button>
+                        </md-layout>
+
+                        </br>
+                        <div v-on:click="tasks(c)">
+                            <md-button title="Add Task" class="md-icon-button md-raised md-warn">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+
+                        <md-list-expand>
+                            <md-list>
+                                <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
+                                    <div v-on:click="selectTask(c,task)">
+                                        <md-layout md-align="end">
+                                            {{t}}.{{task.name}}
+                                            <md-button title="Add story" class="md-icon-button">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </md-button>
+                                        </md-layout>
+                                    </div>
+
+                                </md-list-item>
+                            </md-list>
+                        </md-list-expand>
+
+                        <div v-if="c+1 < project.stories.length" v-on:click="down(c)">
+                            <md-button title="Move Down">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </md-button>
+                        </div>
+                        <div v-else v-on:click="down(c)">
+                            <md-button class="md-toggle">
+                            </md-button>
                         </div>
 
                     </md-list-item>
 
-                </md-layout>
-            </md-layout>
+                </md-list>
+            </div>
         </md-card>
+ 
     </md-card-content>
 </div>

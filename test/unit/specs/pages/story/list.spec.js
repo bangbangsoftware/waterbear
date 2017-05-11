@@ -1,10 +1,9 @@
-import comp from 'src/components/story/colours/colours.js'
+import comp from 'src/pages/story/list/list.js'
 
-describe('colour.spec.js', () => {
+describe('list.spec.js', () => {
    it('should have a bunch of functions', done => {
       const app = comp.methods
       expect(typeof app.navigateTo).to.equal('function')
-      expect(typeof app.changeColour).to.equal('function')
       done()
    })
 })

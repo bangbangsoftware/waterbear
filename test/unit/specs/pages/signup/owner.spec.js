@@ -1,4 +1,4 @@
-import owner from 'src/components/signup/owner/owner'
+import owner from 'src/pages/signup/owner/owner'
 import store from 'src/store.js'
 import Vue from 'vue'
 

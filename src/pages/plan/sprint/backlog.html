@@ -1,0 +1,45 @@
+<div id="sprint">
+    <md-card-content>
+        <label><span class="md-headline">Sprints</span></label>
+        <md-card>
+            <md-layout md-align="end" md-column md-gutter md-flux="100">
+                <md-layout v-for="(sprint,c) in project.sprints" :key="sprint">
+                    <div v-if="c === 0">
+                        <md-button class="md-toggle">
+                        </md-button>
+                    </div>
+                    <div v-else v-on:click="up(c)">
+                        <md-button>
+                            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+
+                    <div v-on:click="selectSprint(c)">
+                        <md-layout md-align="end">
+                            {{c+1}}. {{sprint.name}}
+                        </md-layout>
+                    </div>
+
+                    </br>
+                    <div v-for="(tasks,t) in sprint.tasks" :key="sprint">
+                        <div v-on:click="selectTask(c,task)">
+                            <md-button id="radioSprint">
+                                {{t}}.{{task.name}}
+                            </md-button>
+                        </div>
+                    </div>
+
+                    <div v-if="c+1 < project.sprints.length" v-on:click="down(c)">
+                        <md-button>
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+                    <div v-else v-on:click="down(c)">
+                        <md-button class="md-toggle">
+                        </md-button>
+                    </div>
+                </md-layout>
+            </md-layout>
+        </md-card>
+    </md-card-content>
+</div>

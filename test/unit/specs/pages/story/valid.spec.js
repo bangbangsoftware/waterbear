@@ -1,4 +1,4 @@
-import valid from 'src/components/story/valid.js'
+import valid from 'src/pages/story/valid.js'
 
 describe('valid.spec.js', () => {
    it('should be a functions', done => {

@@ -10,10 +10,7 @@ export default {
             list: []
          }
       }
-      const sprintItem = {
-         story
-      }
-      sprint.list.push(sprintItem)
+      sprint.list.push(story)
       state.session.sprints[state.session.sprintIndex] = sprint
       store.commit('log', 'Added a task to  "' + sprint.name + '" sprint."')
    }

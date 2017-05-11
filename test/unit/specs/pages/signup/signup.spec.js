@@ -1,6 +1,6 @@
 // import Vue from 'vue'
-import signup from 'src/components/signup/signup.js'
-// import signup from 'src/components/signup/signup.vue'
+import signup from 'src/pages/signup/signup.js'
+// import signup from 'src/pages/signup/signup.vue'
 
 describe('signup.vue', () => {
    /*

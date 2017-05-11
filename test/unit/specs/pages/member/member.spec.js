@@ -1,4 +1,4 @@
-import comp from 'src/components/member/member.js'
+import comp from 'src/pages/member/member.js'
 
 describe('member.spec.js', () => {
    it('should have a bunch of functions', done => {

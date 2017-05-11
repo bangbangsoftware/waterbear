@@ -1,4 +1,4 @@
-import comp from 'src/components/story/acceptance/acceptance.js'
+import comp from 'src/pages/story/acceptance/acceptance.js'
 
 describe('acceptance.spec.js', () => {
    it('should have a bunch of functions  ', done => {

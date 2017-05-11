@@ -1,4 +1,4 @@
-import comp from 'src/components/login/login.js'
+import comp from 'src/pages/login/login.js'
 
 describe('login.spec.js', () => {
    it('should have a bunch of functions  ', done => {
