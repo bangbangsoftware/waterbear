@@ -9,12 +9,13 @@ import user from '../../../user.js'
 
 const storeSprints = () => {
    const prj = store.state.session.project
-   console.log('Adding task to sprint')
+   console.log('Adding sprint')
    console.log(prj)
    const db = store.state.db
    db.get(prj._id)
       .then(p => {
-         p.sprints = store.state.session.sprints
+         p.sprints = store.state.session.project.sprints
+         p.stories = store.state.session.project.stories
          return db.put(p)
       })
       .catch(err => console.error(err))

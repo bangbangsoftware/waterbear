@@ -1,9 +1,14 @@
 <div id="sprint">
     <md-card-content>
         <label><span class="md-headline">Sprints</span></label>
+        <md-button title="New Sprint" class="md-icon-button">
+            <div v-on:click="newSprint()">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </div>
+        </md-button>
         <md-card>
             <md-layout md-align="end" md-column md-gutter md-flux="100">
-                <md-layout v-for="(sprint,c) in project.sprints" :key="sprint">
+                <md-layout v-for="(sprint,c) in session.project.sprints" :key="sprint">
                     <div v-if="c === 0">
                         <md-button class="md-toggle">
                         </md-button>
@@ -15,9 +20,11 @@
                     </div>
 
                     <div v-on:click="selectSprint(c)">
-                        <md-layout md-align="end">
-                            {{c+1}}. {{sprint.name}}
-                        </md-layout>
+                        <md-button>
+                            <md-layout md-align="end">
+                                {{c+1}}. {{sprint.name}}
+                            </md-layout>
+                        </md-button>
                     </div>
 
                     </br>
@@ -29,15 +36,16 @@
                         </div>
                     </div>
 
-                    <div v-if="c+1 < project.sprints.length" v-on:click="down(c)">
-                        <md-button>
-                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                        </md-button>
-                    </div>
-                    <div v-else v-on:click="down(c)">
+                    <div v-if="c === project.stories.length-1">
                         <md-button class="md-toggle">
                         </md-button>
                     </div>
+                    <div v-else v-on:click="down(c)">
+                        <md-button title="Move Down">
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </md-button>
+                    </div>
+
                 </md-layout>
             </md-layout>
         </md-card>

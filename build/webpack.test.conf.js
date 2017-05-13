@@ -14,7 +14,8 @@ var webpackConfig = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/test.env')
-    })
+    }),
+
   ]
 })
 webpackConfig.module.rules.push({ test: /\.html$/, use: 'vue-template-loader' });

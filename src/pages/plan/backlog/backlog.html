@@ -29,7 +29,7 @@
 
                         <md-layout md-align="end">
                             <md-button align="end" class="md-raised md-primary" :disabled="session.sprintIndex === -1 || !story.tasks || story.tasks.length === 0">
-                                <div title="Add to Sprint" v-on:click="addToSprint(story,c)">
+                                <div title="Add to Sprint" v-on:click="addToSprint(c)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </div>
                             </md-button>
@@ -58,15 +58,15 @@
                             </md-list>
                         </md-list-expand>
 
-                        <div v-if="c+1 < project.stories.length" v-on:click="down(c)">
-                            <md-button title="Move Down">
+                        <div v-if="c === project.stories.length-1" >
+                             <md-button class="md-toggle">
+                            </md-button>
+                       </div>
+                        <div v-else v-on:click="down(c)">
+                             <md-button title="Move Down">
                                 <i class="fa fa-arrow-down" aria-hidden="true"></i>
                             </md-button>
-                        </div>
-                        <div v-else v-on:click="down(c)">
-                            <md-button class="md-toggle">
-                            </md-button>
-                        </div>
+                       </div>
 
                     </md-list-item>
 

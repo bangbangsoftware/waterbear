@@ -9,7 +9,8 @@ const comp = {
    template,
    data: () => {
       return {
-         project: store.state.session.project
+         project: store.state.session.project,
+         session: store.state.session
       }
    },
    methods: {
@@ -17,6 +18,9 @@ const comp = {
          console.log('sprint selected is number ' + i)
          store.commit('selectSprint', i)
          store.commit('planState', 'sprint')
+      },
+      newSprint: () => {
+         store.commit('planState', 'sprintCreate')
       }
    }
 }
