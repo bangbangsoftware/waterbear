@@ -36,10 +36,10 @@ const comp = {
          const session = store.state.session
          user.updateUser(session.user, session.project)
       },
-      tasks: (i) => {
+      newTask: (i) => {
          console.log('story selected is number ' + i)
-         store.commit('selectStory', i)
          store.commit('clearTask')
+         store.commit('selectStory', i)
          store.commit('planState', 'task')
       },
       selectTask: (i, task) => {
