@@ -1,4 +1,5 @@
 import validSprint from './valid.js'
+import store from '../../../store.js'
 
 export default {
    sprintName: (state, newState) => {
@@ -26,5 +27,13 @@ export default {
          state.session.project.sprints = []
       }
       state.session.project.sprints.push(sprint)
+   },
+   takeFromSprint: (state, index) => {
+      let sprint = state.session.project.sprints[state.session.sprintIndex]
+      const story = sprint.list.splice(index, 1)[0]
+      state.session.project.stories.push(story)
+      state.session.project.sprints[state.session.sprintIndex] = sprint
+      store.commit('log', 'Added a task to  "' + sprint.name + '" sprint."')
    }
+
 }

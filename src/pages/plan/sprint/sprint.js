@@ -18,6 +18,10 @@ const comp = {
       deselect: () => {
          store.commit('selectSprint', -1)
          store.commit('planState', 'sprintSelect')
+      },
+      removeFromSprint: (story, index) => {
+         store.commit('takeFromSprint', index)
+         // storeSprints()
       }
    }
 }

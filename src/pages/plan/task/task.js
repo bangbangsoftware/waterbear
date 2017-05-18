@@ -34,7 +34,9 @@ const comp = {
    },
    data: () => {
       return {
-         session: store.state.session
+         session: store.state.session,
+         skills: store.state.defaults.skills,
+         newSkill: 'Add skill'
       }
    },
    methods: {

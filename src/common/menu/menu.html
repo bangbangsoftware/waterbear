@@ -30,6 +30,20 @@
         </md-toolbar>
 
         <md-list>
+            <md-list-item @click.native="go('member')">
+                Your Details - maybe name? 
+                <span>
+                <i class="fa fa-shower" aria-hidden="true"></i>
+                </span>
+            </md-list-item>
+
+            <md-list-item @click.native="go('project')">
+                Project 
+                <span>
+                <i class="fa fa-shower" aria-hidden="true"></i>
+                </span>
+            </md-list-item>
+
             <md-list-item @click.native="go('story')" class="md-primary">
                 Stories
                 <span>

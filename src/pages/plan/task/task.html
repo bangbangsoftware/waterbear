@@ -27,9 +27,17 @@
                         placeholder="Task Time estimation" v-model="session.task.est"></md-input>
                 </md-input-container>
                 <md-input-container>
-                    <label>Skill Needed</label>
-                    <md-input v-on:change="storeSkill(session.task.skill)" id="skill" required placeholder="Skill needed for the task"
-                        v-model="session.task.skill"></md-input>
+                    <label for="taskSkill">What skill does this task need?</label>
+                    <md-select v-on:change="storeSkill(session.task.skill)" required name="taskSkill"
+                        id="taskSkill" v-model="session.task.skill">
+                        <md-option v-for="skill in skills" v-bind:value="skill"> {{skill}}</md-option>
+                        <md-input-container>
+                            <md-input v-model="newSkill"></md-input>
+                            <div v-on:click="addSkill">
+                                <md-button class="md-raised md-primary">+</md-button>
+                            </div>
+                        </md-input-container>
+                    </md-select>
                 </md-input-container>
 
                 <md-card-actions>

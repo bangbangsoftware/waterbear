@@ -26,6 +26,8 @@ export default {
 
    tags: ['Feature', 'Technical Debt', 'Missing Functionality', 'MVP', 'USP', 'Quicker', 'New feature'],
 
-   roles: ['Product Owner', 'Scrum Master', 'Tester', 'Front end dev', 'Back end dev', 'UX', 'Trainer', 'Operation']
+   roles: ['Product Owner', 'Scrum Master', 'Tester', 'Front end dev', 'Back end dev', 'UX', 'Trainer', 'Operation'],
+
+   skills: ['css', 'vue', 'angularJS', 'design']
 
 }
