@@ -46,7 +46,7 @@
                                 <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
                                     <div v-on:click="selectTask(c,task)">
                                         <md-layout md-align="end">
-                                            {{t}}.{{task.name}}
+                                                {{t}}.{{task.name}} [{{task.skill}}]
                                             <md-button title="Add story" class="md-icon-button">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </md-button>

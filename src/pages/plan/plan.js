@@ -12,6 +12,7 @@ import './sprint/sprint.js'
 import './sprint/backlog.js'
 import './sprint/create.js'
 import './team/team.js'
+import './chart/chart.js'
 
 const comp = {
    name: 'plan',

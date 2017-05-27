@@ -18,6 +18,7 @@ const comp = {
          console.log('sprint selected is number ' + i)
          store.commit('selectSprint', i)
          store.commit('planState', 'sprint')
+         store.commit('sprintSkills')
       },
       newSprint: () => {
          store.commit('planState', 'sprintCreate')

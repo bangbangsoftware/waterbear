@@ -10,9 +10,14 @@
                         v-model="sprint.name" tabindex="0"></md-input>
                 </md-input-container>
                 <md-input-container>
-                    <label>Days</label>
-                    <md-input  v-on:change="storeDays(sprint.from)" id="days" required placeholder="How many days"
-                        v-model="sprint.days"></md-input>
+                    <label>From</label>
+                    <md-input  v-on:change="storeFrom(sprint.from)" id="from" required placeholder="From date and time"
+                        v-model="sprint.from"></md-input>
+                </md-input-container>
+                 <md-input-container>
+                    <label>To</label>
+                    <md-input  v-on:change="storeTo(sprint.to)" id="to" required placeholder="To date and time"
+                        v-model="sprint.to"></md-input>
                 </md-input-container>
                 <md-card-actions>
                     <div v-on:click="exit()">

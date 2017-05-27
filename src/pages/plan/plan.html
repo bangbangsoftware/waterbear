@@ -15,6 +15,7 @@
             <sprint-create  v-if="session.planState === 'sprintCreate'"></sprint-create>
             <task           v-if="session.planState === 'task'"></task>
             <sprint         v-if="session.planState === 'sprint'"></sprint>
+            <chart          v-if="session.planState === 'sprint'"></chart>
         </md-layout>
 
     </md-layout>

@@ -6,12 +6,8 @@ export default {
       state.session.sprint.name = newState
       validSprint(state.session.sprint)
    },
-   sprintFrom: (state, newState) => {
-      state.session.sprint.from = newState
-      validSprint(state.session.sprint)
-   },
-   sprintTo: (state, newState) => {
-      state.session.sprint.to = newState
+   sprintDays: (state, newState) => {
+      state.session.sprint.days = newState
       validSprint(state.session.sprint)
    },
    sprintError: (state, message) => {
@@ -33,7 +29,7 @@ export default {
       const story = sprint.list.splice(index, 1)[0]
       state.session.project.stories.push(story)
       state.session.project.sprints[state.session.sprintIndex] = sprint
-      store.commit('log', 'Added a task to  "' + sprint.name + '" sprint."')
+      store.commit('log', 'Task removed from "' + sprint.name + '" sprint."')
    }
 
 }

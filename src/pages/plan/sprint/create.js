@@ -36,11 +36,8 @@ const comp = {
       storeName: name => {
          store.commit('sprintName', name)
       },
-      storeFrom: from => {
-         store.commit('sprintFrom', from)
-      },
-      storeTo: to => {
-         store.commit('sprintTo', to)
+      storeDays: days => {
+         store.commit('sprintDays', days)
       },
       postSprint: () => {
          store.commit('postSprint', store.state.session.sprint)

@@ -6,13 +6,8 @@ const service = sprint => {
       return false
    }
 
-   if (!sprint.from || sprint.from.length === 0) {
-      store.commit('sprintError', 'invalid sprint - missing from date and time')
-      return false
-   }
-
-   if (!sprint.to || sprint.to.length === 0) {
-      store.commit('sprintError', 'invalid sprint - missing to date and time')
+   if (!sprint.days || sprint.days.length === 0 || sprint.days > 0) {
+      store.commit('sprintError', 'invalid sprint - missing sprint length')
       return false
    }
 
