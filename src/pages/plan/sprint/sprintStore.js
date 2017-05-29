@@ -2,6 +2,9 @@ import validSprint from './valid.js'
 import store from '../../../store.js'
 
 export default {
+   selectSprint: (state, i) => {
+      state.session.sprintIndex = i
+   },
    sprintName: (state, newState) => {
       state.session.sprint.name = newState
       validSprint(state.session.sprint)

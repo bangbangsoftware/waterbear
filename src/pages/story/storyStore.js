@@ -33,9 +33,6 @@ export default {
       theStory.index = selected
       store.commit('currentStory', theStory)
    },
-   selectSprint: (state, i) => {
-      state.session.sprintIndex = i
-   },
    currentStory: (state, story) => {
       state.session.story = story
    },
@@ -46,9 +43,6 @@ export default {
       state.session.project.stories.push(state.story)
       store.commit('log', 'Added "' + state.story.title + '" story')
       store.commit('clearStory')
-   },
-   story: (state, story) => {
-      state.store = story
    },
    title: (state, t) => {
       state.story['title'] = t
