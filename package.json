@@ -8,11 +8,12 @@
                 "transform": {
                         "^.+\\.js$": "babel-jest"
                 }
+
         },
         "scripts": {
                 "dev": "node build/dev-server.js",
                 "build": "node build/build.js",
-                "jest": "./jest --watch --coverage",
+                "jest": "./jest --watch --coverage --bail ./src",
                 "ship": "scp -r dist/* bobert@37.59.116.73:/var/www/waterbear/.",
                 "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
                 "unit-watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",

@@ -54,14 +54,14 @@ test('Should be able post a story', () => {
       },
       story
    }
+   storyStore.clearStory(state)
    storyStore.postStory(state)
    expect(state.session.project.stories.length).toBe(1)
 })
 
 test('Should be a able to add title to main story', () => {
-   const state = {
-      story: {}
-   }
+   const state = {}
+   storyStore.clearStory(state)
    storyStore.title(state, story.title)
    expect(state.story).toBe(story.title)
 })
@@ -99,6 +99,7 @@ test('Should be a able to remove acceptance', () => {
          acs: ['A bad acceptance']
       }
    }
+   storyStore.clearStory(state)
    storyStore.removeAcceptance(state, 0)
    expect(state.story.acs.length).toBe(0)
 })
@@ -109,6 +110,7 @@ test('Should be a able to add acceptance', () => {
          acs: []
       }
    }
+   storyStore.clearStory(state)
    storyStore.acceptance(state, "be able to test")
    expect(state.story.acs.length).toBe(1)
 })

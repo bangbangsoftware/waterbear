@@ -7,8 +7,17 @@ export default {
          const newTasks = story.tasks
          tasks.push.apply(tasks, newTasks)
       })
+      const skillMap = {}
       const skills = tasks.filter(task => typeof task !== 'undefined')
-         .map(task => task.skill)
-      state.session.skills = skills
+         .forEach(task => {
+            let qty = skillMap[task.skill]
+            if (typeof qty === 'undefined' || qty === -1) {
+               qty = 0
+            }
+            qty = qty + task.est
+            skillMap[task.skill] = qty
+         });
+
+      state.session.skills = skillMap
    }
 }
