@@ -62,13 +62,14 @@ test('Should be able post a story', () => {
 test('Should be a able to add title to main story', () => {
    const state = {}
    storyStore.clearStory(state)
-   storyStore.title(state, story.title)
-   expect(state.story).toBe(story.title)
+   storyStore.title(state, 'eak')
+   expect(state.story.title).toBe('eak')
 })
 test('Should be a able to add title to main story', () => {
    const state = {
       story: {}
    }
+   storyStore.clearStory(state)
    const desc = {
       as: 'as a sleepy person',
       want: 'to sleep',
@@ -83,6 +84,7 @@ test('Should be a able remove acceptance', () => {
    const state = {
       story: {}
    }
+   storyStore.clearStory(state)
    const desc = {
       as: 'as a sleepy person',
       want: 'to sleep',

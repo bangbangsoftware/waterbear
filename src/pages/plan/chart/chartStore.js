@@ -8,7 +8,7 @@ export default {
          tasks.push.apply(tasks, newTasks)
       })
       const skillMap = {}
-      const skills = tasks.filter(task => typeof task !== 'undefined')
+      tasks.filter(task => typeof task !== 'undefined')
          .forEach(task => {
             let qty = skillMap[task.skill]
             if (typeof qty === 'undefined' || qty === -1) {
@@ -16,7 +16,7 @@ export default {
             }
             qty = qty + task.est
             skillMap[task.skill] = qty
-         });
+         })
 
       state.session.skills = skillMap
    }
