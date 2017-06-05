@@ -1,0 +1,15 @@
+<md-card style="margin-top:20px">
+    <div id='coloured' v-bind:class="colourClasses[story.colourNo]">
+        <md-card-header>
+            <strong>{{c+1}}. {{story.title}}</strong>
+        </md-card-header>
+        <md-card-content>
+            <div>
+                As {{story.desc}}
+            </div>
+            <br>
+            <acceptance-criteria-list :acs="story.acs"></acceptance-criteria-list>
+        </md-card-content>
+        <actions :story="story"></actions>
+    </div>
+</md-card>

@@ -12,25 +12,8 @@
             -->
     <md-layout :md-gutter="4">
         <md-layout md-flex-medium="25" v-for="(story,c) in project.stories" :key="story" v-on:click="editStory(story)">
-            <md-card style="margin-top:20px">
-                <div id='coloured' v-bind:class="colourClasses[story.colourNo]">
-                    <md-card-header>
-                        {{c+1}}. {{story.title}}
-                    </md-card-header>
-                    <div>
-                        As {{story.desc}}
-                    </div>
-                    <br>
-                    <md-card-content v-for="(ac, i) in story.acs" :key='ac'>
-                        <i>{{i+1}}. {{ac}} </i>
-                    </md-card-content>
-                    <md-card-actions align="end">
-                        <md-button v-on:click="editStory(story)" color="primary">EDIT</md-button>
-                        <md-button v-on:click="removeStory(story)" color="primary">DELETE</md-button>
-                        <md-button v-on:click="breakStory(story)" color="primary">BREAKUP</md-button>
-                    </md-card-actions>
-                </div>
-            </md-card>
+            <story-card :story="story" :c="c"></story-card>
+
     </md-layout>
 
 

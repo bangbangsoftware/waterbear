@@ -33,3 +33,86 @@ a {
 {
     opacity: 0
 }
+
+.story .list .red{
+    background-color:rgba(0,0,0,0);
+}
+
+.story .list .red .md-card-header {
+    border-bottom:3px solid rgba(255,0,0,0.5);
+}
+
+.story .list .red .md-card-actions{
+    background-color:rgba(255,0,0,0.5);
+}
+
+.story .list .green{
+    background-color:rgba(0,0,0,0);
+}
+
+.story .list .green .md-card-header {
+    border-bottom:3px solid rgba(0,255,0,0.5);
+}
+
+.story .list .green .md-card-actions{
+    background-color:rgba(0,255,0,0.5);
+}
+
+.story .list .black{
+    background-color:rgba(0,0,0,0);
+}
+
+.story .list .black .md-card-header {
+    border-bottom:3px solid rgba(0,0,0,0.5);
+}
+
+.story .list .black .md-card-actions{
+    background-color:rgba(0,0,0,0.5);
+}
+
+.story .list .brown{
+    background-color:rgba(165,42,42,0);
+}
+
+.story .list .brown .md-card-header {
+    border-bottom:3px solid rgba(165,42,42,0.5);
+}
+
+.story .list .brown .md-card-actions{
+    background-color:rgba(165,42,42,0.5);
+}
+
+.story .list .orange{
+    background-color:rgba(0,0,0,0);
+}
+
+.story .list .orange .md-card-header {
+    border-bottom:3px solid rgba(255,165,0,0.5);
+}
+
+.story .list .orange .md-card-actions{
+    background-color:rgba(255,165,0,0.5);
+}
+
+.story .list .yellow{
+    background-color:rgba(255,255,0,0);
+}
+
+.story .list .yellow .md-card-header {
+    border-bottom:3px solid rgba(255,255,0,0.5);
+}
+
+.story .list .yellow .md-card-actions{
+    background-color:rgba(255,255,0,0.5);
+}
+.story .list .blue{
+    background-color:rgba(0,0,0,0);
+}
+
+.story .list .blue .md-card-header {
+    border-bottom:3px solid rgba(0,0,255,0.5);
+}
+
+.story .list .blue .md-card-actions{
+    background-color:rgba(0,0,255,0.5);
+}
