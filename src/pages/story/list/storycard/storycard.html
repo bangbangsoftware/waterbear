@@ -5,11 +5,13 @@
         </md-card-header>
         <md-card-content>
             <div>
-                As {{story.desc}}
+                As <em>{{story.descAs}}</em><br />
+                I want <em>{{story.descWant}}</em><br />
+                So that <em>{{story.descThat}}</em>
             </div>
             <br>
             <acceptance-criteria-list :acs="story.acs"></acceptance-criteria-list>
         </md-card-content>
-        <actions :story="story"></actions>
+        <actions :story="story" :c="c"></actions>
     </div>
 </md-card>

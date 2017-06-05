@@ -60,6 +60,7 @@ a {
 
 .story .list .black{
     background-color:rgba(0,0,0,0);
+    color:black;
 }
 
 .story .list .black .md-card-header {
