@@ -2,6 +2,8 @@ import store from '../../../store.js'
 import Vue from 'vue'
 import template from './list.html'
 import '../colours/colours.css'
+import './list.css'
+import StoryCard from './storycard/storycard'
 
 const comp = {
    name: 'list',
@@ -12,6 +14,9 @@ const comp = {
          colourClasses: store.state.defaults.colourClasses
       }
    },
+    components: {
+        'storyCard': StoryCard
+    },
    methods: {
       navigateTo: function(nav) {
          this.$router.go({

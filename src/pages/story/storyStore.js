@@ -36,6 +36,10 @@ export default {
    currentStory: (state, story) => {
       state.session.story = story
    },
+   deleteStory: (state, c) => {
+    console.log('deleting story' + c)
+    state.session.project.stories.splice(c, 1)
+   },
    postStory: (state) => {
       if (!state.session.project.stories) {
          state.session.project.stories = []
