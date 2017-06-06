@@ -6,24 +6,6 @@ import template from './task.html'
 import valid from './valid'
 import next from '../next.js'
 
-const storeTask = (task) => {
-   const prj = store.state.session.project
-   console.log('Adding task to story')
-   console.log(prj)
-   const db = store.state.db
-   db.get(prj._id)
-      .then(p => {
-         let tasks = p.stories[store.state.session.story.index].tasks
-         if (!tasks) {
-            tasks = []
-         }
-         tasks.push(task)
-         p.stories[store.state.session.story.index].tasks = tasks
-         return db.put(p)
-      })
-      .catch(err => console.error(err))
-}
-
 const comp = {
    name: 'task',
    template,
@@ -40,6 +22,25 @@ const comp = {
       }
    },
    methods: {
+      addTask: (p, task) => {
+         let tasks = p.stories[store.state.session.story.index].tasks
+         if (!tasks) {
+            tasks = []
+         }
+         tasks.push(task)
+         p.stories[store.state.session.story.index].tasks = tasks
+         const db = store.state.db
+         return db.put(p)
+      },
+      storeTask: task => {
+         const prj = store.state.session.project
+         console.log('Adding task to story')
+         console.log(prj)
+         const db = store.state.db
+         db.get(prj._id)
+            .then(p => comp.methods.addTask(p, task))
+            .catch(err => console.error(err))
+      },
       storeName: (value) => {
          store.commit('taskName', value)
       },
@@ -47,7 +48,8 @@ const comp = {
          store.commit('taskDesc', desc)
       },
       storeEst: (value) => {
-         store.commit('taskEst', value)
+         const num = parseInt(value)
+         store.commit('taskEst', num)
       },
       storeSkill: (value) => {
          store.commit('taskSkill', value)
@@ -61,7 +63,7 @@ const comp = {
          }
          console.log('posting task')
          store.commit('task', task)
-         storeTask(task)
+         comp.methods.storeTask(task)
       },
       exit: function() {
          const state = next(this.session)
