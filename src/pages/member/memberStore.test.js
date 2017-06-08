@@ -1,6 +1,6 @@
 import memberStore from './memberStore.js'
 
-test('That nick name can be stored', () => {
+it('That nick name can be stored', () => {
    const state = {
       session: {
          user: {}
@@ -10,7 +10,7 @@ test('That nick name can be stored', () => {
    expect(state.session.user.nick).toBe('fred')
 })
 
-test('Should be able to toggle night', () => {
+it('Should be able to toggle night', () => {
    const state = {
       session: {
          user: {
@@ -30,7 +30,7 @@ test('Should be able to toggle night', () => {
    expect(state.session.user.days[0].night[0].on).toBe(true)
 })
 
-test('Should be able to toggle day', () => {
+it('Should be able to toggle day', () => {
    const state = {
       session: {
          user: {
@@ -50,7 +50,7 @@ test('Should be able to toggle day', () => {
    expect(state.session.user.days[0].day[0].on).toBe(true)
 })
 
-test('Should be able to add an array of hours', () => {
+it('Should be able to add an array of hours', () => {
    const state = {
       session: {
          user: {}
@@ -64,7 +64,7 @@ test('Should be able to add an array of hours', () => {
    expect(state.session.user.days[0].day[0].on).toBe(true)
 })
 
-test('Should be able to add a member', () => {
+it('Should be able to add a member', () => {
    const state = {
       members: []
    }

@@ -1,6 +1,6 @@
 import store from './sprintStore.js'
 
-test('if can be selected', () => {
+it('if can be selected', () => {
    const state = {
       session: {}
    }
@@ -8,7 +8,7 @@ test('if can be selected', () => {
    expect(state.session.sprintIndex).toBe(45)
 })
 
-test('Sprint can set sprint name', () => {
+it('Sprint can set sprint name', () => {
    const state = {
       session: {
          sprint: {}
@@ -18,7 +18,7 @@ test('Sprint can set sprint name', () => {
    expect(state.session.sprint.name).toBe('Bug fix')
 })
 
-test('can set sprint days', () => {
+it('can set sprint days', () => {
    const state = {
       session: {
          sprint: {
@@ -31,7 +31,7 @@ test('can set sprint days', () => {
    expect(state.session.sprint.days[0]).toBe('A Bug fix')
 })
 
-test('can set sprint days', () => {
+it('can set sprint days', () => {
    const state = {
       session: {
          sprint: {
@@ -44,7 +44,7 @@ test('can set sprint days', () => {
 })
 
 
-test('can set sprint error', () => {
+it('can set sprint error', () => {
    const state = {
       session: {
          sprint: {}
@@ -55,7 +55,7 @@ test('can set sprint error', () => {
    expect(state.session.sprint.valid).toBe(false)
 })
 
-test('can set sprint to be ok', () => {
+it('can set sprint to be ok', () => {
    const state = {
       session: {
          sprint: {}
@@ -66,7 +66,7 @@ test('can set sprint to be ok', () => {
    expect(state.session.sprint.valid).toBe(true)
 })
 
-test('can post sprint', () => {
+it('can post sprint', () => {
    const state = {
       session: {
          project: {}
@@ -79,7 +79,7 @@ test('can post sprint', () => {
    expect(state.session.project.sprints[0].name).toBe('fred')
 })
 
-test('if can take from sprint', () => {
+it('if can take from sprint', () => {
    const story = {
       name: 'fred\'s story'
    }

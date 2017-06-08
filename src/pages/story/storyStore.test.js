@@ -12,7 +12,7 @@ const story = {
 }
 
 
-test('If clear story mutates story to have blank values', () => {
+it('If clear story mutates story to have blank values', () => {
    const state = {
       story
    }
@@ -27,7 +27,7 @@ test('If clear story mutates story to have blank values', () => {
    expect(state.story.valid).toBe(false)
 })
 
-test('Should be able to select a story', () => {
+it('Should be able to select a story', () => {
    const state = {
       session: {
          project: {
@@ -39,7 +39,7 @@ test('Should be able to select a story', () => {
    expect(story.selected).toBe(true)
 })
 
-test('Should be able to set current story', () => {
+it('Should be able to set current story', () => {
    const state = {
       session: {}
    }
@@ -47,7 +47,7 @@ test('Should be able to set current story', () => {
    expect(state.session.story.title).toBe('The last story')
 })
 
-test('Should be able post a story', () => {
+it('Should be able post a story', () => {
    const state = {
       session: {
          project: {}
@@ -59,13 +59,13 @@ test('Should be able post a story', () => {
    expect(state.session.project.stories.length).toBe(1)
 })
 
-test('Should be a able to add title to main story', () => {
+it('Should be a able to add title to main story', () => {
    const state = {}
    storyStore.clearStory(state)
    storyStore.title(state, 'eak')
    expect(state.story.title).toBe('eak')
 })
-test('Should be a able to add title to main story', () => {
+it('Should be a able to add title to main story', () => {
    const state = {
       story: {}
    }
@@ -80,7 +80,7 @@ test('Should be a able to add title to main story', () => {
    expect(state.story.descWant).toBe(desc.want)
    expect(state.story.descThat).toBe(desc.that)
 })
-test('Should be a able remove acceptance', () => {
+it('Should be a able remove acceptance', () => {
    const state = {
       story: {}
    }
@@ -95,7 +95,7 @@ test('Should be a able remove acceptance', () => {
    expect(state.story.descWant).toBe(desc.want)
    expect(state.story.descThat).toBe(desc.that)
 })
-test('Should be a able to remove acceptance', () => {
+it('Should be a able to remove acceptance', () => {
    const state = {
       story: {
          acs: ['A bad acceptance']
@@ -106,7 +106,7 @@ test('Should be a able to remove acceptance', () => {
    expect(state.story.acs.length).toBe(0)
 })
 
-test('Should be a able to add acceptance', () => {
+it('Should be a able to add acceptance', () => {
    const state = {
       story: {
          acs: []
@@ -116,7 +116,7 @@ test('Should be a able to add acceptance', () => {
    storyStore.acceptance(state, "be able to test")
    expect(state.story.acs.length).toBe(1)
 })
-test('Should be a able to add change colour', () => {
+it('Should be a able to add change colour', () => {
    const state = {
       story: {}
    }

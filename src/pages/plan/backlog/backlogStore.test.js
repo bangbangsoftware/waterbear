@@ -1,6 +1,6 @@
 import store from './backlogStore.js'
 
-test('can add to sprint', () => {
+it('can add to sprint', () => {
    const state = {
       session: {
          project: {
@@ -16,7 +16,7 @@ test('can add to sprint', () => {
    expect(state.session.project.sprints[state.session.sprintIndex].list[0]).toBe('This isn\'t real')
 })
 
-test('can add to sprint', () => {
+it('can add to sprint', () => {
    const state = {
       session: {
          project: {

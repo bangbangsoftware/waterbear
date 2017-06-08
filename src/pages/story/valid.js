@@ -6,7 +6,7 @@ const service = (story) => {
       return false
    }
 
-   if (story.descAs.length === 0) {
+   if (!story.descAs || story.descAs.length === 0) {
       store.commit('storyError', 'invalid story - missing "As" description')
       return false
    }

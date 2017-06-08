@@ -1,6 +1,6 @@
 import store from './taskStore.js'
 
-test('task error can be set', () => {
+it('task error can be set', () => {
    const state = {
       session: {
          task: {}
@@ -11,7 +11,7 @@ test('task error can be set', () => {
    expect(state.session.task.error).toBe('hello')
 })
 
-test('task ok can be set', () => {
+it('task ok can be set', () => {
    const state = {
       session: {
          task: {}
@@ -22,7 +22,7 @@ test('task ok can be set', () => {
    expect(state.session.task.error).toBe('')
 })
 
-test('task can be cleared', () => {
+it('task can be cleared', () => {
    const state = {
       session: {
          task: {}
@@ -33,7 +33,7 @@ test('task can be cleared', () => {
    expect(state.session.task.name).toBe('')
 })
 
-test('task name can be set', () => {
+it('task name can be set', () => {
    const state = {
       session: {
          task: {}
@@ -44,7 +44,7 @@ test('task name can be set', () => {
    expect(state.session.task.name).toBe('ringo')
 })
 
-test('task desc can be set', () => {
+it('task desc can be set', () => {
    const state = {
       session: {
          task: {
@@ -59,7 +59,7 @@ test('task desc can be set', () => {
    expect(state.session.task.desc).toBe('blar')
 })
 
-test('task desc can be set', () => {
+it('task desc can be set', () => {
    const state = {
       session: {
          task: {
@@ -74,7 +74,7 @@ test('task desc can be set', () => {
 })
 
 
-test('task skill can be set', () => {
+it('task skill can be set', () => {
    const state = {
       session: {
          task: {}
@@ -88,7 +88,7 @@ test('task skill can be set', () => {
    expect(state.session.task.skill).toBe('running')
 })
 
-test('task est can be set', () => {
+it('task est can be set', () => {
    const state = {
       session: {
          task: {}
@@ -102,7 +102,7 @@ test('task est can be set', () => {
    expect(state.session.task.est).toBe(10)
 })
 
-test('can select a task', () => {
+it('can select a task', () => {
    const state = {
       session: {
          task: {}
@@ -118,7 +118,7 @@ test('can select a task', () => {
    expect(state.session.task.name).toBe('ringo')
 })
 
-test('can add a task', () => {
+it('can add a task', () => {
     const state = {
       session: {
          task: {},

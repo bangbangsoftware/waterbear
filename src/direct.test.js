@@ -1,5 +1,5 @@
-import direct from 'src/direct.js'
-import store from 'src/store.js'
+import direct from './direct.js'
+import store from './store.js'
 import Vue from 'vue'
 
 describe('redirect.spec.js', () => {
@@ -25,7 +25,7 @@ describe('redirect.spec.js', () => {
             done()
          })
          .catch(err => {
-            expect(err).to.equal('redirectSpecProject just isn\'t there')
+            expect(err).toBe('redirectSpecProject just isn\'t there')
          })
 
       Vue.nextTick(() => {
@@ -58,8 +58,8 @@ describe('redirect.spec.js', () => {
       direct(user, fakeDB)
       Vue.nextTick(() => {
          console.log('THE END')
-         expect(store.state.project.owner.email).to.equal('FAILfred@fred.com')
-         expect(store.state.feed[0]).to.equal('fred@fred.com logged on')
+         expect(store.state.project.owner.email).toBe('FAILfred@fred.com')
+         expect(store.state.feed[0]).toBe('fred@fred.com logged on')
          expect(store.state.session.user.email).equal('freiid@fred.com')
          done()
       })

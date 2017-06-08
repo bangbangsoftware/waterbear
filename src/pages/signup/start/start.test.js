@@ -1,5 +1,5 @@
-import start from 'src/pages/signup/start/start'
-import store from 'src/store.js'
+import start from './start'
+import store from '../../../store.js'
 import Vue from 'vue'
 
 describe('start.vue', () => {
@@ -65,17 +65,17 @@ describe('start.vue', () => {
 
    it('should not allow blank email', () => {
       const create = start.methods.createUser
-      expect(create('', 'changeme')).to.equal('Missing email')
+      expect(create('', 'changeme')).toBe('Missing email')
    })
 
    it('should not do a rudimentry validation on email', () => {
       const create = start.methods.createUser
-      expect(create('dfffff', 'changeme')).to.equal('Email looks a bit wrong')
+      expect(create('dfffff', 'changeme')).toBe('Email looks a bit wrong')
    })
 
    it('should not allow blank password', () => {
       const create = start.methods.createUser
-      expect(create('what@what.com', '')).to.equal('Missing password')
+      expect(create('what@what.com', '')).toBe('Missing password')
    })
 
    it('should be able to create user', () => {

@@ -1,23 +1,18 @@
+import service from './skills.js'
+
 export default {
    sprintSkills: (state) => {
       const sprint = state.session.project.sprints[state.session.sprintIndex]
-      const stories = sprint.list
-      const tasks = []
-      stories.forEach(story => {
-         const newTasks = story.tasks
-         tasks.push.apply(tasks, newTasks)
-      })
-      const skillMap = {}
-      tasks.filter(task => typeof task !== 'undefined')
-         .forEach(task => {
-            let qty = skillMap[task.skill]
-            if (typeof qty === 'undefined' || qty === -1) {
-               qty = 0
-            }
-            qty = qty + task.est
-            skillMap[task.skill] = qty
-         })
-
-      state.session.skills = skillMap
+      if (!state.session.skills) {
+         state.session.skills = {}
+      }
+      state.session.skills.sprint = service.sprintSkills(sprint)
+   },
+   memberSkills: (state, startDate, endDate) => {
+      if (!state.session.skills) {
+         state.session.skills = {}
+      }
+      const members = service.memberSkills(startDate, endDate, members)
+      state.session.skills.members = members
    }
 }

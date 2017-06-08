@@ -1,17 +1,17 @@
 import valid from './valid.js'
 
-test('valid.spec.js', () => {
+it('valid.spec.js', () => {
    expect(typeof valid).toBe('function')
 })
 
-test('Expect a story with zero length title to be invalid', () => {
+it('Expect a story with zero length title to be invalid', () => {
    const story = {
       title: ''
    };
    expect(valid(story)).toBe(false);
 })
 
-test('Expect a story with zero length description "as" to be invalid', () => {
+it('Expect a story with zero length description "as" to be invalid', () => {
    const story = {
       title: 'Hello',
       descAs: '',
@@ -22,29 +22,35 @@ test('Expect a story with zero length description "as" to be invalid', () => {
    expect(valid(story)).toBe(false);
 })
 
-test('Expect a story with zero length description "want" to be invalid', () => {
-   const story = {
-      title: 'Hello',
-      descAs: 'As a test',
-      descWant: '',
-      descThat: '',
-      acs: []
-   };
-   expect(valid(story)).toBe(false);
-})
+it(
+   'Expect a story with zero length description "want" to be invalid',
+   () => {
+      const story = {
+         title: 'Hello',
+         descAs: 'As a test',
+         descWant: '',
+         descThat: '',
+         acs: []
+      };
+      expect(valid(story)).toBe(false);
+   }
+)
 
-test('Expect a story with zero length description "that" to be invalid', () => {
-   const story = {
-      title: 'Hello',
-      descAs: 'As a test',
-      descWant: 'to be able to validate a story',
-      descThat: '',
-      acs: []
-   };
-   expect(valid(story)).toBe(false);
-})
+it(
+   'Expect a story with zero length description "that" to be invalid',
+   () => {
+      const story = {
+         title: 'Hello',
+         descAs: 'As a test',
+         descWant: 'to be able to validate a story',
+         descThat: '',
+         acs: []
+      };
+      expect(valid(story)).toBe(false);
+   }
+)
 
-test('Expect a story with zero length acs list to be invalid', () => {
+it('Expect a story with zero length acs list to be invalid', () => {
    const story = {
       title: 'Hello',
       descAs: 'As a test',
@@ -55,7 +61,7 @@ test('Expect a story with zero length acs list to be invalid', () => {
    expect(valid(story)).toBe(false);
 })
 
-test('Expect a full story to be valid', () => {
+it('Expect a full story to be valid', () => {
    const story = {
       title: 'Hello',
       descAs: 'As a test',
