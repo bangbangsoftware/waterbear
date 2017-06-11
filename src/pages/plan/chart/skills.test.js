@@ -114,9 +114,9 @@ it('should be able to give a team skills', () => {
    expect(teamSkills[1].hours).toBe(40)
    expect(teamSkills[2].hours).toBe(40)
 
-   expect(teamSkills[0].weight).toBe(40) 
-   expect(teamSkills[1].weight).toBe(80) 
-   expect(teamSkills[2].weight).toBe(120) 
+   expect(teamSkills[0].weight).toBe(40)
+   expect(teamSkills[1].weight).toBe(80)
+   expect(teamSkills[2].weight).toBe(120)
 
    expect(teamSkills[0].skills.length).toBe(1)
    expect(teamSkills[1].skills.length).toBe(2)
@@ -153,7 +153,7 @@ it('should be able to use a teams skill time', () => {
 })
 
 it('should be able to balance teams skill with sprints need', () => {
-    const task1 = {
+   const task1 = {
       name: 'Front end dev',
       est: 35,
       skill: 'vuejs'
@@ -183,7 +183,7 @@ it('should be able to balance teams skill with sprints need', () => {
       est: 32,
       skill: 'vuejs'
    }
- 
+
    const story1 = {
       tasks: [task2, task3, task4, task6]
    }
@@ -221,5 +221,7 @@ it('should be able to balance teams skill with sprints need', () => {
    expect(results.teamSkills[0].hours).toBe(0)
    expect(results.teamSkills[1].hours).toBe(3)
    expect(results.teamSkills[2].hours).toBe(40)
- 
+   console.log(results.teamSkills)
+   console.log(results.failed)
+
 })
