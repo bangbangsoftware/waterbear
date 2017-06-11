@@ -37,7 +37,6 @@ const defaultHours = (name, off) => {
 }
 
 export default () => {
-   console.log('Setting up default working hours')
    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
    const results = days.map(name => {

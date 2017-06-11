@@ -114,13 +114,42 @@ it('should be able to give a team skills', () => {
    expect(teamSkills[1].hours).toBe(40)
    expect(teamSkills[2].hours).toBe(40)
 
-   expect(teamSkills[0].weight).toBe(80)
-   expect(teamSkills[1].weight).toBe(120)
-   expect(teamSkills[2].weight).toBe(40)
+   expect(teamSkills[0].weight).toBe(40) 
+   expect(teamSkills[1].weight).toBe(80) 
+   expect(teamSkills[2].weight).toBe(120) 
 
-   expect(teamSkills[0].skills.length).toBe(2)
-   expect(teamSkills[1].skills.length).toBe(3)
-   expect(teamSkills[2].skills.length).toBe(1)
+   expect(teamSkills[0].skills.length).toBe(1)
+   expect(teamSkills[1].skills.length).toBe(2)
+   expect(teamSkills[2].skills.length).toBe(3)
+})
+
+it('should be able to use a teams skill time', () => {
+   const members = []
+   members.push({
+      name: 'Cory',
+      days: defaults(),
+      skills: ['vuejs', 'couchdb']
+   })
+   members.push({
+      name: 'Finn',
+      days: defaults(),
+      skills: ['vuejs', 'couchdb', 'css']
+   })
+   members.push({
+      name: 'Mick',
+      days: defaults(),
+      skills: ['wasm']
+   })
+   const startDate = new Date(2017, 5, 11) // which is actually June
+   const endDate = new Date(2017, 5, 17)
+   const teamSkills = service.getTeamSkills(members, startDate, endDate)
+
+   const result = service.useSkill(teamSkills, 'vuejs', 1);
+   expect(result.failed).toBe(false)
+   expect(result.skills[1].hours).toBe(39)
+
+   const result2 = service.useSkill(teamSkills, 'BANG', 1);
+   expect(result2.failed).toBe(true)
 })
 
 it('should be able to balance teams skill with sprints need', () => {
@@ -179,8 +208,12 @@ it('should be able to balance teams skill with sprints need', () => {
    })
    const startDate = new Date(2017, 5, 11) // which is actually June
    const endDate = new Date(2017, 5, 17)
+   const results = service.skillBalance(members, startDate, endDate, sprint)
 
-   const skillBalance = service.skillBalance(members, startDate, endDate, sprint)
-   expect(skillBalance.vuejs).toBe(23)
+   expect(results.failed[0].skill).toBe('None')
+   expect(results.failed[0].hours).toBe(4)
+   expect(results.teamSkills[0].hours).toBe(40)
+   expect(results.teamSkills[1].hours).toBe(37)
+   expect(results.teamSkills[2].hours).toBe(32)
  
 })

@@ -72,14 +72,52 @@ const service = {
             skills: skillHours.skills,
             weight
          }
-      })
+      }).sort((a, b) => a.weight - b.weight)
    },
-   getSkillBalance: (members, startDate, endDate, sprint) => {
-      const teamSkills = service.getTeamSkills(members, startDate, endDate)
-      const skills = service.sprintSkills(sprint)
-      const relevant = teamSkills.filter(ts => skills.indexOf(ts.skills) > -1)
-      const keys = Object.keys(skills)
+   useSkill: (teamSkill, skill, hours) => {
+      let taken = false
+      const newTeamSkill = teamSkill.map(member => {
+         if (member.skills.indexOf(skill) === -1) {
+            return member // Doesn't have the skill
+         }
+         if (!taken && member.hours >= hours) {
+            taken = true
+            member.hours = member.hours - hours
+            member.weight = service.getWeight(member)
+         }
+         return member
+      }).sort((a, b) => a.weight - b.weight)
 
+      // If no skill / time in team.... it should just fail, right?
+      //      if (!taken) {
+      //         newTeamSkill[0].hours = newTeamSkill[0].hours - hours
+      //         newTeamSkill[0].weight = service.getWeight(newTeamSkill[0])
+      //      }
+      return {
+         skills: newTeamSkill,
+         failed: !taken
+      }
+   },
+   skillBalance: (members, startDate, endDate, sprint) => {
+      let teamSkills = service.getTeamSkills(members, startDate, endDate)
+      const skillHours = service.sprintSkills(sprint)
+      const skills = Object.keys(skillHours)
+      const failed = []
+      skills.forEach(skill => {
+         const result = service.useSkill(teamSkills, skill, skillHours[skill])
+         if (result.failed) {
+            failed.push({
+               skill,
+               hours: skillHours[skill]
+            })
+         } else {
+            teamSkills = result.skills
+         }
+      })
+      return {
+         teamSkills,
+         failed
+      }
    }
 }
 
