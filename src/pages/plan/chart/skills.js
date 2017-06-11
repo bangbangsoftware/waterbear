@@ -76,15 +76,24 @@ const service = {
    },
    useSkill: (teamSkill, skill, hours) => {
       let taken = false
+      let timeLeft = hours
       const newTeamSkill = teamSkill.map(member => {
          if (member.skills.indexOf(skill) === -1) {
             return member // Doesn't have the skill
          }
-         if (!taken && member.hours >= hours) {
-            taken = true
-            member.hours = member.hours - hours
-            member.weight = service.getWeight(member)
+         if (member.hours === 0) {
+            return member // Doesn't have the time
          }
+         taken = true
+
+         if (member.hours >= timeLeft) {
+            member.hours = member.hours - timeLeft
+            timeLeft = 0
+         } else {
+            timeLeft = timeLeft - member.hours
+            member.hours = 0
+         }
+         member.weight = service.getWeight(member)
          return member
       }).sort((a, b) => a.weight - b.weight)
 

@@ -155,7 +155,7 @@ it('should be able to use a teams skill time', () => {
 it('should be able to balance teams skill with sprints need', () => {
     const task1 = {
       name: 'Front end dev',
-      est: 1,
+      est: 35,
       skill: 'vuejs'
    }
    const task2 = {
@@ -171,16 +171,21 @@ it('should be able to balance teams skill with sprints need', () => {
    const task4 = {
       name: 'Document',
       est: 4,
-      skill: 'None'
+      skill: 'Skydiving'
    }
    const task5 = {
       name: 'Design stuff',
       est: 5,
       skill: 'css'
    }
-
+   const task6 = {
+      name: 'Front end dev',
+      est: 32,
+      skill: 'vuejs'
+   }
+ 
    const story1 = {
-      tasks: [task2, task3, task4]
+      tasks: [task2, task3, task4, task6]
    }
 
    const story2 = {
@@ -210,10 +215,11 @@ it('should be able to balance teams skill with sprints need', () => {
    const endDate = new Date(2017, 5, 17)
    const results = service.skillBalance(members, startDate, endDate, sprint)
 
-   expect(results.failed[0].skill).toBe('None')
+   expect(results.failed.length).toBe(1)
+   expect(results.failed[0].skill).toBe('Skydiving')
    expect(results.failed[0].hours).toBe(4)
-   expect(results.teamSkills[0].hours).toBe(40)
-   expect(results.teamSkills[1].hours).toBe(37)
-   expect(results.teamSkills[2].hours).toBe(32)
+   expect(results.teamSkills[0].hours).toBe(0)
+   expect(results.teamSkills[1].hours).toBe(3)
+   expect(results.teamSkills[2].hours).toBe(40)
  
 })
