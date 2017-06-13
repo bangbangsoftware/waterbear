@@ -1,4 +1,4 @@
-// import store from '../../../storyStore.js'
+import store from '../../../storyStore.js'
 import template from './actions.html'
 
 export default {
@@ -11,7 +11,7 @@ export default {
         },
         removeStory: function(story, c) {
             console.log('remove')
-            // store.deleteStory(story, c)
+            store.deleteStory(story, c)
         },
         breakStory: function(story) {
             console.log('break')

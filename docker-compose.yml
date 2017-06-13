@@ -1,0 +1,12 @@
+version: '2'
+services:
+  waterbear-nginx:
+    build: .
+    ports:
+     - "8080:80"
+  waterbear-couch:
+    image: couchdb
+    volumes:
+    - $PWD/couchdbconf/local.ini:/usr/local/etc/couchdb/local.ini:rw
+    ports:
+     - "5984:5984"
