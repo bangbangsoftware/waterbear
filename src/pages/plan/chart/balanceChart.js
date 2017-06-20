@@ -18,15 +18,23 @@ const comp = Bar.extend({
       const now = new Date()
       const fortnightAway = new Date(+new Date() + 12096e5)
       const results = skills.skillBalance(members, now, fortnightAway, sprint)
-      const allSkills = skills.toList(members, sprint)
 
-      const hours = results.failed.map(ts => ts.hours)
+      const allSkills = Object.keys(results)
+      const needs = Object.values(results).map(r => r.need)
+      const gots = Object.values(results).map(r => r.got)
+      console.log('results', results)
+      console.log('gots', gots)
+      console.log('needs', needs)
       this.renderChart({
          labels: allSkills,
          datasets: [{
-            label: 'Balance',
+            label: 'Need',
             backgroundColor: '#f87979',
-            data: [hours, hours]
+            data: needs
+         }, {
+            label: 'Got',
+            backgroundColor: '#180079',
+            data: gots
          }]
       })
    }
