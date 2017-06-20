@@ -12,7 +12,10 @@ import './sprint/sprint.js'
 import './sprint/backlog.js'
 import './sprint/create.js'
 import './team/team.js'
-import './chart/chart.js'
+
+import './chart/memberChart.js'
+import './chart/sprintChart.js'
+import './chart/balanceChart.js'
 
 const comp = {
    name: 'plan',
@@ -34,4 +37,5 @@ const comp = {
 }
 
 Vue.component('plan', comp)
+
 export default comp

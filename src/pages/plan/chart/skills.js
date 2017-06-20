@@ -103,30 +103,77 @@ const service = {
       //         newTeamSkill[0].weight = service.getWeight(newTeamSkill[0])
       //      }
       return {
-         skills: newTeamSkill,
+         skillsLeft: newTeamSkill,
          failed: !taken
       }
    },
+   toList: (members, sprint) => {
+      const append = (list, item) => {
+         if (list.indexOf(item) > -1) {
+            return list
+         }
+         list.push(item)
+         return list
+      }
+      const allUnique = []
+      members.forEach(memb => {
+         memb.skills.forEach(skill => append(allUnique, skill))
+      })
+      sprint.list.forEach(story =>
+         story.tasks.forEach(task => append(allUnique, task.skill)))
+      return allUnique
+   },
+   getAverages: (teamSkills) => {
+      const average = {}
+      teamSkills.forEach(member => {
+         const split = member.hours / member.skills.length
+         member.skills.forEach(skill => {
+            let total = average[skill]
+            if (!total) {
+               total = 0
+            }
+            total = total + split
+            average[skill] = total
+         })
+      })
+      return average
+   },
+   getAverage: (teamSkills, skill) => {
+      const avs = service.getAverages(teamSkills)
+      if (avs && typeof avs[skill] === 'number') {
+         return avs[skill]
+      }
+      return 0
+   },
    skillBalance: (members, startDate, endDate, sprint) => {
       let teamSkills = service.getTeamSkills(members, startDate, endDate)
-      const skillHours = service.sprintSkills(sprint)
-      const skills = Object.keys(skillHours)
-      const failed = []
+      const sprintHours = service.sprintSkills(sprint)
+      const skills = service.toList(members, sprint)
+      const results = {}
       skills.forEach(skill => {
-         const result = service.useSkill(teamSkills, skill, skillHours[skill])
-         if (result.failed) {
-            failed.push({
-               skill,
-               hours: skillHours[skill]
-            })
+         results[skill] = {
+            need: 0,
+            got: 0
+         }
+         let plan = {
+            failed: true
+         }
+         if (sprintHours[skill]) {
+            results[skill].need = sprintHours[skill]
+            plan = service.useSkill(teamSkills, skill, sprintHours[skill])
+         }
+         if (plan.failed) {
+            results[skill].got = 0
          } else {
-            teamSkills = result.skills
+            teamSkills = plan.skillsLeft
+            results[skill].got = sprintHours[skill]
          }
       })
-      return {
-         teamSkills,
-         failed
-      }
+      skills.forEach(skill => {
+         let total = results[skill].got
+         results[skill].got = total + service.getAverage(teamSkills, skill)
+      })
+      return results
    }
 }
 

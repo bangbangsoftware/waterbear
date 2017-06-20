@@ -123,6 +123,78 @@ it('should be able to give a team skills', () => {
    expect(teamSkills[2].skills.length).toBe(3)
 })
 
+it('Should be able to make a unique list of skills based on sprint and members', () => {
+   const task1 = {
+      name: 'Front end dev',
+      est: 35,
+      skill: 'vuejs'
+   }
+   const task2 = {
+      name: 'Backend dev',
+      est: 2,
+      skill: 'couchdb'
+   }
+   const task3 = {
+      name: 'Design stuff',
+      est: 3,
+      skill: 'css'
+   }
+   const task4 = {
+      name: 'Document',
+      est: 4,
+      skill: 'Skydiving'
+   }
+   const task5 = {
+      name: 'Design stuff',
+      est: 5,
+      skill: 'css'
+   }
+   const task6 = {
+      name: 'Front end dev',
+      est: 32,
+      skill: 'vuejs'
+   }
+
+   const story1 = {
+      tasks: [task2, task3, task4, task6]
+   }
+
+   const story2 = {
+      tasks: [task1, task5]
+   }
+
+   const sprint = {
+      list: [story1, story2]
+   }
+   const members = []
+   members.push({
+      name: 'Cory',
+      days: defaults(),
+      skills: ['vuejs', 'couchdb']
+   })
+   members.push({
+      name: 'Finn',
+      days: defaults(),
+      skills: ['vuejs', 'couchdb', 'css']
+   })
+   members.push({
+      name: 'Mick',
+      days: defaults(),
+      skills: ['wasm']
+   })
+
+   const results = service.toList(members, sprint)
+   expect(results.length).toBe(5)
+   expect(results.indexOf('vuejs')).toBeGreaterThan(-1)
+   expect(results.indexOf('wasm')).toBeGreaterThan(-1)
+   expect(results.indexOf('couchdb')).toBeGreaterThan(-1)
+   expect(results.indexOf('css')).toBeGreaterThan(-1)
+   expect(results.indexOf('Skydiving')).toBeGreaterThan(-1)
+
+
+
+})
+
 it('should be able to use a teams skill time', () => {
    const members = []
    members.push({
@@ -146,7 +218,7 @@ it('should be able to use a teams skill time', () => {
 
    const result = service.useSkill(teamSkills, 'vuejs', 1);
    expect(result.failed).toBe(false)
-   expect(result.skills[1].hours).toBe(39)
+   expect(result.skillsLeft[1].hours).toBe(39)
 
    const result2 = service.useSkill(teamSkills, 'BANG', 1);
    expect(result2.failed).toBe(true)
@@ -214,8 +286,15 @@ it('should be able to balance teams skill with sprints need', () => {
    const startDate = new Date(2017, 5, 11) // which is actually June
    const endDate = new Date(2017, 5, 17)
    const results = service.skillBalance(members, startDate, endDate, sprint)
+   console.log("team", service.getTeamSkills(members, startDate, endDate))
+   console.log("sprint", service.sprintSkills(sprint))
+   console.log("results",results)
 
-   expect(results.failed.length).toBe(1)
+   expect(Object.keys(results).length).toBe(5)
+   expect(results['wasm'].need).toBe(0)
+   expect(results['wasm'].got).toBe(40)
+      /*
+   expect(results.ailed.length).toBe(1)
    expect(results.failed[0].skill).toBe('Skydiving')
    expect(results.failed[0].hours).toBe(4)
    expect(results.teamSkills[0].hours).toBe(0)
@@ -223,5 +302,6 @@ it('should be able to balance teams skill with sprints need', () => {
    expect(results.teamSkills[2].hours).toBe(40)
    console.log(results.teamSkills)
    console.log(results.failed)
+*/
 
 })
