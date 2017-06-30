@@ -3,11 +3,19 @@
     <h1 v-if="session.error" class="error">{{session.error}}</h1>
     <md-card md-with-hover>
         <md-card-header>
-                <div class="md-subhead">Details</div>
+            <div class="md-subhead">Details</div>
         </md-card-header>
 
         <h2 v-if="session.error" class="error"> {{ session.error }}</h2>
         <md-card-content md-ratio="1:3">
+            <div v-if="session.user.owner">
+                <md-button>
+                    <div v-on:click="changeUser(session.user)" v-bind:class="{ pressed: session.user.picked}">{{session.user.nick}}</div>
+                </md-button>
+                <md-button v-for="(user,i) in session.project.members" :key="user.name" v-bind:id="i+'-member'">
+                    <div v-on:click="changeUser(user)" v-bind:class="{ pressed: user.picked}">{{user.nick}}</div>
+                </md-button>
+            </div>
             <name></name>
             <div class="md-subhead">Your skills</div>
             <skills></skills>
@@ -21,7 +29,5 @@
             <md-button class="md-raised md-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Save</md-button>
         </div>
     </md-card-actions>
-
-
 
 </md-layout>

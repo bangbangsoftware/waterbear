@@ -68,6 +68,7 @@ const service = {
    loadUser: (user, project) => {
       const owner = project.owner
       if (owner.name === user.name) {
+         owner.owner = true
          return owner
       } else {
          const memberList = project.members.filter(member => member.name === user.name)

@@ -2,6 +2,7 @@ import template from './team.html'
 import store from '../../../store.js'
 import Vue from 'vue'
 import user from '../../../user.js'
+import defaults from '../../member/hours/default.js'
 
 const comp = {
    name: 'team',
@@ -51,7 +52,8 @@ const comp = {
          const newMember = {
             nick: name,
             role,
-            name: email
+            name: email,
+            days: defaults()
          }
          let newList = store.state.session.project.members
          if (typeof newList === 'undefined') {

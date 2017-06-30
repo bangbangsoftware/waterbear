@@ -14,6 +14,9 @@ import './skills/skills.js'
 const comp = {
    name: 'member',
    beforeCreate,
+   create: () => {
+      comp.data().session.user.picked = true
+   },
    template,
    data: () => {
       return {

@@ -2,6 +2,7 @@ import store from '../../../store.js'
 import user from '../../../user.js'
 import Vue from 'vue'
 import template from './owner.html'
+import defaults from '../../member/hours/default.js'
 
 const comp = {
    name: 'owner',
@@ -32,7 +33,8 @@ const comp = {
          user.ownerAndDefaults({
             nick,
             name: email,
-            role
+            role,
+            days: defaults()
          })
          store.commit('stage', {
             name,
