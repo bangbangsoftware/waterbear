@@ -116,9 +116,11 @@ const service = {
          return list
       }
       const allUnique = []
+           /* Don't care about all members skills just whats in the sprint
       members.forEach(memb => {
          memb.skills.forEach(skill => append(allUnique, skill))
       })
+      */
       sprint.list.forEach(story =>
          story.tasks.forEach(task => append(allUnique, task.skill)))
       return allUnique

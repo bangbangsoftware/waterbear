@@ -13,10 +13,14 @@ const comp = Bar.extend({
       const project = store.state.session.project
       console.log('The project is %o', project)
       const sprint = project.sprints[store.state.session.sprintIndex]
-      const members = [] // @TODO Not correct shape yet, no days: project.members
-      members.push(project.owner)
+      const members = project.members
+      // members.push(project.owner) - Owner is already there????
       const now = new Date()
       const fortnightAway = new Date(+new Date() + 12096e5)
+
+      console.log('Members: %o', members)
+      console.log('From %o to %o', now, fortnightAway)
+      console.log('Sprint: %o', sprint)
       const results = skills.skillBalance(members, now, fortnightAway, sprint)
 
       const allSkills = Object.keys(results)
