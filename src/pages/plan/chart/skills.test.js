@@ -290,7 +290,7 @@ it('should be able to balance teams skill with sprints need', () => {
    console.log("sprint", service.sprintSkills(sprint))
    console.log("results",results)
 
-   expect(Object.keys(results).length).toBe(4)
+   expect(Object.keys(results).length).toBe(5)
    expect(results['wasm'].need).toBe(0)
    expect(results['wasm'].got).toBe(40)
       /*

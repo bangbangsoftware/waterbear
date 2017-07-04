@@ -16,6 +16,14 @@ const getDayHours = (date, member) => {
    return dayHours + nightHours
 }
 
+const append = (list, item) => {
+   if (list.indexOf(item) > -1) {
+      return list
+   }
+   list.push(item)
+   return list
+}
+
 const service = {
    sprintSkills: (sprint) => {
       const stories = sprint.list
@@ -107,23 +115,19 @@ const service = {
          failed: !taken
       }
    },
-   toList: (members, sprint) => {
-      const append = (list, item) => {
-         if (list.indexOf(item) > -1) {
-            return list
-         }
-         list.push(item)
-         return list
-      }
-      const allUnique = []
-           /* Don't care about all members skills just whats in the sprint
-      members.forEach(memb => {
-         memb.skills.forEach(skill => append(allUnique, skill))
-      })
-      */
+   sprint: (sprint, allUnique = []) => {
       sprint.list.forEach(story =>
          story.tasks.forEach(task => append(allUnique, task.skill)))
       return allUnique
+   },
+   members: (members, allUnique = []) => {
+      members.forEach(memb => {
+         memb.skills.forEach(skill => append(allUnique, skill))
+      })
+      return allUnique
+   },
+   toList: (members, sprint) => {
+      return service.members(members, service.sprint(sprint))
    },
    getAverages: (teamSkills) => {
       const average = {}
