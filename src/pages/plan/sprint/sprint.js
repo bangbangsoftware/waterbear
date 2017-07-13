@@ -1,30 +1,39 @@
 import Vue from 'vue'
 
+import store from '../../../store.js'
+
 import template from './sprint.html'
 
-import store from '../../../store.js'
+import next from '../next.js'
+
+import loginCheck from '../../../loginCheck.js'
+
+import './chart/memberChart.js'
+import './chart/sprintChart.js'
+import './chart/balanceChart.js'
 
 const comp = {
    name: 'sprint',
+   beforeCreate: function() {
+      loginCheck().then(() => {
+         const id = parseInt(this.$route.params.id)
+         console.log(new Date() + ' sprint planning -#' + id)
+         store.commit('selectSprint', id)
+         store.commit('planState', 'sprint')
+         store.commit('sprintSkills')
+         const state = next(store.state.session)
+         store.commit('planState', state)
+      })
+   },
    template,
    data: () => {
       return {
-         project: store.state.session.project,
-         session: store.state.session,
-         sprint: store.state.session.project.sprints[store.state.session.sprintIndex]
+         session: store.state.session
       }
    },
-   methods: {
-      deselect: () => {
-         store.commit('selectSprint', -1)
-         store.commit('planState', 'sprintSelect')
-      },
-      removeFromSprint: (story, index) => {
-         store.commit('takeFromSprint', index)
-         // storeSprints()
-      }
-   }
+   methods: {}
 }
 
 Vue.component('sprint', comp)
+
 export default comp

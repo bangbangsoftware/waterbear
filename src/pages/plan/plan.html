@@ -1,30 +1,14 @@
 <div id=plan>
-    <md-layout md-gutter>
-    </md-layout>
-    <md-layout v-if='session.loaded' md-gutter>
-
-        <md-layout>
-            <md-layout>
-            </md-layout>
+    <div v-if='session.loaded'>
+        <md-layout md-gutter>
             <md-layout>
                 <backlog></backlog>
-            </md-layout>
-            <md-layout>
             </md-layout>
             <md-layout md-flex="50">
                 <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
                 <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
                 <task v-if="session.planState === 'task'"></task>
-                <sprint v-if="session.planState === 'sprint'"></sprint>
             </md-layout>
         </md-layout>
-        <md-layout v-if="session.planState ==='sprint'" md-align="center" md-gutter="16">
-            <md-layout md-flex md-flex-medium="100" md-hide-small>
-                <member-chart></member-chart>
-                <balance-chart></balance-chart>
-                <sprint-chart></sprint-chart>
-            </md-layout>
-        </md-layout>
-
-    </md-layout>
+    </div>
 </div>

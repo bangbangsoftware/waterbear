@@ -1,4 +1,4 @@
-import store from './sprintStore.js'
+import store from './selectStore.js'
 
 it('if can be selected', () => {
    const state = {

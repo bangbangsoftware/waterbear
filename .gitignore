@@ -35,6 +35,5 @@ test/unit/coverage
 .DS_Store
 Thumbs.db
 
-# Ignore these examples
-src/app/reverse.pipe.spec.ts
-src/app/reverse.pipe.ts
+# Ignore test data
+testData.js

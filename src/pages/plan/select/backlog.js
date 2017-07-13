@@ -16,9 +16,11 @@ const comp = {
    methods: {
       selectSprint: (i) => {
          console.log('sprint selected is number ' + i)
-         store.commit('selectSprint', i)
-         store.commit('planState', 'sprint')
-         store.commit('sprintSkills')
+        if (window) {
+            Vue.nextTick(() => {
+               window.location.href = '#/sprint/' + i
+            })
+         }
       },
       newSprint: () => {
          store.commit('planState', 'sprintCreate')

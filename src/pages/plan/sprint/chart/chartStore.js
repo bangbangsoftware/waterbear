@@ -14,5 +14,8 @@ export default {
       }
       const members = service.memberSkills(startDate, endDate, members)
       state.session.skills.members = members
+   },
+   planChart: (state, both) => {
+      state.session.planData = both
    }
 }

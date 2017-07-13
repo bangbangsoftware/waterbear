@@ -1,7 +1,8 @@
-import AcceptanceCriteriaList from './AcceptanceCriteriaList.js'
+import acceptanceCriteriaList from './acceptanceCriteriaList.js'
 
-describe('acceptance.spec.js', () => {
-   it('should have a bunch of functions  ', done => {
+describe('acceptanceCtiterialList.test.js', () => {
+   it('should have a bunch of functions  ', () => {
+      expect(acceptanceCriteriaList).toBeDefined()
 
    })
 })

@@ -8,14 +8,10 @@ import template from './plan.html'
 
 import './task/task.js'
 import './backlog/backlog.js'
-import './sprint/sprint.js'
-import './sprint/backlog.js'
-import './sprint/create.js'
+import './select/select.js'
+import './select/backlog.js'
+import './select/create.js'
 import './team/team.js'
-
-import './chart/memberChart.js'
-import './chart/sprintChart.js'
-import './chart/balanceChart.js'
 
 const comp = {
    name: 'plan',

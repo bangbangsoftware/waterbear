@@ -49,7 +49,7 @@ it('Should be able to get all skills totals from all tasks in all stories in a s
    expect(skills['Javascript']).toBe(1)
 })
 
-import defaults from '../../member/hours/default.js'
+import defaults from '../../../member/hours/default.js'
 it('Should be able to get get availability for a team member', () => {
 
    const member = {

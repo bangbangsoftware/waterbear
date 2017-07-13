@@ -7,8 +7,8 @@ import memberMutations from './pages/member/memberStore.js'
 import storyMutations from './pages/story/storyStore.js'
 import backlogMutations from './pages/plan/backlog/backlogStore.js'
 import planMutations from './pages/plan/planStore.js'
-import sprintMutations from './pages/plan/sprint/sprintStore.js'
-import chartMutations from './pages/plan/chart/chartStore.js'
+import sprintMutations from './pages/plan/select/selectStore.js'
+import chartMutations from './pages/plan/sprint/chart/chartStore.js'
 
 import state from './storeState.js'
 
