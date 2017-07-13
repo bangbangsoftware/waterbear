@@ -11,6 +11,9 @@ import loginCheck from '../../../loginCheck.js'
 import './chart/memberChart.js'
 import './chart/sprintChart.js'
 import './chart/balanceChart.js'
+import './chart/spareChart.js'
+
+import data from './chart/data.js'
 
 const comp = {
    name: 'sprint',
@@ -23,6 +26,7 @@ const comp = {
          store.commit('sprintSkills')
          const state = next(store.state.session)
          store.commit('planState', state)
+         data.refresh()
       })
    },
    template,

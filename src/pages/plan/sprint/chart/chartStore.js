@@ -16,6 +16,6 @@ export default {
       state.session.skills.members = members
    },
    planChart: (state, both) => {
-      state.session.planData = both
+      state.session.planChartData = both
    }
 }

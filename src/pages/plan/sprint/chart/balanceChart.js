@@ -1,12 +1,11 @@
 import Vue from 'vue'
 
 import { Bar } from 'vue-chartjs'
-import data from './data.js'
+import store from 'store'
 
 const comp = Bar.extend({
    mounted() {
-      const both = data.refresh()
-      const display = both.balance
+      const display = store.state.session.planChartData.balance
       console.log('display', display)
       this.renderChart({
          labels: display.skills,
