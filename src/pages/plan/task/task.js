@@ -4,7 +4,7 @@ import store from '../../../store.js'
 
 import template from './task.html'
 import valid from './valid'
-import next from '../next.js'
+import util from '../util.js'
 
 const comp = {
    name: 'task',
@@ -66,7 +66,7 @@ const comp = {
          comp.methods.storeTask(task)
       },
       exit: function() {
-         const state = next(this.session)
+         const state = util.next(this.session)
          store.commit('planState', state)
       }
    }

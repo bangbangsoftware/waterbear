@@ -3,7 +3,7 @@ import Vue from 'vue'
 import template from './create.html'
 
 import store from '../../../store.js'
-import next from '../next.js'
+import util from '../util.js'
 
 const storeSprint = (sprint) => {
    const prj = store.state.session.project
@@ -42,7 +42,7 @@ const comp = {
       postSprint: () => {
          store.commit('postSprint', store.state.session.sprint)
          storeSprint(store.state.session.sprint)
-         const state = next(store.state.session)
+         const state = util.next(store.state.session)
          store.commit('planState', state)
       }
    }

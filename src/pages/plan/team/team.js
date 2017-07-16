@@ -6,7 +6,7 @@ import user from '../../../user.js'
 import template from './team.html'
 
 const comp = {
-   name: 'time',
+   name: 'team-display',
    template,
    beforeCreate: function() {
       this.members = store.state.session.project.members

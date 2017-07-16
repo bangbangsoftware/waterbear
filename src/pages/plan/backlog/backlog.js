@@ -7,19 +7,7 @@ import '../../../../node_modules/vue-material/dist/components/mdList/index.css'
 import store from '../../../store.js'
 import user from '../../../user.js'
 
-const storeSprints = () => {
-   const prj = store.state.session.project
-   console.log('Adding sprint')
-   console.log(prj)
-   const db = store.state.db
-   db.get(prj._id)
-      .then(p => {
-         p.sprints = store.state.session.project.sprints
-         p.stories = store.state.session.project.stories
-         return db.put(p)
-      })
-      .catch(err => console.error(err))
-}
+import util from './../util.js'
 
 const comp = {
    name: 'backlog',
@@ -52,7 +40,7 @@ const comp = {
       },
       addToSprint: function(index) {
          store.commit('addToSprint', index)
-         storeSprints()
+         util.updateSprints()
          store.commit('planState', 'sprint')
       }
    }

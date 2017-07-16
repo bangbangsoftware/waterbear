@@ -4,7 +4,7 @@
         <md-layout>
             <label><span class="md-headline">The Backlog</span></label>
             <md-layout md-align="end">
-                <md-button title="Add story" class="md-icon-button">
+                <md-button title="Add Story" class="md-icon-button">
                     <i class="fa fa-pencil-square-o fa-10" aria-hidden="true"></i>
                 </md-button>
             </md-layout>
@@ -48,7 +48,7 @@
                                     <div v-on:click="selectTask(c,task)">
                                         <md-layout md-align="end">
                                             {{t}}.{{task.name}}
-                                            <md-button title="Add story" class="md-icon-button">
+                                            <md-button title="Edit Task" class="md-icon-button">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </md-button>
                                         </md-layout>
@@ -58,15 +58,15 @@
                             </md-list>
                         </md-list-expand>
 
-                        <div v-if="c === project.stories.length-1" >
-                             <md-button class="md-toggle">
+                        <div v-if="c === project.stories.length-1">
+                            <md-button class="md-toggle">
                             </md-button>
-                       </div>
+                        </div>
                         <div v-else v-on:click="down(c)">
-                             <md-button title="Move Down">
+                            <md-button title="Move Down">
                                 <i class="fa fa-arrow-down" aria-hidden="true"></i>
                             </md-button>
-                       </div>
+                        </div>
 
                     </md-list-item>
 

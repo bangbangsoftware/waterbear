@@ -4,6 +4,8 @@ import template from './select.html'
 
 import store from '../../../store.js'
 
+import util from '../util.js'
+
 const comp = {
    name: 'selectSprint',
    template,
@@ -21,7 +23,7 @@ const comp = {
       },
       removeFromSprint: (story, index) => {
          store.commit('takeFromSprint', index)
-            // storeSprints()
+         util.updateSprints()
       }
    }
 }

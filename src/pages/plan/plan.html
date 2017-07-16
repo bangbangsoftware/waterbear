@@ -3,12 +3,12 @@
         <md-layout md-gutter>
             <md-layout>
                 <backlog></backlog>
-            </md-layout>
-            <md-layout md-flex="50">
-                <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
-                <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
-                <task v-if="session.planState === 'task'"></task>
-            </md-layout>
+           </md-layout>
+           <md-layout md-flex="50">
+               <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
+               <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
+               <task v-if="session.planState === 'task'"></task>
+           </md-layout>
         </md-layout>
     </div>
 </div>

@@ -14,7 +14,7 @@
             <div class="phone-viewport">
                 <md-list>
 
-                    <md-list-item v-for="(story,c) in sprint.list" :key="sprint">
+                    <md-list-item v-for="(story,c) in sprint.list" :key="story.id">
                         <div v-if="c === 0">
                             <md-button class="md-toggle">
                             </md-button>

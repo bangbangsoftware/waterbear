@@ -2,23 +2,31 @@ import Vue from 'vue'
 
 import store from '../../store.js'
 import loginCheck from '../../loginCheck.js'
-import next from './next.js'
+import util from './util.js'
 
 import template from './plan.html'
 
-import './task/task.js'
-import './backlog/backlog.js'
-import './select/select.js'
-import './select/backlog.js'
-import './select/create.js'
-import './team/team.js'
+import task from './task/task.js'
+import backlog from './backlog/backlog.js'
+import selectSprint from './select/select.js'
+import sprintBacklog from './select/backlog.js'
+import sprintCreate from './select/create.js'
+import teamDisplay from './team/team.js'
 
 const comp = {
+   components: {
+      task,
+      backlog,
+      selectSprint,
+      sprintBacklog,
+      sprintCreate,
+      teamDisplay
+   },
    name: 'plan',
    beforeCreate: () => {
       console.log(new Date() + ' Plan created')
       loginCheck().then(() => {
-         const state = next(store.state.session)
+         const state = util.next(store.state.session)
          console.log('Where we at? ' + state)
          store.commit('planState', state)
       })
@@ -27,6 +35,11 @@ const comp = {
    data: () => {
       return {
          session: store.state.session
+      }
+   },
+   watch: {
+      session: function(val) {
+         this.session = val
       }
    },
    methods: {}
