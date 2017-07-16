@@ -17,12 +17,21 @@ const generate = sprint => {
 }
 
 const comp = Bar.extend({
+   data: () => {
+      return {
+         session: store.state.session
+      }
+   },
    watch: {
       session: {
-         handler: function(val) {
-            const sprint = store.state.session.project.sprints[store.state.session.sprintIndex]
+         handler: function(sess) {
+            const sprint = sess.project.sprints[sess.sprintIndex]
             const data = generate(sprint)
-            this._chart.data.datasets = data.datasets
+            this._chart.data.datasets = [{
+               label: 'Sprint',
+               backgroundColor: '#f87979',
+               data: data.datasets
+            }]
             this._chart.data.labels = data.labels
             this._chart.update()
          },
