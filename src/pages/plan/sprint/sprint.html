@@ -10,17 +10,14 @@
             </md-layout>
         </md-layout>
         <md-layout v-if="session.planChartData" md-gutter>
-             <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
-                <sprint-chart></sprint-chart>
-            </md-layout>
-
-            <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
-                <balance-chart></balance-chart>
-            </md-layout>
-
-           <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
-                <spare-chart></spare-chart>
-            </md-layout>
+            <div class="elevation-1">
+                <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
+                    <balance-chart></balance-chart>
+                </md-layout>
+               <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
+                    <spare-chart></spare-chart>
+                </md-layout>
+            </div>
 
         </md-layout>
     </div>

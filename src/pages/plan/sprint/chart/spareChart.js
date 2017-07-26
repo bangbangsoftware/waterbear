@@ -35,6 +35,9 @@ const comp = Bar.extend({
             backgroundColor: '#180079',
             data: display.gots
          }]
+      }, {
+         responsive: true,
+         maintainAspectRatio: false
       })
    }
 })

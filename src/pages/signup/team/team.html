@@ -2,12 +2,12 @@
 
     <md-card-header>
         <div class="md-title">
-            <h1>About the team</h1></div>
+            <h5>About the team</h5></div>
         <div class="md-subhead"></div>
     </md-card-header>
 
     <md-card-content md-ratio="1:3">
-        <h2 v-if="state.error" class="error">{{ state.error }}</h2>
+        <h6 v-if="state.error" class="error">{{ state.error }}</h6>
         <form v-on:keyup.enter="state = addMember(state.teamName,state.teamRole,state.teamEmail,state.members)">
             <md-input-container>
                 <label>What is their name</label>

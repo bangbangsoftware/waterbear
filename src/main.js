@@ -12,8 +12,11 @@ console.log('Hello from %cTardigrade', 'font-size:300%; color:orange')
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import 'font-awesome/css/font-awesome.css'
-
 Vue.use(VueMaterial)
+
+import Vuetify from 'vuetify'
+Vue.use(Vuetify)
+import '../node_modules/vuetify/dist/vuetify.min.css'
 
 Vue.filter('truncate', function(value) {
    if (!value) {

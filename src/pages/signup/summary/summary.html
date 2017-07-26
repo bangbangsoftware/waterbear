@@ -1,7 +1,7 @@
 <div v-if="stages.length > 0" class="summary">
     <md-whiteframe>
-        <h1 v-if="stages.length === 1">Summary </h1>
-        <h1 v-if="stages.length > 1">{{stages[1].name}} Summary </h1>
+        <h6 v-if="stages.length === 1">Summary </h6>
+        <h6 v-if="stages.length > 1">{{stages[1].name}} Summary </h6>
         <div class="phone-viewport">
             <md-layout v-if="stages.length === 1 || stages.length === 2">
                 Owner's email address is {{stages[0].name}}

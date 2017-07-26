@@ -2,29 +2,6 @@ import store from '../../../../store.js'
 
 import skills from './skills.js'
 
-const getBoxes = balance => {
-   const what = balance.skills.map((s, i) => {
-      return [{
-         'value': balance.needs[i],
-         'type': 'needs'
-      }, {
-         'value': balance.gots[i],
-         'type': 'gots'
-      }]
-   })
-   return {
-      boxes: what,
-      box_labels: balance.skills,
-      colours: {
-         failed: '#ff8257,#d2633f,#ffa994',
-         new: '#40a8e5,#3d83ac,#8abde4',
-         fresh: '#40e569,#3dac58,#8ae49c',
-         due: '#ffae57,#d2633f,#ffcc7f',
-         nill: '#929292,#818181,#b1b1b1'
-      }
-   }
-}
-
 const getBoth = (skills, results) => {
    const just = {}
    skills.forEach(skill => {
@@ -65,12 +42,9 @@ const comp = {
          }
       })
       const spareSkills = getBoth(memberSkills, results)
-      const chart = getBoxes(balance)
       debug('spare', balance)
-      console.log('chart is %o', chart)
       const balanceAndSpare = {
          balance,
-         chart,
          spareSkills
       }
       store.commit('planChart', balanceAndSpare)
