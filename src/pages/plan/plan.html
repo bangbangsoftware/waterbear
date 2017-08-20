@@ -1,14 +1,11 @@
-<div id=plan>
-    <div v-if='session.loaded'>
-        <md-layout md-gutter>
-            <md-layout>
-                <backlog></backlog>
-           </md-layout>
-           <md-layout md-flex="50">
-               <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
-               <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
-               <task v-if="session.planState === 'task'"></task>
-           </md-layout>
-        </md-layout>
-    </div>
-</div>
+<v-layout id="plan" v-if='session.loaded'>
+
+    <v-flex xs6>
+        <backlog></backlog>
+    </v-flex>
+    <v-flex xs6>
+        <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
+        <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
+        <task v-if="session.planState === 'task'"></task>
+    </v-flex>
+</v-layout>

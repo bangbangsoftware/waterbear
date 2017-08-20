@@ -1,24 +1,24 @@
 <div id=plan>
     <div v-if='session.sprintIndex > -1'>
 
-        <md-layout>
-            <md-layout md-flex-small="100" md-flex-medium="33" md-hide-xsmall>
+        <div>
+            <div flex-small="100" flex-medium="33" hide-xsmall>
                 <backlog></backlog>
-            </md-layout>
-            <md-layout md-flex md-flex-medium="33" md-hide-small>
+            </div>
+            <div flex flex-medium="33" hide-small>
                 <select-sprint></select-sprint>
-            </md-layout>
-        </md-layout>
-        <md-layout v-if="session.planChartData" md-gutter>
+            </div>
+        </div>
+        <div v-if="session.planChartData" gutter>
             <div class="elevation-1">
-                <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
+                <div flex-xsmall="100" flex-small="50" flex-medium="33">
                     <balance-chart></balance-chart>
-                </md-layout>
-               <md-layout md-flex-xsmall="100" md-flex-small="50" md-flex-medium="33">
+                </div>
+               <div flex-xsmall="100" flex-small="50" flex-medium="33">
                     <spare-chart></spare-chart>
-                </md-layout>
+                </div>
             </div>
 
-        </md-layout>
+        </div>
     </div>
 </div>

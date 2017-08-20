@@ -1,3 +1,7 @@
 .wrap {
     word-wrap: break-word;
 }
+
+.all-width {
+    max-width: 100%;
+}

@@ -9,10 +9,11 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-authentication'))
 console.log('Hello from %cTardigrade', 'font-size:300%; color:orange')
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.css'
 import 'font-awesome/css/font-awesome.css'
-Vue.use(VueMaterial)
+
+// import VueMaterial from 'vue-material'
+// import 'vue-material/dist/vue-material.css'
+// Vue.use(VueMaterial)
 
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
@@ -31,6 +32,7 @@ Vue.filter('truncate', function(value) {
    return value.substring(0, 19) + '...'
 })
 
+/**
 Vue.material.registerTheme({
    app: {
       primary: 'cyan'
@@ -42,6 +44,7 @@ Vue.material.registerTheme({
       primary: 'teal'
    }
 })
+**/
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,29 +1,29 @@
 <div class="acceptance">
     <div v-for="(ac, i) in state.acs">
-        <md-layout md-align="center">
-            <md-layout md-flex="60">{{i+1}}. {{ac}}
-            </md-layout>
-            <md-layout md-flex="20">
-                <md-button class="md-raised " id="acRemoveButton">
+        <div align="center">
+            <div flex="60">{{i+1}}. {{ac}}
+            </div>
+            <div flex="20">
+                <button class="raised " id="acRemoveButton">
                     <i v-on:click="state = removeCriteria(i)" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                </md-button>
-            </md-layout>
-        </md-layout>
+                </button>
+            </div>
+        </div>
     </div>
     <h6 v-if="state.error" class="error">{{state.error}}</h6>
-    <md-layout md-align="center">
-        <md-layout md-flex="60">
-            <md-input-container>
+    <div align="center">
+        <div flex="60">
+            <input-container>
                 <label>Add Criteria</label>
-                <md-input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" class="ac-input" placeholder="Acceptance Criteria"
+                <input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" class="ac-input" placeholder="Acceptance Criteria"
                     v-model="state.newAc">
-                </md-input>
-            </md-input-container>
-        </md-layout>
-        <md-layout md-flex="20">
-            <md-button class="md-raised md-primary" id="acButton" v-on:click.native="state = addCriteria(state.newAc)">
+                </input>
+            </input-container>
+        </div>
+        <div flex="20">
+            <button class="raised primary" id="acButton" v-on:click.native="state = addCriteria(state.newAc)">
                 <i  class="fa fa-plus-square-o" aria-hidden="true"></i>
-            </md-button>
-        </md-layout>
-    </md-layout>
+            </button>
+        </div>
+    </div>
 </div>

@@ -1,30 +1,30 @@
 <div v-if='session.loaded' class="story">
-    <md-layout>
-        <md-layout md-align="center" md-flex="80">
-            <md-card>
-                <md-card-content>
+    <v-layout>
+        <v-layout v-align="center" v-flex="80">
+            <v-card>
+                <v-container>
                     <h6 v-if="story.error">{{story.error}}</h6>
                     <story-desc></story-desc>
                     <acceptance></acceptance>
                     <tags></tags>
                     <colours></colours>
                     <br>
-                    <md-card-actions>
+                    <v-card-actions>
                         <!--
-                        <md-button align="start" class="md-raised md-primary" v-on:click="clearStory()">Clear Story</md-button>
+                        <v-button align="start" class="v-raised v-primary" v-on:click="clearStory()">Clear Story</v-button>
                             -->
-                        <md-button v-on:mouseover="whatsNeeded(story)" align="end" class="md-raised md-primary"
+                        <v-button v-on:mouseover="whatsNeeded(story)" align="end" class="v-raised v-primary"
                             :disabled="!story.valid">
                             <div v-on:click="postStory(story)">Add Story</div>
-                        </md-button>
-                    </md-card-actions>
-                </md-card-content>
-            </md-card>
-        </md-layout>
-        <md-layout md-gutter>
+                        </v-button>
+                    </v-card-actions>
+                </v-container>
+            </v-card>
+        </v-layout>
+        <v-layout v-gutter>
             <feed></feed>
-        </md-layout>
-    </md-layout>
+        </v-layout>
+    </v-layout>
 
     <list></list>
 

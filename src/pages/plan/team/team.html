@@ -1,28 +1,28 @@
 <div id="time">
     Graph for time period vrs task length vrs skills available
-    <md-whiteframe>
-        <md-layout>
-            <md-list>
-                <md-list-item>
-                    <md-table v-if="members.length > 0">
-                        <md-table-header>
-                            <md-table-row>
-                                <md-table-head>Name</md-table-head>
-                                <md-table-head md-tooltip="We'll send them an invite">Email</md-table-head>
-                                <md-table-head>Role</md-table-head>
-                            </md-table-row>
-                        </md-table-header>
+    <whiteframe>
+        <div>
+            <list>
+                <list-item>
+                    <table v-if="members.length > 0">
+                        <table-header>
+                            <table-row>
+                                <table-head>Name</table-head>
+                                <table-head tooltip="We'll send them an invite">Email</table-head>
+                                <table-head>Role</table-head>
+                            </table-row>
+                        </table-header>
 
-                        <md-table-body>
-                            <md-table-row v-for="(position, index) in members" :key="index">
-                                <md-table-cell>{{position.name}}</md-table-cell>
-                                <md-table-cell>{{position.email}}</md-table-cell>
-                                <md-table-cell>{{position.role}}</md-table-cell>
-                            </md-table-row>
-                        </md-table-body>
-                    </md-table>
-                </md-list-item>
-            </md-list>
-        </md-layout>
-    </md-whiteframe>
+                        <table-body>
+                            <table-row v-for="(position, index) in members" :key="index">
+                                <table-cell>{{position.name}}</table-cell>
+                                <table-cell>{{position.email}}</table-cell>
+                                <table-cell>{{position.role}}</table-cell>
+                            </table-row>
+                        </table-body>
+                    </table>
+                </list-item>
+            </list>
+        </div>
+    </whiteframe>
 </div>

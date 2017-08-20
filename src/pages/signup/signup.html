@@ -1,53 +1,53 @@
 <div class="signup">
 
-    <md-layout>
-        <md-layout md-gutter>
+    <div>
+        <div >
             <feed></feed>
-        </md-layout>
-        <md-layout md-align="center" md-flex="50">
+        </div>
+        <div align="center" flex="50">
 
-            <md-whiteframe v-if="stages.length === 0" md-elevation="14">
+            <whiteframe v-if="stages.length === 0" elevation="14">
                 <start></start>
-            </md-whiteframe>
+            </whiteframe>
 
-            <md-whiteframe v-if="stages.length === 1" md-elevation="14">
+            <whiteframe v-if="stages.length === 1" elevation="14">
                 <project></project>
-            </md-whiteframe>
+            </whiteframe>
 
-            <md-whiteframe v-if="stages.length === 2" md-elevation="14">
+            <whiteframe v-if="stages.length === 2" elevation="14">
                 <owner></owner>
-            </md-whiteframe>
+            </whiteframe>
 
             <transition name="fade">
-                <md-whiteframe v-if="stages.length === 3" md-elevation="14">
+                <whiteframe v-if="stages.length === 3" elevation="14">
                     <team></team>
-                </md-whiteframe>
+                </whiteframe>
             </transition>
 
-        </md-layout>
+        </div>
 
-        <md-layout>
+        <div>
             <project-summary></project-summary>
-        </md-layout>
+        </div>
 
-    </md-layout>
+    </div>
 
-    <md-layout>
+    <div>
         <div>&nbsp;</div>
-    </md-layout>
+    </div>
 
-    <md-layout v-if="stages.length === 3" md-align="center">
-        <md-layout md-flex="20">
+    <div v-if="stages.length === 3" align="center">
+        <div flex="20">
             <router-link to="/done">
-                <md-button class="md-raised md-primary">Define of done</md-button>
+                <button class="raised primary">Define of done</button>
             </router-link>
-        </md-layout>
-        <md-layout md-flex="20">
+        </div>
+        <div flex="20">
             <router-link to="/story">
-                <md-button class="md-raised md-primary">Enter stories</md-button>
+                <button class="raised primary">Enter stories</button>
             </router-link>
-        </md-layout>
-    </md-layout>
+        </div>
+    </div>
 
 
 </div>

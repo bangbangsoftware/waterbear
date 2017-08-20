@@ -1,76 +1,48 @@
-<div id="selectSprint">
-    <md-card-content v-if="sprint">
-        <md-layout  md-align="center">
-            <div v-if="session.sprintIndex > -1" v-on:click="deselect()">
-                <md-button>
-                    <span class="md-subheading">Planning the "{{sprint.name}}" Sprint</span>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </md-button>
-            </div>
-        </md-layout>
-
-        <md-card >
-
-            <div class="phone-viewport">
-                <md-list>
-
-                    <md-list-item v-for="(story,c) in sprint.list" :key="story.id">
-                        <div v-if="c === 0">
-                            <md-button class="md-toggle">
-                            </md-button>
-                        </div>
-                        <div v-else v-on:click="up(c)">
-                            <md-button title="Move Up">
-                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </md-button>
-                        </div>
-                        {{c+1}}. {{ story.title | truncate }}
-
-                        <md-layout md-align="end">
-                            <md-button align="end" class="md-raised md-primary">
-                                <div title="Remove from Sprint" v-on:click="removeFromSprint(story,c)">
-                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                                </div>
-                            </md-button>
-                        </md-layout>
-
-                        </br>
-                        <div v-on:click="tasks(c)">
-                            <md-button title="Add Task" class="md-icon-button">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </md-button>
-                        </div>
-
-                        <md-list-expand>
-                            <md-list>
-                                <md-list-item class="md-inset" v-for="(task,t) in story.tasks" :key="task">
-                                    <div v-on:click="selectTask(c,task)">
-                                        <md-layout md-align="end">
-                                                {{t}}.{{task.name}} [{{task.skill}}]
-                                            <md-button title="Add story" class="md-icon-button">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                            </md-button>
-                                        </md-layout>
-                                    </div>
-
-                                </md-list-item>
-                            </md-list>
-                        </md-list-expand>
-                        <div v-if="c === sprint.list.length-1">
-                            <md-button class="md-toggle">
-                            </md-button>
-                        </div>
-                        <div v-else v-on:click="down(c)">
-                            <md-button title="Move Down">
-                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </md-button>
-                        </div>
-
-                    </md-list-item>
-
-                </md-list>
-            </div>
-        </md-card>
-
-    </md-card-content>
-</div>
+<v-layout row id="selectSprint">
+    <v-flex xs12 sm6 offset-sm3>
+        <v-card>
+            <v-toolbar class="teal white--text" dark>
+                <v-toolbar-side-icon></v-toolbar-side-icon>
+                <v-toolbar-title>Sprints</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                    <v-icon>more_vert</v-icon>
+                </v-btn>
+            </v-toolbar>
+            <v-list>
+                <v-list-group v-for="(story,c) in sprint.list" :key="story.id">
+                    <v-list-tile slot="item">
+                        <v-list-tile-action>
+                            <!--  <v-icon>{{ item.action }}</v-icon> -->
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{c+1}}. {{ story.title | truncate }}</v-list-tile-title>
+                        </v-list-tile-content>
+                        <v-list-tile-action>
+                            <v-icon>keyboard_arrow_down</v-icon>
+                        </v-list-tile-action>
+                    </v-list-tile>
+                    <v-list-tile class="md-inset" v-for="(task,t) in story.tasks" :key="task">
+                         <v-list-tile-content>
+                            <v-list-tile-title> {{t}}.{{task.name}} [{{task.skill}}]</v-list-tile-title>
+                            <v-list-tile-title> buttone</v-list-tile-title>
+                        </v-list-tile-content>
+                        <v-list-tile-content>
+                        </v-list-tile-content>
+                        <v-list-tile-action>
+                        <v-list-tile-action-content>
+                                sdfsdfsdf
+                        </v-list-tile-action-content>
+                            <!--                <v-icon>{{ subItem.action }}</v-icon> -->
+                        </v-list-tile-action>
+                    </v-list-tile>
+                    <v-list-tile v-on:click="alert('HELL yes')">
+                        <v-button v-on:click="alert('HELL yes')">
+                            SELECT
+                        </v-button>
+                    </v-list-tile>
+                </v-list-group>
+            </v-list>
+        </v-card>
+    </v-flex>
+</v-layout>

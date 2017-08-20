@@ -94,6 +94,7 @@ export default {
          if (window) {
             Vue.nextTick(() => {
                window.location.href = '#/' + where
+               this.drawer = false
             })
          }
 

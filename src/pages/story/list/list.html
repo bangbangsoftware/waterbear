@@ -1,20 +1,20 @@
 <div class="list">
-        <md-card-content>
+        <card-content>
             <label>List</label>
-            <!--            <md-select >
-                <md-option v-for="(list,listNo) in project.stories">{{list.name}}</md-option>
-            </md-select>
+            <!--            <select >
+                <option v-for="(list,listNo) in project.stories">{{list.name}}</option>
+            </select>
             -->
-        </md-card-content>
+        </card-content>
 
         <!--
-        <md-card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories[listID].items.slice().reverse()">
+        <card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories[listID].items.slice().reverse()">
             -->
-    <md-layout :md-gutter="4">
-        <md-layout md-flex-medium="25" v-for="(story,c) in project.stories" :key="story" v-on:click="editStory(story)">
+    <div :gutter="4">
+        <div flex-medium="25" v-for="(story,c) in project.stories" :key="story" v-on:click="editStory(story)">
             <story-card :story="story" :c="c"></story-card>
-        </md-layout>
-    </md-layout>
+        </div>
+    </div>
 
 
 </div>

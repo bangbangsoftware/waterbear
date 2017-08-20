@@ -1,39 +1,25 @@
 <div v-if="stages.length > 0" class="summary">
-    <md-whiteframe>
-        <h6 v-if="stages.length === 1">Summary </h6>
-        <h6 v-if="stages.length > 1">{{stages[1].name}} Summary </h6>
-        <div class="phone-viewport">
-            <md-layout v-if="stages.length === 1 || stages.length === 2">
-                Owner's email address is {{stages[0].name}}
-            </md-layout>
+    <v-list>
+        <v-list-title v-if="stages.length === 1">Summary </v-list-title>
+        <v-list-title v-if="stages.length > 1">{{stages[1].name}} Summary </v-list-title>
+        <v-subheader v-if="members.length > 0">
+            <table v-if="members.length > 0">
+                <table-header>
+                    <table-row>
+                        <table-head>Name</table-head>
+                        <table-head tooltip="We'll send them an invite">Email</table-head>
+                        <table-head>Role</table-head>
+                    </table-row>
+                </table-header>
 
-            <md-layout v-if="stages.length ===3">
-                This project is owned by the {{stages[2].role}}: <a :href="'mailto:' + stages[0].name">{{stages[2].name}}</a>
-            </md-layout>
-
-            <md-layout>
-                <md-list>
-                    <md-list-item>
-                        <md-table v-if="members.length > 0" >
-                            <md-table-header>
-                                <md-table-row>
-                                    <md-table-head >Name</md-table-head>
-                                    <md-table-head md-tooltip="We'll send them an invite">Email</md-table-head>
-                                    <md-table-head >Role</md-table-head>
-                                </md-table-row>
-                            </md-table-header>
-
-                            <md-table-body>
-                                <md-table-row v-for="(position, index) in members" :key="index">
-                                    <md-table-cell>{{position.name}}</md-table-cell>
-                                    <md-table-cell>{{position.email}}</md-table-cell>
-                                    <md-table-cell>{{position.role}}</md-table-cell>
-                                </md-table-row>
-                            </md-table-body>
-                        </md-table>
-                    </md-list-item>
-                </md-list>
-            </md-layout>
-        </div>
-    </md-whiteframe>
+                <table-body>
+                    <table-row v-for="(position, index) in members" :key="index">
+                        <table-cell>{{position.name}}</table-cell>
+                        <table-cell>{{position.email}}</table-cell>
+                        <table-cell>{{position.role}}</table-cell>
+                    </table-row>
+                </table-body>
+            </table>
+        </v-subheader>
+    </v-list>
 </div>

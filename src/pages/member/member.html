@@ -1,33 +1,33 @@
-<md-layout v-if="session.user" md-align="center" md-flex="50">
+<div v-if="session.user" align="center" flex="50">
 
     <h6 v-if="session.error" class="error">{{session.error}}</h6>
-    <md-card md-with-hover>
-        <md-card-header>
-            <div class="md-subhead">Details</div>
-        </md-card-header>
+    <card with-hover>
+        <card-header>
+            <div class="subhead">Details</div>
+        </card-header>
 
         <h6 v-if="session.error" class="error"> {{ session.error }}</h6>
-        <md-card-content md-ratio="1:3">
+        <card-content ratio="1:3">
             <div v-if="session.user.owner">
-                <md-button>
+                <button>
                     <div v-on:click="changeUser(session.user)" v-bind:class="{ pressed: session.user.picked}">{{session.user.nick}}</div>
-                </md-button>
-                <md-button v-for="(user,i) in session.project.members" :key="user.name" v-bind:id="i+'-member'">
+                </button>
+                <button v-for="(user,i) in session.project.members" :key="user.name" v-bind:id="i+'-member'">
                     <div v-on:click="changeUser(user)" v-bind:class="{ pressed: user.picked}">{{user.nick}}</div>
-                </md-button>
+                </button>
             </div>
             <name></name>
-            <div class="md-subhead">Your skills</div>
+            <div class="subhead">Your skills</div>
             <skills></skills>
-            <div class="md-subhead">Normal working hours</div>
+            <div class="subhead">Normal working hours</div>
             <hours></hours>
-        </md-card-content>
+        </card-content>
 
-    </md-card>
-    <md-card-actions>
+    </card>
+    <card-actions>
         <div v-on:click="save()">
-            <md-button class="md-raised md-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Save</md-button>
+            <button class="raised primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Save</button>
         </div>
-    </md-card-actions>
+    </card-actions>
 
-</md-layout>
+</div>

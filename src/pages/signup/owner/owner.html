@@ -1,37 +1,37 @@
-<md-layout md-gutter="1">
-    <md-card md-with-hover>
+<div gutter="1">
+    <card with-hover>
 
-        <md-card-header>
-            <div class="md-title">
+        <card-header>
+            <div class="title">
                 <h6>About you</h6></div>
-            <div class="md-subhead"></div>
-        </md-card-header>
+            <div class="subhead"></div>
+        </card-header>
 
-        <md-card-content md-ratio="1:3">
+        <card-content ratio="1:3">
             <form v-on:keyup.enter="error = owner(ownerName,ownerRole)">
-                <md-input-container>
+                <input-container>
                     <label>What is your name?</label>
-                    <md-input tabindex="0" autofocus id='ownername' v-model="ownerName" placeholder="name"></md-input>
-                </md-input-container>
+                    <input tabindex="0" autofocus id='ownername' v-model="ownerName" placeholder="name"></input>
+                </input-container>
 
-                <md-input-container>
+                <input-container>
                     <label for="ownerRole">What is your role in the project</label>
-                    <md-select name="ownerRole" id="ownerRole" v-model="ownerRole">
-                        <md-option v-for="role in roles" v-bind:value="role"> {{role}}</md-option>
-                    </md-select>
-                </md-input-container>
+                    <select name="ownerRole" id="ownerRole" v-model="ownerRole">
+                        <option v-for="role in roles" v-bind:value="role"> {{role}}</option>
+                    </select>
+                </input-container>
             </form>
-        </md-card-content>
+        </card-content>
 
-        <md-card-actions>
+        <card-actions>
             <div v-on:click="error = owner(ownerName,ownerRole)">
-                <md-button class="md-raised md-primary">Next</md-button>
+                <button class="raised primary">Next</button>
             </div>
 
 
-        </md-card-actions>
+        </card-actions>
 
-    </md-card>
-    </md-whiteframe>
+    </card>
+    </whiteframe>
 
-</md-layout>
+</div>

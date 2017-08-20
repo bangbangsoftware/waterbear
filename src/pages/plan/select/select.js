@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
 import template from './select.html'
+import './select.css'
 
 import store from '../../../store.js'
-
 import util from '../util.js'
 
 const comp = {

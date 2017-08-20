@@ -1,25 +1,25 @@
 <div class="skills">
-    <md-layout>
+    <div>
         <!--
-        <md-chips v-model="skills" md-input-placeholder="Add a skill">
+        <chips v-model="skills" input-placeholder="Add a skill">
             <template scope="chip">{{ chip.value }}</template>
-        </md-chips>
+        </chips>
             -->
-        <md-input-container>
+        <input-container>
             <label for="taskSkill">What skill does this task need?</label>
-            <md-select v-on:change="storeSkill(session.task.skill)" required name="taskSkill"
+            <select v-on:change="storeSkill(session.task.skill)" required name="taskSkill"
                 id="taskSkill" v-model="session.task.skill">
-                <md-option v-for="skill in skills" v-bind:value="skill"> {{skill}}</md-option>
-                <md-input-container>
-                    <md-input v-model="newSkill"></md-input>
+                <option v-for="skill in skills" v-bind:value="skill"> {{skill}}</option>
+                <input-container>
+                    <input v-model="newSkill"></input>
                     <div v-on:click="addSkill">
-                        <md-button class="md-raised md-primary">+</md-button>
+                        <button class="raised primary">+</button>
                     </div>
-                </md-input-container>
-            </md-select>
+                </input-container>
+            </select>
             @TODO: Add multi skills....
-        </md-input-container>
+        </input-container>
 
 
-    </md-layout>
+    </div>
 </div>

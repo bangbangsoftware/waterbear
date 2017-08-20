@@ -1,32 +1,32 @@
 <div id="session.sprint">
-    <md-layout>
-        <md-card>
-            <md-card-content>
+    <div>
+        <card>
+            <card-content>
                 <h6>Sprint</h6>
                 <br>
-                <md-input-container>
+                <input-container>
                         <label>Goal</label>
-                    <md-input v-on:change="storeName(sprint.name)" id="name" required placeholder="Sprint Name"
-                        v-model="sprint.name" tabindex="0"></md-input>
-                </md-input-container>
-                <md-input-container>
+                    <input v-on:change="storeName(sprint.name)" id="name" required placeholder="Sprint Name"
+                        v-model="sprint.name" tabindex="0"></input>
+                </input-container>
+                <input-container>
                     <label>Days</label>
-                    <md-input  v-on:change="storeDays(sprint.from)" id="days" required placeholder="How many days"
-                        v-model="sprint.days"></md-input>
-                </md-input-container>
-                <md-card-actions>
+                    <input  v-on:change="storeDays(sprint.from)" id="days" required placeholder="How many days"
+                        v-model="sprint.days"></input>
+                </input-container>
+                <card-actions>
                     <div v-on:click="exit()">
-                        <md-button :disabled="!session.project.sprints || session.project.sprints.length === 0" md-align="start" class="md-raised md-primary">
+                        <button :disabled="!session.project.sprints || session.project.sprints.length === 0" align="start" class="raised primary">
                             Return
-                        </md-button>
+                        </button>
                     </div>
 
-                    <md-button align="end" class="md-raised md-primary"
+                    <button align="end" class="raised primary"
                         :disabled="!session.sprint.valid">
                         <div v-on:click="postSprint(session.sprint)">Add Sprint</div>
-                    </md-button>
-                </md-card-actions>
-            </md-card-content>
-        </md-card>
-    </md-layout>
+                    </button>
+                </card-actions>
+            </card-content>
+        </card>
+    </div>
 </div>
