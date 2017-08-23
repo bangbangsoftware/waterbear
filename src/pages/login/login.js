@@ -6,6 +6,15 @@ import user from '../../user.js'
 import template from './login.html'
 import './login.css'
 
+const error = err => console.error(err)
+const name = 'waterbear'
+const pouchOpts = {
+   skipSetup: true,
+   live: true
+}
+import PouchDB from 'pouchdb'
+PouchDB.plugin(require('pouchdb-authentication'))
+
 const oops = (err, email, where) => {
    console.error(where)
    console.error(err)
@@ -38,7 +47,7 @@ const comp = {
       element.focus()
    },
    methods: {
-      login: (email, pw) => {
+      login: function(email, pw) {
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
             if (emailElement) {
@@ -60,7 +69,12 @@ const comp = {
             }
             return 'Missing password'
          }
-         user.login(email, pw)
+
+         const remoteCoach = this.session.couchURL + name
+         const db = (typeof PouchDB.plugin === Function) ? new PouchDB(remoteCoach, pouchOpts, error) : PouchDB(remoteCoach, pouchOpts, error)
+         store.commit('db', db)
+
+         user.login(email, pw, db)
             .then(here => {
                store.commit('menuOn')
                window.location.href = '#/' + here

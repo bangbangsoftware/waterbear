@@ -5,19 +5,14 @@
 import App from './App'
 import router from './router'
 import Vue from 'vue'
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-authentication'))
+
 console.log('Hello from %cTardigrade', 'font-size:300%; color:orange')
 
 import 'font-awesome/css/font-awesome.css'
-
-// import VueMaterial from 'vue-material'
-// import 'vue-material/dist/vue-material.css'
-// Vue.use(VueMaterial)
+import '../node_modules/vuetify/dist/vuetify.min.css'
 
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
-import '../node_modules/vuetify/dist/vuetify.min.css'
 
 Vue.filter('truncate', function(value) {
    if (!value) {
@@ -31,20 +26,6 @@ Vue.filter('truncate', function(value) {
    }
    return value.substring(0, 19) + '...'
 })
-
-/**
-Vue.material.registerTheme({
-   app: {
-      primary: 'cyan'
-   },
-   about: {
-      primary: 'indigo'
-   },
-   contact: {
-      primary: 'teal'
-   }
-})
-**/
 
 /* eslint-disable no-new */
 new Vue({

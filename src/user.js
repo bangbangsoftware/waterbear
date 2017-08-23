@@ -137,14 +137,15 @@ const service = {
             }).catch(err => reject(err))
       })
    },
-   login: (email, pw) => {
+   login: (email, pw, database = db) => {
       return new Promise((resolve, reject) => {
          console.log('About to logout then in')
-         db.logout()
-            .then(db.login(email, pw))
+         database.logout()
+            .then(database.login(email, pw))
             .catch(err => reject(err))
             .then(me => gotoNext({
-               name: email
+               name: email,
+               db: database
             }))
             .catch(err => reject(err))
             .then(here => resolve(here))
