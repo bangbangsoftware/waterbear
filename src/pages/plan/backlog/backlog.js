@@ -10,40 +10,40 @@ import user from '../../../user.js'
 import util from './../util.js'
 
 const comp = {
-   name: 'backlog',
-   template,
-   data: () => {
-      return {
-         session: store.state.session,
-         project: store.state.session.project,
-         colourClasses: store.state.defaults.colourClasses
-      }
-   },
-   methods: {
-      save: () => {
-         const session = store.state.session
-         user.updateUser(session.user, session.project)
-      },
-      newTask: (i) => {
-         console.log('story selected is number ' + i)
-         store.commit('clearTask')
-         store.commit('selectStory', i)
-         store.commit('planState', 'task')
-      },
-      selectTask: (i, task) => {
-         console.log('story selected is number ' + i)
-         console.log('task selected...')
-         console.log(task)
-         store.commit('selectStory', i)
-         store.commit('selectTask', task)
-         store.commit('planState', 'task')
-      },
-      addToSprint: function(index) {
-         store.commit('addToSprint', index)
-         util.updateSprints()
-         store.commit('planState', 'sprint')
-      }
-   }
+    name: 'backlog',
+    template,
+    data: () => {
+        return {
+            session: store.state.session,
+            project: store.state.session.project,
+            colourClasses: store.state.defaults.colourClasses
+        }
+    },
+    methods: {
+        save: () => {
+            const session = store.state.session
+            user.updateUser(session.user, session.project)
+        },
+        newTask: (i) => {
+            console.log('story selected is number ' + i)
+            store.commit('clearTask')
+            store.commit('selectStory', i)
+            store.commit('planState', 'task')
+        },
+        selectTask: (i, task) => {
+            console.log('story selected is number ' + i)
+            console.log('task selected...')
+            console.log(task)
+            store.commit('selectStory', i)
+            store.commit('selectTask', task)
+            store.commit('planState', 'task')
+        },
+        addToSprint: function(index) {
+            store.commit('addToSprint', index)
+            util.updateSprints()
+            store.commit('planState', 'sprint')
+        }
+    }
 }
 
 Vue.component('backlog', comp)

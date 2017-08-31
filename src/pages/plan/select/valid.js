@@ -6,7 +6,8 @@ const service = sprint => {
       return false
    }
 
-   if (!sprint.days || sprint.days.length === 0 || sprint.days > 0) {
+   const number = parseInt(sprint.days)
+   if (!sprint.days || sprint.days.length === 0 || number < 1) {
       store.commit('sprintError', 'invalid sprint - missing sprint length')
       return false
    }

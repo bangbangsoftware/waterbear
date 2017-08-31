@@ -1,3 +1,39 @@
+<v-card>
+    <v-toolbar class="indigo" dark>
+        <v-toolbar-title>Task </v-toolbar-title>
+    </v-toolbar>
+    <v-card-text>
+        <span class="title">
+                 <h5>Task for</h5>
+                <h6>{{session.story.title}}</h6>
+                <h6>{{session.story.descWant}}</h6>
+                <h6>{{session.sprint.name}}</h6>
+        </span>
+        <h6 v-if="session.error" class="errorMessage"> {{ session.error }}</h6>
+        <form>
+            <v-text-field autofocus v-on:change="storeName(session.task.name)" label="Task name"
+                class="mt-5" v-model="session.task.name" id="name" required></v-text-field>
+            <v-text-field v-on:change="storeDesc(session.task.desc)" label="Task desc" class="mt-5"
+                v-model="session.task.desc" id="desc" required></v-text-field>
+            <v-text-field v-on:change="storeEst(session.task.est)" type="number" label="Task estimation"
+                class="mt-5" v-model="session.task.est" id="est" required></v-text-field>
+            <v-select v-bind:items="skills" v-model="session.task.skill" label="Skill" class="input-group--focused"
+                item-value="text"></v-select>
+        </form>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn v-on:click="exit()" align="start">
+            Return
+        </v-btn>
+
+        <v-btn v-on:click="postTask(session.task)" align="end"  :disabled="!session.task.valid">
+            Add Task
+        </v-btn>
+
+    </v-card-actions>
+
+</v-card>
+<!--
 <div id="session.task">
     <div>
         <card>
@@ -57,3 +93,4 @@
         </card>
     </div>
 </div>
+-->

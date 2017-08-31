@@ -1,32 +1,18 @@
-<div id="session.sprint">
-    <div>
-        <card>
-            <card-content>
-                <h6>Sprint</h6>
-                <br>
-                <input-container>
-                        <label>Goal</label>
-                    <input v-on:change="storeName(sprint.name)" id="name" required placeholder="Sprint Name"
-                        v-model="sprint.name" tabindex="0"></input>
-                </input-container>
-                <input-container>
-                    <label>Days</label>
-                    <input  v-on:change="storeDays(sprint.from)" id="days" required placeholder="How many days"
-                        v-model="sprint.days"></input>
-                </input-container>
-                <card-actions>
-                    <div v-on:click="exit()">
-                        <button :disabled="!session.project.sprints || session.project.sprints.length === 0" align="start" class="raised primary">
-                            Return
-                        </button>
-                    </div>
+<v-card>
+    <v-toolbar class="indigo" dark>
+        <v-toolbar-title>Sprint</v-toolbar-title>
+    </v-toolbar>
+    <v-card-text>
+        <span class="title">Goal</span>
+        <h6 v-if="session.error" class="errorMessage"> {{ session.error }}</h6>
+        <form >
+            <v-text-field v-on:change="storeName(sprint.name)" label="Sprint name" class="mt-5" v-model="sprint.name" id="name" required></v-text-field>
+            <v-text-field type="number" v-on:change="storeDays(sprint.days)" label="How many days" class="mt-5" v-model="sprint.days" id="days" required></v-text-field>
+        </form>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn v-on:click="exit()" :disabled="!session.project.sprints || session.project.sprints.length === 0" > Return</v-btn>
+        <v-btn :disabled="!session.sprint.valid" v-on:click="postSprint(session.sprint)">Add Sprint</v-btn>
+    </v-card-actions>
 
-                    <button align="end" class="raised primary"
-                        :disabled="!session.sprint.valid">
-                        <div v-on:click="postSprint(session.sprint)">Add Sprint</div>
-                    </button>
-                </card-actions>
-            </card-content>
-        </card>
-    </div>
-</div>
+</v-card>

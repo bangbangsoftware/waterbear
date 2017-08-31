@@ -1,25 +1,20 @@
-<div v-if="stages.length > 0" class="summary">
-    <v-list>
-        <v-list-title v-if="stages.length === 1">Summary </v-list-title>
-        <v-list-title v-if="stages.length > 1">{{stages[1].name}} Summary </v-list-title>
-        <v-subheader v-if="members.length > 0">
-            <table v-if="members.length > 0">
-                <table-header>
-                    <table-row>
-                        <table-head>Name</table-head>
-                        <table-head tooltip="We'll send them an invite">Email</table-head>
-                        <table-head>Role</table-head>
-                    </table-row>
-                </table-header>
-
-                <table-body>
-                    <table-row v-for="(position, index) in members" :key="index">
-                        <table-cell>{{position.name}}</table-cell>
-                        <table-cell>{{position.email}}</table-cell>
-                        <table-cell>{{position.role}}</table-cell>
-                    </table-row>
-                </table-body>
-            </table>
-        </v-subheader>
-    </v-list>
-</div>
+  <v-layout  v-if="stages.length > 0" row>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card>
+        <v-toolbar class="white--text pink" dark>
+          <v-toolbar-title v-if="stages.length === 1">Summary</v-toolbar-title>
+          <v-toolbar-title v-if="stages.length > 1">{{stages[1].name}} Summary</v-toolbar-title>
+        </v-toolbar>
+        <v-list two-line>
+          <v-list-tile avatar ripple v-for="(position, index) in members" v-bind:key="index">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ posiion.name }}</v-list-tile-title>
+              <v-list-tile-sub-title  tooltip="We'll send them an invite" class="grey--text text--darken-4">{{ position.email }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ position.role }}</v-list-tile-sub-title>
+            </v-list-tile-content>
+            <v-divider v-if="index + 1 < members.length"></v-divider>
+          </v-list-tile>
+        </v-list>
+      </v-card>
+    </v-flex>
+  </v-layout>

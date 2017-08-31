@@ -1,7 +1,5 @@
-<div class="tags">
-    <div>
-        <chips v-model="tags" input-placeholder="Add a tag">
-            <template scope="chip">{{ chip.value }}</template>
-        </chips>
-    </div>
+<div>
+    <v-chips close v-for="(tag, index) in tags" v-bind:key="index">
+        {{ chip.value }}
+    </v-chips>
 </div>

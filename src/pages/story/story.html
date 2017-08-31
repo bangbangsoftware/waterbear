@@ -1,31 +1,43 @@
-<div v-if='session.loaded' class="story">
-    <v-layout>
-        <v-layout v-align="center" v-flex="80">
+<v-container v-if='session.loaded' fluid>
+    <v-layout row wrap>
+        <v-flex xs6>
             <v-card>
-                <v-container>
-                    <h6 v-if="story.error">{{story.error}}</h6>
-                    <story-desc></story-desc>
-                    <acceptance></acceptance>
-                    <tags></tags>
-                    <colours></colours>
-                    <br>
+                <v-toolbar class="indigo" dark>
+                    <v-toolbar-title>What is the story?</v-toolbar-title>
+                </v-toolbar>
+                <h6 class="errorMessage" v-if="story.error">{{story.error}}</h6>
+                <v-card-text>
+                    <v-layout row>
+                        <v-flex xs8>
+                            <story-desc></story-desc>
+                        </v-flex>
+                        <v-flex xs8>
+                            <tags></tags>
+                        </v-flex>
+                        <!--                        <v-flex xs8>
+                            <colours></colours>
+                        </v-flex>
+                        -->
+                    </v-layout>
+                    <v-layout row>
+                        <v-flex xs8>
+                            <acceptance></acceptance>
+                        </v-flex>
+                    </v-layout>
                     <v-card-actions>
-                        <!--
-                        <v-button align="start" class="v-raised v-primary" v-on:click="clearStory()">Clear Story</v-button>
-                            -->
-                        <v-button v-on:mouseover="whatsNeeded(story)" align="end" class="v-raised v-primary"
-                            :disabled="!story.valid">
-                            <div v-on:click="postStory(story)">Add Story</div>
-                        </v-button>
+                        <v-btn align="start" v-on:click="clearStory()">Clear Story</v-btn>
+                        <v-btn v-on:click="postStory(story)" light v-on:mouseover="whatsNeeded(story)"
+                            align="end" :disabled="!story.valid">
+                            Add Story
+                        </v-btn>
                     </v-card-actions>
-                </v-container>
+                </v-card-text>
             </v-card>
-        </v-layout>
-        <v-layout v-gutter>
+            <v-spacer></v-spacer>
             <feed></feed>
-        </v-layout>
+        </v-flex>
+        <v-flex xs6>
+            <list></list>
+        </v-flex>
     </v-layout>
-
-    <list></list>
-
-</div>
+</v-container>

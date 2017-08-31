@@ -1,17 +1,14 @@
-<md-card style="margin-top:20px">
-    <div id='coloured' v-bind:class="colourClasses[story.colourNo]">
-        <md-card-header>
-            <strong>{{c+1}}. {{story.title}}</strong>
-        </md-card-header>
-        <md-card-content>
-            <div>
-                As <em>{{story.descAs}}</em><br />
-                I want <em>{{story.descWant}}</em><br />
-                So that <em>{{story.descThat}}</em>
-            </div>
-            <br>
-            <acceptance-criteria-list :acs="story.acs"></acceptance-criteria-list>
-        </md-card-content>
-        <actions :story="story" :c="c"></actions>
-    </div>
-</md-card>
+<div>
+    <v-card class="blue-grey darken-2 white--text">
+        <v-spacer></v-spacer>
+        <v-toolbar class="white--text orange" dark>
+            <v-toolbar-title>{{c+1}}. {{story.title}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
+        As <em>{{story.descAs}}</em><br/> I want <em>{{story.descWant}}</em><br/>        So that <em>{{story.descThat}}</em>
+        <v-card-actions>
+            <actions :story="story" :c="c"></actions>
+        </v-card-actions>
+    </v-card>
+    <v-spacer></v-spacer>
+</div>

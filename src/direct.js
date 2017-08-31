@@ -22,6 +22,7 @@ const register = (user, project, resolve, reject) => {
    console.log(user)
    store.commit('project', project)
    store.commit('log', user.name + ' logged on')
+   store.commit('log', 'entering project ' + project._id)
 
    const projectsUser = userService.loadUser(user, project)
    store.commit('user', projectsUser)

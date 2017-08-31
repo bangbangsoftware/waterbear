@@ -14,7 +14,7 @@ const oops = (err, email, where) => {
    }
    console.error(where)
    console.error(err)
-   let error = err.error + ' ' + err.reason + ' (' + err.status + ')'
+   let error = (err.error === undefined) ? err : err.error + ' ' + err.reason + ' (' + err.status + ')'
    if (err.status === 409) {
       error = email + ' is already in use'
    }
@@ -27,6 +27,10 @@ const oops = (err, email, where) => {
 }
 
 const register = email => {
+   if (store.state.session.error) {
+      console.error('Can\'t register due to :' + store.state.session.error)
+      return
+   }
    const me = {
       name: email
    }
@@ -36,6 +40,14 @@ const register = email => {
    store.commit('db', db)
    store.commit('user', me)
    store.commit('stage', me)
+}
+
+const signInReg = (email, pw) => {
+   user.signup(email, pw)
+       .catch(err => oops(err, email, 'signup'))
+       .then(() => db.login(email, pw))
+       .catch(err => oops(err, email, 'login'))
+       .then(() => register(email))
 }
 
 const comp = {
@@ -63,28 +75,28 @@ const comp = {
             if (emailElement) {
                emailElement.focus()
             }
-            return 'Missing email'
+            return oops('Missing email', '', 'no email')
          }
          if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             const emailElement = document.getElementById('email')
             if (emailElement) {
                emailElement.focus()
             }
-            return 'Email looks a bit wrong'
+            return oops('Email looks a bit wrong', '', 'bad email')
          }
          if (pw.length === 0) {
             const pwElement = document.getElementById('password')
             if (pwElement) {
                pwElement.focus()
             }
-            return 'Missing password'
+            return oops('Missing password', '', 'no password')
          }
-         db.logout().then(user.signup(email, pw))
-            .catch(err => oops(err, email, 'logout'))
-            .then(db.login(email, pw))
-            .catch(err => oops(err, email, 'signup'))
-            .then(register(email))
-            .catch(err => oops(err, email, 'login'))
+         db.logout()
+            .then(() => signInReg(email, pw))
+            .catch(err => {
+                console.error(err)
+                signInReg(email, pw)
+            })
       }
    }
 }

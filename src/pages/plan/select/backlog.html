@@ -8,26 +8,13 @@
                 </v-toolbar>
                 <v-list>
                     <v-list-group v-for="(sprint,c) in session.project.sprints" :key="sprint">
-                        <v-list-tile slot="item">
+                        <v-list-tile :click="selectSprint(c)" slot="item">
                             <v-list-tile-action>
                                 <!--      <v-icon>{{ item.action }}</v-icon> -->
                             </v-list-tile-action>
                             <v-list-tile-content>
                                 <v-list-tile-title>{{c+1}}. {{sprint.name}}</v-list-tile-title>
                             </v-list-tile-content>
-                            <v-list-tile-action>
-                                <v-icon>keyboard_arrow_down</v-icon>
-                            </v-list-tile-action>
-                        </v-list-tile>
-                        <v-list-tile v-for="(tasks,t) in sprint.tasks" :key="sprint">
-                            <v-list-tile-content>
-                                <div v-on:click="selectTask(c,task)">
-                                    <v-list-tile-title> {{t}}.{{task.name}} </v-list-tile-title>
-                                </div>
-                            </v-list-tile-content>
-                            <v-list-tile-action>
-                                <!-- <v-icon>{{ subItem.action }}</v-icon> -->
-                            </v-list-tile-action>
                         </v-list-tile>
                     </v-list-group>
                 </v-list>

@@ -1,53 +1,38 @@
-<div class="signup">
-
-    <div>
-        <div >
-            <feed></feed>
-        </div>
-        <div align="center" flex="50">
-
-            <whiteframe v-if="stages.length === 0" elevation="14">
-                <start></start>
-            </whiteframe>
-
-            <whiteframe v-if="stages.length === 1" elevation="14">
-                <project></project>
-            </whiteframe>
-
-            <whiteframe v-if="stages.length === 2" elevation="14">
-                <owner></owner>
-            </whiteframe>
-
-            <transition name="fade">
-                <whiteframe v-if="stages.length === 3" elevation="14">
+<v-container fluid grid-list-md class="grey lighten-4">
+    <v-layout row wrap>
+        <v-flex>
+            <v-card-text>
+                <p v-if="stages.length === 0" class="text-lg-right">
+                    <start></start>
+                </p>
+                <p v-if="stages.length === 1" class="text-lg-right">
+                    <project></project>
+                </p>
+                <p v-if="stages.length === 2" class="text-lg-right">
+                    <owner></owner>
+                </p>
+                <p v-if="stages.length === 3" class="text-lg-right">
                     <team></team>
-                </whiteframe>
-            </transition>
-
-        </div>
-
-        <div>
-            <project-summary></project-summary>
-        </div>
-
-    </div>
-
-    <div>
-        <div>&nbsp;</div>
-    </div>
-
-    <div v-if="stages.length === 3" align="center">
-        <div flex="20">
-            <router-link to="/done">
-                <button class="raised primary">Define of done</button>
-            </router-link>
-        </div>
-        <div flex="20">
-            <router-link to="/story">
-                <button class="raised primary">Enter stories</button>
-            </router-link>
-        </div>
-    </div>
-
-
-</div>
+                </p>
+                <feed></feed>
+                <!--
+	            <project-summary></project-summary>
+		    -->
+            </v-card-text>
+            <v-card-actions v-if="stages.length === 3">
+                <div v-on:keyup.enter="error = createuser(email,pw)">
+                    <router-link to="/done">
+                        <v-btn light>
+                            definition of done
+                        </v-btn>
+                    </router-link>
+                    <router-link to="/story">
+                        <v-btn light>
+                            enter stories
+                        </v-btn>
+                    </router-link>
+                </div>
+            </v-card-actions>
+        </v-flex>
+    </v-layout>
+</v-container>

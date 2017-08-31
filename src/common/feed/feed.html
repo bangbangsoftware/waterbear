@@ -1,12 +1,15 @@
-<div class="feed">
-    <md-whiteframe v-if="feeds.length > 0">
-        <h6>The Feed</h6>
-        <div class="phone-viewport">
-            <md-list>
-                <md-list-item v-for="item in feeds">
-                    <span>{{item.date | time }} - {{item.message}}</span>
-                </md-list-item>
-            </md-list>
-        </div>
-    </md-whiteframe>
-</div>
+<v-card v-if="feeds.length > 0">
+    <v-toolbar class="white--text green" dark>
+        <v-toolbar-title>The Feed...</v-toolbar-title>
+        <v-spacer></v-spacer>
+    </v-toolbar>
+    <v-list one-line>
+        <v-list-tile  v-for="(item, index) in feeds" v-bind:key="item.message">
+            <v-list-tile-content>
+                <v-list-tile-action-text>{{ item.date | time }}</v-list-tile-action-text>
+                <v-list-tile-title>{{ item.message }}</v-list-tile-title>
+            </v-list-tile-content>
+            <v-divider v-if="index + 1 < feeds.length"></v-divider>
+        </v-list-tile>
+    </v-list>
+</v-card>

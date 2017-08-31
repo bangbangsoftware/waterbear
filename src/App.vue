@@ -31,10 +31,10 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar v-if="session.loaded" fixed class="indigo darken-4" dark>
-      <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-on:click="toggle()"></v-toolbar-side-icon>
       <v-toolbar-title>Waterbear</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon @click.native="go('')"> 
+      <v-toolbar-side-icon  v-on:click="go('')"> 
         <i class="fa fa-sign-out" aria-hidden="true"></i>
       </v-toolbar-side-icon>
     </v-toolbar>
@@ -85,16 +85,22 @@ export default {
    },
    name: 'app',
    methods: {
+      toggle: function() {
+         console.log('toggled: ' + this.drawer)
+         this.drawer = !this.drawer
+      },
       go: function(where) { // !!! to use 'this', don't use => !!!!
          console.log(where)
          if (!where) {
             store.commit('loaded', false)
          }
          this.drawer = false
+         this.mini = false
          if (window) {
             Vue.nextTick(() => {
                window.location.href = '#/' + where
                this.drawer = false
+               this.mini = false
             })
          }
 

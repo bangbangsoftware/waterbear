@@ -1,20 +1,3 @@
-<div class="list">
-        <card-content>
-            <label>List</label>
-            <!--            <select >
-                <option v-for="(list,listNo) in project.stories">{{list.name}}</option>
-            </select>
-            -->
-        </card-content>
-
-        <!--
-        <card v-on:click="editStory(story)" v-blind:class="story.colour" v-for="(story,c) in project.stories[listID].items.slice().reverse()">
-            -->
-    <div :gutter="4">
-        <div flex-medium="25" v-for="(story,c) in project.stories" :key="story" v-on:click="editStory(story)">
-            <story-card :story="story" :c="c"></story-card>
-        </div>
-    </div>
-
-
+<div>
+    <story-card v-for="(story,c) in project.stories" :key="c" v-on:click="editStory(story)" :story="story" :c="c"></story-card>
 </div>

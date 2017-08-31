@@ -1,29 +1,21 @@
-<div class="acceptance">
-    <div v-for="(ac, i) in state.acs">
-        <div align="center">
-            <div flex="60">{{i+1}}. {{ac}}
-            </div>
-            <div flex="20">
-                <button class="raised " id="acRemoveButton">
-                    <i v-on:click="state = removeCriteria(i)" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <h6 v-if="state.error" class="error">{{state.error}}</h6>
-    <div align="center">
-        <div flex="60">
-            <input-container>
-                <label>Add Criteria</label>
-                <input id="newAc" v-on:keyup.enter="state = addCriteria(state.newAc)" class="ac-input" placeholder="Acceptance Criteria"
-                    v-model="state.newAc">
-                </input>
-            </input-container>
-        </div>
-        <div flex="20">
-            <button class="raised primary" id="acButton" v-on:click.native="state = addCriteria(state.newAc)">
-                <i  class="fa fa-plus-square-o" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
+<div>
+    <v-list>
+        <v-list-tile avatar v-for="(ac,i) in state.acs" v-bind:key="i">
+            <v-list-tile-action>
+                <v-icon v-on:click="state = removeCriteria(i)" class="pink--text">cross</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+                <v-list-tile-title>{{i+1}}. {{ac}}</v-list-tile-title>
+            </v-list-tile-content>
+        </v-list-tile>
+    </v-list>
+
+    <h6 v-if="state.error" class="errorMessage">{{state.error}}</h6>
+
+    <v-text-field label="Acceptance Criteria" v-on:keyup.enter="state = addCriteria(state.newAc)"
+        v-model="state.newAc">
+        <v-btn absolute dark fab bottom right id="acButton" class="pink" v-on:click="state = addCriteria(state.newAc)">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        </v-btn>
+    </v-text-field>
 </div>

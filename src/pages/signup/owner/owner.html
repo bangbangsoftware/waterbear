@@ -1,37 +1,30 @@
-<div gutter="1">
-    <card with-hover>
-
-        <card-header>
-            <div class="title">
-                <h6>About you</h6></div>
-            <div class="subhead"></div>
-        </card-header>
-
-        <card-content ratio="1:3">
-            <form v-on:keyup.enter="error = owner(ownerName,ownerRole)">
-                <input-container>
-                    <label>What is your name?</label>
-                    <input tabindex="0" autofocus id='ownername' v-model="ownerName" placeholder="name"></input>
-                </input-container>
-
-                <input-container>
-                    <label for="ownerRole">What is your role in the project</label>
-                    <select name="ownerRole" id="ownerRole" v-model="ownerRole">
-                        <option v-for="role in roles" v-bind:value="role"> {{role}}</option>
-                    </select>
-                </input-container>
-            </form>
-        </card-content>
-
-        <card-actions>
-            <div v-on:click="error = owner(ownerName,ownerRole)">
-                <button class="raised primary">Next</button>
-            </div>
-
-
-        </card-actions>
-
-    </card>
-    </whiteframe>
-
-</div>
+<v-container fluid>
+    <v-layout row wrap>
+        <v-flex s12 md6 offset-md3>
+            <v-card>
+                <v-toolbar class="indigo" dark>
+                    <v-toolbar-title>About you</v-toolbar-title>
+                </v-toolbar>
+                <h6 class="errorMessage" v-if="error"> {{ error }}</h6>
+                <v-card-text>
+                    <v-layout row>
+                        <v-flex xs8>
+                            <v-text-field autofocus id="ownername" label="What is your name?" class="mt-5"
+                                maxlength="100" v-model="ownerName" required></v-text-field>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row>
+                        <v-flex xs6>
+                            <v-select v-bind:items="roles" v-model="ownerRole" label="Select" single-line bottom></v-select>
+                        </v-flex>
+                    </v-layout>
+                    <v-card-actions>
+                        <p class="text-xs-right" v-on:click="error = owner(ownerName,ownerRole)" v-on:keyup.enter="error = owner(ownerName,ownerRole)">
+                            <v-btn light>Next</v-btn>
+                        </p>
+                    </v-card-actions>
+                </v-card-text>
+            </v-card>
+        </v-flex>
+    </v-layout>
+</v-container>

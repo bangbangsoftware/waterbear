@@ -1,20 +1,25 @@
 <div class="story-desc">
-    <v-input-container>
-        <label>What is the title of the story?</label>
-        <v-input v-on:change="storeTitle(title)"   id="title" required placeholder="Story Title" v-model="title" tabindex="0"></v-input>
-    </v-input-container>
-    <v-input-container>
-        <v-input-container>
-            <label>As...</label>
-            <v-textarea v-on:change="storeDesc(descAs,descWant,descThat)" id="descAs" required placeholder="As" v-model="descAs"></v-textarea>
-        </v-input-container>
-        <v-input-container>
-            <label>I want...</label>
-            <v-textarea  v-on:change="storeDesc(descAs,descWant,descThat)" id="descWant" required placeholder="I want" v-model="descWant"></v-textarea>
-        </v-input-container>
-        <v-input-container>
-            <label>so that...</label>
-            <v-textarea  v-on:change="storeDesc(descAs,descWant,descThat)" id="descThat" required placeholder="so that" v-model="descThat"></v-textarea>
-        </v-input-container>
-    </v-input-container>
+    <v-layout row>
+        <v-flex xs8>
+            <v-text-field autofocus id="title" label="What's the stories title?" class="mt-5"
+                maxlength="100" v-on:change="storeTitle(title)" v-model="title" required></v-text-field>
+        </v-flex>
+    </v-layout>
+    <v-layout row>
+        <v-flex xs8>
+            <v-text-field multi-line id="descAs" label="As...." class="mt-5" maxlength="100"
+                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descAs"
+                required></v-text-field>
+        </v-flex>
+        <v-flex xs8>
+            <v-text-field multi-line id="descWant" label="I want....." class="mt-5" maxlength="100"
+                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descWant"
+                required></v-text-field>
+        </v-flex>
+        <v-flex xs8>
+            <v-text-field multi-line id="descThat" label="so that....." class="mt-5" maxlength="100"
+                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descThat"
+                required></v-text-field>
+        </v-flex>
+    </v-layout>
 </div>

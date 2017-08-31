@@ -17,8 +17,9 @@ a {
     color: #42b983;
 }
 
-.error {
-    color: red;
+.errorMessage {
+    background-color: lightblue;
+    text-align: center;
 }
 
 .fade-enter-active,
