@@ -3,15 +3,15 @@ import store from '../../store.js'
 
 export default {
    storyError: (state, message) => {
-      state.story.error = message
-      state.story.valid = false
+      state.session.story.error = message
+      state.session.story.valid = false
    },
    storyOk: (state) => {
-      state.story.error = ''
-      state.story.valid = true
+      state.session.story.error = ''
+      state.session.story.valid = true
    },
    clearStory: (state) => {
-      state.story = {
+      state.session.story = {
          title: '',
          descAs: '',
          descWant: '',
@@ -44,29 +44,29 @@ export default {
       if (!state.session.project.stories) {
          state.session.project.stories = []
       }
-      state.session.project.stories.push(state.story)
-      store.commit('log', 'Added "' + state.story.title + '" story')
+      state.session.project.stories.push(state.session.story)
+      store.commit('log', 'Added "' + state.session.story.title + '" story')
       store.commit('clearStory')
    },
    title: (state, t) => {
-      state.story['title'] = t
-      validStory(state.story)
+      state.session.story['title'] = t
+      validStory(state.session.story)
    },
    desc: (state, desc) => {
-      state.story.descAs = desc.as
-      state.story.descWant = desc.want
-      state.story.descThat = desc.that
-      validStory(state.story)
+      state.session.story.descAs = desc.as
+      state.session.story.descWant = desc.want
+      state.session.story.descThat = desc.that
+      validStory(state.session.story)
    },
    removeAcceptance: (state, index) => {
-      state.story.acs.splice(index, 1)
-      validStory(state.story)
+      state.session.story.acs.splice(index, 1)
+      validStory(state.session.story)
    },
    acceptance: (state, crit) => {
-      state.story.acs.push(crit)
-      validStory(state.story)
+      state.session.story.acs.push(crit)
+      validStory(state.session.story)
    },
    colour: (state, no) => {
-      state.story.colourNo = no
+      state.session.story.colourNo = no
    }
 }

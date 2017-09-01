@@ -54,14 +54,14 @@ describe('story.test.js', () => {
 
    it('should NOT add an invalid story with one field filled in', () => {
       store.commit('title', 'tester')
-      story.methods.postStory(store.state.story)
+      story.methods.postStory(store.state.session.story)
       expect(store.state.session.project.stories.length).toBe(0)
    })
 
    it('should NOT add an invalid story with two field filled in', () => {
       store.commit('title', 'tester')
       store.commit('desc', 'tesc desc')
-      story.methods.postStory(store.state.story)
+      story.methods.postStory(store.state.session.story)
       expect(store.state.session.project.stories.length).toBe(0)
    })
 
@@ -71,7 +71,7 @@ describe('story.test.js', () => {
       store.commit('desc', {as:"blind man",want:"to see",that:"can understand"})
       var crit = {}
       store.commit('acceptance', crit)
-      story.methods.postStory(store.state.story)
+      story.methods.postStory(store.state.session.story)
       expect(store.state.session.project.stories.length).toBe(1)
    })
 })

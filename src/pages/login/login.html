@@ -17,7 +17,8 @@
 
                 <v-card-text>
                     <v-text-field autofocus label="Email " v-model="email" required></v-text-field>
-                    <v-text-field label="Password " v-model="pw" type="password" required></v-text-field>
+                    <v-text-field v-on:keyup.enter="error = login(email,pw)" label="Password " v-model="pw"
+                        type="password" required></v-text-field>
                     <v-text-field label="Database" v-model="session.couchURL" required></v-text-field>
                 </v-card-text>
                 </div>

@@ -20,7 +20,7 @@
       </v-toolbar>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile v-for="item in items" :key="item.title" @click.native="go(item.title)">
+        <v-list-tile v-for="item in items" :key="item.title" @click.native="drawer = go(item.route)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -68,15 +68,23 @@ export default {
          drawer: false,
          items: [{
             title: 'Your details',
+            route: 'todo',
             icon: 'dashboard'
          }, {
             title: 'Project',
+            route: 'todo',
             icon: 'question_answer'
          }, {
-            title: 'Story',
+            title: 'Story Creation',
+            route: 'story',
             icon: 'question_answer'
          }, {
-            title: 'Plan',
+            title: 'Backlog Refinement',
+            route: 'refine',
+            icon: 'question_answer'
+         }, {
+            title: 'Sprint Planning',
+            route: 'sprint',
             icon: 'question_answer'
          }],
          mini: false,
@@ -114,6 +122,8 @@ export default {
                window.location.href = '#/' + where
             }
             **/
+
+          return this.drawer
       }
    }
 

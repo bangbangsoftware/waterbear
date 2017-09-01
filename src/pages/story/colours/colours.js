@@ -10,7 +10,7 @@ const comp = {
       return {
          colours: store.state.defaults.colours,
          colourClasses: store.state.defaults.colourClasses,
-         selectedColour: store.state.story.colourNo
+         selectedColour: store.state.session.story.colourNo
       }
    },
    methods: {

@@ -9,7 +9,7 @@ const comp = {
       return {
          state: {
             newAc: '',
-            acs: store.state.story.acs,
+            acs: store.state.session.story.acs,
             error: ''
          }
       }
@@ -30,7 +30,7 @@ const comp = {
          }
          return {
             newAc: '',
-            acs: store.state.story.acs,
+            acs: store.state.session.story.acs,
             error: ''
          }
       },
@@ -38,7 +38,7 @@ const comp = {
          store.commit('removeAcceptance', acNo)
          return {
             newAc: '',
-            acs: store.state.story.acs,
+            acs: store.state.session.story.acs,
             error: ''
          }
       }

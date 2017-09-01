@@ -9,6 +9,7 @@ import backlogMutations from './pages/plan/backlog/backlogStore.js'
 import planMutations from './pages/plan/planStore.js'
 import sprintMutations from './pages/plan/select/selectStore.js'
 import chartMutations from './pages/plan/sprint/chart/chartStore.js'
+import refineMutations from './pages/refine/refineStore.js'
 
 import state from './storeState.js'
 
@@ -26,6 +27,7 @@ addToMutations(backlogMutations)
 addToMutations(planMutations)
 addToMutations(sprintMutations)
 addToMutations(chartMutations)
+addToMutations(refineMutations)
 
 export default new Vuex.Store({
    state,

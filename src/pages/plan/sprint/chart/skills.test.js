@@ -184,15 +184,13 @@ it('Should be able to make a unique list of skills based on sprint and members',
    })
 
    const results = service.toList(members, sprint)
-   expect(results.length).toBe(5)
+
+   expect(results.length).toBe(4)
    expect(results.indexOf('vuejs')).toBeGreaterThan(-1)
-   expect(results.indexOf('wasm')).toBeGreaterThan(-1)
+   expect(results.indexOf('wasm')).toBe(-1)
    expect(results.indexOf('couchdb')).toBeGreaterThan(-1)
    expect(results.indexOf('css')).toBeGreaterThan(-1)
    expect(results.indexOf('Skydiving')).toBeGreaterThan(-1)
-
-
-
 })
 
 it('should be able to use a teams skill time', () => {
@@ -290,9 +288,10 @@ it('should be able to balance teams skill with sprints need', () => {
    console.log("sprint", service.sprintSkills(sprint))
    console.log("results",results)
 
-   expect(Object.keys(results).length).toBe(5)
-   expect(results['wasm'].need).toBe(0)
-   expect(results['wasm'].got).toBe(40)
+   expect(Object.keys(results).length).toBe(4)
+   expect(results['wasm']).toBe(undefined)
+   expect(results['vuejs'].got).toBe(68)
+   expect(results['vuejs'].need).toBe(67)
       /*
    expect(results.ailed.length).toBe(1)
    expect(results.failed[0].skill).toBe('Skydiving')
