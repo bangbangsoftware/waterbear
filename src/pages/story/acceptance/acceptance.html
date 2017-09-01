@@ -12,10 +12,7 @@
 
     <h6 v-if="state.error" class="errorMessage">{{state.error}}</h6>
 
-    <v-text-field label="Acceptance Criteria" v-on:keyup.enter="state = addCriteria(state.newAc)"
+    <v-text-field id="newAc" label="Acceptance Criteria" v-on:keyup.enter="addCriteria(state.newAc)"
         v-model="state.newAc">
-        <v-btn absolute dark fab bottom right id="acButton" class="pink" v-on:click="state = addCriteria(state.newAc)">
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-        </v-btn>
     </v-text-field>
 </div>

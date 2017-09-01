@@ -44,7 +44,11 @@ export default {
       if (!state.session.project.stories) {
          state.session.project.stories = []
       }
-      state.session.project.stories.push(state.session.story)
+      if (state.session.story.index) {
+         state.session.project.stories[state.session.story.index] = state.session.story
+      } else {
+         state.session.project.stories.push(state.session.story)
+      }
       store.commit('log', 'Added "' + state.session.story.title + '" story')
       store.commit('clearStory')
    },

@@ -20,25 +20,28 @@ const comp = {
                 path: nav
             })
         },
-        addCriteria: ac => {
+        addCriteria: function(ac) {
             if (ac && ac.length > 0) {
                 store.commit('acceptance', ac)
             }
+
             const element = document.getElementById('newAc')
             if (element) {
                 element.focus()
             }
+            const acs = store.state.session.story.acs
             return {
                 newAc: '',
-                acs: store.state.session.story.acs,
+                acs,
                 error: ''
             }
         },
-        removeCriteria: acNo => {
+        removeCriteria: function(acNo) {
             store.commit('removeAcceptance', acNo)
+            const acs = store.state.session.story.acs
             return {
                 newAc: '',
-                acs: store.state.session.story.acs,
+                acs,
                 error: ''
             }
         }

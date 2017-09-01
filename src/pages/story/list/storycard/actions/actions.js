@@ -1,4 +1,4 @@
-import store from '../../../storyStore.js'
+import store from '../../../../../store.js'
 import template from './actions.html'
 
 export default {
@@ -6,12 +6,14 @@ export default {
     template,
     props: ['story', 'c'],
     methods: {
-        editStory: function(story) {
+        editStory: function(story, c) {
             console.log('edit')
+            story.index = c
+            store.commit('currentStory', story)
         },
         removeStory: function(story, c) {
             console.log('remove')
-            store.deleteStory(story, c)
+            store.commit('deleteStory', c)
         },
         breakStory: function(story) {
             console.log('break')
