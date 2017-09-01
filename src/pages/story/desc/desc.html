@@ -1,25 +1,14 @@
 <div class="story-desc">
     <v-layout row>
-        <v-flex xs8>
-            <v-text-field autofocus id="title" label="What's the stories title?" class="mt-5"
-                maxlength="100" v-on:change="storeTitle(title)" v-model="title" required></v-text-field>
-        </v-flex>
+        <v-text-field autofocus id="title" label="What's the stories title?" class="mt-5"
+            maxlength="100" v-on:change="storeTitle(session.story.title)" v-model="session.story.title" required></v-text-field>
     </v-layout>
     <v-layout row>
-        <v-flex xs8>
-            <v-text-field multi-line id="descAs" label="As...." class="mt-5" maxlength="100"
-                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descAs"
-                required></v-text-field>
-        </v-flex>
-        <v-flex xs8>
-            <v-text-field multi-line id="descWant" label="I want....." class="mt-5" maxlength="100"
-                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descWant"
-                required></v-text-field>
-        </v-flex>
-        <v-flex xs8>
-            <v-text-field multi-line id="descThat" label="so that....." class="mt-5" maxlength="100"
-                v-on:change="storeDesc(descAs,descWant,descThat)" v-model="descThat"
-                required></v-text-field>
-        </v-flex>
+        <v-text-field multi-line id="descAs" label="As...." class="mt-5" maxlength="100"
+            v-on:change="storeDesc(session.story.descAs,session.story.descWant,session.story.descThat)" v-model="session.story.descAs" required></v-text-field>
+        <v-text-field multi-line id="descWant" label="I want....." class="mt-5" maxlength="100"
+            v-on:change="storeDesc(session.story.descAs,session.story.descWant,session.story.descThat)" v-model="session.story.descWant" required></v-text-field>
+        <v-text-field multi-line id="descThat" label="so that....." class="mt-5" maxlength="100"
+            v-on:change="storeDesc(session.story.descAs,session.story.descWant,session.story.descThat)" v-model="session.story.descThat" required></v-text-field>
     </v-layout>
 </div>

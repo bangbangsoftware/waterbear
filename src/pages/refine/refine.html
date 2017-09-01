@@ -3,9 +3,16 @@
         <v-flex xs6>
             <v-card>
                 <v-toolbar class="indigo" dark>
-                    <v-toolbar-title>Refinement</v-toolbar-title>
+                    <v-btn v-on:click="lastIncomplete(session.project)" icon>
+                        <v-icon>chevron_left</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>Refinement ({{todo(session.project)}})</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn v-on:click="nextIncomplete(session.project)" icon>
+                        <v-icon>chevron_right</v-icon>
+                    </v-btn>
                 </v-toolbar>
-                <h6 class="errorMessage" v-if="story.error">{{story.error}}</h6>
+                <h6 class="errorMessage" v-if="session.story.error">{{session.story.error}}</h6>
                 <v-card-text>
 
                     <v-layout row>
@@ -21,13 +28,19 @@
                         -->
                     </v-layout>
                     <v-layout row>
-                        <v-flex xs8>
-                            <acceptance></acceptance>
-                        </v-flex>
+                        <v-layout row>
+                            <v-flex xs8>
+                                <acceptance></acceptance>
+                            </v-flex>
+                            <v-flex xs4>
+                                <v-text-field type="number" id="points" label="Points" class="mt-5" maxlength="3"
+                                    v-model="session.story.points"></v-text-field>
+                            </v-flex>
+                        </v-layout>
                     </v-layout>
                     <v-card-actions>
-                        <v-btn align="start" v-on:click="addTask(story)">Add Task</v-btn>
-                        <v-btn v-on:click="updateStory(story)" align="end" >Update Story </v-btn>
+                        <v-btn align="start" v-on:click="addTask(session.story)">Add Task</v-btn>
+                        <v-btn v-on:click="updateStory(session.story)" align="end">Update Story </v-btn>
                     </v-card-actions>
                 </v-card-text>
             </v-card>

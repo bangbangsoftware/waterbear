@@ -14,7 +14,7 @@ const story = {
 const session = {
    planState: 'sprintSelect',
    loaded: false,
-   story: {},
+   story,
    task: {},
    menu: false,
    error: '',
@@ -47,7 +47,6 @@ export default {
    feeds: [],
    db: null,
    members: [],
-   story,
    signup,
    session,
    defaults

@@ -1,6 +1,6 @@
 <div>
     <v-list>
-        <v-list-tile avatar v-for="(ac,i) in state.acs" v-bind:key="i">
+        <v-list-tile avatar v-for="(ac,i) in state.session.story.acs" v-bind:key="i">
             <v-list-tile-action>
                 <v-icon v-on:click="state = removeCriteria(i)" class="pink--text">cross</v-icon>
             </v-list-tile-action>
