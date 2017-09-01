@@ -14,17 +14,19 @@ const story = {
 
 it('If clear story mutates story to have blank values', () => {
     const state = {
-        story
+        session: {
+            story
+        }
     }
     storyStore.clearStory(state)
-    expect(state.story.title.length).toBe(0)
-    expect(state.story.descAs.length).toBe(0)
-    expect(state.story.descWant.length).toBe(0)
-    expect(state.story.descThat.length).toBe(0)
-    expect(state.story.tags.length).toBe(0)
-    expect(state.story.colourNo).toBe(4)
-    expect(state.story.acs.length).toBe(0)
-    expect(state.story.valid).toBe(false)
+    expect(state.session.story.title.length).toBe(0)
+    expect(state.session.story.descAs.length).toBe(0)
+    expect(state.session.story.descWant.length).toBe(0)
+    expect(state.session.story.descThat.length).toBe(0)
+    expect(state.session.story.tags.length).toBe(0)
+    expect(state.session.story.colourNo).toBe(4)
+    expect(state.session.story.acs.length).toBe(0)
+    expect(state.session.story.valid).toBe(false)
 })
 
 it('Should be able to select a story', () => {
@@ -60,10 +62,12 @@ it('Should be able post a story', () => {
 })
 
 it('Should be a able to add title to main story', () => {
-    const state = {}
+    const state = {
+        session: {}
+    }
     storyStore.clearStory(state)
     storyStore.title(state, 'eak')
-    expect(state.story.title).toBe('eak')
+    expect(state.session.story.title).toBe('eak')
 })
 it('Should be a able to add title to main story', () => {
     const state = {
@@ -78,9 +82,9 @@ it('Should be a able to add title to main story', () => {
         that: 'that I feel better'
     }
     storyStore.desc(state, desc)
-    expect(state.story.descAs).toBe(desc.as)
-    expect(state.story.descWant).toBe(desc.want)
-    expect(state.story.descThat).toBe(desc.that)
+    expect(state.session.story.descAs).toBe(desc.as)
+    expect(state.session.story.descWant).toBe(desc.want)
+    expect(state.session.story.descThat).toBe(desc.that)
 })
 it('Should be a able remove acceptance', () => {
     const state = {
@@ -95,9 +99,9 @@ it('Should be a able remove acceptance', () => {
         that: 'that I feel better'
     }
     storyStore.desc(state, desc)
-    expect(state.story.descAs).toBe(desc.as)
-    expect(state.story.descWant).toBe(desc.want)
-    expect(state.story.descThat).toBe(desc.that)
+    expect(state.session.story.descAs).toBe(desc.as)
+    expect(state.session.story.descWant).toBe(desc.want)
+    expect(state.session.story.descThat).toBe(desc.that)
 })
 it('Should be a able to remove acceptance', () => {
     const state = {
@@ -109,7 +113,7 @@ it('Should be a able to remove acceptance', () => {
     }
     storyStore.clearStory(state)
     storyStore.removeAcceptance(state, 0)
-    expect(state.story.acs.length).toBe(0)
+    expect(state.session.story.acs.length).toBe(0)
 })
 
 it('Should be a able to add acceptance', () => {
@@ -122,8 +126,10 @@ it('Should be a able to add acceptance', () => {
     }
     storyStore.clearStory(state)
     storyStore.acceptance(state, "be able to test")
-    expect(state.story.acs.length).toBe(1)
-}) it('Should be a able to add change colour', () => {
+    expect(state.session.story.acs.length).toBe(1)
+})
+
+it('Should be a able to add change colour', () => {
     const state = {
         session: {
             story: {}

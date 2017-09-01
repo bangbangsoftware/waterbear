@@ -1,0 +1,41 @@
+<v-container v-if='session.loaded' fluid>
+    <v-layout row wrap>
+        <v-flex xs6>
+            <v-card>
+                <v-toolbar class="indigo" dark>
+                    <v-toolbar-title>Refinement</v-toolbar-title>
+                </v-toolbar>
+                <h6 class="errorMessage" v-if="story.error">{{story.error}}</h6>
+                <v-card-text>
+
+                    <v-layout row>
+                        <v-flex xs8>
+                            <story-desc></story-desc>
+                        </v-flex>
+                        <v-flex xs8>
+                            <tags></tags>
+                        </v-flex>
+                        <!--                        <v-flex xs8>
+                            <colours></colours>
+                        </v-flex>
+                        -->
+                    </v-layout>
+                    <v-layout row>
+                        <v-flex xs8>
+                            <acceptance></acceptance>
+                        </v-flex>
+                    </v-layout>
+                    <v-card-actions>
+                        <v-btn align="start" v-on:click="addTask(story)">Add Task</v-btn>
+                        <v-btn v-on:click="updateStory(story)" align="end" >Update Story </v-btn>
+                    </v-card-actions>
+                </v-card-text>
+            </v-card>
+            <v-spacer></v-spacer>
+            <feed></feed>
+        </v-flex>
+        <v-flex xs6>
+            <task></task>
+        </v-flex>
+    </v-layout>
+</v-container>

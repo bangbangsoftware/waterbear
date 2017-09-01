@@ -6,6 +6,7 @@ import login from '../pages/login/login.js'
 import member from '../pages/member/member.js'
 import plan from '../pages/plan/plan.js'
 import sprint from '../pages/plan/sprint/sprint.js'
+import refine from '../pages/refine/refine.js'
 import '../common/feed/feed.js'
 
 Vue.use(Router)
@@ -27,6 +28,10 @@ export default new Router({
       path: '/story',
       name: 'story',
       component: story
+   }, {
+      path: '/refine',
+      name: 'refine',
+      component: refine
    }, {
       path: '/plan',
       name: 'plan',
