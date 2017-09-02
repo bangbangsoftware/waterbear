@@ -6,7 +6,7 @@
                     <v-btn v-on:click="lastIncomplete(session.project)" icon>
                         <v-icon>chevron_left</v-icon>
                     </v-btn>
-                    <v-toolbar-title>Refinement ({{todo(session.project)}})</v-toolbar-title>
+                    <v-toolbar-title>{{session.story.index}}. Refinement ({{todo(session.project)}})</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn v-on:click="nextIncomplete(session.project)" icon>
                         <v-icon>chevron_right</v-icon>
