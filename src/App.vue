@@ -84,7 +84,7 @@ export default {
             icon: 'question_answer'
          }, {
             title: 'Sprint Planning',
-            route: 'sprint',
+            route: 'sprint/0',
             icon: 'question_answer'
          }],
          mini: false,

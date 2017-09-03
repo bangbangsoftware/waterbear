@@ -42,6 +42,10 @@ const comp = {
             store.commit('addToSprint', index)
             util.updateSprints()
             store.commit('planState', 'sprint')
+        },
+        completeStories: function() {
+            const state = util.backlogState(store.state.session.project)
+            return state.complete
         }
     }
 }

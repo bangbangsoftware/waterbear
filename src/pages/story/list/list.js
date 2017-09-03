@@ -10,7 +10,7 @@ const comp = {
    template,
    data: function() {
       return {
-         project: store.state.session.project,
+         session: store.state.session,
          colourClasses: store.state.defaults.colourClasses
       }
    },

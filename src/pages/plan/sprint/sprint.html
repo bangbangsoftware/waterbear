@@ -1,24 +1,18 @@
-<div id=plan>
-    <div v-if='session.sprintIndex > -1'>
-
-        <div>
-            <div flex-small="100" flex-medium="33" hide-xsmall>
-                <backlog></backlog>
+<v-layout id="sprint" v-if='session.sprintIndex > -1'>
+    <v-flex xs6>
+        <backlog></backlog>
+    </v-flex>
+    <v-flex xs6>
+            <select-sprint></select-sprint>
+    </v-flex>
+    <v-flex v-if="session.planChartData" gutter>
+        <div class="elevation-1">
+            <div flex-xsmall="100" flex-small="50" flex-medium="33">
+                <balance-chart></balance-chart>
             </div>
-            <div flex flex-medium="33" hide-small>
-                <select-sprint></select-sprint>
+            <div flex-xsmall="100" flex-small="50" flex-medium="33">
+                <spare-chart></spare-chart>
             </div>
         </div>
-        <div v-if="session.planChartData" gutter>
-            <div class="elevation-1">
-                <div flex-xsmall="100" flex-small="50" flex-medium="33">
-                    <balance-chart></balance-chart>
-                </div>
-               <div flex-xsmall="100" flex-small="50" flex-medium="33">
-                    <spare-chart></spare-chart>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+    </v-flex>
+</v-layout>

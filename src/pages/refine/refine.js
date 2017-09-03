@@ -9,11 +9,7 @@ import '../story/desc/desc'
 import valid from '../story/valid'
 
 import check from '../../loginCheck.js'
-
-const incompleteFilter = story => (story.tasks === undefined ||
-    story.tasks.length === 0 ||
-    story.points === undefined)
-const completeFilter = story => !incompleteFilter(story)
+import util from '../plan/util.js'
 
 const jumpIncomplete = (project, amount) => {
     const state = comp.methods.backlogState(project)
@@ -124,20 +120,8 @@ const comp = {
             return states.incomplete.length
         },
         backlogState: function(project) {
-            const stories = project.stories.map((story, i) => {
-                story.index = i
-                if (story.tasks === undefined) {
-                    story.tasks = []
-                }
-                return story
-            })
-            const incomplete = stories.filter(story => incompleteFilter(story))
-            const complete = stories.filter(story => completeFilter(story))
-            return {
-                incomplete,
-                complete
-            }
-        },
+            return util.backlogState(project)
+       },
         navigateTo: function(nav) {
             this.$router.go({
                 path: nav
