@@ -15,8 +15,7 @@
                 required></v-text-field>
             <v-text-field type="number" label="Task estimation" class="mt-5" v-model="session.task.est"
                 id="est" required></v-text-field>
-            <v-select v-bind:items="skills" v-model="session.task.skill" label="Skill" class="input-group--focused"
-                item-value="text"></v-select>
+            <v-select v-bind:items="skills" v-model="session.task.skill" label="Skill" class="input-group--focused" item-value="text"></v-select>
         </form>
     </v-card-text>
     <v-card-actions>

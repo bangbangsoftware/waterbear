@@ -1,25 +1,3 @@
 <div class="skills">
-    <div>
-        <!--
-        <chips v-model="skills" input-placeholder="Add a skill">
-            <template scope="chip">{{ chip.value }}</template>
-        </chips>
-            -->
-        <input-container>
-            <label for="taskSkill">What skill does this task need?</label>
-            <select v-on:change="storeSkill(session.task.skill)" required name="taskSkill"
-                id="taskSkill" v-model="session.task.skill">
-                <option v-for="skill in skills" v-bind:value="skill"> {{skill}}</option>
-                <input-container>
-                    <input v-model="newSkill"></input>
-                    <div v-on:click="addSkill">
-                        <button class="raised primary">+</button>
-                    </div>
-                </input-container>
-            </select>
-            @TODO: Add multi skills....
-        </input-container>
-
-
-    </div>
+    <v-select multiple v-on:change="changed()" v-bind:items="skills" v-model="session.user.skills" label="Skill" class="input-group--focused" item-value="text"></v-select>
 </div>

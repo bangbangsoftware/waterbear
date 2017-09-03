@@ -68,24 +68,32 @@ export default {
          drawer: false,
          items: [{
             title: 'Your details',
-            route: 'todo',
-            icon: 'dashboard'
+            route: 'member',
+            icon: 'account_box'
          }, {
             title: 'Project',
             route: 'todo',
-            icon: 'question_answer'
+            icon: 'grade'
          }, {
             title: 'Story Creation',
             route: 'story',
-            icon: 'question_answer'
+            icon: 'create'
+         }, {
+            title: 'team',
+            route: 'team',
+            icon: 'motorcycle'
          }, {
             title: 'Backlog Refinement',
             route: 'refine',
-            icon: 'question_answer'
-         }, {
+            icon: 'compare_arrows'
+          }, {
             title: 'Sprint Planning',
             route: 'sprint/0',
-            icon: 'question_answer'
+            icon: 'assignment'
+         }, {
+            title: 'Assessment',
+            route: 'assess',
+            icon: 'assessment'
          }],
          mini: false,
          right: null

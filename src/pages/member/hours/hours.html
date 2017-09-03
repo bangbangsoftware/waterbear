@@ -1,17 +1,12 @@
 <div class="hours">
     <div v-for="(dayHours, hoursIndex) in days">
-        <layout align="center" gutter>
-            <h6>{{dayHours.name}}</h6>
-        </layout>
-        <layout align="center" gutter>
-            <layout flex="22">
-                <button v-for="(hour,i) in dayHours.day" :key="hour.name" v-bind:id="i+'-amToggle'">
-                    <div v-on:click="toggleDay(hoursIndex,i)" v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
-                </button>
-                <button v-for="(hour,i) in dayHours.night" :key="hour.name" v-bind:id="i+'-pmToggle'" v-on:click="toggleNight(hoursIndex,i)">
-                    <div v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
-                </button>
-            </layout>
-        </layout>
+        <h6>{{dayHours.name}}</h6>
+        <v-btn v-for="(hour,i) in dayHours.day" :key="hour.name" v-bind:id="i+'-amToggle'">
+            <div v-on:click="toggleDay(hoursIndex,i)" v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
+        </v-btn>
+        <v-btn v-for="(hour,i) in dayHours.night" :key="hour.name" v-bind:id="i+'-pmToggle'"
+            v-on:click="toggleNight(hoursIndex,i)">
+            <div v-bind:class="{ pressed: hour.on}">{{hour.name}}</div>
+        </v-btn>
     </div>
 </div>

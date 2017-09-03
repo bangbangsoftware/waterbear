@@ -1,33 +1,27 @@
-<div v-if="session.user" align="center" flex="50">
-
+<v-container v-if='session.user' fluid>
     <h6 v-if="session.error" class="error">{{session.error}}</h6>
-    <card with-hover>
-        <card-header>
-            <div class="subhead">Details</div>
-        </card-header>
-
+    <v-card>
+        <v-toolbar class="indigo" dark>
+            <v-toolbar-title>Details</v-toolbar-title>
+        </v-toolbar>
         <h6 v-if="session.error" class="error"> {{ session.error }}</h6>
-        <card-content ratio="1:3">
-            <div v-if="session.user.owner">
-                <button>
-                    <div v-on:click="changeUser(session.user)" v-bind:class="{ pressed: session.user.picked}">{{session.user.nick}}</div>
-                </button>
-                <button v-for="(user,i) in session.project.members" :key="user.name" v-bind:id="i+'-member'">
-                    <div v-on:click="changeUser(user)" v-bind:class="{ pressed: user.picked}">{{user.nick}}</div>
-                </button>
-            </div>
-            <name></name>
-            <div class="subhead">Your skills</div>
-            <skills></skills>
-            <div class="subhead">Normal working hours</div>
-            <hours></hours>
-        </card-content>
-
-    </card>
-    <card-actions>
-        <div v-on:click="save()">
-            <button class="raised primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>Save</button>
-        </div>
-    </card-actions>
-
-</div>
+        <v-card-text>
+            <v-layout row wrap>
+                <name></name>
+            </v-layout>
+            <v-layout row>
+               <skills></skills>
+            </v-layout>
+            <v-layout row wrap>
+                <div class="subhead">Normal working hours</div>
+                <hours></hours>
+            </v-layout>
+            <v-card-actions>
+                <v-btn v-on:click="save()" light>
+                    Save
+                </v-btn>
+            </v-card-actions>
+        </v-card-text>
+    </v-card>
+    </v-layout>
+</v-container>
