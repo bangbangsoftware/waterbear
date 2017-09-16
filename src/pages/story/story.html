@@ -26,7 +26,8 @@
                                     <acceptance></acceptance>
                                 </v-flex>
                                 <v-flex xs4>
-                                    <v-text-field type="number" id="points" label="Points" class="mt-5" maxlength="3" v-model="story.points"></v-text-field>
+                                    <v-text-field type="number" id="points" label="Points" class="mt-5" maxlength="3"
+                                        v-model="story.points"></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-flex>
@@ -44,7 +45,14 @@
             <feed></feed>
         </v-flex>
         <v-flex xs6>
-            <list></list>
+            <v-card>
+                <v-toolbar class="indigo" dark>
+                    <v-toolbar-title>Backlog</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                    <list></list>
+                </v-card-text>
+            </v-card>
         </v-flex>
     </v-layout>
 </v-container>

@@ -27,8 +27,7 @@ const comp = {
       const project = store.state.session.project
       const sprint = project.sprints[store.state.session.sprintIndex]
       const members = project.members
-
-      // members.push(project.owner) - Owner is already there????
+      members.push(project.owner)// Had a bug that the Owner is already there, but it went away????
       const results = skills.skillBalance(members, from, to, sprint)
 
       const sprintSkills = skills.sprint(sprint)

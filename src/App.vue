@@ -79,7 +79,7 @@ export default {
             route: 'story',
             icon: 'create'
          }, {
-            title: 'team',
+            title: 'Team',
             route: 'team',
             icon: 'motorcycle'
          }, {

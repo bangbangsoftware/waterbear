@@ -8,25 +8,16 @@
             <v-list>
                 <v-list-group v-for="(story,c) in sprint.list" :key="story.id">
                     <v-list-tile v-on:click="" slot="item">
+                        <v-list-tile-title>{{c+1}}. {{ story.title | truncate }}</v-list-tile-title>
                         <v-list-tile-action>
                             <!--  <v-icon>{{ item.action }}</v-icon> -->
                         </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>{{c+1}}. {{ story.title | truncate }}</v-list-tile-title>
-                        </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile v-if="story.tasks" class="md-inset" v-for="(task,t) in story.tasks"
                         :key="t">
-                        <v-list-tile-content>
-                            <v-list-tile-title> {{t}}.{{task.name}} [{{task.skill}}]</v-list-tile-title>
-                            <v-list-tile-title> button</v-list-tile-title>
-                        </v-list-tile-content>
-                        <v-list-tile-content>
-                        </v-list-tile-content>
+                        <v-list-tile-title> {{t}}.{{task.name}} [{{task.skill}}]</v-list-tile-title>
+                        <v-list-tile-title> button</v-list-tile-title>
                         <v-list-tile-action>
-                            <v-list-tile-action-content>
-                                sdfsdfsdf
-                            </v-list-tile-action-content>
                             <!--                <v-icon>{{ subItem.action }}</v-icon> -->
                         </v-list-tile-action>
                     </v-list-tile>
