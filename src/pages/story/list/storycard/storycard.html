@@ -12,7 +12,12 @@
             </v-btn>
         </v-toolbar>
 
-        As <em>{{story.descAs}}</em><br/> I want <em>{{story.descWant}}</em><br/>        So that <em>{{story.descThat}}</em>
+        <v-card-text>
+            As <em>{{story.descAs}}</em><br/> 
+            I want <em>{{story.descWant}}</em><br/>
+            So that <em>{{story.descThat}}</em>
+        </v-card-text>
+
         <v-card-actions>
             <actions :story="story" :c="c"></actions>
         </v-card-actions>
@@ -21,10 +26,10 @@
         :position-y="y">
         <div class="text-xs-center">
             <v-list>
-                <v-list-tile @click="">
+                <v-list-tile @click="moveTop(c)">
                     <v-list-tile-title>Go to top</v-list-tile-title>
                 </v-list-tile>
-                <v-list-tile @click="">
+                <v-list-tile @click="moveBottom(c)">
                     <v-list-tile-title>Go to bottom</v-list-tile-title>
                 </v-list-tile>
             </v-list>

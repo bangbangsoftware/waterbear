@@ -56,13 +56,13 @@ export default {
         if (!state.session.project.stories) {
             state.session.project.stories = []
         }
-        const newIndex = movement.index + movement.shift
+        const newIndex = movement.newIndex
         if (newIndex > state.session.project.stories.length || newIndex < 0) {
             return
         }
         const mover = state.session.project.stories[movement.index]
-        state.session.project.stories[movement.index] = state.session.project.stories[newIndex]
-        state.session.project.stories[newIndex] = mover
+        state.session.project.stories.splice(movement.index, 1)
+        state.session.project.stories.splice(newIndex, 0, mover)
     },
     title: (state, t) => {
         state.session.story['title'] = t

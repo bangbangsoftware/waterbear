@@ -3,11 +3,11 @@ import template from './storycard.html'
 import Actions from './actions/actions'
 import AcceptanceCriteriaList from './acceptanceCriteriaList/acceptanceCriteriaList'
 
-const movement = (index, shift) => {
+const movement = (index, newIndex) => {
     console.log('Moving Story')
     store.commit('moveStory', {
         index,
-        shift
+        newIndex
     })
     const prj = store.state.session.project
     const db = store.state.db
@@ -38,11 +38,17 @@ export default {
             this.x = e.clientX
             this.y = e.clientY
         },
+        moveTop(i) {
+            movement(i, 0)
+        },
+        moveBottom(i) {
+            movement(i, store.state.session.project.stories.length - 1)
+        },
         moveDown(i) {
-            movement(i, 1)
+            movement(i, i + 1)
         },
         moveUp(i) {
-            movement(i, -1)
+            movement(i, i - 1)
         }
     },
     components: {
