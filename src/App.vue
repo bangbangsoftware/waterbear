@@ -1,5 +1,5 @@
 <template>
-  <v-app id="example-2" standalone>
+  <v-app id="waterbear" toolbar>
     <v-navigation-drawer v-if="session.loaded" light :mini-variant.sync="mini" v-model="drawer" overflow>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
@@ -31,7 +31,8 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar v-if="session.loaded" fixed class="indigo darken-4" dark>
-      <v-toolbar-side-icon v-on:click="toggle()"></v-toolbar-side-icon>
+      <!-- v-toolbar-side-icon v-on:click="toggle()"></v-toolbar-side-icon -->
+      <v-toolbar-side-icon @click.stop="toggle()"></v-toolbar-side-icon>
       <v-toolbar-title>Waterbear</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon  v-on:click="go('')"> 

@@ -51,13 +51,16 @@ export default {
             .catch(err => console.error(err))
     },
     backlogState: project => {
-        const stories = project.stories.map((story, i) => {
-            story.index = i
-            if (story.tasks === undefined) {
-                story.tasks = []
-            }
-            return story
-        })
+        const stories = project.stories
+            .filter(s => s !== undefined)
+            .filter(s => s !== null)
+            .map((story, i) => {
+                story.index = i
+                if (story.tasks === undefined) {
+                    story.tasks = []
+                }
+                return story
+            })
         const incomplete = stories.filter(story => incompleteFilter(story))
         const complete = stories.filter(story => completeFilter(story))
         return {
