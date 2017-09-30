@@ -19,6 +19,9 @@ const oops = (err, email, where) => {
    console.error(where)
    console.error(err)
    let error = err.error + ' ' + err.reason + ' (' + err.status + ')'
+   if (err.status === 404) {
+      error = 'The login failed '
+   }
    if (err.status === 409) {
       error = email + ' is already in use'
    }

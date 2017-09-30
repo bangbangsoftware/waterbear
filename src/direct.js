@@ -54,7 +54,7 @@ const goodUser = (user, resolve, reject, db) => {
 
 const badUser = (error, reject) => {
    console.error(error)
-   reject('Bad user')
+   reject(error)
 }
 
 const loadUser = (me, resolve, reject, db) => {

@@ -17,6 +17,11 @@ a {
     color: #42b983;
 }
 
+.errorMessage {
+    color: red;
+    background-color: white;
+}
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .5s
