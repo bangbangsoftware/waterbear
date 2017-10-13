@@ -13,6 +13,17 @@ const MOY = ['January',
 
 const getPostfix = n => 'th'
 
+const makeUnique = (list, key) => {
+    const keys = []
+    return list.filter(item => {
+        if (keys.indexOf(item[key]) > -1) {
+            return false
+        }
+        keys.push(item[key])
+        return true
+    })
+}
+
 const comp = {
     name: 'team',
     beforeCreate,
@@ -25,6 +36,7 @@ const comp = {
         const mm = now.getMonth()
         const yy = now.getFullYear()
         let lastMonth = ''
+        const showMenu = false
         for (let day = -5; day < 15; day++) {
             const date = new Date(yy, mm, dd + day)
             const dom = date.getDate()
@@ -33,25 +45,46 @@ const comp = {
             lastMonth = moy
             const format = ' ' + DOW[date.getDay()] + ' the ' + dom + getPostfix(dom)
             const colour = (day === 0) ? 'green' : (day < 0) ? 'grey' : 'white'
+            const state = ''
             const data = {
                 format,
                 date,
                 newMonth,
-                colour
+                colour,
+                state
             }
             days.push(data)
         }
-        const members = JSON.parse(JSON.stringify(project.members))
-        members.push(project.owner)
+        const list = JSON.parse(JSON.stringify(project.members))
+        list.push(project.owner)
+        const members = makeUnique(list, 'name').map(member => {
+            member.days = days.map(day => day.state)
+            return member
+        })
+        console.log('we have %o members', members.length)
         return {
             session: store.state.session,
             menu: store.state.menu,
             days,
-            members
+            members,
+            showMenu,
+            x: 0,
+            y: 0
         }
     },
     methods: {
-        save: () => {}
+        show(e) {
+            e.preventDefault()
+            this.showMenu = true
+            this.x = e.clientX
+            this.y = e.clientY
+        },
+        save: () => {},
+        wfh: (c, day) => {
+            console.log('Working from home %o, %o', c, day.format)
+        },
+        sick: (c) => {},
+        holiday: (c) => {}
     }
 }
 
