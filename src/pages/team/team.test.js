@@ -11,6 +11,49 @@ it('should have some extra functions', () => {
     expect(typeof comp.dayState).toBe('function')
 })
 
+it('should be able to make Unique', () => {
+    const list = [{
+        name: 'bang',
+        id: 0
+    }, {
+        name: 'thwock',
+        id: 1
+    }, {
+        name: 'ding',
+        id: 2
+    }, {
+        name: 'bang',
+        id: 3
+    }, {
+        name: 'bang',
+        id: 3
+    }]
+    const three = comp.makeUnique(list, 'name')
+    expect(three.length).toBe(3)
+
+    const four = comp.makeUnique(list, 'id')
+    expect(four.length).toBe(4)
+})
+
+it('should be able to cycle state', () => {
+    const mockState = {
+        id: -1
+    };
+    let nextState = comp.cycle(mockState)
+    expect(nextState.display).toBe("")
+
+    nextState = comp.cycle(nextState)
+    expect(nextState.display).toBe("WFH")
+
+    nextState = comp.cycle(nextState)
+    expect(nextState.display).toBe("OFF")
+
+    nextState = comp.cycle(nextState)
+    expect(nextState.display).toBe("SICK")
+
+    nextState = comp.cycle(nextState)
+    expect(nextState.display).toBe("")
+})
 
 it('should be able to calculate a day state', () => {
     const days = [{
@@ -25,10 +68,10 @@ it('should be able to calculate a day state', () => {
             'on': false
         }, {
             'name': '10am',
-            'on':true 
+            'on': true
         }, {
             'name': '11am',
-            'on': true 
+            'on': true
         }, {
             'name': '12am',
             'on': false
@@ -37,10 +80,10 @@ it('should be able to calculate a day state', () => {
             'on': true
         }, {
             'name': '2pm',
-            'on': true 
+            'on': true
         }, {
             'name': '3pm',
-            'on':true 
+            'on': true
         }, {
             'name': '4pm',
             'on': true
@@ -56,7 +99,7 @@ it('should be able to calculate a day state', () => {
         }],
         'night': [{
             'name': '8pm',
-            'on': true 
+            'on': true
         }, {
             'name': '9pm',
             'on': false
