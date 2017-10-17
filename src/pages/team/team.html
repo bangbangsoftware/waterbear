@@ -18,9 +18,10 @@
                         <v-card class="blue" v-if="m === 1">
                             <v-card-text>{{day.format}}</v-card-text>
                         </v-card>
-                        <v-card v-else :class="day.colour" @contextmenu="show">
+                        <v-card v-else :class="members[m-2].days[index].colour" @contextmenu="show">
                             <v-card-text @click='members[m-2].days[index] = toggle(m-2,index)'>
                                     {{members[m-2].days[index].display}}
+
                                     <!--                                    
                                     {{members[m].days[index].state}}
                                 <v-menu offset-y v-model="showMenu"

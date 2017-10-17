@@ -27,6 +27,7 @@ const DS = [{
 }, {
     id: 2,
     display: 'OFF',
+    colour: 'grey',
     off: true
 }, {
     id: 3,
@@ -68,11 +69,15 @@ const comp = {
         const list = JSON.parse(JSON.stringify(project.members))
         list.push(project.owner)
         const members = comp.makeUnique(list, 'name').map(member => {
-            member.days = days.map(day => comp.dayState(day.date, member.days))
-                // member.days = days.map(day => DS[NORMAL])
+            member.days = days.map(dy => {
+                const ds = comp.dayState(dy.date, member.days, dy.colour)
+                console.log(ds)
+                return ds
+            })
             return member
         })
-        console.log('we have %o members', members.length)
+        console.log('members')
+        console.log(members)
         const d = {
             session: store.state.session,
             menu: store.state.menu,
@@ -82,7 +87,6 @@ const comp = {
             x: 0,
             y: 0
         }
-        console.log(d)
         return d
     },
     methods: {
@@ -120,17 +124,21 @@ comp.cycle = state => {
     return DS[next]
 }
 
-comp.dayState = (date, days) => {
+comp.dayState = (date, days, colour = 'white') => {
     const wd = date.getDay()
     const day = days[wd]
     const nightHours = day.night.map(nt => (nt.on) ? 1 : 0).reduce((total, curr) => total + curr)
     const dayHours = day.day.map(dy => (dy.on) ? 1 : 0).reduce((total, curr) => total + curr)
     const total = dayHours + nightHours
     if (total === 0) {
-        return DS[OFF]
+        const off = JSON.parse(JSON.stringify(DS[OFF]))
+        off.date = date
+        return off
     }
-    const normal = DS[NORMAL]
+    const normal = JSON.parse(JSON.stringify(DS[NORMAL]))
     normal.display = total + ' hours'
+    normal.colour = colour
+    normal.date = date
     return normal
 }
 
