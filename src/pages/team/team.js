@@ -3,6 +3,8 @@ import Vue from 'vue'
 import store from '../../store.js'
 import beforeCreate from '../../loginCheck.js'
 
+import user from '../../user.js'
+
 import template from './team.html'
 import './team.css'
 
@@ -32,57 +34,66 @@ const DS = [{
 }, {
     id: 3,
     display: 'SICK',
+    colour: 'grey',
     off: true
 }]
 
+const days = []
+
+const setup = () => {
+    const now = new Date()
+    const dd = now.getDate()
+    const mm = now.getMonth()
+    const yy = now.getFullYear()
+    let lastMonth = ''
+    for (let day = -5; day < 15; day++) {
+        const date = new Date(yy, mm, dd + day)
+        const dom = date.getDate()
+        const moy = MOY[date.getMonth()]
+        const newMonth = (lastMonth === moy) ? false : moy
+        lastMonth = moy
+        const format = ' ' + DOW[date.getDay()] + ' the ' + dom + getPostfix(dom)
+        const colour = (day === 0) ? 'green' : (day < 0) ? 'grey' : 'white'
+        const data = {
+            format,
+            date,
+            newMonth,
+            colour
+        }
+        days.push(data)
+    }
+    const project = store.state.session.project
+    const list = JSON.parse(JSON.stringify(project.members))
+        // Have to to owner later...
+        // list.push(project.owner)
+    const membersWithDiary = comp.makeUnique(list, 'name').map(member => {
+        if (member.diary) {
+            return member
+        }
+        member.diary = days.map(dy => {
+            const ds = comp.dayState(dy.date, member.days, dy.colour)
+            return ds
+        })
+        return member
+    })
+    user.storeMembers(membersWithDiary)
+}
+
 const comp = {
     name: 'team',
-    beforeCreate,
     template,
+    beforeCreate: function() {
+        beforeCreate()
+    },
     data: function() {
-        const days = []
-        const now = new Date()
-        const dd = now.getDate()
-        const mm = now.getMonth()
-        const yy = now.getFullYear()
-        let lastMonth = ''
+        setup()
         const showMenu = false
-        for (let day = -5; day < 15; day++) {
-            const date = new Date(yy, mm, dd + day)
-            const dom = date.getDate()
-            const moy = MOY[date.getMonth()]
-            const newMonth = (lastMonth === moy) ? false : moy
-            lastMonth = moy
-            const format = ' ' + DOW[date.getDay()] + ' the ' + dom + getPostfix(dom)
-            const colour = (day === 0) ? 'green' : (day < 0) ? 'grey' : 'white'
-            const data = {
-                format,
-                date,
-                newMonth,
-                colour
-            }
-            days.push(data)
-        }
-        // Seperate method and should insert days if
-        // they don't exist and put state on session of the team....
-        const project = store.state.session.project
-        const list = JSON.parse(JSON.stringify(project.members))
-        list.push(project.owner)
-        const members = comp.makeUnique(list, 'name').map(member => {
-            member.days = days.map(dy => {
-                const ds = comp.dayState(dy.date, member.days, dy.colour)
-                console.log(ds)
-                return ds
-            })
-            return member
-        })
-        console.log('members')
-        console.log(members)
+            // Seperate method and should insert days if
+            // they don't exist and put state on session of the team....
         const d = {
             session: store.state.session,
             menu: store.state.menu,
             days,
-            members,
             showMenu,
             x: 0,
             y: 0
@@ -97,12 +108,17 @@ const comp = {
             this.y = e.clientY
         },
         save: () => {},
-        toggle: function(member, day) {
-            console.log('toggling from %o and %o', member, day)
-            const currentState = this.members[member].days[day]
+        toggle: function(memberNo, day) {
+            console.log('toggling from %o and %o', memberNo, day)
+            const members = this.session.project.members
+            const member = members[memberNo]
+            const currentState = member.diary[day]
+            console.log(currentState)
             const nextState = comp.cycle(currentState)
-            this.members[member].days[day] = nextState
+            member.diary[day] = nextState
             console.log(nextState)
+            members[memberNo] = member
+            user.storeMembers(members)
             return nextState
         }
     }

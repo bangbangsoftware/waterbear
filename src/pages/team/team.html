@@ -14,16 +14,15 @@
                     <v-flex xs12 v-if="day.newMonth">
                         <v-card>{{day.newMonth}}</v-card>
                     </v-flex>
-                    <v-flex xs2 v-if="index > 1" v-for="m in members.length+1" :key="m">
-                        <v-card class="blue" v-if="m === 1">
-                            <v-card-text>{{day.format}}</v-card-text>
+                     <v-flex xs2 v-if="index > 1"  >
+                        <v-card class="blue" >
+                                <v-card-text>{{day.format}}</v-card-text>
                         </v-card>
-                        <v-card v-else :class="members[m-2].days[index].colour" @contextmenu="show">
-                            <v-card-text @click='members[m-2].days[index] = toggle(m-2,index)'>
-                                    {{members[m-2].days[index].display}}
-
-                                    <!--                                    
-                                    {{members[m].days[index].state}}
+                    </v-flex>
+                    <v-flex xs2 v-if="index > 1" v-for="(member,m) in session.project.members" >
+                        <v-card :class="member.diary[index].colour" @contextmenu="show">
+                            <v-card-text @click='toggle(m,index)'>
+                                    {{member.diary[index].display}}
                                 <v-menu offset-y v-model="showMenu"
                                     :position-absolutely="true" :position-x="x" :position-y="y">
                                     <div class="text-xs-center">
@@ -40,6 +39,7 @@
                                         </v-list>
                                     </div>
                                 </v-menu>
+                                    <!--                                    
                                     -->
                             </v-card-text>
                         </v-card>
@@ -49,7 +49,7 @@
                             <v-card-text class="px-0">Date</v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex v-if="index === 0" xs2 v-for="(member,mbx) in members" :key="mbx">
+                    <v-flex v-if="index === 0" xs2 v-for="(member,mbx) in session.project.members" :key="mbx">
                         <v-card light class="blue">
                             <v-card-text class="px-0">{{member.nick}}</v-card-text>
                         </v-card>
