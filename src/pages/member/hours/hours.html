@@ -7,7 +7,7 @@
         </v-btn>
         <v-btn v-for="(hour,i) in dayHours.night" :key="hour.name" v-bind:id="i+'-pmToggle'"
             v-on:click="toggleNight(hoursIndex,i)">
-                <div v-bind:class="[hour.state]">{{hour.name}}</div>
+                <div  v-bind:class="[hour.state]">{{hour.name}}</div>
         </v-btn>
     </div>
 </div>

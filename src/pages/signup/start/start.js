@@ -70,6 +70,7 @@ const comp = {
    },
    methods: {
       createUser: (email, pw) => {
+         store.commit('error', '')
          if (email.length === 0) {
             const emailElement = document.getElementById('email')
             if (emailElement) {
