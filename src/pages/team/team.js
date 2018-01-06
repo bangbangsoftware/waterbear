@@ -19,20 +19,20 @@ const NORMAL = 0
 const OFF = 2
 
 const DS = [{
-    id: 0,
+    state: 0,
     display: '',
     off: false
 }, {
-    id: 1,
+    state: 1,
     display: 'WFH',
     off: false
 }, {
-    id: 2,
+    state: 2,
     display: 'OFF',
     colour: 'grey',
     off: true
 }, {
-    id: 3,
+    state: 3,
     display: 'SICK',
     colour: 'grey',
     off: true
@@ -63,9 +63,10 @@ const setup = () => {
         days.push(data)
     }
     const project = store.state.session.project
+    if (!project.members || project.members === undefined) {
+        project.members = []
+    }
     const list = JSON.parse(JSON.stringify(project.members))
-        // Have to to owner later...
-        // list.push(project.owner)
     const membersWithDiary = comp.makeUnique(list, 'name').map(member => {
         if (member.diary) {
             return member
@@ -112,16 +113,45 @@ const comp = {
             console.log('toggling from %o and %o', memberNo, day)
             const members = this.session.project.members
             const member = members[memberNo]
-            const currentState = member.diary[day]
-            console.log(currentState)
+            let currentState = member.diary[day]
+            if (!currentState.hours) {
+                currentState.hours = currentState.display
+            }
             const nextState = comp.cycle(currentState)
             member.diary[day] = nextState
-            console.log(nextState)
+            const now = new Date()
+            member.diary = member.diary.map((d, i) => {
+                if (d.off) {
+                    d.colour = 'grey'
+                } else if (!d.off && comp.today(d.date)) {
+                    d.colour = 'green'
+                } else if (d.date < now) {
+                    d.colour = 'grey'
+                } else {
+                    d.colour = 'white'
+                }
+                return d
+            })
             members[memberNo] = member
             user.storeMembers(members)
             return nextState
         }
     }
+}
+
+comp.today = (dateString) => {
+    const now = new Date()
+    const d = new Date(dateString)
+    if (now.getDate() !== d.getDate()) {
+        return false
+    }
+    if (now.getMonth() !== d.getMonth()) {
+        return false
+    }
+    if (now.getFullYear() !== d.getFullYear()) {
+        return false
+    }
+    return true
 }
 
 comp.makeUnique = (list, key) => {
@@ -135,9 +165,22 @@ comp.makeUnique = (list, key) => {
     })
 }
 
-comp.cycle = state => {
-    const next = (state.id + 1 === DS.length) ? 0 : state.id + 1
-    return DS[next]
+comp.display = newState => {
+    if (newState.hours) {
+        return newState.hours
+    }
+    return newState.total === undefined ? '0 hours' : newState.total + ' hours'
+}
+
+comp.cycle = current => {
+    const next = (current.state + 1 === DS.length) ? 0 : current.state + 1
+    const newState = JSON.parse(JSON.stringify(DS[next]))
+    newState.hours = current.hours
+    newState.date = current.date
+    if (newState.state === 0) {
+        newState.display = comp.display(newState)
+    }
+    return newState
 }
 
 comp.dayState = (date, days, colour = 'white') => {
@@ -145,14 +188,16 @@ comp.dayState = (date, days, colour = 'white') => {
     const day = days[wd]
     const nightHours = day.night.map(nt => (nt.on) ? 1 : 0).reduce((total, curr) => total + curr)
     const dayHours = day.day.map(dy => (dy.on) ? 1 : 0).reduce((total, curr) => total + curr)
-    const total = dayHours + nightHours
+    const total = (dayHours + nightHours) === undefined ? 0 : dayHours + nightHours
     if (total === 0) {
         const off = JSON.parse(JSON.stringify(DS[OFF]))
         off.date = date
+        off.display = total + ' hours'
         return off
     }
     const normal = JSON.parse(JSON.stringify(DS[NORMAL]))
     normal.display = total + ' hours'
+    normal.hours = total + ' hours'
     normal.colour = colour
     normal.date = date
     return normal

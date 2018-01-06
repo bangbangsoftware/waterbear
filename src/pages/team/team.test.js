@@ -14,33 +14,33 @@ it('should have some extra functions', () => {
 it('should be able to make Unique', () => {
     const list = [{
         name: 'bang',
-        id: 0
+        state: 0
     }, {
         name: 'thwock',
-        id: 1
+        state: 1
     }, {
         name: 'ding',
-        id: 2
+        state: 2
     }, {
         name: 'bang',
-        id: 3
+        state: 3
     }, {
         name: 'bang',
-        id: 3
+        state: 3
     }]
     const three = comp.makeUnique(list, 'name')
     expect(three.length).toBe(3)
 
-    const four = comp.makeUnique(list, 'id')
+    const four = comp.makeUnique(list, 'state')
     expect(four.length).toBe(4)
 })
 
 it('should be able to cycle state', () => {
     const mockState = {
-        id: -1
+        state: -1
     };
     let nextState = comp.cycle(mockState)
-    expect(nextState.display).toBe("")
+    expect(nextState.display).toBe("0 hours")
 
     nextState = comp.cycle(nextState)
     expect(nextState.display).toBe("WFH")
@@ -52,7 +52,7 @@ it('should be able to cycle state', () => {
     expect(nextState.display).toBe("SICK")
 
     nextState = comp.cycle(nextState)
-    expect(nextState.display).toBe("")
+    expect(nextState.display).toBe("0 hours")
 })
 
 it('should be able to calculate a day state', () => {

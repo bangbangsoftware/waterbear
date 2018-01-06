@@ -51,7 +51,7 @@ const service = {
     },
     getAvailability: (member, startDate, endDate) => {
         // what day is the start Day
-        // for owner and members how many skill/hours
+        // for members how many skill/hours
         // skillMap[skill] = qty
         if (startDate >= endDate) {
             console.error('start after end???: ' + startDate + ' > ' + endDate)

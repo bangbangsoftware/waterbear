@@ -30,8 +30,7 @@ const session = {
       stories: [],
       members: [],
       defaults: [],
-      sprints: [],
-      owner: {}
+      sprints: []
    },
    user: {
       days: []

@@ -13,6 +13,7 @@ const toggle = (hour, time) => {
     hour.label = name
     hour.state = nextState(hour)
     hour.name = (hour.state === 'off') ? name : hour.state
+    hour.on = (hour.state === 'on' || hour.state === 'wfh')
     return hour
 }
 

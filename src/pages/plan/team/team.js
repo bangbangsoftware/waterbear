@@ -10,9 +10,6 @@ const comp = {
    template,
    beforeCreate: function() {
       this.members = store.state.session.project.members
-      const owner = store.state.session.project.owner
-      owner.owner = true
-      this.members.push(owner)
    },
    data: () => {
       return {
