@@ -131,7 +131,7 @@ const service = {
         const newList = memberList
             .filter(member => member.name !== replacement.name)
         newList.push(cleanUser(replacement))
-        service.storeMembers(newList)
+        return service.storeMembers(newList)
     },
     storeMembers: (members) => {
         return new Promise((resolve, reject) => {

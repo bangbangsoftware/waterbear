@@ -76,18 +76,19 @@ const service = {
         return skillHours.hours * skillHours.skills.length
     },
     getTeamSkills: (members, startDate, endDate) => {
-        return members.map(member => {
-            const start = new Date(startDate)
-            const end = new Date(endDate)
-            const hours = service.getAvailability(member, start, end)
-            const skillHours = service.getSkillHours(member, hours)
-            const weight = service.getWeight(skillHours)
-            return {
-                hours,
-                skills: skillHours.skills,
-                weight
-            }
-        }).sort((a, b) => a.weight - b.weight)
+        return members.filter(m => m !== undefined)
+            .map(member => {
+                const start = new Date(startDate)
+                const end = new Date(endDate)
+                const hours = service.getAvailability(member, start, end)
+                const skillHours = service.getSkillHours(member, hours)
+                const weight = service.getWeight(skillHours)
+                return {
+                    hours,
+                    skills: skillHours.skills,
+                    weight
+                }
+            }).sort((a, b) => a.weight - b.weight)
     },
     useSkill: (teamSkill, skill, hours) => {
         let taken = false
@@ -128,7 +129,7 @@ const service = {
             return allUnique
         }
         sprt.list.filter(story => story.tasks !== undefined)
-                 .forEach(story => story.tasks.forEach(task => append(allUnique, task.skill)))
+            .forEach(story => story.tasks.forEach(task => append(allUnique, task.skill)))
         return allUnique
     },
     members: (members, allUnique = []) => {

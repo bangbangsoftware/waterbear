@@ -13,6 +13,8 @@ import sprintBacklog from './select/backlog.js'
 import sprintCreate from './select/create.js'
 import teamDisplay from './team/team.js'
 
+console.log(' CURRENTLY THIS IS NOT USED?!')
+
 const comp = {
    components: {
       task,

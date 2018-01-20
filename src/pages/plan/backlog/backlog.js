@@ -13,11 +13,17 @@ const comp = {
     name: 'backlog',
     template,
     data: () => {
+        const state = util.backlogState(store.state.session.project)
         return {
             session: store.state.session,
             project: store.state.session.project,
-            colourClasses: store.state.defaults.colourClasses
+            colourClasses: store.state.defaults.colourClasses,
+            complete: state.complete
         }
+    },
+    beforeCreate: function() {
+        const state = util.backlogState(store.state.session.project)
+        this.complete = state.complete
     },
     methods: {
         save: () => {
@@ -29,6 +35,9 @@ const comp = {
             store.commit('clearTask')
             store.commit('selectStory', i)
             store.commit('planState', 'task')
+        },
+        refine: () => {
+            window.location.href = '#/refine'
         },
         selectTask: (i, task) => {
             console.log('story selected is number ' + i)

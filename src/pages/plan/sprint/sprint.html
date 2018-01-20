@@ -2,8 +2,14 @@
     <v-flex xs6>
         <backlog></backlog>
     </v-flex>
-    <v-flex xs6>
-            <select-sprint></select-sprint>
+    <v-flex xs6 v-if="session.planState === 'sprintCreate'" >
+        <sprint-create></sprint-create>
+    </v-flex>
+    <v-flex xs6 v-else >
+        <select-sprint></select-sprint>
+    </v-flex>
+    <v-flex xs6 v-if="session.planState === 'task'" >
+        <task></task>
     </v-flex>
     <v-flex v-if="session.planChartData" gutter>
         <div class="elevation-1">

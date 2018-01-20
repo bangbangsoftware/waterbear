@@ -1,95 +1,28 @@
-<v-card>
-    <v-toolbar class="teal white--text" dark>
-        <v-toolbar-title>Ready Stories Backlog</v-toolbar-title>
-        <v-spacer></v-spacer>
-    </v-toolbar>
-    <v-flex xs6>
-        <v-list>
-            <v-list-group v-for="(story,c) in completeStories()" :key="c">
-                <v-list-tile title="Add to Sprint" v-on:click="addToSprint(c)" slot="item">
-                    <v-list-tile-action>
-                        <!-- <v-icon>{{ item.action }}</v-icon> -->
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title> {{c+1}}. {{ story.title | truncate }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list-group>
-        </v-list>
-    </v-flex>
-</v-card>
-
-<!--
-
-    <v-card-content>
-        <v-layout>
-            <label><span class="v-headline">The Backlog</span></label>
-            <v-layout v-align="end">
-            </v-layout>
-        </v-layout>
-
-        <v-card>
-
-            <div class="phone-viewport">
-                <v-list>
-
-                    <v-list-item v-for="(story,c) in project.stories" :key="story">
-                        <div v-if="c === 0">
-                            <v-button class="v-toggle">
-                            </v-button>
-                        </div>
-                        <div v-else v-on:click="up(c)">
-                            <v-button title="Move Up">
-                                <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                            </v-button>
-                        </div>
-                        {{c+1}}. {{ story.title | truncate }}
-
-                        <v-layout v-align="end">
-                            <v-button align="end" class="v-raised v-primary" :disabled="session.sprintIndex === -1 || !story.tasks || story.tasks.length === 0">
-                                <div title="Add to Sprint" v-on:click="addToSprint(c)">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                </div>
-                            </v-button>
-                        </v-layout>
-
-                        </br>
-                        <div v-on:click="newTask(c)">
-                            <v-button title="Add Task" class="v-icon-button">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </v-button>
-                        </div>
-
-                        <v-list-expand>
-                            <v-list>
-                                <v-list-item class="v-inset" v-for="(task,t) in story.tasks" :key="task">
-                                    <div v-on:click="selectTask(c,task)">
-                                        <v-layout v-align="end">
-                                            {{t}}.{{task.name}}
-                                            <v-button title="Edit Task" class="v-icon-button">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                            </v-button>
-                                        </v-layout>
-                                    </div>
-
-                                </v-list-item>
-                            </v-list>
-                        </v-list-expand>
-
-                        <div v-if="c === project.stories.length-1">
-                            <v-button class="v-toggle">
-                            </v-button>
-                        </div>
-                        <div v-else v-on:click="down(c)">
-                            <v-button title="Move Down">
-                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                            </v-button>
-                        </div>
-
-                    </v-list-item>
-
-                </v-list>
-            </div>
-        </v-card>
-    </v-card-content>
-    -->
+<div>
+        <v-card v-if="complete.length > 0">
+        <v-toolbar class="teal white--text" dark>
+                <v-toolbar-title>Ready Stories Backlog</v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-flex xs6>
+            <v-list>
+                <v-list-group v-for="(story,c) in completeStories()" :key="c">
+                    <v-list-tile title="Add to Sprint" v-on:click="addToSprint(c)" slot="item">
+                        <v-list-tile-action>
+                            <!-- <v-icon>{{ item.action }}</v-icon> -->
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title> {{c+1}}. {{ story.title | truncate }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list-group>
+            </v-list>
+        </v-flex>
+    </v-card>
+        <v-card v-else>
+         <v-toolbar class="teal white--text" dark>
+            <v-toolbar-title v-on:click="refine()">THERE ARE NO STORIES READY</v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
+    </v-card>
+</div>
