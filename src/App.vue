@@ -1,6 +1,6 @@
 <template>
   <v-app id="waterbear" toolbar>
-    <v-navigation-drawer v-if="session.loaded" light :mini-variant.sync="mini" v-model="drawer" overflow>
+    <v-navigation-drawer app v-if="session.loaded" light :mini-variant.sync="mini" v-model="drawer" overflow>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar tag="div">
@@ -20,6 +20,7 @@
       </v-toolbar>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
+  
         <v-list-tile v-for="item in items" :key="item.title" @click.native="drawer = go(item.route)">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -41,7 +42,9 @@
     </v-toolbar>
     <main>
       <v-container fluid>
-      <router-view></router-view>
+</br>Why is this here?
+</br>
+        <router-view></router-view>
       </v-container>
     </main>
   </v-app>
@@ -71,6 +74,10 @@ export default {
             title: 'Your details',
             route: 'member',
             icon: 'account_box'
+          }, {
+            title: 'Team',
+            route: 'team',
+            icon: 'motorcycle'
          }, {
             title: 'Project',
             route: 'todo',
@@ -79,11 +86,7 @@ export default {
             title: 'Story Creation',
             route: 'story',
             icon: 'create'
-         }, {
-            title: 'Team',
-            route: 'team',
-            icon: 'motorcycle'
-         }, {
+        }, {
             title: 'Backlog Refinement',
             route: 'refine',
             icon: 'compare_arrows'

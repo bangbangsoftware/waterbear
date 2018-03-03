@@ -8,7 +8,7 @@
                 </v-toolbar>
                 <v-list>
                     <v-list-group v-for="(sprint,c) in session.project.sprints" :key="sprint">
-                        <v-list-tile :click="selectSprint(c)" slot="item">
+                        <v-list-tile :click="selectSprint(c)" slot="activator">
                             <v-list-tile-action>
                                 <!--      <v-icon>{{ item.action }}</v-icon> -->
                             </v-list-tile-action>

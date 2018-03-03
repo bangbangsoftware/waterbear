@@ -112,7 +112,7 @@
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.5.13",
     "vue-template-loader": "^0.2.2",
-    "vuetify": "^0.16.6",
+    "vuetify": "^1.0.0",
     "vuex": "^2.5.0",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",

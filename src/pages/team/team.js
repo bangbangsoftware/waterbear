@@ -8,35 +8,9 @@ import user from '../../user.js'
 import template from './team.html'
 import './team.css'
 
-const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const MOY = ['January',
-    'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-]
+import {DOW, MOY, NORMAL, OFF, DS} from './defaults.js'
 
 const getPostfix = n => 'th'
-
-const NORMAL = 0
-const OFF = 2
-
-const DS = [{
-    state: 0,
-    display: '',
-    off: false
-}, {
-    state: 1,
-    display: 'WFH',
-    off: false
-}, {
-    state: 2,
-    display: 'OFF',
-    colour: 'grey',
-    off: true
-}, {
-    state: 3,
-    display: 'SICK',
-    colour: 'grey',
-    off: true
-}]
 
 const days = []
 
