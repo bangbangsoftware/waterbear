@@ -1,32 +1,34 @@
 <v-card>
     <v-toolbar v-on:click="toggleNameEdit()" class="teal white--text" dark>
         <v-toolbar-title v-if="!editName">{{sprint.name}} Sprint</v-toolbar-title>
-          <button v-if="!editName">Start!</button>
+        <button v-if="!editName">Start!</button>
         <v-toolbar-title v-if="editName">INPUT</v-toolbar-title>
         <v-spacer></v-spacer>
     </v-toolbar>
     <v-list>
-               <v-list-group v-for="(story, c) in sprint.list" :key="story.id" no-action>
-                    <v-list-tile slot="activator">
-                        <v-list-tile-content>
-                                <v-list-tile-title v-on:click="">{{c}}. {{ story.title }}</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                    <v-list-tile v-for="task in story.tasks" :key="name" @click="">
-                        <v-list-tile-content>
-                          <v-list-tile-title> {{t}}.{{task.name}} [{{task.skill}}]</v-list-tile-title>
-                        </v-list-tile-content>
+        <v-list-group v-for="(story, c) in sprint.list" :key="story.id" no-action>
+            <v-list-tile slot="activator">
+                <v-list-tile-content>
+                    <v-list-tile-title v-on:click="">{{c}}. {{ story.title }}</v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile v-for="(task,t) in story.tasks" :key="task.name" @click="">
+                <v-list-tile-content>
+                    <v-list-tile-title> {{t}}.{{task.name}} [{{task.skill}}]</v-list-tile-title>
+                </v-list-tile-content>
+                <!--
                         <v-list-tile-action>
                             <v-icon>{{ task.desc }}</v-icon>
                         </v-list-tile-action>
-                    </v-list-tile>
-             <v-list-tile>
+                        -->
+            </v-list-tile>
+            <v-list-tile>
                 <v-btn v-on:click="removeFromSprint (story, c)">
                     Remove from Sprint
                 </v-btn>
             </v-list-tile>
-                </v-list-group>
- 
+        </v-list-group>
+
 
     </v-list>
 </v-card>

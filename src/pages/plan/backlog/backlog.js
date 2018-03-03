@@ -13,12 +13,16 @@ const comp = {
     name: 'backlog',
     template,
     data: () => {
-        const state = util.backlogState(store.state.session.project)
         return {
             session: store.state.session,
             project: store.state.session.project,
-            colourClasses: store.state.defaults.colourClasses,
-            complete: state.complete
+            colourClasses: store.state.defaults.colourClasses
+        }
+    },
+    computed: {
+        complete: function() {
+            const state = util.backlogState(this.project)
+            return state.complete
         }
     },
     beforeCreate: function() {

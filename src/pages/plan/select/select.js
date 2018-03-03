@@ -27,7 +27,7 @@ const comp = {
             this.editName = !this.editName
             store.commit('planState', 'sprintCreate')
         },
-        removeFromSprint: (story, index) => {
+        removeFromSprint: function(story, index) {
             store.commit('takeFromSprint', index)
             util.updateSprints()
         }
