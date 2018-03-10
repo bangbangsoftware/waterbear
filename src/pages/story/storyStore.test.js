@@ -59,6 +59,18 @@ it('Should be able post a story', () => {
     storyStore.clearStory(state)
     storyStore.postStory(state)
     expect(state.session.project.stories.length).toBe(1)
+    expect(state.session.project.stories[0].index).toBe(0)
+
+    state.session.story.index = -1;
+    storyStore.postStory(state)
+    expect(state.session.project.stories.length).toBe(2)
+    expect(state.session.project.stories[0].index).toBe(1)
+
+    state.session.story.title = 'Edited story';
+    storyStore.postStory(state)
+    expect(state.session.project.stories.length).toBe(2)
+    expect(state.session.project.stories[0].index).toBe(1)
+    expect(state.session.project.stories[0].title).toBe('Edited story')
 })
 
 it('Should be a able to add title to main story', () => {

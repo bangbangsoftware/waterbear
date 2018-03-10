@@ -103,6 +103,7 @@
     "shelljs": "^0.7.6",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
+    "tapable": "1.0.0-beta.5",
     "url-loader": "^0.5.7",
     "vue": "^2.5.13",
     "vue-html-loader": "^1.2.3",
@@ -114,8 +115,9 @@
     "vue-template-loader": "^0.2.2",
     "vuetify": "^1.0.0",
     "vuex": "^2.5.0",
-    "webpack": "^2.2.1",
+    "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^2.2.1",
+    "webpack-cli": "^2.0.10",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
     "webpack-merge": "^2.6.1"

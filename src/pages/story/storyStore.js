@@ -19,7 +19,8 @@ export default {
             tags: [],
             colourNo: 4,
             acs: [],
-            valid: false
+            valid: false,
+            index: -1
         }
     },
     selectStory: (state, selected) => {
@@ -44,12 +45,14 @@ export default {
         if (!state.session.project.stories) {
             state.session.project.stories = []
         }
-        if (state.session.story.index) {
+        if (state.session.story.index > -1) {
             state.session.project.stories[state.session.story.index] = state.session.story
+            store.commit('log', 'updating "' + state.session.story.title + '" story')
         } else {
+            state.session.story.index = state.session.project.stories.length
             state.session.project.stories.push(state.session.story)
+            store.commit('log', 'Added "' + state.session.story.title + '" story')
         }
-        store.commit('log', 'Added "' + state.session.story.title + '" story')
         store.commit('clearStory')
     },
     moveStory: (state, movement) => {
