@@ -3,7 +3,7 @@
 
         <v-card>
             <v-toolbar v-on:click="toggleNameEdit()" class="teal white--text" dark>
-                <v-toolbar-title v-if="!editName">{{sprint.name}} Sprint</v-toolbar-title>
+                    <v-toolbar-title v-if="!editName">{{sprint.name}} Sprint [{{sprint.days}} days]</v-toolbar-title>
                 <v-toolbar-title v-if="editName">INPUT</v-toolbar-title>
                 <v-spacer></v-spacer>
             </v-toolbar>
@@ -28,9 +28,12 @@
                 </v-list-group>
             </v-list>
 
-            <v-card-actions>
+            <v-card-actions v-if="sprint.list.length >0">
                 <v-btn v-if="!editName" flat color="orange">START</v-btn>
                 <v-btn v-on:click="toggleNameEdit()" flat color="orange">NEW</v-btn>
+            </v-card-actions>
+            <v-card-actions v-else>
+                <v-btn v-on:click="toggleNameEdit()" flat color="orange">Update</v-btn>
             </v-card-actions>
         </v-card>
 
