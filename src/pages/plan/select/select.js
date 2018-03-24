@@ -15,7 +15,8 @@ const comp = {
             project: store.state.session.project,
             session: store.state.session,
             sprint,
-            editName: false
+            editName: false,
+            dialog: false
         }
     },
     methods: {

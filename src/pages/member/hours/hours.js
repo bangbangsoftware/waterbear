@@ -36,6 +36,14 @@ const comp = {
                 day,
                 hour
             })
+        },
+        colour: value => {
+            if (value === 'on') {
+                return 'green'
+            }
+             if (value === 'wfh') {
+                return 'warning'
+            }
         }
     }
 }
