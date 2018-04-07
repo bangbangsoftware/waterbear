@@ -42,7 +42,7 @@
     </v-toolbar>
     <main>
       <v-container fluid>
-</br>Why is this her?
+</br>
 </br>
         <router-view></router-view>
       </v-container>

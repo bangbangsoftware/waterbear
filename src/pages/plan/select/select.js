@@ -24,6 +24,10 @@ const comp = {
             store.commit('selectSprint', -1)
             store.commit('planState', 'sprintSelect')
         },
+        startSprint: function() {
+            store.commit('planState', 'sprintSelect')
+            this.dialog = false
+        },
         toggleNameEdit: function() {
             this.editName = !this.editName
             store.commit('planState', 'sprintCreate')

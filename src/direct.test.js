@@ -33,7 +33,7 @@ describe('redirect.spec.js', () => {
       })
    })
 
-   it('should handle direct ai project owner without hours to member screen', done => {
+   it('should handle direct a project owner without hours to member screen', done => {
       const fakeDB = {
          get: prj => {
             console.log('fakeDB get called')

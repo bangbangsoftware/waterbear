@@ -6,6 +6,9 @@ import user from '../../user.js'
 import template from './login.html'
 import './login.css'
 
+import alreadyLoggedIn from '../../loginCheck.js'
+import direct from '../../direct.js'
+
 const error = err => console.error(err)
 const name = 'waterbear'
 const pouchOpts = {
@@ -46,6 +49,21 @@ const comp = {
             pw: '',
             session: store.state.session
         }
+    },
+    beforeCreate: function() {
+        alreadyLoggedIn(false)
+            .then(() => {
+                console.log('Already Logged in')
+                direct(this.session.user)
+                    .then(go => {
+                        if (window) {
+                            window.location.href = '#/' + go
+                        }
+                    })
+            })
+            .catch(() => {
+                console.log('NOT already Logged in')
+            })
     },
     create: () => {
         store.commit('loaded', false)
