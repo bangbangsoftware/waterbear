@@ -3,7 +3,7 @@ import db from './dbase.js'
 
 import resolveUser from './direct.js'
 
-const runaway = (jump, reject) => (reject, message) => {
+const runaway = (jump, reject) => message => {
     store.commit('loaded', false)
     store.commit('error', 'Need to login')
     if (window && jump) {
