@@ -69,6 +69,7 @@ export default {
    data: function() {
       return {
          session: store.state.session,
+         state: store.state,
          drawer: false,
          items: [{
             title: 'Your details',
@@ -113,6 +114,10 @@ export default {
          console.log(where)
          if (!where) {
             store.commit('loaded', false)
+            store.commit('db', null)
+            if (this.state.db) {
+              this.state.db.logout()
+            }
          }
          this.drawer = false
          this.mini = false

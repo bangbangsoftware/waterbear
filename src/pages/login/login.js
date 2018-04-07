@@ -47,7 +47,6 @@ const comp = {
             error: '',
             email: '',
             pw: '',
-            done: false,
             session: store.state.session
         }
     },
@@ -64,7 +63,6 @@ const comp = {
             })
             .catch(() => {
                 console.log('NOT already Logged in')
-                this.done = true
             })
     },
     create: () => {
