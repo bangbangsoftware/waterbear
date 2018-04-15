@@ -13,7 +13,7 @@ const whereNow = (project, user, resolve) => {
         resolve('story')
         return
     }
-    const next = director(user)
+    const next = director(user, project)
     resolve(next)
 }
 

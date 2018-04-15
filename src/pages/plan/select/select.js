@@ -11,6 +11,8 @@ const comp = {
     template,
     data: () => {
         const sprint = (store.state.session.project.sprints === undefined) ? {} : store.state.session.project.sprints[store.state.session.sprintIndex]
+        sprint.startTime = new Date(sprint.startDate)
+        sprint.startDate = sprint.startDate.toString().substring(0, 10)
         return {
             project: store.state.session.project,
             session: store.state.session,
@@ -27,6 +29,7 @@ const comp = {
         startSprint: function() {
             store.commit('planState', 'sprintSelect')
             this.dialog = false
+            util.updateSprints()
         },
         toggleNameEdit: function() {
             this.editName = !this.editName

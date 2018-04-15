@@ -8,7 +8,10 @@ describe('director.spec.js', () => {
         const dev = {
             role: 'Frontend Dev'
         }
-        expect(director(dev)).toBe('work')
+        const prj = {
+            sprints: []
+        }
+        expect(director(dev, prj)).toBe('work')
         done();
     })
 
@@ -16,7 +19,10 @@ describe('director.spec.js', () => {
         const dev = {
             role: 'Scrum Master'
         }
-        expect(director(dev)).toBe('sprint/0')
+         const prj = {
+            sprints: []
+        }
+        expect(director(dev, prj)).toBe('sprint/0')
         done();
     })
 
