@@ -8,6 +8,7 @@ import plan from '../pages/plan/plan.js'
 import sprint from '../pages/plan/sprint/sprint.js'
 import refine from '../pages/refine/refine.js'
 import team from '../pages/team/team.js'
+import devopen from '../pages/opener/dev/dev.js'
 import '../common/feed/feed.js'
 
 Vue.use(Router)
@@ -20,6 +21,10 @@ export default new Router({
         path: '/',
         name: 'login',
         component: login
+    }, {
+        path: '/devopen',
+        name: 'devopen',
+        component: devopen
     }, {
         path: '/start',
         name: 'signup',

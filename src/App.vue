@@ -76,7 +76,7 @@ export default {
             route: 'member',
             icon: 'account_box'
           }, {
-            title: 'Team',
+            title: 'The Team',
             route: 'team',
             icon: 'motorcycle'
          }, {
