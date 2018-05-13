@@ -1,32 +1,32 @@
-import stat from './sprintStat.js'
+import sprint from './validSprint.js'
 
 describe("sprintStats.test.js: calculating days from a date", () => {
 
     it('Should be tell the difference between one day', () => {
         const dateOne = new Date(2018, 7, 21, 10, 0, 0, 0)
         const dateTwo = new Date(2018, 7, 22, 10, 0, 0, 0)
-        const days = stat.howManyDays(dateOne + "", dateTwo)
+        const days = sprint.howManyDays(dateOne + "", dateTwo)
         expect(days).toBe(1)
     })
 
     it('Should be tell the difference between 12 day', () => {
         const dateOne = new Date(2018, 7, 21, 10, 0, 0, 0)
         const dateTwo = new Date(2018, 8, 2, 10, 0, 0, 0)
-        const days = stat.howManyDays(dateOne + "", dateTwo)
+        const days = sprint.howManyDays(dateOne + "", dateTwo)
         expect(days).toBe(12)
     })
 
     it('Should be tell the difference between a year', () => {
         const dateOne = new Date(2019, 7, 21, 10, 0, 0, 0)
         const dateTwo = new Date(2018, 7, 21, 10, 0, 0, 0)
-        const days = stat.howManyDays(dateOne + "", dateTwo)
+        const days = sprint.howManyDays(dateOne + "", dateTwo)
         expect(days).toBe(365)
     })
 
     it('Should be tell the difference between 0 day', () => {
         const dateOne = new Date(2018, 7, 21, 10, 0, 0, 0)
         const dateTwo = new Date(2018, 7, 21, 10, 0, 0, 0)
-        const days = stat.howManyDays(dateOne + "", dateTwo)
+        const days = sprint.howManyDays(dateOne + "", dateTwo)
         expect(days).toBe(0)
     })
 
@@ -39,21 +39,21 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
 
     it('Should be handle a empty sprint', () => {
         const mockSprint = {}
-        const summary = stat.state(mockSprint)
+        const summary = sprint.valid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
 
     it('Should be handle a undefined sprint', () => {
         const mockSprint = undefined
-        const summary = stat.state(mockSprint)
+        const summary = sprint.valid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
 
     it('Should be handle a null sprint', () => {
         const mockSprint = null
-        const summary = stat.state(mockSprint)
+        const summary = sprint.valid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
@@ -66,7 +66,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
         const mockSprint = {
             list: [story]
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint hasn't started yet")
     })
 
@@ -74,7 +74,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
         const mockSprint = {
             startDate: date
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No stories in the sprint")
     })
@@ -84,7 +84,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: []
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No stories in the sprint")
     })
@@ -95,7 +95,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: [story]
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No tasks in the stories")
     })
@@ -108,7 +108,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: [story]
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No tasks in the stories")
     })
@@ -123,7 +123,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: five,
             list: [story]
         }
-        const summary = stat.state(mockSprint, now)
+        const summary = sprint.valid(mockSprint, now)
         expect(summary.state).toBe("The sprint has a false start")
         expect(summary.description).toBe("It started 5 days ago but no task have started yet")
     })
