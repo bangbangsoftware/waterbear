@@ -1,6 +1,6 @@
 import sprint from './validSprint.js'
 
-describe("sprintStats.test.js: calculating days from a date", () => {
+describe("validSprint.test.js: calculating days from a date", () => {
 
     it('Should be tell the difference between one day', () => {
         const dateOne = new Date(2018, 7, 21, 10, 0, 0, 0)
@@ -32,28 +32,28 @@ describe("sprintStats.test.js: calculating days from a date", () => {
 
 })
 
-describe("sprintStats.test.js: The summary text of a sprint", () => {
+describe("validSprint.test.js: The summary text of a sprint", () => {
 
     const date = new Date(2018, 7, 22, 10, 0, 0, 0)
     const now = new Date(2018, 7, 21, 10, 0, 0, 0)
 
     it('Should be handle a empty sprint', () => {
         const mockSprint = {}
-        const summary = sprint.valid(mockSprint)
+        const summary = sprint.invalid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
 
     it('Should be handle a undefined sprint', () => {
         const mockSprint = undefined
-        const summary = sprint.valid(mockSprint)
+        const summary = sprint.invalid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
 
     it('Should be handle a null sprint', () => {
         const mockSprint = null
-        const summary = sprint.valid(mockSprint)
+        const summary = sprint.invalid(mockSprint)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("Nothing in the sprint")
     })
@@ -66,7 +66,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
         const mockSprint = {
             list: [story]
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint hasn't started yet")
     })
 
@@ -74,7 +74,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
         const mockSprint = {
             startDate: date
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No stories in the sprint")
     })
@@ -84,7 +84,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: []
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No stories in the sprint")
     })
@@ -95,7 +95,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: [story]
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No tasks in the stories")
     })
@@ -108,7 +108,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: date,
             list: [story]
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint isn't defined yet")
         expect(summary.description).toBe("No tasks in the stories")
     })
@@ -123,7 +123,7 @@ describe("sprintStats.test.js: The summary text of a sprint", () => {
             startDate: five,
             list: [story]
         }
-        const summary = sprint.valid(mockSprint, now)
+        const summary = sprint.invalid(mockSprint, now)
         expect(summary.state).toBe("The sprint has a false start")
         expect(summary.description).toBe("It started 5 days ago but no task have started yet")
     })

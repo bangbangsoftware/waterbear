@@ -10,7 +10,10 @@ export default {
         validSprint(state.session.sprint)
     },
     sprintDays: (state, newState) => {
-        state.session.sprint.days = newState
+        if (!newState) {
+            return
+        }
+        state.session.sprint.days = (typeof newState === 'string') ? parseInt(newState) : newState
         validSprint(state.session.sprint)
     },
     sprintError: (state, message) => {

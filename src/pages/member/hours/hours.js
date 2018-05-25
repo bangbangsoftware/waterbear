@@ -2,7 +2,7 @@ import store from '../../../store.js'
 import Vue from 'vue'
 import template from './hours.html'
 import './hours.css'
-import defaults from './default.js'
+import defaults from '../../../common/setup/hours.js'
 
 const comp = {
     name: 'hours',

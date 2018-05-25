@@ -2,7 +2,7 @@ import store from '../../../store.js'
 import user from '../../../user.js'
 import Vue from 'vue'
 import template from './owner.html'
-import defaults from '../../member/hours/default.js'
+import defaults from '../../../common/setup/hours.js'
 
 const comp = {
    name: 'owner',

@@ -25,11 +25,12 @@ const unfinished = sprint => {
         return "No stories in the sprint"
     }
 
-    const tasks = []
-    sprint.list.filter(story => story.tasks)
-        .map(story => tasks.push(...story.tasks))
+    console.log("sprint list is ", sprint.list)
+    const allTasks = sprint.list.filter(story => story.tasks)
+        .map(story => story.tasks)
+    console.log("all tasks", allTasks.length)
 
-    if (!tasks.length) {
+    if (allTasks.length === 0) {
         return "No tasks in the stories"
     }
 
@@ -51,7 +52,7 @@ const noTaskStarted = sprint => {
     return stories.length === 0
 }
 
-const valid = (sprint, now = new Date()) => {
+const invalid = (sprint, now = new Date()) => {
     const fail = unfinished(sprint)
     if (fail) {
         return {
@@ -77,7 +78,7 @@ const valid = (sprint, now = new Date()) => {
 }
 
 export default {
-    valid,
+    invalid,
     howManyDays
 }
 
