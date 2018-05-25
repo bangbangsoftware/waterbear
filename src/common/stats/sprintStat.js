@@ -29,23 +29,31 @@ const addTime = (h, map, total, end = 23) => {
 }
 
 const rangeState = (current, end, user, results) => {
-    if (current.getTime() > end.getTime()) {
-        return results
+    const next = nextDay(current, end.getHours(), end.getMinutes())
+    if (next.getTime() > end.getTime()) {
+        return results 
     }
-    const state = comp.currentHours(current, user)
-    const newResults = results + state.done 
+    const state = comp.currentHours(next, user)
+    const newResults = results + state.done
 
-    const next = nextDay(current)
     return rangeState(next, end, user, newResults)
 }
 
-const nextDay = current => {
-    const hh = current.getHours()
-    const mins = current.getMinutes()
+const nextDay = (current, hh = current.getHours(), mins = current.getMinutes()) => {
     const dd = current.getDate() + 1
     const mm = current.getMonth()
     const yy = current.getFullYear()
-    return new Date(yy, mm, dd, hh, mins)
+    return new Date(yy, mm, dd, hh, mins, 0, 0)
+}
+
+const exists = what => {
+    if (what === undefined) {
+        return false
+    }
+    if (what === null) {
+        return false
+    }
+    return (what)
 }
 
 const comp = {
@@ -109,9 +117,20 @@ const comp = {
                 left: task.est
             }
         }
-        const state = comp.currentHours(start, user).left
-        const next = start
-        const done = rangeState(next, now, user, state)
+        const end = task.end
+        const until = exists(end) ? end : now
+        const state = comp.currentHours(start, user)
+        const today = util.today(start, until)
+        if (today) {
+            const done = state.done
+            const left = task.est - done
+            return {
+                done,
+                left
+            }
+        }
+
+        const done = rangeState(start, until, user, state.left)
         const left = task.est - done
         return {
             done,

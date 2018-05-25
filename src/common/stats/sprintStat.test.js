@@ -122,24 +122,41 @@ describe("sprintStat.test.js: How time works with the sprint and members", () =>
         expect(state2.left).toBe(5)
     })
 
-    it("should describe started tasks by hours under/over", () => {
+    it("should describe started task by hours under/over", () => {
         const data = dataOne()
         const user = data.member
         const task = {
             "name": "start button",
             "desc": "Make the start button do something",
-            "est": "10",
+            "est": 10,
             "skill": "vue",
-            "error": "",
             "valid": true,
-            "start": new Date(2018, 7, 21, 12, 20, 0, 0),
-            "index": 0
+            "start": new Date(2018, 7, 21, 12, 20, 0, 0)
         };
         const now = new Date(2018, 7, 22, 13, 10, 0, 0)
         const state = sprint.taskState(task, user, now)
-        expect(state.done).toBe(11)
-        expect(state.left).toBe(-1)
+        expect(state.done).toBe(9)
+        expect(state.left).toBe(1)
     })
+
+    it("should describe finished task by hours under/over ", () => {
+        const data = dataOne()
+        const user = data.member
+        const task = {
+            "name": "start button",
+            "desc": "Make the start button do something",
+            "est": 10,
+            "skill": "vue",
+            "valid": true,
+            "start": new Date(2018, 7, 21, 12, 20, 0, 0),
+            "end": new Date(2018, 7, 22, 10, 20, 0, 0)
+        };
+        const now = new Date(2018, 7, 22, 13, 10, 0, 0)
+        const state = sprint.taskState(task, user, now)
+        expect(state.done).toBe(7)
+        expect(state.left).toBe(3)
+    })
+
 })
 
 
