@@ -14,24 +14,26 @@ const empty = obj => {
 
 const unfinished = sprint => {
     if (empty(sprint)) {
-        return "Nothing in the sprint"
+        return 'Nothing in the sprint'
     }
 
     if (!sprint.list) {
-        return "No stories in the sprint"
+        return 'No stories in the sprint'
     }
 
     if (!sprint.list.length) {
-        return "No stories in the sprint"
+        return 'No stories in the sprint'
     }
 
-    console.log("sprint list is ", sprint.list)
     const allTasks = sprint.list.filter(story => story.tasks)
         .map(story => story.tasks)
-    console.log("all tasks", allTasks.length)
+        .filter(tasks => tasks.length > 0)
+//        .filter(task => Object.keys(task).length > 0 || task.constructor !== Object)
+
+        console.log(allTasks)
 
     if (allTasks.length === 0) {
-        return "No tasks in the stories"
+        return 'No tasks in the stories'
     }
 
     return false
@@ -55,14 +57,15 @@ const noTaskStarted = sprint => {
 const invalid = (sprint, now = new Date()) => {
     const fail = unfinished(sprint)
     if (fail) {
+        console.log(fail)
         return {
-            state: "The sprint isn't defined yet",
+            state: 'The sprint is not defined yet',
             description: fail
         }
     }
     if (!sprint.startDate) {
         return {
-            state: "The sprint hasn't started yet"
+            state: 'The sprint has not started yet'
         }
     }
 
@@ -70,8 +73,8 @@ const invalid = (sprint, now = new Date()) => {
     const nothingStarted = noTaskStarted(sprint)
     if (nothingStarted && sinceStart > 0) {
         return {
-            state: "The sprint has a false start",
-            description: "It started " + sinceStart + " days ago but no task have started yet"
+            state: 'The sprint has a false start',
+            description: 'It started ' + sinceStart + ' days ago but no task have started yet'
         }
     }
     return false
@@ -81,5 +84,4 @@ export default {
     invalid,
     howManyDays
 }
-
 // impact * cost * confidence / time = score

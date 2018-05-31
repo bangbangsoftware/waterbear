@@ -6,6 +6,8 @@ import defaults from '../setup/hours.js'
 
 import memberData from './test.member.js'
 
+import sprintData from './test.sprint.js'
+
 const dataOne = () => {
     const startDate = new Date(2018, 7, 21, 9, 0, 0, 0)
     const weekLater = new Date(2018, 7, 28, 10, 0, 0, 0)
@@ -155,6 +157,23 @@ describe("sprintStat.test.js: How time works with the sprint and members", () =>
         const state = sprint.taskState(task, user, now)
         expect(state.done).toBe(7)
         expect(state.left).toBe(3)
+    })
+
+    it("should be able to give contingency", () => {
+        sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0)
+        const now = new Date(2018, 7, 2, 12, 20, 0, 0)
+        const state = sprint.contingency(sprintData, [memberData], now)
+        
+        expect(state.skills.length).toBe(1)
+        const skill = state.skills[0]
+
+        expect(skill.name).toBe('vue')
+        expect(skill.left).toBe(0)
+        
+        expect(state.members.length).toBe(1)
+        const member = state.members[0]    
+
+        expect(member.left).toBe(36)
     })
 
 })

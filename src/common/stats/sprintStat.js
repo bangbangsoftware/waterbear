@@ -1,5 +1,6 @@
 import is from '../valid/validSprint'
 import util from '../util'
+import conting from './contingency.js'
 
 const allTasks = sprint => {
     const tasks = []
@@ -16,22 +17,10 @@ const getTasksOfStatus = (sprint, status) => {
     const tasks = allTasks(sprint)
     return tasks.filter(t => (t.status && t.status === status))
 }
-const addTime = (h, map, total, end = 23) => {
-    if (h > end) {
-        return total
-    }
-
-    if (map[h].on) {
-        return addTime(h + 1, map, total + 1, end)
-    }
-
-    return addTime(h + 1, map, total, end)
-}
-
 const rangeState = (current, end, user, results) => {
-    const next = nextDay(current, end.getHours(), end.getMinutes())
+    const next = nextDay(current, 1, end.getHours(), end.getMinutes())
     if (next.getTime() > end.getTime()) {
-        return results 
+        return results
     }
     const state = comp.currentHours(next, user)
     const newResults = results + state.done
@@ -39,8 +28,8 @@ const rangeState = (current, end, user, results) => {
     return rangeState(next, end, user, newResults)
 }
 
-const nextDay = (current, hh = current.getHours(), mins = current.getMinutes()) => {
-    const dd = current.getDate() + 1
+const nextDay = (current, plus = 1, hh = current.getHours(), mins = current.getMinutes()) => {
+    const dd = current.getDate() + plus
     const mm = current.getMonth()
     const yy = current.getFullYear()
     return new Date(yy, mm, dd, hh, mins, 0, 0)
@@ -66,55 +55,33 @@ const comp = {
         const userTasks = getAssignedTasks(tasks, user)
         if (!userTasks.length) {
             return {
-                state: "You have no tasks",
-                description: ""
+                state: 'You have no tasks',
+                description: ''
             }
         }
-
         return {}
     },
-    hours: (user, now = Date()) => {
-        const days = user.diary.filter(d => util.today(d.date, now));
-        const day = (days.length > 0) ? days[0] : {
-            off: false,
-            hours: 8
-        }
-        if (day.off) {
-            return 0
-        }
-        return comp.hoursLeftToday(now, user)
-    },
-    hoursLeftToday: (now, user) => {
-        const dayIndex = now.getDay()
-        const dayHours = user.days[dayIndex]
-        const current24Hour = now.getHours()
-        const map = comp.hourMap(dayHours)
-        const total = addTime(current24Hour, map, 0)
-        return total
-    },
-    hoursDoneToday: (now, user) => {
-        const dayIndex = now.getDay()
-        const dayHours = user.days[dayIndex]
-        const current24Hour = now.getHours()
-        const map = comp.hourMap(dayHours)
-        const start = map[0].on ? 1 : 0
-        const total = addTime(0, map, start, current24Hour)
-        return total
-    },
+    hoursDoneToday: (now, user) => util.hoursDoneToday(now,user), 
     currentHours: (now, user) => {
-        const done = comp.hoursDoneToday(now, user)
-        const left = comp.hoursLeftToday(now, user)
+        const done = util.hoursDoneToday(now, user)
+        const left = util.hoursLeftToday(now, user)
         return {
             done,
             left
         }
     },
+    contingency: (sprint, members, now) => {
+        const tasks = allTasks(sprint)
+        return conting(sprint, members, now, tasks)
+    },
     taskState: (task, user, now = Date()) => {
+        const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
         const start = task.start
         if (!start) {
             return {
+                skilled,
                 done: 0,
-                left: task.est
+                left: parseInt(task.est)
             }
         }
         const end = task.end
@@ -125,6 +92,7 @@ const comp = {
             const done = state.done
             const left = task.est - done
             return {
+                skilled,
                 done,
                 left
             }
@@ -133,36 +101,25 @@ const comp = {
         const done = rangeState(start, until, user, state.left)
         const left = task.est - done
         return {
+            skilled,
             done,
             left
         }
     },
     left: (sprint, user, now = Date(), total = 0) => {
-        const start = sprint.startDate
-        const dd = start.getUTCDate()
-        const mm = start.getUTCMonth()
-        const yy = start.getUTCFullYear()
-        for (let day = 0; day < sprint.days; day++) {
-            const next = new Date(yy, mm, dd + day)
-            const today = util.today(next, now)
-            if (today || next.getTime() > now.getTime()) {
-                const hours = comp.hours(user, next)
-                total = total + hours
-            }
-        }
-        return total
+        return util.left(sprint, user, now, total)
     },
     hoursLeft: (sprint, members, now = Date()) => {
         return members.map(user => comp.left(sprint, user, now)).reduce((t, c) => t + c)
     },
     tasksNotStarted: sprint => {
-        return comp.tasksStat(getTasksOfStatus(sprint, "todo"))
+        return comp.tasksStat(getTasksOfStatus(sprint, 'todo'))
     },
     tasksOnGoing: sprint => {
-        return comp.taskStat(getTasksOfStatus(sprint, "ongoing"))
+        return comp.taskStat(getTasksOfStatus(sprint, 'ongoing'))
     },
     tasksCompleted: sprint => {
-        return comp.taskStat(getTasksOfStatus(sprint, "done"))
+        return comp.taskStat(getTasksOfStatus(sprint, 'done'))
     },
     tasksStat: tasks => {
         return {
@@ -171,37 +128,9 @@ const comp = {
             tasks
         }
     },
-    workhours: (member, from, to) => {
-
-    },
-    contingency: (sprint, now) => {
-        const notStarted = comp.tasksNoStarted(sprint)
-        const onGoing = comp.tasksOnGoing(sprint)
-            // work out how many hours have been done on each task, map it against member and
-            // there diary
-    },
-    mapper: v => {
-        const posfix = v.substring(v.length - 2)
-        const value = parseInt(v.substring(0, v.length - 2))
-        const result = (posfix === 'pm') ? value + 12 : value
-        if (result > 23) {
-            return 0
-        }
-        return result
-    },
-    hourMap: (dayHours) => {
-        const hours = []
-        hours.push(...dayHours.day)
-        hours.push(...dayHours.night)
-        const map = {}
-        hours.forEach(h => {
-            const key = comp.mapper(h.name)
-            map[key] = h
-        })
-        return map
-    },
+    mapper: v => util.mapper(v),
+    hours: (user, now = Date()) => util.hours(user, now),
+    hourMap: (dayHours) => util.hourMap(dayHours)
 }
-
 export default comp
-
 // impact * cost * confidence / time = score

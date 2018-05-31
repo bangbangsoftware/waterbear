@@ -1,3 +1,5 @@
+// import sprint from '../../../../common/stats/sprintStat.js'
+
 const getDates = (startDate, stopDate) => {
     const dateArray = []
     let currentDate = startDate
@@ -13,7 +15,8 @@ const getDayHours = (date, member) => {
     const fullday = member.days[index]
     const dayHours = fullday.day.filter(hour => hour.on).length
     const nightHours = fullday.night.filter(hour => hour.on).length
-    return dayHours + nightHours
+    const together = parseInt(dayHours) + parseInt(nightHours)
+    return together
 }
 
 const append = (list, item) => {
@@ -25,7 +28,7 @@ const append = (list, item) => {
 }
 
 const service = {
-    sprintSkills: (sprt) => {
+    sprintSkills: (sprt, now = sprt.startDate) => {
         const stories = sprt.list
         if (stories === undefined) {
             console.log('Nothing in sprint as of yet')
@@ -39,12 +42,14 @@ const service = {
         const skillMap = {}
         tasks.filter(task => typeof task !== 'undefined')
             .forEach(task => {
+                console.log('task', task)
+                console.log('sprint', sprt)
                 let qty = skillMap[task.skill]
                 if (typeof qty === 'undefined' || qty === -1) {
                     qty = 0
                 }
-                qty = qty + task.est
-                skillMap[task.skill] = qty
+                qty = qty + parseInt(task.est)
+                skillMap[task.skill] = parseInt(qty)
             })
 
         return skillMap
@@ -83,11 +88,12 @@ const service = {
                 const hours = service.getAvailability(member, start, end)
                 const skillHours = service.getSkillHours(member, hours)
                 const weight = service.getWeight(skillHours)
-                return {
+                const withWeight = {
                     hours,
                     skills: skillHours.skills,
                     weight
                 }
+                return withWeight
             }).sort((a, b) => a.weight - b.weight)
     },
     useSkill: (teamSkill, skill, hours) => {
@@ -124,7 +130,6 @@ const service = {
         }
     },
     sprint: (sprt, allUnique = []) => {
-        console.log(sprt)
         if (sprt.list === undefined) {
             return allUnique
         }
@@ -193,6 +198,7 @@ const service = {
         skills.forEach(skill => {
             let total = results[skill].got
             results[skill].got = total + service.getAverage(teamSkills, skill)
+            results[skill].diff = results[skill].got - results[skill].need
         })
         return results
     }

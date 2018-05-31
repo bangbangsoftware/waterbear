@@ -49,12 +49,12 @@ it('Should be able to get all skills totals from all tasks in all stories in a s
    expect(skills['Javascript']).toBe(1)
 })
 
-import defaults from '../../../member/hours/default.js'
+import { DAYS} from '../../../team/defaults.js'
 it('Should be able to get get availability for a team member', () => {
 
    const member = {
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    }
 
@@ -69,7 +69,7 @@ it('Should be able to get skills totals for a hours', () => {
 
    const member = {
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    }
    const skillHours = service.getSkillHours(member, 40)
@@ -91,17 +91,17 @@ it('should be able to give a team skills', () => {
    const members = []
    members.push({
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb']
    })
    members.push({
       name: 'Finn',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    })
    members.push({
       name: 'Mick',
-      days: defaults(),
+      days: DAYS,
       skills: ['wasm']
    })
    const startDate = new Date(2017, 5, 11) // which is actually June
@@ -169,17 +169,17 @@ it('Should be able to make a unique list of skills based on sprint and members',
    const members = []
    members.push({
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb']
    })
    members.push({
       name: 'Finn',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    })
    members.push({
       name: 'Mick',
-      days: defaults(),
+      days: DAYS,
       skills: ['wasm']
    })
 
@@ -197,17 +197,17 @@ it('should be able to use a teams skill time', () => {
    const members = []
    members.push({
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb']
    })
    members.push({
       name: 'Finn',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    })
    members.push({
       name: 'Mick',
-      days: defaults(),
+      days: DAYS,
       skills: ['wasm']
    })
    const startDate = new Date(2017, 5, 11) // which is actually June
@@ -268,17 +268,17 @@ it('should be able to balance teams skill with sprints need', () => {
    const members = []
    members.push({
       name: 'Cory',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb']
    })
    members.push({
       name: 'Finn',
-      days: defaults(),
+      days: DAYS,
       skills: ['vuejs', 'couchdb', 'css']
    })
    members.push({
       name: 'Mick',
-      days: defaults(),
+      days: DAYS,
       skills: ['wasm']
    })
    const startDate = new Date(2017, 5, 11) // which is actually June
