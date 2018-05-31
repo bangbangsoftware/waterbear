@@ -51,6 +51,14 @@ comp.hoursDoneToday = (now, user) => {
     const total = comp.addTime(0, map, start, current24Hour)
     return total
 }
+comp.currentHours = (now, user) => {
+    const done = comp.hoursDoneToday(now, user)
+    const left = comp.hoursLeftToday(now, user)
+    return {
+        done,
+        left
+    }
+}
 
 comp.hoursLeftToday = (now, user) => {
     const dayIndex = now.getDay()

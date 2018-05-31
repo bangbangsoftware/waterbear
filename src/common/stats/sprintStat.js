@@ -1,38 +1,10 @@
 import is from '../valid/validSprint'
 import util from '../util'
+import tasks from './tasks.js'
 import conting from './contingency.js'
-
-const allTasks = sprint => {
-    const tasks = []
-    sprint.list.filter(story => story.tasks)
-        .map(story => tasks.push(...story.tasks))
-    return tasks
-}
 
 const getAssignedTasks = (tasks, user) => {
     return tasks.filter(t => (t.assignedTo && t.assignedTo.id === user.id))
-}
-
-const getTasksOfStatus = (sprint, status) => {
-    const tasks = allTasks(sprint)
-    return tasks.filter(t => (t.status && t.status === status))
-}
-const rangeState = (current, end, user, results) => {
-    const next = nextDay(current, 1, end.getHours(), end.getMinutes())
-    if (next.getTime() > end.getTime()) {
-        return results
-    }
-    const state = comp.currentHours(next, user)
-    const newResults = results + state.done
-
-    return rangeState(next, end, user, newResults)
-}
-
-const nextDay = (current, plus = 1, hh = current.getHours(), mins = current.getMinutes()) => {
-    const dd = current.getDate() + plus
-    const mm = current.getMonth()
-    const yy = current.getFullYear()
-    return new Date(yy, mm, dd, hh, mins, 0, 0)
 }
 
 const exists = what => {
@@ -51,8 +23,8 @@ const comp = {
         if (fail) {
             return fail
         }
-        const tasks = allTasks(sprint)
-        const userTasks = getAssignedTasks(tasks, user)
+        const all = tasks.allTasks(sprint)
+        const userTasks = getAssignedTasks(all, user)
         if (!userTasks.length) {
             return {
                 state: 'You have no tasks',
@@ -61,66 +33,22 @@ const comp = {
         }
         return {}
     },
-    hoursDoneToday: (now, user) => util.hoursDoneToday(now,user), 
-    currentHours: (now, user) => {
-        const done = util.hoursDoneToday(now, user)
-        const left = util.hoursLeftToday(now, user)
-        return {
-            done,
-            left
-        }
-    },
+    hoursDoneToday: (now, user) => util.hoursDoneToday(now, user),
+    currentHours: (now, user) => util.currentHours(now, user),
     contingency: (sprint, members, now) => {
-        const tasks = allTasks(sprint)
-        return conting(sprint, members, now, tasks)
+        const all = tasks.allTasks(sprint)
+        return conting(sprint, members, now, all)
     },
-    taskState: (task, user, now = Date()) => {
-        const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
-        const start = task.start
-        if (!start) {
-            return {
-                skilled,
-                done: 0,
-                left: parseInt(task.est)
-            }
-        }
-        const end = task.end
-        const until = exists(end) ? end : now
-        const state = comp.currentHours(start, user)
-        const today = util.today(start, until)
-        if (today) {
-            const done = state.done
-            const left = task.est - done
-            return {
-                skilled,
-                done,
-                left
-            }
-        }
-
-        const done = rangeState(start, until, user, state.left)
-        const left = task.est - done
-        return {
-            skilled,
-            done,
-            left
-        }
-    },
+    taskState: (task, user, now = Date()) => tasks.taskState(task, user, now),
     left: (sprint, user, now = Date(), total = 0) => {
         return util.left(sprint, user, now, total)
     },
     hoursLeft: (sprint, members, now = Date()) => {
         return members.map(user => comp.left(sprint, user, now)).reduce((t, c) => t + c)
     },
-    tasksNotStarted: sprint => {
-        return comp.tasksStat(getTasksOfStatus(sprint, 'todo'))
-    },
-    tasksOnGoing: sprint => {
-        return comp.taskStat(getTasksOfStatus(sprint, 'ongoing'))
-    },
-    tasksCompleted: sprint => {
-        return comp.taskStat(getTasksOfStatus(sprint, 'done'))
-    },
+    tasksNotStarted: sprint => tasks.tasksNotStarted(sprint),
+    tasksOnGoing: sprint => tasks.tasksOnGoing(sprint),
+    tasksCompleted: sprint => tasks.tasksCompleted(sprint),
     tasksStat: tasks => {
         return {
             qty: tasks.length,
