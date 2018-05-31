@@ -3,18 +3,8 @@ import util from '../util'
 import tasks from './tasks.js'
 import conting from './contingency.js'
 
-const getAssignedTasks = (tasks, user) => {
-    return tasks.filter(t => (t.assignedTo && t.assignedTo.id === user.id))
-}
-
-const exists = what => {
-    if (what === undefined) {
-        return false
-    }
-    if (what === null) {
-        return false
-    }
-    return (what)
+const getAssignedTasks = (taks, user) => {
+    return taks.filter(t => (t.assignedTo && t.assignedTo.id === user.id))
 }
 
 const comp = {
@@ -49,11 +39,11 @@ const comp = {
     tasksNotStarted: sprint => tasks.tasksNotStarted(sprint),
     tasksOnGoing: sprint => tasks.tasksOnGoing(sprint),
     tasksCompleted: sprint => tasks.tasksCompleted(sprint),
-    tasksStat: tasks => {
+    tasksStat: tsks => {
         return {
-            qty: tasks.length,
-            est: tasks.map(t => t.est).reduce((t, c) => t + c),
-            tasks
+            qty: tsks.length,
+            est: tsks.map(t => t.est).reduce((t, c) => t + c),
+            tsks
         }
     },
     mapper: v => util.mapper(v),
