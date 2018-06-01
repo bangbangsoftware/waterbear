@@ -71,6 +71,29 @@ const comp = {
             left
         }
     },
+    skillHoursLeft: (sprint, now) => {
+        const tasks = sprint.tasks    
+        const mapper = {}
+        const notStartedHours = comp.allTasks(sprint).filter(t => !t.start)
+        notStartedHours.forEach(t => {
+            const qty = mapper[t.skill];
+            mapper[t.skill] = (qty === undefined) ? t.est : qty + t.est
+        })
+        comp.allTasks(sprint)
+            .filter(t => t.start && !t.end)
+            .forEach(task => {
+                const state = comp.taskState(task, task.assignedTo, now)
+                const qty = mapper[task.skill]
+                mapper[task.skill] = (qty === undefined) ? task.est : qty + task.est
+            })
+        const keys = Object.keys(mapper)
+        return keys.map(k => {
+            return {
+                name: k,
+                hours: mapper[k]
+            }
+        })
+    },
     tasksNotStarted: sprint => {
         return comp.tasksStat(getTasksOfStatus(sprint, 'todo'))
     },
@@ -80,7 +103,7 @@ const comp = {
     tasksCompleted: sprint => {
         return comp.taskStat(getTasksOfStatus(sprint, 'done'))
     },
-    tasksStat: tasks => {
+    tasksStat: (tasks, now) => {
         return {
             qty: tasks.length,
             est: tasks.map(t => t.est).reduce((t, c) => t + c),

@@ -46,4 +46,13 @@ describe("tasks.test.js: How is a member doing", () => {
         expect(state.left).toBe(3)
     })
 
+    it("should describe skills hours to do ", () => {
+        const data = dataOne()
+        const skillBalance = tasks.skillHoursLeft(data.sprint)
+        expect(skillBalance.length).toBe(1)
+        const skill = skillBalance[0]    
+        expect(skill.name).toBe('bang')
+        expect(skill.hours).toBe(10)
+    })
+
 })

@@ -26,6 +26,7 @@ const dataOne = () => {
     const taskOne = {
         name: "Go go go!",
         status: "todo",
+        skill: 'bang',    
         est: 2,
         assignedTo: {
             id: 3
@@ -35,6 +36,7 @@ const dataOne = () => {
         name: "Go on then",
         status: "todo",
         est: 8,
+        skill: 'bang',    
         assignedTo: {
             id: 0
         }

@@ -1,4 +1,5 @@
 import util from '../util'
+import tasks from './tasks.js'
 
 const addTask = (map, skill, qty) => {
     const amount = parseInt(qty)
@@ -28,10 +29,12 @@ const update = (memberTime, take) => {
 }
 
 const totalTime = (memberTime, skill) => {
-    return memberTime.filter(m => hasSkill(m, skill))
-        .map(m => m.left)
+    const skillBase = memberTime.filter(m => hasSkill(m, skill))
+    if (skillBase.length === 0) {
+        return 0
+    }
+    return skillBase.map(m => m.left)
         .reduce((t, c) => t + c)
-
 }
 
 const fill = (memberTime, skill, amount) => {
@@ -60,7 +63,9 @@ const fill = (memberTime, skill, amount) => {
 }
 
 
-const comp = (sprint, members, now, tasks) => {
+const comp = (sprint, members, now) => {
+
+    const work = tasks.allTasks(sprint)
 
     // how much time does each member have left in the sprint????
     let memberTime = members.map(user => {
@@ -73,7 +78,7 @@ const comp = (sprint, members, now, tasks) => {
 
     // how much tasks are left to do??
     const taskMap = {}
-    tasks.forEach(task => {
+    work.forEach(task => {
         const skill = task.skill
         if (task.end) {
             return
@@ -92,15 +97,20 @@ const comp = (sprint, members, now, tasks) => {
         const take = taskMap[skill]
         const state = fill(memberTime, skill, take)
         memberTime = state.memberTime
+        const name = skill
+        const onTrack = (state.remainder === 0)
+        const hoursOver = state.remainder
         skillBalance.push({
-            name: skill,
-            left: state.remainder
+            name,
+            onTrack,
+            hoursOver,
         })
     })
-
+    const totalHoursLeft = memberTime.map(m => m.left).reduce((t, c) => t + c)
     return {
         skills: skillBalance,
-        members: memberTime
+        members: memberTime,
+        totalHoursLeft
     }
 }
 

@@ -28,15 +28,6 @@ export default {
             "valid": true,
             "index": 0
         }],
-        "task": [{
-            "name": "Go through the app",
-            "desc": "Look at the app and see how it could work",
-            "est": "10",
-            "skill": "vue",
-            "error": "",
-            "valid": true,
-            "index": 0
-        }]
     }, {
         "title": "Start the Sprint",
         "descAs": "Scrum Master",
@@ -59,15 +50,6 @@ export default {
             "valid": true,
             "index": 0
         }],
-        "points": "10",
-        "task": [{
-            "name": "start button",
-            "desc": "Make the start button do something",
-            "est": "10",
-            "skill": "vue",
-            "error": "",
-            "valid": true,
-            "index": 0
-        }]
+        "points": "10"
     }]
 };
