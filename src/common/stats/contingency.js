@@ -1,4 +1,3 @@
-
 import util from '../util'
 
 const addTask = (map, skill, qty) => {
@@ -51,7 +50,7 @@ const fill = (memberTime, skill, amount) => {
     let balance = amount
     const newMemberTime = memberTime.map(m => {
         if (hasSkill(m, skill)) {
-            const newState = update(m, amount)
+            const newState = update(m, balance)
             balance = newState.remainder
             return newState.memberTime
         }
@@ -74,7 +73,6 @@ const comp = (sprint, members, now, tasks) => {
 
     // how much tasks are left to do??
     const taskMap = {}
-
     tasks.forEach(task => {
         const skill = task.skill
         if (task.end) {

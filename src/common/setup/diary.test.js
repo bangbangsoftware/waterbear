@@ -1,8 +1,7 @@
-import comp from './dairy.js'
+import comp from './diary.js'
 
 it('should have some extra functions', () => {
     expect(typeof comp.makeUnique).toBe('function')
-    expect(typeof comp.cycle).toBe('function')
     expect(typeof comp.dayState).toBe('function')
 })
 
@@ -28,26 +27,6 @@ it('should be able to make Unique', () => {
 
     const four = comp.makeUnique(list, 'state')
     expect(four.length).toBe(4)
-})
-
-it('should be able to cycle state', () => {
-    const mockState = {
-        state: -1
-    };
-    let nextState = comp.cycle(mockState)
-    expect(nextState.display).toBe("0 hours")
-
-    nextState = comp.cycle(nextState)
-    expect(nextState.display).toBe("WFH")
-
-    nextState = comp.cycle(nextState)
-    expect(nextState.display).toBe("OFF")
-
-    nextState = comp.cycle(nextState)
-    expect(nextState.display).toBe("SICK")
-
-    nextState = comp.cycle(nextState)
-    expect(nextState.display).toBe("0 hours")
 })
 
 it('should be able to calculate a day state', () => {

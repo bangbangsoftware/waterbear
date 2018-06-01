@@ -8,79 +8,9 @@ import memberData from './test.member.js'
 
 import sprintData from './test.sprint.js'
 
-const dataOne = () => {
-    const startDate = new Date(2018, 7, 21, 9, 0, 0, 0)
-    const weekLater = new Date(2018, 7, 28, 10, 0, 0, 0)
-    const saturday = new Date(2018, 4, 26, 10, 0, 0, 0) // this is 26 of March ???
-    const over = new Date(2018, 8, 10, 10, 0, 0, 0)
-    const now = new Date(2018, 7, 22, 10, 0, 0, 0)
-
-    const days = defaults()
-    const members = [{
-        id: 3,
-        name: "mick",
-        days
-    }, {
-        id: 4,
-        name: "fred",
-        days
-    }]
-    const both = diary.setup(members, startDate)
-    const member = both.members[0]
-
-    const taskOne = {
-        name: "Go go go!",
-        status: "todo",
-        est: 2,
-        assignedTo: {
-            id: 3
-        }
-    }
-    const taskTwo = {
-        name: "Go on then",
-        status: "todo",
-        est: 8,
-        assignedTo: {
-            id: 0
-        }
-    }
-    const story = {
-        tasks: [taskOne, taskTwo]
-    }
-    const sprint = {
-        startDate,
-        list: [story],
-        days: 10
-    }
-
-    return {
-        startDate,
-        weekLater,
-        over,
-        sprint,
-        member,
-        saturday,
-        members: both.members
-    }
-
-}
+import dataOne  from '../test.data.js'
 
 describe("sprintStat.test.js: How time works with the sprint and members", () => {
-
-    /// generate diary through member for sprint.
-    it('Should be able tell how many hours a member has on a given day', () => {
-        const data = dataOne()
-        const hours = sprint.hours(data.member, data.startDate)
-        expect(hours).toBe(8)
-        const none = sprint.hours(data.member, data.saturday)
-        expect(none).toBe(0)
-    })
-
-    it("Should tell many hours a member has left in sprint", () => {
-        const data = dataOne()
-        const hours = sprint.left(data.sprint, data.member, data.startDate)
-        expect(hours).toBe(56)
-    })
 
     it("Should tell many hours left in sprint for two members", () => {
         const data = dataOne()
@@ -94,86 +24,24 @@ describe("sprintStat.test.js: How time works with the sprint and members", () =>
         expect(noHours).toBe(0)
     })
 
-    it("Should know how which tasks have not started", () => {
-        const data = dataOne()
-        const taskData = sprint.tasksNotStarted(data.sprint)
-        expect(taskData.est).toBe(10)
-        expect(taskData.qty).toBe(2)
-        expect(taskData.tasks[0].status).toBe("todo")
-    })
-
-    it("Should map date", () => {
-        expect(sprint.mapper("1pm")).toBe(13)
-        expect(sprint.mapper("2pm")).toBe(14)
-        expect(sprint.mapper("3pm")).toBe(15)
-        expect(sprint.mapper("12pm")).toBe(0)
-        expect(sprint.mapper("12am")).toBe(12)
-    })
-
-    it("Should be able to tell what hours a member has at a point of time", () => {
-        const data = dataOne()
-        const user = data.member
-        const now = new Date(2018, 7, 22, 7, 0, 0, 0)
-        const state = sprint.currentHours(now, user)
-        expect(state.done).toBe(0)
-        expect(state.left).toBe(8)
-
-        const later = new Date(2018, 7, 22, 12, 20, 0, 0) // 11:20 am
-        const state2 = sprint.currentHours(later, user)
-        expect(state2.done).toBe(3)
-        expect(state2.left).toBe(5)
-    })
-
-    it("should describe started task by hours under/over", () => {
-        const data = dataOne()
-        const user = data.member
-        const task = {
-            "name": "start button",
-            "desc": "Make the start button do something",
-            "est": 10,
-            "skill": "vue",
-            "valid": true,
-            "start": new Date(2018, 7, 21, 12, 20, 0, 0)
-        };
-        const now = new Date(2018, 7, 22, 13, 10, 0, 0)
-        const state = sprint.taskState(task, user, now)
-        expect(state.done).toBe(9)
-        expect(state.left).toBe(1)
-    })
-
-    it("should describe finished task by hours under/over ", () => {
-        const data = dataOne()
-        const user = data.member
-        const task = {
-            "name": "start button",
-            "desc": "Make the start button do something",
-            "est": 10,
-            "skill": "vue",
-            "valid": true,
-            "start": new Date(2018, 7, 21, 12, 20, 0, 0),
-            "end": new Date(2018, 7, 22, 10, 20, 0, 0)
-        };
-        const now = new Date(2018, 7, 22, 13, 10, 0, 0)
-        const state = sprint.taskState(task, user, now)
-        expect(state.done).toBe(7)
-        expect(state.left).toBe(3)
-    })
-
-    it("should be able to give contingency", () => {
+   it("should be able to give contingency", () => {
         sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0)
         const now = new Date(2018, 7, 2, 12, 20, 0, 0)
-        const state = sprint.contingency(sprintData, [memberData], now)
-        
+        const another = JSON.parse(JSON.stringify(memberData))
+        const state = sprint.contingency(sprintData, [memberData, another], now)
+
         expect(state.skills.length).toBe(1)
         const skill = state.skills[0]
 
         expect(skill.name).toBe('vue')
         expect(skill.left).toBe(0)
-        
-        expect(state.members.length).toBe(1)
-        const member = state.members[0]    
 
-        expect(member.left).toBe(36)
+        expect(state.members.length).toBe(2)
+        const member1 = state.members[0]
+        const member2 = state.members[1]
+
+        expect(member1.left).toBe(36)
+        expect(member2.left).toBe(56)
     })
 
 })

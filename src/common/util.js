@@ -106,5 +106,4 @@ comp.left = (sprint, user, now = Date(), total = 0) => {
     return total
 }
 
-
 export default comp
