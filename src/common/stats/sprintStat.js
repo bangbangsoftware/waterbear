@@ -1,7 +1,7 @@
 import is from '../valid/validSprint'
 import util from '../util'
 import tasks from './tasks.js'
-import conting from './contingency.js'
+import contingency from './contingency.js'
 
 const getAssignedTasks = (taks, user) => {
     return taks.filter(t => (t.assignedTo && t.assignedTo.id === user.id))
@@ -25,10 +25,10 @@ const comp = {
     },
     contingency: (sprint, members, now) => {
         const all = tasks.allTasks(sprint)
-        return conting(sprint, members, now, all)
+        return contingency(sprint, members, now, all)
     },
     hoursLeft: (sprint, members, now = Date()) => {
-        return members.map(user => util.left(sprint, user, now)).reduce((t, c) => t + c)
+        return members.map(user => util.hoursLeftInSprint(sprint, user, now)).reduce((t, c) => t + c)
     },
     tasksStat: tsks => {
         return {

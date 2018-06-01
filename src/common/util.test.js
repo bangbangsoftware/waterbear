@@ -35,10 +35,7 @@ describe("sprintStat.test.js: How time works with the sprint and members", () =>
 
     it("Should tell many hours a member has left in sprint", () => {
         const data = dataOne()
-        const hours = util.left(data.sprint, data.member, data.startDate)
+        const hours = util.hoursLeftInSprint(data.sprint, data.member, data.startDate)
         expect(hours).toBe(56)
     })
-
-
 })
-

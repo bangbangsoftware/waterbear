@@ -12,7 +12,6 @@ comp.addTime = (h, map, total, end = 23) => {
     return comp.addTime(h + 1, map, total, end)
 }
 
-
 comp.today = (date, now = new Date()) => {
     const d = (typeof date === 'string') ? new Date(date) : date
 
@@ -68,6 +67,7 @@ comp.hoursLeftToday = (now, user) => {
     const total = comp.addTime(current24Hour, map, 0)
     return total
 }
+
 comp.hourMap = (dayHours) => {
     const hours = []
     hours.push(...dayHours.day)
@@ -90,7 +90,7 @@ comp.mapper = v => {
     return result
 }
 
-comp.left = (sprint, user, now = Date(), total = 0) => {
+comp.hoursLeftInSprint = (sprint, user, now = Date(), total = 0) => {
     const start = sprint.startDate
     const dd = start.getUTCDate()
     const mm = start.getUTCMonth()

@@ -63,11 +63,11 @@ const fill = (memberTime, skill, amount) => {
 const comp = (sprint, members, now, tasks) => {
 
     // how much time does each member have left in the sprint????
-    let memberTime = members.map(m => {
-        const left = util.left(sprint, m, now)
+    let memberTime = members.map(user => {
+        const left = util.hoursLeftInSprint(sprint, user, now)
         return {
             left,
-            skills: m.skills
+            skills: user.skills
         }
     })
 
