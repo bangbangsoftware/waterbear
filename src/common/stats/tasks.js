@@ -29,7 +29,7 @@ const exists = what => {
     if (what === null) {
         return false
     }
-    return (what)
+    return (what) ? true : false
 }
 
 const comp = {
@@ -42,37 +42,36 @@ const comp = {
     taskState: (task, user, now = Date()) => {
         const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
         const start = task.start
-        if (!start) {
-            return {
-                skilled,
-                done: 0,
-                left: parseInt(task.est)
-            }
+        const paused = exists(task.paused)
+        const result = {
+            skilled,
+            done: 0,
+            left: parseInt(task.est),
+            finished: false,
+            paused
         }
-        const end = task.end
-        const until = exists(end) ? end : now
+
+        if (!start) {
+            return result
+        }
+        result.finished = exists(task.end)
+        const until = result.finished ? task.end : result.paused ? task.paused : now
+        const blocked = (task.blockers)? task.blockers.map(blocker => blocker.hours).reduce((t, c) => t + c) : 0
         const state = util.currentHours(start, user)
         const today = util.today(start, until)
         if (today) {
-            const done = state.done
-            const left = task.est - done
-            return {
-                skilled,
-                done,
-                left
-            }
+            result.done = state.done - blocked
+            result.left = task.est - result.done
+            return result
         }
 
-        const done = rangeState(start, until, user, state.left)
-        const left = task.est - done
-        return {
-            skilled,
-            done,
-            left
-        }
+        const workDone = rangeState(start, until, user, state.left)
+        result.done = workDone - blocked
+        result.left = task.est - result.done
+        return result
     },
     skillHoursLeft: (sprint, now) => {
-        const tasks = sprint.tasks    
+        const tasks = sprint.tasks
         const mapper = {}
         const notStartedHours = comp.allTasks(sprint).filter(t => !t.start)
         notStartedHours.forEach(t => {
