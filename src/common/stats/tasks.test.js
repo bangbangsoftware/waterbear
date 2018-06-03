@@ -50,10 +50,10 @@ describe("tasks.test.js: How is a member doing", () => {
             "skill": "vue",
             "blockers": [{
                 why: "server down",
-                hours: 3 
+                hours: 3
             }, {
                 why: "Bee's in the office",
-                hours: 3 
+                hours: 3
             }],
             "valid": true,
             "start": new Date(2018, 7, 21, 12, 20, 0, 0)
@@ -66,7 +66,31 @@ describe("tasks.test.js: How is a member doing", () => {
         expect(state.paused).toBe(false)
     })
 
-        // what about abandoned tasks, or tasks that have been broken down.... 
+    // what about abandoned tasks, or tasks that have been broken down.... 
+    it("should describe an abandoned task by hours over", () => {
+        const data = dataOne()
+        const user = data.member
+        const task = {
+            "name": "start button",
+            "desc": "Make the start button do something",
+            "est": 10,
+            "skill": "vue",
+            "valid": true,
+            "start": new Date(2018, 7, 21, 12, 20, 0, 0),
+            "abandoned": {
+                hoursWasted: 4,
+                reason: "On fire"
+            }
+        };
+        const now = new Date(2018, 7, 22, 18, 10, 0, 0)
+        const state = tasks.taskState(task, user, now)
+        expect(state.done).toBe(4)
+        expect(state.left).toBe(0)
+        expect(state.finished).toBe(true)
+        expect(state.paused).toBe(false)
+        expect(state.abandoned).toBe(true)
+    })
+
 
     it("should describe paused task by hours", () => {
         const data = dataOne()
