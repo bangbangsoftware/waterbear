@@ -66,6 +66,7 @@ describe("tasks.test.js: How is a member doing", () => {
         expect(state.paused).toBe(false)
     })
 
+        // what about abandoned tasks, or tasks that have been broken down.... 
 
     it("should describe paused task by hours", () => {
         const data = dataOne()
