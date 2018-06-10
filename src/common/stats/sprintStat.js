@@ -8,24 +8,39 @@ const getAssignedTasks = (taks, user) => {
 }
 
 const comp = {
+    taskToDo: (sprint) => {
+        return tasks.allTasks(sprint).filter(t => !tasks.exists(t.assignedTo))
+    },
+    contingency: (sprint, members, now) => {
+        // skillBalance
+        const all = tasks.allTasks(sprint)
+        return contingency(sprint, members, now, all)
+    },
+    tasksDone: (sprint) => {
+        return tasks.allTasks(sprint).filter(t => {
+            const state = task.taskState(t)
+            return state.finished
+        })
+    },
     state: (sprint, user, now = new Date()) => {
         const fail = is.invalid(sprint, now)
         if (fail) {
             return fail
         }
         const all = tasks.allTasks(sprint)
+
+        // maybe all of this should be done on the controllers    
         const userTasks = getAssignedTasks(all, user)
         if (!userTasks.length) {
             return {
                 state: 'You have no tasks',
-                description: ''
+                description: '',
+                needTask: true
             }
         }
+        // @TODO describe all current tasks, if more than one - maybe comment, decribe the blockers
+        // paused and 
         return {}
-    },
-    contingency: (sprint, members, now) => {
-        const all = tasks.allTasks(sprint)
-        return contingency(sprint, members, now, all)
     },
     hoursLeft: (sprint, members, now = Date()) => {
         return members.map(user => util.hoursLeftInSprint(sprint, user, now)).reduce((t, c) => t + c)

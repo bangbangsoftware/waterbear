@@ -42,28 +42,29 @@ const comp = {
     taskState: (task, user, now = Date()) => {
         const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
         const start = task.start
-        const paused = exists(task.paused)
         const abandoned = exists(task.abandoned)
+        const finished = exists(task.end)
+        const paused = exists(task.paused) && !finished && !abandoned
         const result = {
             skilled,
             done: 0,
             left: parseInt(task.est),
-            finished: false,
+            finished,
             paused,
             abandoned
         }
         if (abandoned) {
             result.finished = true
+            result.paused = false 
             result.left = 0
             result.done = task.abandoned.hoursWasted
-            result.reason = task.abandoned.reason
+            result.reason = task.abandoned.reason             
             return result
         }
 
         if (!start) {
             return result
         }
-        result.finished = exists(task.end)
         const until = result.finished ? task.end : result.paused ? task.paused : now
         const blocked = (task.blockers) ? task.blockers.map(blocker => blocker.hours).reduce((t, c) => t + c) : 0
         const state = util.currentHours(start, user)

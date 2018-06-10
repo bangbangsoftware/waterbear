@@ -30,7 +30,7 @@ comp.today = (date, now = new Date()) => {
 comp.hours = (user, now = Date()) => {
     const days = user.diary.filter(d => {
         return comp.today(d.date, now)
-    });
+    })
     const day = (days.length > 0) ? days[0] : {
         off: false,
         hours: 8

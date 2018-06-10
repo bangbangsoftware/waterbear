@@ -6,9 +6,8 @@
             </v-card-media>
             <v-card-title primary-title>
                 <div>
-                        <h3 class="headline mb-0">SPRINT NAME {{sprint.name}}</h3>
-                    <div>Greetings {{session.user.nick}}, the sprint is going BLAR...</div>
-                    <div>You're working on BLAR right? Any blockers or distractions... type-a-head </div>
+                    <h3 class="headline mb-0">Greetings {{session.user.nick}}.</h3>
+                    <div>{{sprint.name}}</div>
                 </div>
             </v-card-title>
             <v-card-actions>
@@ -21,8 +20,5 @@
         <update-time-spent></update-time-spent>
         <blockers></blockers>
         <distractions></distractions>
-    </v-flex v-else>
-    <v-flex xs6>
-        <pick-work></pick-work>
     </v-flex>
 </v-layout>
