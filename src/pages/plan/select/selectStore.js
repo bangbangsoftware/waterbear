@@ -3,7 +3,7 @@ import store from '../../../store.js'
 
 export default {
     selectSprint: (state, i) => {
-        state.session.sprintIndex = i
+        state.session.project.current.sprintIndex = i
     },
     sprintName: (state, newState) => {
         state.session.sprint.name = newState
@@ -31,11 +31,11 @@ export default {
         state.session.project.sprints.push(sprint)
     },
     takeFromSprint: (state, index) => {
-        let sprint = state.session.project.sprints[state.session.sprintIndex]
+        let sprint = state.session.project.sprints[state.session.project.current.sprintIndex]
         const story = sprint.list.splice(index, 1)[0]
         story.index = -1
         state.session.project.stories.push(story)
-        state.session.project.sprints[state.session.sprintIndex] = sprint
+        state.session.project.sprints[state.session.project.current.sprintIndex] = sprint
         store.commit('log', 'Task removed from "' + sprint.name + '" sprint."')
     }
 

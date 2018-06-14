@@ -28,7 +28,14 @@ const append = (list, item) => {
 }
 
 const service = {
-    sprintSkills: (sprt, now = sprt.startDate) => {
+    sprintSkills: (sprt, now) => {
+        if (sprt === undefined) {
+            console.log('No sprint as of yet')
+            return
+        }
+        if (now === undefined) {
+            now = sprt.startDate
+        }
         const stories = sprt.list
         if (stories === undefined) {
             console.log('Nothing in sprint as of yet')
@@ -130,7 +137,7 @@ const service = {
         }
     },
     sprint: (sprt, allUnique = []) => {
-        if (sprt.list === undefined) {
+        if (sprt === undefined || sprt.list === undefined) {
             return allUnique
         }
         sprt.list.filter(story => story.tasks !== undefined)

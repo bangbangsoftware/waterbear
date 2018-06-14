@@ -25,7 +25,7 @@ const comp = Bar.extend({
    watch: {
       session: {
          handler: function(sess) {
-            const sprint = sess.project.sprints[sess.sprintIndex]
+            const sprint = sess.project.sprints[sess.project.current.sprintIndex]
             const data = generate(sprint)
             this._chart.data.datasets = [{
                label: 'Sprint',
@@ -41,7 +41,7 @@ const comp = Bar.extend({
    mounted() {
       const project = store.state.session.project
       console.log('The project is %o', project)
-      const sprint = project.sprints[store.state.session.sprintIndex]
+      const sprint = project.sprints[store.state.session.project.current.sprintIndex]
       const data = generate(sprint)
       this.renderChart({
          labels: data.labels,

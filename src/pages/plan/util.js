@@ -13,7 +13,7 @@ export default {
         console.log(session.project)
         if (!session.project.sprints || session.project.sprints.length < 1) {
             return 'sprintCreate'
-        } else if (session.sprintIndex === -1) {
+        } else if (session.project.current.sprintIndex === -1) {
             return 'sprintSelect'
         } else {
             return 'sprint'
@@ -27,6 +27,9 @@ export default {
         const db = store.state.db
         db.get(prj._id)
             .then(p => {
+                p.current = {
+                    sprintIndex: store.state.session.project.current.sprintIndex
+                }
                 p.sprints = store.state.session.project.sprints
                 p.stories = store.state.session.project.stories
                 return db.put(p)

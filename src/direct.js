@@ -10,7 +10,8 @@ const whereNow = (project, user, resolve) => {
         return
     }
     if (typeof project.stories === 'undefined' || project.stories.length === 0) {
-        resolve('story')
+        // resolve('story')
+        resolve('devopen')
         return
     }
     const next = director(user, project)

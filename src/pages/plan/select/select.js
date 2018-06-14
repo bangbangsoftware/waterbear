@@ -10,7 +10,7 @@ const comp = {
     name: 'selectSprint',
     template,
     data: () => {
-        const sprint = (store.state.session.project.sprints === undefined) ? {} : store.state.session.project.sprints[store.state.session.sprintIndex]
+        const sprint = (store.state.session.project.sprints === undefined) ? {} : store.state.session.project.sprints[store.state.session.project.current.sprintIndex]
         sprint.startTime = new Date(sprint.startDate)
         sprint.startDate = sprint.startDate.toString().substring(0, 10)
         return {

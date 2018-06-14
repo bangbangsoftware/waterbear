@@ -25,7 +25,7 @@ const debug = (what, out) => {
 const comp = {
     refresh: (from = new Date(), to = new Date(+new Date() + 12096e5)) => {
         const project = store.state.session.project
-        const sprint = (project.sprints === undefined) ? {} : project.sprints[store.state.session.sprintIndex]
+        const sprint = (project.sprints === undefined) ? {} : project.sprints[store.state.session.project.current.sprintIndex]
         const members = (project.members) ? project.members : []
         const results = skills.skillBalance(members, from, to, sprint)
 

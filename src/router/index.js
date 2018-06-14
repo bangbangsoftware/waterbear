@@ -8,7 +8,7 @@ import plan from '../pages/plan/plan.js'
 import sprint from '../pages/plan/sprint/sprint.js'
 import refine from '../pages/refine/refine.js'
 import team from '../pages/team/team.js'
-import devopen from '../pages/opener/dev/dev.js'
+import devopen from '../pages/opener/dev/dev.vue'
 import '../common/feed/feed.js'
 
 Vue.use(Router)

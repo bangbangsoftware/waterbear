@@ -93,7 +93,7 @@ export default {
             icon: 'compare_arrows'
           }, {
             title: 'Sprint Planning',
-            route: 'sprint/0',
+            route: 'sprint/' + store.state.session.project.current.sprintIndex,
             icon: 'assignment'
          }, {
             title: 'Assessment',

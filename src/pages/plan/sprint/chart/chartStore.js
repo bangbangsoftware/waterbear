@@ -4,7 +4,7 @@ const defaultSprint = {}
 
 export default {
     sprintSkills: (state) => {
-        const sprint = (state.session.project.sprints === undefined) ? defaultSprint : state.session.project.sprints[state.session.sprintIndex]
+        const sprint = (state.session.project.sprints === undefined) ? defaultSprint : state.session.project.sprints[state.session.project.current.sprintIndex]
         if (!state.session.skills) {
             state.session.skills = {}
         }

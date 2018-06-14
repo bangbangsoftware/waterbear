@@ -2,10 +2,14 @@ import store from './selectStore.js'
 
 it('if can be selected', () => {
     const state = {
-        session: {}
+        session: {
+            project: {
+                current: {}
+            }
+        }
     }
     store.selectSprint(state, 45)
-    expect(state.session.sprintIndex).toBe(45)
+    expect(state.session.project.current.sprintIndex).toBe(45)
 })
 
 it('Sprint can set sprint name', () => {
@@ -91,9 +95,11 @@ it('if can take from sprint', () => {
         session: {
             project: {
                 sprints: [sprint],
-                stories: []
+                stories: [],
+                current: {
+                    sprintIndex: 0
+                }
             },
-            sprintIndex: 0
         }
     }
     store.takeFromSprint(state, 0)
