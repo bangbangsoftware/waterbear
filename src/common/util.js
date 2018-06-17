@@ -91,7 +91,7 @@ comp.mapper = v => {
 }
 
 comp.hoursLeftInSprint = (sprint, user, now = Date(), total = 0) => {
-    const start = sprint.startDate
+    const start = new Date(sprint.startDate)
     const dd = start.getUTCDate()
     const mm = start.getUTCMonth()
     const yy = start.getUTCFullYear()

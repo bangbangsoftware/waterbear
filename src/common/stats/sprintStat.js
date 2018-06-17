@@ -11,14 +11,14 @@ const comp = {
     taskToDo: (sprint) => {
         return tasks.allTasks(sprint).filter(t => !tasks.exists(t.assignedTo))
     },
-    contingency: (sprint, members, now) => {
+    contingency: (sprint, members, now = new Date()) => {
         // skillBalance
         const all = tasks.allTasks(sprint)
         return contingency(sprint, members, now, all)
     },
     tasksDone: (sprint) => {
         return tasks.allTasks(sprint).filter(t => {
-            const state = task.taskState(t)
+            const state = tasks.taskState(t)
             return state.finished
         })
     },
@@ -29,7 +29,7 @@ const comp = {
         }
         const all = tasks.allTasks(sprint)
 
-        // maybe all of this should be done on the controllers    
+        // maybe all of this should be done on the controllers
         const userTasks = getAssignedTasks(all, user)
         if (!userTasks.length) {
             return {
@@ -39,7 +39,7 @@ const comp = {
             }
         }
         // @TODO describe all current tasks, if more than one - maybe comment, decribe the blockers
-        // paused and 
+        // paused
         return {}
     },
     hoursLeft: (sprint, members, now = Date()) => {
@@ -51,7 +51,7 @@ const comp = {
             est: tsks.map(t => t.est).reduce((t, c) => t + c),
             tsks
         }
-    },
+    }
 }
 export default comp
 // impact * cost * confidence / time = score

@@ -74,3 +74,4 @@
     </v-flex>
 
 </v-layout>
+<script src='./select.js'></script>

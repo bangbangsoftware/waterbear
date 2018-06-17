@@ -12,11 +12,9 @@
                         <div>{{sprint.name}}</div>
                     </div>
                 </v-card-title>
-                <v-card-actions v-if="sprint.defined">
-                    <v-btn flat class="margin-right" color="orange">Go to dashboard</v-btn>
-                </v-card-actions>
-                <v-card-actions v-else="sprint.defined">
-                    <v-btn flat color="orange">Define Sprint</v-btn>
+                <v-card-actions >
+                    <v-btn v-if="sprint.defined" flat class="margin-right" color="orange">Go to dashboard</v-btn>
+                    <v-btn v-else flat color="orange">Define Sprint</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>

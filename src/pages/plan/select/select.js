@@ -5,14 +5,29 @@ import './select.css'
 
 import store from '../../../store.js'
 import util from '../util.js'
+import moment from 'moment'
+
+Vue.filter('formatDate', function(value) {
+    if (!value) {
+        return ''
+    }
+    return moment(String(value)).format('MM/DD/YYYY')
+})
+
+const getTime = date => {
+    return {
+        hours: parseInt(date.substring(0, 2)),
+        minutes: parseInt(date.substring(3, 5))
+    }
+}
 
 const comp = {
     name: 'selectSprint',
     template,
     data: () => {
         const sprint = (store.state.session.project.sprints === undefined) ? {} : store.state.session.project.sprints[store.state.session.project.current.sprintIndex]
-        sprint.startTime = new Date(sprint.startDate)
-        sprint.startDate = sprint.startDate.toString().substring(0, 10)
+        sprint.startDate = new Date(sprint.startDate)
+        sprint.startTime = sprint.startDate.getHours() + ':' + sprint.startDate.getMinutes()
         return {
             project: store.state.session.project,
             session: store.state.session,
@@ -29,6 +44,11 @@ const comp = {
         startSprint: function() {
             store.commit('planState', 'sprintSelect')
             this.dialog = false
+            const i = store.state.session.project.current.sprintIndex
+            const time = getTime(store.state.session.project.sprints[i].startTime)
+            // @TODO This looks wrong... dates... grrrrr
+            store.state.session.project.sprints[i].startDate.setHours(time.hours + 1)
+            store.state.session.project.sprints[i].startDate.setMinutes(time.minutes)
             util.updateSprints()
         },
         toggleNameEdit: function() {

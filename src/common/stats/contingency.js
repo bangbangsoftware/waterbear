@@ -4,7 +4,7 @@ import tasks from './tasks.js'
 const addTask = (map, skill, qty) => {
     const amount = parseInt(qty)
     const total = map[skill]
-    const newTotal = (total === undefined) ? amount : total + amount;
+    const newTotal = (total === undefined) ? amount : total + amount
     map[skill] = newTotal
 }
 
@@ -62,9 +62,7 @@ const fill = (memberTime, skill, amount) => {
     return fill(newMemberTime, skill, balance)
 }
 
-
 const comp = (sprint, members, now) => {
-
     const work = tasks.allTasks(sprint)
 
     // how much time does each member have left in the sprint????
@@ -85,13 +83,13 @@ const comp = (sprint, members, now) => {
         }
         if (task.start) {
             addTask(taskMap, skill, task.est) // @TODO!!!! work out how much is left from est...
-            return;
+            return
         }
         addTask(taskMap, skill, task.est)
     })
 
     // go through all keys in keys in taskMap and see if all the hours can be sent across members
-    const skills = Object.keys(taskMap);
+    const skills = Object.keys(taskMap)
     const skillBalance = []
     skills.forEach(skill => {
         const take = taskMap[skill]
@@ -103,7 +101,7 @@ const comp = (sprint, members, now) => {
         skillBalance.push({
             name,
             onTrack,
-            hoursOver,
+            hoursOver
         })
     })
     const totalHoursLeft = memberTime.map(m => m.left).reduce((t, c) => t + c)

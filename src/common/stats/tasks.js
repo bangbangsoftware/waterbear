@@ -22,16 +22,6 @@ const nextDay = (current, plus = 1, hh = current.getHours(), mins = current.getM
     return new Date(yy, mm, dd, hh, mins, 0, 0)
 }
 
-const exists = what => {
-    if (what === undefined) {
-        return false
-    }
-    if (what === null) {
-        return false
-    }
-    return (what) ? true : false
-}
-
 const comp = {
     allTasks: sprint => {
         const tasks = []
@@ -39,12 +29,24 @@ const comp = {
             .map(story => tasks.push(...story.tasks))
         return tasks
     },
+    exists: what => {
+        if (what === undefined) {
+            return false
+        }
+        if (what === null) {
+            return false
+        }
+        if (!what) {
+            return false
+        }
+        return true
+    },
     taskState: (task, user, now = Date()) => {
         const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
         const start = task.start
-        const abandoned = exists(task.abandoned)
-        const finished = exists(task.end)
-        const paused = exists(task.paused) && !finished && !abandoned
+        const abandoned = comp.exists(task.abandoned)
+        const finished = comp.exists(task.end)
+        const paused = comp.exists(task.paused) && !finished && !abandoned
         const result = {
             skilled,
             done: 0,
@@ -55,10 +57,10 @@ const comp = {
         }
         if (abandoned) {
             result.finished = true
-            result.paused = false 
+            result.paused = false
             result.left = 0
             result.done = task.abandoned.hoursWasted
-            result.reason = task.abandoned.reason             
+            result.reason = task.abandoned.reason
             return result
         }
 
@@ -81,17 +83,17 @@ const comp = {
         return result
     },
     skillHoursLeft: (sprint, now) => {
-        const tasks = sprint.tasks
+        // ??? const tasks = sprint.tasks
         const mapper = {}
         const notStartedHours = comp.allTasks(sprint).filter(t => !t.start)
         notStartedHours.forEach(t => {
-            const qty = mapper[t.skill];
+            const qty = mapper[t.skill]
             mapper[t.skill] = (qty === undefined) ? t.est : qty + t.est
         })
         comp.allTasks(sprint)
             .filter(t => t.start && !t.end)
             .forEach(task => {
-                const state = comp.taskState(task, task.assignedTo, now)
+                // ???? const state = comp.taskState(task, task.assignedTo, now)
                 const qty = mapper[task.skill]
                 mapper[task.skill] = (qty === undefined) ? task.est : qty + task.est
             })
@@ -118,7 +120,7 @@ const comp = {
             est: tasks.map(t => t.est).reduce((t, c) => t + c),
             tasks
         }
-    },
+    }
 }
 export default comp
 // impact * cost * confidence / time = score
