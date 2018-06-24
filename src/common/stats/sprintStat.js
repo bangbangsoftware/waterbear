@@ -8,20 +8,14 @@ const getAssignedTasks = (taks, user) => {
 }
 
 const comp = {
-    taskToDo: (sprint) => {
-        return tasks.allTasks(sprint).filter(t => !tasks.exists(t.assignedTo))
-    },
+    taskToDo: sprint => tasks.taskToDo(sprint),
     contingency: (sprint, members, now = new Date()) => {
         // skillBalance
         const all = tasks.allTasks(sprint)
         return contingency(sprint, members, now, all)
     },
-    tasksDone: (sprint) => {
-        return tasks.allTasks(sprint).filter(t => {
-            const state = tasks.taskState(t)
-            return state.finished
-        })
-    },
+    tasksDone: sprint => tasks.tasksDone(sprint),
+    tasksDonePercent: sprint => tasks.tasksDonePercent(sprint),
     state: (sprint, user, now = new Date()) => {
         const fail = is.invalid(sprint, now)
         if (fail) {

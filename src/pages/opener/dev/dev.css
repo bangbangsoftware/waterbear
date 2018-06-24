@@ -1,0 +1,27 @@
+.progress-grid {
+  display: grid;
+  grid-template-columns: 25% auto;
+  max-height: 25px;
+}
+
+.header-row {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-gap: 2%;
+  align-content: space-between;
+}
+
+.header-column {
+  display: grid;
+  grid-template-columns: 90% auto;
+  grid-gap: 20%;
+  align-content: space-between;
+}
+
+.skill-cell {
+  margin-left: auto;
+}
+
+.progress-label {
+  padding-top: 15px;
+}

@@ -11,6 +11,23 @@
                 </div>
             </v-card-title>
             <v-card-actions>
+
+<autocomplete :items="reasons" 
+    v-model="blocker" 
+     label="Blockers" item-text="blocker" 
+    item-value="blocker" 
+    @selected="handleSelected"
+     strict="Unknown">
+<template slot="item" scope="data">
+      <v-list-tile-content>
+        <v-list-tile-title>{{data}}</v-list-tile-title>
+        <template v-if="!data">
+          <v-list-tile-sub-title>{{data}} - {{data}}</v-list-tile-sub-title>
+        </template>
+      </v-list-tile-content>
+    </template>
+</autocomplete>
+
                 <v-btn flat class="margin-right" color="orange">Eak</v-btn>
             </v-card-actions>
         </v-card>

@@ -25,6 +25,9 @@ const nextDay = (current, plus = 1, hh = current.getHours(), mins = current.getM
 const comp = {
     allTasks: sprint => {
         const tasks = []
+        if (!sprint.list) {
+            return tasks
+        }
         sprint.list.filter(story => story.tasks)
             .map(story => tasks.push(...story.tasks))
         return tasks
@@ -105,6 +108,11 @@ const comp = {
             }
         })
     },
+    endDate: sprint => {
+        const date = new Date(sprint.startDate)
+        date.setDate(date.getDate() + sprint.days)
+        return date
+    },
     tasksNotStarted: sprint => {
         return comp.tasksStat(getTasksOfStatus(sprint, 'todo'))
     },
@@ -120,6 +128,22 @@ const comp = {
             est: tasks.map(t => t.est).reduce((t, c) => t + c),
             tasks
         }
+    },
+    taskToDo: (sprint) => { // @TODO should this use status????
+        return comp.allTasks(sprint).filter(t => !comp.exists(t.assignedTo))
+    },
+    tasksDone: (sprint) => { // @TODO should this use status????
+        return comp.allTasks(sprint).filter(t => {
+            // const state = comp.taskState(t) // @TODO THIS SHOULD HAVE USER?????!!!!
+            // return state.finished
+            return t.finished
+        })
+    },
+    tasksDonePercentage: sprint => {
+        const done = comp.tasksDone(sprint).length
+        const all = comp.allTasks(sprint).length
+        const one = all / 100
+        return done * one
     }
 }
 export default comp

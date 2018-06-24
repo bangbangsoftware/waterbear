@@ -2,6 +2,7 @@ import store from '../../../../store.js'
 import Vue from 'vue'
 import check from '../../../../loginCheck.js'
 
+
 const comp = {
     name: 'blockers',
     beforeCreate: function() {
@@ -10,12 +11,20 @@ const comp = {
     data: function() {
         const session = store.state.session
         const project = session.project
+        const reasons = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+        const blocker = ''
         return {
             session,
-            project
+            project,
+            reasons,
+            blocker
         }
     },
-    methods: {}
+    methods: {
+        handleSelected: function() {
+            return this.reasons
+        }
+    }
 }
 
 Vue.component('blockers', comp)

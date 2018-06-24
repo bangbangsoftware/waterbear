@@ -17,8 +17,10 @@
                 </v-chip>
             </div>
 
-            <h4>Members:</h4>
+            <h3>Members:</h3>
             <div v-for="member in stat.members">
+                <h4>{{member.details.nick}}</h4>
+
                 <div v-for="skill in member.skills">
                     <v-chip color="teal" text-color="white">
                         {{skill}}
@@ -28,20 +30,21 @@
             </div>
 
             <h4>Total hours left: {{stat.totalHoursLeft}}</h4>
-            <h4>To do...</h4> 
+            <h4>To do...</h4>
             <v-container fluid grid-list-xl>
-            <v-layout row wrap justify-space-between>
+                <v-layout row wrap justify-space-between>
 
-                    <button :title="task.desc" md6 sm12 v-for="task in todo" class="raised primary" >
+                    <button :title="task.desc" md6 sm12 v-for="task in todo" class="raised primary">
                         <v-card color="accent" class="px-1">
-                           {{task.name}}
+                           &nbsp;&nbsp;{{task.name}}
                                 <v-chip color="accent" text-color="white">
                                     <v-avatar class="teal">{{task.est}}</v-avatar>
                                     {{task.skill}}
                                 </v-chip>
+
                         </v-card>
                 </button>
-            </v-layout>
+                </v-layout>
             </v-container>
             <v-card-actions>
                 <v-btn flat class="margin-right" color="orange">Eak</v-btn>

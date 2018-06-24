@@ -22,7 +22,8 @@ const update = (memberTime, take) => {
     return {
         memberTime: {
             left: newLeft,
-            skills
+            skills,
+            details: memberTime.details
         },
         remainder
     }
@@ -66,11 +67,12 @@ const comp = (sprint, members, now) => {
     const work = tasks.allTasks(sprint)
 
     // how much time does each member have left in the sprint????
-    let memberTime = members.map(user => {
-        const left = util.hoursLeftInSprint(sprint, user, now)
+    let memberTime = members.map(details => {
+        const left = util.hoursLeftInSprint(sprint, details, now)
         return {
+            details,
             left,
-            skills: user.skills
+            skills: details.skills
         }
     })
 
@@ -105,10 +107,20 @@ const comp = (sprint, members, now) => {
         })
     })
     const totalHoursLeft = memberTime.map(m => m.left).reduce((t, c) => t + c)
+    const startDate = new Date(sprint.startDate)
+    const totalHours = members.map(details =>
+            util.hoursLeftInSprint(sprint, details, startDate))
+        .reduce((t, c) => t + c)
+    const unplannedHoursLeft = members.map(details =>
+            util.hoursLeftInSprint(sprint, details, now))
+        .reduce((t, c) => t + c)
+
     return {
         skills: skillBalance,
         members: memberTime,
-        totalHoursLeft
+        totalHoursLeft,
+        totalHours,
+        unplannedHoursLeft
     }
 }
 
