@@ -1,27 +1,50 @@
 .progress-grid {
-  display: grid;
-  grid-template-columns: 25% auto;
-  max-height: 25px;
+    display: grid;
+    grid-template-columns: 25% auto;
+    max-height: 25px;
 }
 
 .header-row {
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-gap: 2%;
-  align-content: space-between;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.greeting {
+    align-self: right;
+}
+
+.summary {
+    justify-self: center;
 }
 
 .header-column {
-  display: grid;
-  grid-template-columns: 90% auto;
-  grid-gap: 20%;
-  align-content: space-between;
+    display: grid;
+    grid-template-columns: 40% 50% 10%;
+    align-content: space-between;
+    padding-top: 1%;
+}
+
+.task-row {
+    padding-left: 8%;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.task {
+    display: grid;
+    grid-template-columns: 15% auto;
+}
+
+.task-skill {}
+
+.task-name {
+    padding-top: 2%;
 }
 
 .skill-cell {
-  margin-left: auto;
+    justify-self: left;
 }
 
 .progress-label {
-  padding-top: 15px;
+    padding-top: 15px;
 }

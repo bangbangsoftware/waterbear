@@ -1,18 +1,30 @@
 <template v-if='session.loaded'>
 <div>
-    <v-spacer></v-spacer>
     <v-card class="primary" dark>
-        <v-card-title primary-title>
-            <div class="header-row">
-            <h3 class="headline mb-0">Greetings {{session.user.nick}}.</h3>
+        <!--  <v-card-title> -->
+        <div class="header-row">
             <div class="header-column">
-                <div>
+                <div class="summary">
+                    <h3 class="headline greeting">Greetings {{session.user.nick}}.</h3>
+                    <v-divider></v-divider>
                     <div>{{sprint.days}} days <b>{{sprint.name}}</b> sprint from {{sprint.startDate
                         | formatDate}} to {{endDate(sprint) | formatDate}} </div>
                     <div v-for="progress in progressList" :key="progress.name" class="progress-grid">
                         <div class="progress-label">{{progress.name}}</div>
                         <!-- ({{progress.percent}}%) -->
                         <v-progress-linear :value="progress.percent" height="20" :color="progress.colour"></v-progress-linear>
+                    </div>
+                </div>
+                <div class="task-row">
+                    <h4>TO DO:</h4>
+                    <div class="task" :title="task.desc" v-for="task in todo" >
+                                <div class="task-skill">
+                                      <v-chip color="accent" text-color="white">
+                                        <v-avatar class="teal">{{task.est}}</v-avatar>
+                                        {{task.skill}}
+                                      </v-chip>
+                                </div>
+                                 <div class="task-name">{{task.name}}</div>
                     </div>
                 </div>
                 <div class="skill-cell">
@@ -27,9 +39,9 @@
                         </v-chip>
                     </div>
                 </div>
-                </div>
             </div>
-        </v-card-title>
+        </div>
+        <!--   </v-card-title> -->
         <v-card-actions>
             <v-btn v-if="!sprint.defined" flat color="orange">Define Sprint</v-btn>
         </v-card-actions>

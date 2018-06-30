@@ -84,11 +84,13 @@ const comp = {
         const noSprint = (session.project.current.sprintIndex < 0 || project.sprints === undefined || project.sprints.length === 0)
         const currentSprint = (noSprint) ? sprintless(session) : sprint(session)
         const stat = sprintStat.contingency(currentSprint, members)
+        const todo = sprintStat.taskToDo(currentSprint)
         return {
             session,
             sprint: currentSprint,
             progressList: progressList(currentSprint, stat),
-            stat
+            stat,
+            todo
         }
     },
     methods: {
