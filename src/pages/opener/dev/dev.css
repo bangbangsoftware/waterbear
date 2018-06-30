@@ -4,6 +4,13 @@
     max-height: 25px;
 }
 
+.middle {
+    display: grid;
+    grid-template-rows: auto;
+    padding-top: 2%;
+}
+
+
 .header-row {
     display: grid;
     grid-template-rows: auto;

@@ -2,7 +2,6 @@ import store from '../../../../store.js'
 import Vue from 'vue'
 import check from '../../../../loginCheck.js'
 
-
 const comp = {
     name: 'blockers',
     beforeCreate: function() {
@@ -21,9 +20,13 @@ const comp = {
         }
     },
     methods: {
-        handleSelected: function() {
-            return this.reasons
+        onSelect(value) {
+            this.value = value
+        },
+        onChange(value) {
+            this.value = value
         }
+
     }
 }
 

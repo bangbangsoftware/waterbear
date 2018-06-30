@@ -1,5 +1,5 @@
 <template v-if='session.loaded'>
-<div>
+<div class="middle">
     <v-card class="primary" dark>
         <!--  <v-card-title> -->
         <div class="header-row">
@@ -48,11 +48,6 @@
     </v-card>
     <v-flex v-if="sprint.defined" xs12>
         <blockers></blockers>
-    </v-flex>
-    <v-divider></v-divider>
-    <v-spacer></v-spacer>
-    <v-flex v-if="sprint.defined" xs12>
-        <condition></condition>
     </v-flex>
 </div>
 </template>
