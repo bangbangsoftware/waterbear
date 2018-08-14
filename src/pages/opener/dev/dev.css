@@ -38,8 +38,12 @@
 }
 
 .task {
+    width: auto;
     display: grid;
     grid-template-columns: 15% auto;
+    justify-self: left;
+    word-wrap: true;
+
 }
 
 .task-skill {}

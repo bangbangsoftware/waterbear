@@ -17,15 +17,16 @@
                 </div>
                 <div class="task-row">
                     <h4>TO DO:</h4>
-                    <div class="task" :title="task.desc" v-for="task in todo" >
-                                <div class="task-skill">
-                                      <v-chip color="accent" text-color="white">
-                                        <v-avatar class="teal">{{task.est}}</v-avatar>
-                                        {{task.skill}}
-                                      </v-chip>
-                                </div>
-                                 <div class="task-name">{{task.name}}</div>
-                    </div>
+                    <v-btn color="blue" v-on:click="assign(sprint, task)" class="task" :title="task.desc"
+                        v-for="task in todo">
+                        <div class="task-skill">
+                            <v-chip color="accent" text-color="white">
+                                <v-avatar class="teal">{{task.est}}</v-avatar>
+                                {{task.skill}}
+                            </v-chip>
+                        </div>
+                        <div class="task-name">{{task.name}}</div>
+                    </v-btn>
                 </div>
                 <div class="skill-cell">
                     <h4>Skills:</h4>
@@ -47,7 +48,22 @@
         </v-card-actions>
     </v-card>
     <v-flex v-if="sprint.defined" xs12>
-        <blockers></blockers>
+            <blockers v-if="mine.length > 0"></blockers>
+        <div v-if="mine.length === 0">Please choose a task...</div>
+        <div class="task-row">
+            <h4>Assigned:</h4>
+            <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
+                v-for="task in mine">
+                <div class="task-skill">
+                    <v-chip color="accent" text-color="white">
+                        <v-avatar class="teal">{{task.est}}</v-avatar>
+                        {{task.skill}}
+                    </v-chip>
+                </div>
+                <div class="task-name">{{task.name}}</div>
+            </v-btn>
+        </div>
+
     </v-flex>
 </div>
 </template>

@@ -29,7 +29,13 @@ const comp = {
             return tasks
         }
         sprint.list.filter(story => story.tasks)
-            .map(story => tasks.push(...story.tasks))
+            .map(story => {
+                const storyTasks = story.tasks.map(t => {
+                    t.storyIndex = story.index
+                    return t
+                })
+                tasks.push(...storyTasks)
+            })
         return tasks
     },
     exists: what => {
@@ -43,6 +49,12 @@ const comp = {
             return false
         }
         return true
+    },
+    mine: (assignedTo, user) => {
+        if (!comp.exists(assignedTo)) {
+            return false
+        }
+        return assignedTo === user.name
     },
     taskState: (task, user, now = Date()) => {
         const skilled = (user.skills) ? user.skills.filter(s => s === task.skill).length > 0 : false
@@ -131,6 +143,9 @@ const comp = {
     },
     taskToDo: (sprint) => { // @TODO should this use status????
         return comp.allTasks(sprint).filter(t => !comp.exists(t.assignedTo))
+    },
+    myTasks: (sprint, user) => { // @TODO should this use status????
+        return comp.allTasks(sprint).filter(t => comp.mine(t.assignedTo, user))
     },
     tasksDone: (sprint) => { // @TODO should this use status????
         return comp.allTasks(sprint).filter(t => {

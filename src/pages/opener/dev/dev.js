@@ -10,6 +10,8 @@ import sprintStat from '../../../common/stats/sprintStat'
 
 import tasks from '../../../common/stats/tasks'
 
+import util from '../../plan/util'
+
 
 const sprintless = session => {
     const owner = session.project.members.filter(m => m.owner)
@@ -68,6 +70,13 @@ const progressList = (currentSprint, stat) => {
     return progressList
 }
 
+const current = session => {
+    const noSprint = (session.project.current.sprintIndex < 0 ||
+        session.project.sprints === undefined ||
+        session.project.sprints.length === 0)
+    return (noSprint) ? sprintless(session) : sprint(session)
+}
+
 const comp = {
     name: 'opendev',
     components: {
@@ -77,24 +86,65 @@ const comp = {
     beforeCreate: function() {
         check()
     },
+    computed: {
+        todo: function() {
+            const currentSprint = current(store.state.session)
+            return sprintStat.taskToDo(currentSprint)
+        },
+        mine: function() {
+            const currentSprint = current(store.state.session)
+            return sprintStat.mine(currentSprint, store.state.session.user)
+        }
+    },
     data: function() {
         const session = store.state.session
+        console.log(session.user)
         const project = session.project
         const members = project.members
-        const noSprint = (session.project.current.sprintIndex < 0 || project.sprints === undefined || project.sprints.length === 0)
-        const currentSprint = (noSprint) ? sprintless(session) : sprint(session)
+        const currentSprint = current(session)
         const stat = sprintStat.contingency(currentSprint, members)
-        const todo = sprintStat.taskToDo(currentSprint)
         return {
             session,
             sprint: currentSprint,
             progressList: progressList(currentSprint, stat),
-            stat,
-            todo
+            stat
         }
     },
     methods: {
-        endDate: sprint => tasks.endDate(sprint)
+        endDate: sprint => tasks.endDate(sprint),
+        assign: function(sprint, task) {
+            console.log('You have selected', task)
+            task.assignedTo = this.session.user.name
+            if (!task.history) {
+                task.history = []
+            }
+            const date = new Date()
+            const action = "assigned"
+            const user = this.session.user.name
+            const history = {
+                date,
+                action,
+                user
+            }
+            task.history.push(history)
+            store.commit('task', task)
+            util.storeSprintTask(task)
+        },
+        unassign: function(sprint, task) {
+            console.log('You have selected', task)
+            task.assignedTo = undefined
+            const date = new Date()
+            const action = "unassigned"
+            const user = this.session.user.name
+            const history = {
+                date,
+                action,
+                user
+            }
+            task.history.push(history)
+            store.commit('task', task)
+            util.storeSprintTask(task)
+        }
     }
 }
 

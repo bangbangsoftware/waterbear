@@ -22,36 +22,13 @@ const comp = {
         }
     },
     methods: {
-        addTask: (p, task) => {
-            const index = store.state.session.story.index
-            const storyTask = p.stories[index].tasks
-            const tasks = (storyTask === undefined) ? [] : storyTask
-            tasks.push(task)
-            p.stories[index].tasks = tasks
-            const db = store.state.db
-            return db.put(p)
-        },
-        storeTask: task => {
-            const prj = store.state.session.project
-            console.log('Adding task to story')
-            console.log(prj)
-            const db = store.state.db
-            db.get(prj._id)
-                .then(p => comp.methods.addTask(p, task))
-                .catch(err => console.error(err))
-        },
-        storeName: (value) => {
-            store.commit('taskName', value)
-        },
-        storeDesc: (desc) => {
-            store.commit('taskDesc', desc)
-        },
+        storeTask: task => util.storeTask(task),
+        storeName: value => store.commit('taskName', value),
+        storeDesc: desc => store.commit('taskDesc', desc),
+        storeSkill: value => store.commit('taskSkill', value),
         storeEst: (value) => {
             const num = parseInt(value)
             store.commit('taskEst', num)
-        },
-        storeSkill: (value) => {
-            store.commit('taskSkill', value)
         },
         postTask: function(task) {
             var ok = valid(task)

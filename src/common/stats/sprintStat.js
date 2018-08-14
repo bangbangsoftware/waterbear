@@ -4,11 +4,12 @@ import tasks from './tasks.js'
 import contingency from './contingency.js'
 
 const getAssignedTasks = (taks, user) => {
-    return taks.filter(t => (t.assignedTo && t.assignedTo.id === user.id))
+    return taks.filter(t => (t.assignedTo && t.assignedTo.name === user.name))
 }
 
 const comp = {
     taskToDo: sprint => tasks.taskToDo(sprint),
+    mine: (sprint, user) => tasks.myTasks(sprint, user),
     contingency: (sprint, members, now = new Date()) => {
         // skillBalance
         const all = tasks.allTasks(sprint)

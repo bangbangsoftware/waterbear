@@ -7,7 +7,50 @@ const incompleteFilter = story => (story.tasks === undefined ||
     story.points === undefined)
 const completeFilter = story => !incompleteFilter(story)
 
+const addTask = (p, task) => {
+    const index = store.state.session.story.index
+    const storyTasks = p.stories[index].tasks
+    const allTasks = (storyTasks === undefined) ? [] : storyTasks
+    const tasks = allTasks.filter(t => t.name !== task.name)
+    tasks.push(task)
+    p.stories[index].tasks = tasks
+    const db = store.state.db
+    return db.put(p)
+}
+
+const addSprintTask = (p, task) => {
+    const sprintIndex = p.current.sprintIndex
+    const sprint = p.sprints[sprintIndex]
+    const story = sprint.list[task.storyIndex]
+    const storyTasks = story.tasks
+    const allTasks = (storyTasks === undefined) ? [] : storyTasks
+    const tasks = allTasks.filter(t => t.name !== task.name)
+    tasks.push(task)
+    story.tasks = tasks
+    p.sprints[sprintIndex].list[task.storyIndex] = story
+    const db = store.state.db
+    return db.put(p)
+}
+
 export default {
+    storeSprintTask: task => {
+        const prj = store.state.session.project
+        console.log('Updating task in sprint')
+        console.log(prj)
+        const db = store.state.db
+        db.get(prj._id)
+            .then(p => addSprintTask(p, task))
+            .catch(err => console.error(err))
+    },
+    storeTask: task => {
+        const prj = store.state.session.project
+        console.log('Adding task to story')
+        console.log(prj)
+        const db = store.state.db
+        db.get(prj._id)
+            .then(p => addTask(p, task))
+            .catch(err => console.error(err))
+    },
     next: session => {
         console.log('Next in plan for project...')
         console.log(session.project)
