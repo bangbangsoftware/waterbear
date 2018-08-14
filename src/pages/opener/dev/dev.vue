@@ -48,9 +48,9 @@
         </v-card-actions>
     </v-card>
     <v-flex v-if="sprint.defined" xs12>
-            <blockers v-if="mine.length > 0"></blockers>
-        <div v-if="mine.length === 0">Please choose a task...</div>
-        <div class="task-row">
+        <H1 v-if="mine.length === 0">Please choose a task...</H1>
+        <div  v-if="mine.length > 0" class="task-row">
+            <blockers></blockers>
             <h4>Assigned:</h4>
             <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
                 v-for="task in mine">

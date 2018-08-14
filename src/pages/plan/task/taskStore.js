@@ -46,14 +46,14 @@ export default {
         const storyIndex = state.session.story.index
         const story = stories[storyIndex]
         let tasks = []
-         if (story && story.tasks) {
+        if (story && story.tasks) {
             tasks = story.tasks.filter(t => t.name !== task.name)
         } else {
             task.index = tasks.length
         }
         tasks.push(task)
         if (story) {
-            state.session.project.stories[storyIndex].task = tasks
+            state.session.project.stories[storyIndex].tasks = tasks
             store.commit('log', 'Added "' + task.name + '" to story "' + story.title + '"')
         }
         store.commit('clearTask')
