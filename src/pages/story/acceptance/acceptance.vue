@@ -1,3 +1,4 @@
+<template>
 <div>
     <v-list>
         <v-list-tile avatar v-for="(ac,i) in state.session.story.acs" v-bind:key="i">
@@ -16,3 +17,5 @@
         v-model="state.newAc">
     </v-text-field>
 </div>
+</template>
+<script src='./acceptance.js' />

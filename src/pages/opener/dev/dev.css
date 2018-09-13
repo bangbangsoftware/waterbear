@@ -10,8 +10,29 @@
     padding-top: 2%;
 }
 
+.application .theme--dark.v-card {
+    padding-bottom: 10px
+}
+
+.countdown {
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+    background: #1976d2;
+    border: 4px solid #b9bec3;
+    color: #b9bec3;
+    text-align: center;
+    font: 50px Arial, sans-serif;
+    font-weight: bold;
+}
+
+.days {
+    font: 30px Arial, sans-serif;
+}
 
 .header-row {
+    padding-left: 8%;
     display: grid;
     grid-template-rows: auto;
 }
@@ -32,10 +53,16 @@
 }
 
 .task-row {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.task-row-countdown {
     padding-left: 8%;
     display: grid;
     grid-template-rows: auto auto;
 }
+
 
 .task {
     width: auto;
@@ -43,7 +70,6 @@
     grid-template-columns: 15% auto;
     justify-self: left;
     word-wrap: true;
-
 }
 
 .task-skill {}

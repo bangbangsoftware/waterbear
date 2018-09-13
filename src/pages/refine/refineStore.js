@@ -1,5 +1,5 @@
 export default {
-   incomplete: (state, newState) => {
-      state.session.incomplete = newState
-   }
-}
+  incomplete: (state, newState) => {
+    state.session.incomplete = newState;
+  }
+};

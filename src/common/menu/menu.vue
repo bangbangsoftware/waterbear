@@ -1,3 +1,4 @@
+<template>
 <div class="menu">
     "
     <v-app height="415px" dark id="e3" standalone>
@@ -64,10 +65,8 @@
                         <i class="fa fa-shower" aria-hidden="true"></i>
                         </v-list-tile-avatar>
                         <v-list-tile-title >Plan</v-list-tile-title>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
                             <v-list-tile-title v-text="Plan">
-                        </v-list-tile-title>
+                     </v-list-tile-title>
                     </v-list-tile>
                 </v-list>
                 <v-list-tile class="mt-3">
@@ -104,3 +103,5 @@
     </v-app>
 
 </div>
+</template>
+<script src='./menu.js' />

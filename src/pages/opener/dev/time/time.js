@@ -1,16 +1,13 @@
-import Vue from 'vue'
-import template from './time.html'
+import Vue from "vue";
 
 const comp = {
-    name: 'update-time-spent',
-    template,
-    data: function() {
-        return {
-        }
-    },
-    methods: {}
-}
+  name: "update-time-spent",
+  data: function() {
+    return {};
+  },
+  methods: {}
+};
 
-Vue.component('update-time-spent', comp)
+Vue.component("update-time-spent", comp);
 
-export default comp
+export default comp;

@@ -7,7 +7,7 @@
                     label="Blockers" persistent-hint prepend-icon="mdi-city">
 
                     <v-slide-x-reverse-transition mode="out-in" slot="append-outer">
-                        <v-icon color="info" v-text="'mdi-check-outline'" @click=""></v-icon>
+                        <v-icon color="info" v-text="'mdi-check-outline'" ></v-icon>
                     </v-slide-x-reverse-transition>
                 </v-autocomplete>
 
@@ -19,4 +19,5 @@
     </v-flex>
 </v-layout>
 </template>
-<script src='./blockers.js'></script>
+<script src='./blockers.js'>
+</script>

@@ -20,6 +20,7 @@ a {
 .errorMessage {
     color: red;
     background-color: white;
+    font-size: 30px;
 }
 
 .fade-enter-active,

@@ -1,5 +1,6 @@
 <template>
   <v-app id="waterbear" toolbar>
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
     <v-navigation-drawer app v-if="session.loaded" light :mini-variant.sync="mini" v-model="drawer" overflow>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
@@ -42,8 +43,8 @@
     </v-toolbar>
     <main>
       <v-container fluid>
-</br>
-</br>
+<br>
+<br>
         <router-view></router-view>
       </v-container>
     </main>
@@ -62,74 +63,83 @@
 
 
 <script>
-import Vue from 'vue'
-import './common/menu/menu'
-import store from './store'
+import Vue from "vue";
+import "./common/menu/menu";
+import store from "./store";
 export default {
-   data: function() {
-      return {
-         session: store.state.session,
-         state: store.state,
-         drawer: false,
-         items: [{
-            title: 'Your details',
-            route: 'member',
-            icon: 'account_box'
-          }, {
-            title: 'The Team',
-            route: 'team',
-            icon: 'motorcycle'
-         }, {
-            title: 'Project',
-            route: 'todo',
-            icon: 'grade'
-         }, {
-            title: 'Story Creation',
-            route: 'story',
-            icon: 'create'
-        }, {
-            title: 'Backlog Refinement',
-            route: 'refine',
-            icon: 'compare_arrows'
-          }, {
-            title: 'Sprint Planning',
-            route: 'sprint/' + store.state.session.project.current.sprintIndex,
-            icon: 'assignment'
-         }, {
-            title: 'Assessment',
-            route: 'assess',
-            icon: 'assessment'
-         }],
-         mini: false,
-         right: null
+  data: function() {
+    return {
+      session: store.state.session,
+      state: store.state,
+      drawer: false,
+      items: [
+        {
+          title: "Your details",
+          route: "member",
+          icon: "account_box"
+        },
+        {
+          title: "The Team",
+          route: "team",
+          icon: "motorcycle"
+        },
+        {
+          title: "Project",
+          route: "todo",
+          icon: "grade"
+        },
+        {
+          title: "Story Creation",
+          route: "story",
+          icon: "create"
+        },
+        {
+          title: "Backlog Refinement",
+          route: "refine",
+          icon: "compare_arrows"
+        },
+        {
+          title: "Sprint Planning",
+          route: "sprint/" + store.state.session.project.current.sprintIndex,
+          icon: "assignment"
+        },
+        {
+          title: "Assessment",
+          route: "assess",
+          icon: "assessment"
+        }
+      ],
+      mini: false,
+      right: null
+    };
+  },
+  name: "app",
+  methods: {
+    toggle: function() {
+      console.log("toggled: " + this.drawer);
+      this.drawer = !this.drawer;
+    },
+    go: function(where) {
+      // !!! to use 'this', don't use => !!!!
+      console.log(where);
+      if (!where) {
+        store.commit("loaded", false);
+        store.commit("db", null);
+        if (this.state.db) {
+          this.state.db.logout();
+        }
       }
-   },
-   name: 'app',
-   methods: {
-      toggle: function() {
-         console.log('toggled: ' + this.drawer)
-         this.drawer = !this.drawer
-      },
-      go: function(where) { // !!! to use 'this', don't use => !!!!
-         console.log(where)
-         if (!where) {
-            store.commit('loaded', false)
-            store.commit('db', null)
-            if (this.state.db) {
-              this.state.db.logout()
-            }
-         }
-         this.drawer = false
-         this.mini = false
-         if (window) {
-            Vue.nextTick(() => {
-               window.location.href = '#/' + where
-               this.drawer = false
-               this.mini = false
-            })
-         }
+      this.drawer = false;
+      this.mini = false;
+      if (window) {
+        Vue.nextTick(() => {
+          window.location.href = "#/" + where;
+          this.drawer = false;
+          this.mini = false;
+        });
+      }
 
-         /**
+      /**
             if (this.$router.go) {
                console.log('Going to ' + where)
                this.$router.go({
@@ -140,21 +150,19 @@ export default {
             }
             **/
 
-          return this.drawer
-      }
-   }
-
-}
+      return this.drawer;
+    }
+  }
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
 }
-
 </style>

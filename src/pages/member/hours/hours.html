@@ -1,3 +1,4 @@
+<template>
 <div class="hours">
     <div v-for="(dayHours, hoursIndex) in days">
         <h6>{{dayHours.name}}</h6>
@@ -7,3 +8,5 @@
             v-on:click="toggleNight(hoursIndex,i)"> {{hour.name}} </v-btn>
     </div>
 </div>
+</template>
+<script src='./hours.js' />

@@ -1,9 +1,9 @@
 // import Vue from 'vue'
-import signup from './signup.js'
+import signup from "./signup.js";
 // import signup from 'src/pages/signup/signup.vue'
 
-describe('signup.vue', () => {
-   /*
+describe("signup.vue", () => {
+  /*
     it('should render correct contents', () => {
        const Constructor = Vue.extend(signup)
        const vm = new Constructor().$mount()
@@ -12,17 +12,17 @@ describe('signup.vue', () => {
           .toBe('Quick Start Up')
     })
     */
-   it('should start at the start', () => {
-      const data = signup.data()
-      expect(data.signup.stage).toBe('start')
-   })
+  it("should start at the start", () => {
+    const data = signup.data();
+    expect(data.signup.stage).toBe("start");
+  });
 
-   it('should have no errors', () => {
-      const data = signup.data()
-      expect(data.signup.error).toBe('')
-   })
+  it("should have no errors", () => {
+    const data = signup.data();
+    expect(data.signup.error).toBe("");
+  });
 
-   /* taken out
+  /* taken out
       it('should have a navigate function', () => {
          const methods = signup.methods
          console.log(typeof methods.navigateTo)
@@ -35,4 +35,4 @@ describe('signup.vue', () => {
          expect(typeof methods.navigateTo).toBe('function')
       })
    */
-})
+});

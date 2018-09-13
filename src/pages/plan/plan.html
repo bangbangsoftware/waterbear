@@ -1,3 +1,4 @@
+<template>
 <v-layout id="plan" v-if='session.loaded'>
 
     <v-flex xs6>
@@ -9,3 +10,5 @@
         <task v-if="session.planState === 'task'"></task>
     </v-flex>
 </v-layout>
+</template>
+<script src='./plan.js'></script>

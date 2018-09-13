@@ -1,6 +1,6 @@
-import comp from './member.js'
+import comp from "./member.js";
 
-it('should have a bunch of functions', () => {
-   const app = comp.methods
-   expect(typeof app.save).toBe('function')
-})
+it("should have a bunch of functions", () => {
+  const app = comp.methods;
+  expect(typeof app.save).toBe("function");
+});

@@ -1,33 +1,33 @@
-import store from '../../store.js'
-import template from './feed.html'
-import Vue from 'vue'
+import store from "../../store.js";
+import Vue from "vue";
 
 const zeroFill = val => {
   if (val < 10) {
-    return '0' + val
+    return "0" + val;
   } else {
-    return val
+    return val;
   }
-}
+};
 
 const feedComp = {
-  name: 'feed',
-  template,
+  name: "feed",
   data: () => {
     return {
       feeds: store.state.feeds
-    }
+    };
   },
   filters: {
     time: date => {
-      return zeroFill(date.getHours()) +
-        ':' +
+      return (
+        zeroFill(date.getHours()) +
+        ":" +
         zeroFill(date.getMinutes()) +
-        ':' +
+        ":" +
         zeroFill(date.getSeconds())
+      );
     }
   }
-}
+};
 
-Vue.component('feed', feedComp)
-export default feedComp
+Vue.component("feed", feedComp);
+export default feedComp;

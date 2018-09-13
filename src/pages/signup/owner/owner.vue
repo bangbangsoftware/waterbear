@@ -1,0 +1,33 @@
+<template>
+<v-container fluid>
+    <v-layout row wrap>
+        <v-flex s12 md6 offset-md3>
+            <v-card>
+                <v-toolbar class="indigo" dark>
+                    <v-toolbar-title>About you</v-toolbar-title>
+                </v-toolbar>
+                <h6 class="errorMessage" v-if="error"> {{ error }}</h6>
+                <v-card-text>
+                    <v-layout row>
+                        <v-flex xs8>
+                            <v-text-field autofocus id="ownername" label="What is your name?" class="mt-5"
+                                maxlength="100" v-model="ownerName" required></v-text-field>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row>
+                        <v-flex xs6>
+                            <v-select v-bind:items="roles" v-model="ownerRole" label="Select" single-line bottom></v-select>
+                        </v-flex>
+                    </v-layout>
+                    <v-card-actions>
+                        <p class="text-xs-right" v-on:click="error = owner(ownerName,ownerRole)" v-on:keyup.enter="error = owner(ownerName,ownerRole)">
+                            <v-btn light>Next</v-btn>
+                        </p>
+                    </v-card-actions>
+                </v-card-text>
+            </v-card>
+        </v-flex>
+    </v-layout>
+</v-container>
+</template>
+<script src='./owner.js' />

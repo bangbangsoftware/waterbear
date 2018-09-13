@@ -1,298 +1,296 @@
-import service from './skills.js'
+import service from "./skills.js";
 
-it('Should be able to get all skills totals from all tasks in all stories in a sprint', () => {
-   const task1 = {
-      name: 'Front end dev',
-      est: 1,
-      skill: 'Javascript'
-   }
-   const task2 = {
-      name: 'Backend dev',
-      est: 2,
-      skill: 'Java'
-   }
-   const task3 = {
-      name: 'Design stuff',
-      est: 3,
-      skill: 'UX'
-   }
-   const task4 = {
-      name: 'Document',
-      est: 4,
-      skill: 'None'
-   }
-   const task5 = {
-      name: 'Design stuff',
-      est: 5,
-      skill: 'UX'
-   }
+it("Should be able to get all skills totals from all tasks in all stories in a sprint", () => {
+  const task1 = {
+    name: "Front end dev",
+    est: 1,
+    skill: "Javascript"
+  };
+  const task2 = {
+    name: "Backend dev",
+    est: 2,
+    skill: "Java"
+  };
+  const task3 = {
+    name: "Design stuff",
+    est: 3,
+    skill: "UX"
+  };
+  const task4 = {
+    name: "Document",
+    est: 4,
+    skill: "None"
+  };
+  const task5 = {
+    name: "Design stuff",
+    est: 5,
+    skill: "UX"
+  };
 
-   const story1 = {
-      tasks: [task2, task3, task4]
-   }
+  const story1 = {
+    tasks: [task2, task3, task4]
+  };
 
-   const story2 = {
-      tasks: [task1, task5]
-   }
+  const story2 = {
+    tasks: [task1, task5]
+  };
 
-   const sprint = {
-      list: [story1, story2]
-   }
+  const sprint = {
+    list: [story1, story2]
+  };
 
-   const skills = service.sprintSkills(sprint)
+  const skills = service.sprintSkills(sprint);
 
-   const keys = Object.keys(skills)
-   expect(keys.length).toBe(4)
-   expect(skills['UX']).toBe(8)
-   expect(skills['None']).toBe(4)
-   expect(skills['Java']).toBe(2)
-   expect(skills['Javascript']).toBe(1)
-})
+  const keys = Object.keys(skills);
+  expect(keys.length).toBe(4);
+  expect(skills["UX"]).toBe(8);
+  expect(skills["None"]).toBe(4);
+  expect(skills["Java"]).toBe(2);
+  expect(skills["Javascript"]).toBe(1);
+});
 
-import { DAYS} from '../../../team/defaults.js'
-it('Should be able to get get availability for a team member', () => {
+import { DAYS } from "../../../team/defaults.js";
+it("Should be able to get get availability for a team member", () => {
+  const member = {
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  };
 
-   const member = {
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   }
+  const startDate = new Date(2017, 5, 11); // which is actually June
+  const endDate = new Date(2017, 5, 17);
 
-   const startDate = new Date(2017, 5, 11) // which is actually June
-   const endDate = new Date(2017, 5, 17)
+  const hours = service.getAvailability(member, startDate, endDate);
+  expect(hours).toBe(5 * 8);
+});
 
-   const hours = service.getAvailability(member, startDate, endDate)
-   expect(hours).toBe(5 * 8)
-})
+it("Should be able to get skills totals for a hours", () => {
+  const member = {
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  };
+  const skillHours = service.getSkillHours(member, 40);
+  expect(skillHours.hours).toBe(40);
+  expect(skillHours.skills[0]).toBe("vuejs");
+  expect(skillHours.skills[1]).toBe("couchdb");
+  expect(skillHours.skills[2]).toBe("css");
+});
 
-it('Should be able to get skills totals for a hours', () => {
+it("should be able to give a weight based on skill hours", () => {
+  const skillHours = {
+    hours: 40,
+    skills: ["vuejs", "couchdb", "css"]
+  };
+  expect(service.getWeight(skillHours)).toBe(120);
+});
 
-   const member = {
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   }
-   const skillHours = service.getSkillHours(member, 40)
-   expect(skillHours.hours).toBe(40)
-   expect(skillHours.skills[0]).toBe('vuejs')
-   expect(skillHours.skills[1]).toBe('couchdb')
-   expect(skillHours.skills[2]).toBe('css')
-})
+it("should be able to give a team skills", () => {
+  const members = [];
+  members.push({
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb"]
+  });
+  members.push({
+    name: "Finn",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  });
+  members.push({
+    name: "Mick",
+    days: DAYS,
+    skills: ["wasm"]
+  });
+  const startDate = new Date(2017, 5, 11); // which is actually June
+  const endDate = new Date(2017, 5, 17);
 
-it('should be able to give a weight based on skill hours', () => {
-   const skillHours = {
-      hours: 40,
-      skills: ['vuejs', 'couchdb', 'css']
-   }
-   expect(service.getWeight(skillHours)).toBe(120)
-})
+  const teamSkills = service.getTeamSkills(members, startDate, endDate);
+  expect(teamSkills.length).toBe(3);
 
-it('should be able to give a team skills', () => {
-   const members = []
-   members.push({
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb']
-   })
-   members.push({
-      name: 'Finn',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   })
-   members.push({
-      name: 'Mick',
-      days: DAYS,
-      skills: ['wasm']
-   })
-   const startDate = new Date(2017, 5, 11) // which is actually June
-   const endDate = new Date(2017, 5, 17)
+  expect(teamSkills[0].hours).toBe(40);
+  expect(teamSkills[1].hours).toBe(40);
+  expect(teamSkills[2].hours).toBe(40);
 
-   const teamSkills = service.getTeamSkills(members, startDate, endDate)
-   expect(teamSkills.length).toBe(3)
+  expect(teamSkills[0].weight).toBe(40);
+  expect(teamSkills[1].weight).toBe(80);
+  expect(teamSkills[2].weight).toBe(120);
 
-   expect(teamSkills[0].hours).toBe(40)
-   expect(teamSkills[1].hours).toBe(40)
-   expect(teamSkills[2].hours).toBe(40)
+  expect(teamSkills[0].skills.length).toBe(1);
+  expect(teamSkills[1].skills.length).toBe(2);
+  expect(teamSkills[2].skills.length).toBe(3);
+});
 
-   expect(teamSkills[0].weight).toBe(40)
-   expect(teamSkills[1].weight).toBe(80)
-   expect(teamSkills[2].weight).toBe(120)
+it("Should be able to make a unique list of skills based on sprint and members", () => {
+  const task1 = {
+    name: "Front end dev",
+    est: 35,
+    skill: "vuejs"
+  };
+  const task2 = {
+    name: "Backend dev",
+    est: 2,
+    skill: "couchdb"
+  };
+  const task3 = {
+    name: "Design stuff",
+    est: 3,
+    skill: "css"
+  };
+  const task4 = {
+    name: "Document",
+    est: 4,
+    skill: "Skydiving"
+  };
+  const task5 = {
+    name: "Design stuff",
+    est: 5,
+    skill: "css"
+  };
+  const task6 = {
+    name: "Front end dev",
+    est: 32,
+    skill: "vuejs"
+  };
 
-   expect(teamSkills[0].skills.length).toBe(1)
-   expect(teamSkills[1].skills.length).toBe(2)
-   expect(teamSkills[2].skills.length).toBe(3)
-})
+  const story1 = {
+    tasks: [task2, task3, task4, task6]
+  };
 
-it('Should be able to make a unique list of skills based on sprint and members', () => {
-   const task1 = {
-      name: 'Front end dev',
-      est: 35,
-      skill: 'vuejs'
-   }
-   const task2 = {
-      name: 'Backend dev',
-      est: 2,
-      skill: 'couchdb'
-   }
-   const task3 = {
-      name: 'Design stuff',
-      est: 3,
-      skill: 'css'
-   }
-   const task4 = {
-      name: 'Document',
-      est: 4,
-      skill: 'Skydiving'
-   }
-   const task5 = {
-      name: 'Design stuff',
-      est: 5,
-      skill: 'css'
-   }
-   const task6 = {
-      name: 'Front end dev',
-      est: 32,
-      skill: 'vuejs'
-   }
+  const story2 = {
+    tasks: [task1, task5]
+  };
 
-   const story1 = {
-      tasks: [task2, task3, task4, task6]
-   }
+  const sprint = {
+    list: [story1, story2]
+  };
+  const members = [];
+  members.push({
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb"]
+  });
+  members.push({
+    name: "Finn",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  });
+  members.push({
+    name: "Mick",
+    days: DAYS,
+    skills: ["wasm"]
+  });
 
-   const story2 = {
-      tasks: [task1, task5]
-   }
+  const results = service.toList(members, sprint);
 
-   const sprint = {
-      list: [story1, story2]
-   }
-   const members = []
-   members.push({
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb']
-   })
-   members.push({
-      name: 'Finn',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   })
-   members.push({
-      name: 'Mick',
-      days: DAYS,
-      skills: ['wasm']
-   })
+  expect(results.length).toBe(4);
+  expect(results.indexOf("vuejs")).toBeGreaterThan(-1);
+  expect(results.indexOf("wasm")).toBe(-1);
+  expect(results.indexOf("couchdb")).toBeGreaterThan(-1);
+  expect(results.indexOf("css")).toBeGreaterThan(-1);
+  expect(results.indexOf("Skydiving")).toBeGreaterThan(-1);
+});
 
-   const results = service.toList(members, sprint)
+it("should be able to use a teams skill time", () => {
+  const members = [];
+  members.push({
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb"]
+  });
+  members.push({
+    name: "Finn",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  });
+  members.push({
+    name: "Mick",
+    days: DAYS,
+    skills: ["wasm"]
+  });
+  const startDate = new Date(2017, 5, 11); // which is actually June
+  const endDate = new Date(2017, 5, 17);
+  const teamSkills = service.getTeamSkills(members, startDate, endDate);
 
-   expect(results.length).toBe(4)
-   expect(results.indexOf('vuejs')).toBeGreaterThan(-1)
-   expect(results.indexOf('wasm')).toBe(-1)
-   expect(results.indexOf('couchdb')).toBeGreaterThan(-1)
-   expect(results.indexOf('css')).toBeGreaterThan(-1)
-   expect(results.indexOf('Skydiving')).toBeGreaterThan(-1)
-})
+  const result = service.useSkill(teamSkills, "vuejs", 1);
+  expect(result.failed).toBe(false);
+  expect(result.skillsLeft[1].hours).toBe(39);
 
-it('should be able to use a teams skill time', () => {
-   const members = []
-   members.push({
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb']
-   })
-   members.push({
-      name: 'Finn',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   })
-   members.push({
-      name: 'Mick',
-      days: DAYS,
-      skills: ['wasm']
-   })
-   const startDate = new Date(2017, 5, 11) // which is actually June
-   const endDate = new Date(2017, 5, 17)
-   const teamSkills = service.getTeamSkills(members, startDate, endDate)
+  const result2 = service.useSkill(teamSkills, "BANG", 1);
+  expect(result2.failed).toBe(true);
+});
 
-   const result = service.useSkill(teamSkills, 'vuejs', 1);
-   expect(result.failed).toBe(false)
-   expect(result.skillsLeft[1].hours).toBe(39)
+it("should be able to balance teams skill with sprints need", () => {
+  const task1 = {
+    name: "Front end dev",
+    est: 35,
+    skill: "vuejs"
+  };
+  const task2 = {
+    name: "Backend dev",
+    est: 2,
+    skill: "couchdb"
+  };
+  const task3 = {
+    name: "Design stuff",
+    est: 3,
+    skill: "css"
+  };
+  const task4 = {
+    name: "Document",
+    est: 4,
+    skill: "Skydiving"
+  };
+  const task5 = {
+    name: "Design stuff",
+    est: 5,
+    skill: "css"
+  };
+  const task6 = {
+    name: "Front end dev",
+    est: 32,
+    skill: "vuejs"
+  };
 
-   const result2 = service.useSkill(teamSkills, 'BANG', 1);
-   expect(result2.failed).toBe(true)
-})
+  const story1 = {
+    tasks: [task2, task3, task4, task6]
+  };
 
-it('should be able to balance teams skill with sprints need', () => {
-   const task1 = {
-      name: 'Front end dev',
-      est: 35,
-      skill: 'vuejs'
-   }
-   const task2 = {
-      name: 'Backend dev',
-      est: 2,
-      skill: 'couchdb'
-   }
-   const task3 = {
-      name: 'Design stuff',
-      est: 3,
-      skill: 'css'
-   }
-   const task4 = {
-      name: 'Document',
-      est: 4,
-      skill: 'Skydiving'
-   }
-   const task5 = {
-      name: 'Design stuff',
-      est: 5,
-      skill: 'css'
-   }
-   const task6 = {
-      name: 'Front end dev',
-      est: 32,
-      skill: 'vuejs'
-   }
+  const story2 = {
+    tasks: [task1, task5]
+  };
 
-   const story1 = {
-      tasks: [task2, task3, task4, task6]
-   }
+  const sprint = {
+    list: [story1, story2]
+  };
+  const members = [];
+  members.push({
+    name: "Cory",
+    days: DAYS,
+    skills: ["vuejs", "couchdb"]
+  });
+  members.push({
+    name: "Finn",
+    days: DAYS,
+    skills: ["vuejs", "couchdb", "css"]
+  });
+  members.push({
+    name: "Mick",
+    days: DAYS,
+    skills: ["wasm"]
+  });
+  const startDate = new Date(2017, 5, 11); // which is actually June
+  const endDate = new Date(2017, 5, 17);
+  const results = service.skillBalance(members, startDate, endDate, sprint);
+  console.log("team", service.getTeamSkills(members, startDate, endDate));
+  console.log("sprint", service.sprintSkills(sprint));
+  console.log("results", results);
 
-   const story2 = {
-      tasks: [task1, task5]
-   }
-
-   const sprint = {
-      list: [story1, story2]
-   }
-   const members = []
-   members.push({
-      name: 'Cory',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb']
-   })
-   members.push({
-      name: 'Finn',
-      days: DAYS,
-      skills: ['vuejs', 'couchdb', 'css']
-   })
-   members.push({
-      name: 'Mick',
-      days: DAYS,
-      skills: ['wasm']
-   })
-   const startDate = new Date(2017, 5, 11) // which is actually June
-   const endDate = new Date(2017, 5, 17)
-   const results = service.skillBalance(members, startDate, endDate, sprint)
-   console.log("team", service.getTeamSkills(members, startDate, endDate))
-   console.log("sprint", service.sprintSkills(sprint))
-   console.log("results",results)
-
-   expect(Object.keys(results).length).toBe(4)
-   expect(results['wasm']).toBe(undefined)
-   expect(results['vuejs'].got).toBe(68)
-   expect(results['vuejs'].need).toBe(67)
-      /*
+  expect(Object.keys(results).length).toBe(4);
+  expect(results["wasm"]).toBe(undefined);
+  expect(results["vuejs"].got).toBe(68);
+  expect(results["vuejs"].need).toBe(67);
+  /*
    expect(results.ailed.length).toBe(1)
    expect(results.failed[0].skill).toBe('Skydiving')
    expect(results.failed[0].hours).toBe(4)
@@ -302,5 +300,4 @@ it('should be able to balance teams skill with sprints need', () => {
    console.log(results.teamSkills)
    console.log(results.failed)
 */
-
-})
+});

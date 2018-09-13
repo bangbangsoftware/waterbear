@@ -1,52 +1,49 @@
-import store from '../../../store.js'
-import Vue from 'vue'
-import template from './acceptance.html'
+import store from "../../../store.js";
+import Vue from "vue";
 
 const comp = {
-    name: 'acceptance',
-    template,
-    data: function() {
-        return {
-            state: {
-                newAc: '',
-                session: store.state.session,
-                error: ''
-            }
-        }
+  name: "acceptance",
+  data: function() {
+    return {
+      state: {
+        newAc: "",
+        session: store.state.session,
+        error: ""
+      }
+    };
+  },
+  methods: {
+    navigateTo: function(nav) {
+      this.$router.go({
+        path: nav
+      });
     },
-    methods: {
-        navigateTo: function(nav) {
-            this.$router.go({
-                path: nav
-            })
-        },
-        addCriteria: function(ac) {
-            if (ac && ac.length > 0) {
-                store.commit('acceptance', ac)
-            }
+    addCriteria: function(ac) {
+      if (ac && ac.length > 0) {
+        store.commit("acceptance", ac);
+      }
 
-            const element = document.getElementById('newAc')
-            if (element) {
-                element.focus()
-            }
-            const acs = store.state.session.story.acs
-            return {
-                newAc: '',
-                acs,
-                error: ''
-            }
-        },
-        removeCriteria: function(acNo) {
-            store.commit('removeAcceptance', acNo)
-            const acs = store.state.session.story.acs
-            return {
-                newAc: '',
-                acs,
-                error: ''
-            }
-        }
-
+      const element = document.getElementById("newAc");
+      if (element) {
+        element.focus();
+      }
+      const acs = store.state.session.story.acs;
+      return {
+        newAc: "",
+        acs,
+        error: ""
+      };
+    },
+    removeCriteria: function(acNo) {
+      store.commit("removeAcceptance", acNo);
+      const acs = store.state.session.story.acs;
+      return {
+        newAc: "",
+        acs,
+        error: ""
+      };
     }
-}
-Vue.component('acceptance', comp)
-export default comp
+  }
+};
+Vue.component("acceptance", comp);
+export default comp;

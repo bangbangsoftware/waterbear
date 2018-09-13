@@ -15,22 +15,14 @@
                         <v-progress-linear :value="progress.percent" height="20" :color="progress.colour"></v-progress-linear>
                     </div>
                 </div>
-                <div class="task-row">
-                    <h4>TO DO:</h4>
-                    <v-btn color="blue" v-on:click="assign(sprint, task)" class="task" :title="task.desc"
-                        v-for="task in todo">
-                        <div class="task-skill">
-                            <v-chip color="accent" text-color="white">
-                                <v-avatar class="teal">{{task.est}}</v-avatar>
-                                {{task.skill}}
-                            </v-chip>
-                        </div>
-                        <div class="task-name">{{task.name}}</div>
-                    </v-btn>
+                <div class="task-row-countdown">
+                    <h4>Sprint time left</h4>
+                        <h4 class="countdown">{{daysLeft}}
+                        <p class="days">days</p></h4>
                 </div>
                 <div class="skill-cell">
                     <h4>Skills:</h4>
-                    <div v-for="skill in stat.skills">
+                    <div v-for="skill in stat.skills" :key="skill">
                         <v-chip color="teal" text-color="white">
                             <v-avatar v-if="skill.onTrack">
                                 <v-icon>check_circle</v-icon>
@@ -43,28 +35,64 @@
             </div>
         </div>
         <!--   </v-card-title> -->
-        <v-card-actions>
+        <v-card-actions class="bottom">
             <v-btn v-if="!sprint.defined" flat color="orange">Define Sprint</v-btn>
         </v-card-actions>
     </v-card>
     <v-flex v-if="sprint.defined" xs12>
         <H1 v-if="mine.length === 0">Please choose a task...</H1>
-        <div  v-if="mine.length > 0" class="task-row">
-            <blockers></blockers>
-            <h4>Assigned:</h4>
-            <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
-                v-for="task in mine">
-                <div class="task-skill">
-                    <v-chip color="accent" text-color="white">
-                        <v-avatar class="teal">{{task.est}}</v-avatar>
-                        {{task.skill}}
-                    </v-chip>
+        <H1 v-if="mine.length > 0">&nbsp;</H1>
+       <div class="header-row">
+            <div class="header-column">
+                <div class="task-row">
+                    <h4>TO DO:</h4>
+                    <v-btn color="blue" v-on:click="assign(sprint, task)" class="task" :title="task.desc"
+                        v-for="task in todo" :key="task">
+                        <div class="task-skill">
+                            <v-chip color="accent" text-color="white">
+                                <v-avatar class="teal">{{task.est}}</v-avatar>
+                                {{task.skill}}
+                            </v-chip>
+                        </div>
+                        <div class="task-name">{{task.name}}</div>
+                    </v-btn>
                 </div>
-                <div class="task-name">{{task.name}}</div>
-            </v-btn>
-        </div>
 
+                <div class="task-row">
+                    <h4>Doing</h4>
+                    <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
+                        v-for="task in mine" :key="task">
+                        <div class="task-skill">
+                            <v-chip color="accent" text-color="white">
+                                <v-avatar class="teal">{{task.est}}</v-avatar>
+                                {{task.skill}}
+                            </v-chip>
+                        </div>
+                        <div class="task-name">{{task.name}}</div>
+                    </v-btn>
+                </div>
+ 
+                <div class="task-row">
+                    <h4>Done</h4>
+                    <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
+                        v-for="task in done" :key="task">
+                        <div class="task-skill">
+                            <v-chip color="accent" text-color="white">
+                                <v-avatar class="teal">{{task.est}}</v-avatar>
+                                {{task.skill}}
+                            </v-chip>
+                        </div>
+                        <div class="task-name">{{task.name}}</div>
+                    </v-btn>
+                </div>
+            </div>
+        </div>
+        <div v-if="mine.length > 0" class="task-row">
+            <blockers></blockers>
+        </div>
+ 
     </v-flex>
 </div>
 </template>
-<script src="./dev.js"></script>
+<script src="./dev.js">
+</script>

@@ -1,0 +1,8 @@
+<template>
+<div>
+    <ul v-for="(ac, i) in acs" :key='ac'>
+        <i>{{i+1}}. {{ac}} </i>
+    </ul>
+</div>
+</template>
+<script src='./acceptanceCriteriaList.js' />

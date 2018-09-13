@@ -1,3 +1,4 @@
+<template>
 <v-layout row justify-center>
     <v-flex xs12 sm6 offset-sm3>
 
@@ -13,10 +14,10 @@
                 <v-list-group v-for="(story, c) in sprint.list" :key="story.id" no-action>
                     <v-list-tile slot="activator">
                         <v-list-tile-content>
-                            <v-list-tile-title v-on:click="">{{c+1}}. {{ story.title }}</v-list-tile-title>
+                            <v-list-tile-title >{{c+1}}. {{ story.title }}</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile v-for="(task,t) in story.tasks" :key="task.name" @click="">
+                    <v-list-tile v-for="(task,t) in story.tasks" :key="task.name">
                         <v-list-tile-content>
                             <v-list-tile-title> {{t+1}}.{{task.name}} [{{task.skill}}]
                             </v-list-tile-title>
@@ -74,4 +75,6 @@
     </v-flex>
 
 </v-layout>
-<script src='./select.js'></script>
+</template>
+<script src='./select.js'>
+</script>
