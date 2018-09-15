@@ -4,13 +4,16 @@ import "./select.css";
 
 import store from "../../../store.js";
 import util from "../util.js";
-import moment from "moment";
+//import moment from "moment";
+import dateFns from "date-fns";
 
 Vue.filter("formatDate", function(value) {
   if (!value) {
     return "";
   }
-  return moment(String(value)).format("DD MMM YYYY");
+  //  return moment(String(value)).format("DD MMM YYYY");
+  const d = dateFns.parse(String(value));
+  return dateFns.format(d, "DD MMM YYYY");
 });
 
 const getTime = date => {
