@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import { Bar } from "vue-chartjs";
-import store from "store";
+import store from "../../../../store";
 
 const comp = {
   extends: Bar,

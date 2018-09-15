@@ -22,7 +22,7 @@
                 </div>
                 <div class="skill-cell">
                     <h4>Skills:</h4>
-                    <div v-for="skill in stat.skills" :key="skill">
+                    <div v-for="(skill,i) in stat.skills" :key="i">
                         <v-chip color="teal" text-color="white">
                             <v-avatar v-if="skill.onTrack">
                                 <v-icon>check_circle</v-icon>
@@ -47,7 +47,7 @@
                 <div class="task-row">
                     <h4>TO DO:</h4>
                     <v-btn color="blue" v-on:click="assign(sprint, task)" class="task" :title="task.desc"
-                        v-for="task in todo" :key="task">
+                        v-for="(task,i) in todo"  :key="i">
                         <div class="task-skill">
                             <v-chip color="accent" text-color="white">
                                 <v-avatar class="teal">{{task.est}}</v-avatar>
@@ -61,7 +61,7 @@
                 <div class="task-row">
                     <h4>Doing</h4>
                     <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
-                        v-for="task in mine" :key="task">
+                        v-for="(task,i) in mine" :key="i">
                         <div class="task-skill">
                             <v-chip color="accent" text-color="white">
                                 <v-avatar class="teal">{{task.est}}</v-avatar>
@@ -75,7 +75,7 @@
                 <div class="task-row">
                     <h4>Done</h4>
                     <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
-                        v-for="task in done" :key="task">
+                        v-for="(task,i) in done" :key="i">
                         <div class="task-skill">
                             <v-chip color="accent" text-color="white">
                                 <v-avatar class="teal">{{task.est}}</v-avatar>

@@ -2,7 +2,7 @@
 <v-layout>
     <v-flex xs12 sm6 offset-sm3 v-if="!session.loaded">
         <v-card>
-            <v-card-media class="green--text" height="200px" src="/static/tardi.jpg">
+            <v-img class="green--text" height="200px" src="/static/tardi.jpg">
                 <v-container fill-height fluid>
                     <v-layout fill-height>
                         <v-flex xs12 align-end flexbox>
@@ -10,7 +10,7 @@
                         </v-flex>
                     </v-layout>
                 </v-container>
-            </v-card-media>
+            </v-img>
             <div>Get a project up and running</div>
             <v-card-title primary-title>
                 <h6 v-if="error" class="errorMessage">{{ error }}</h6>

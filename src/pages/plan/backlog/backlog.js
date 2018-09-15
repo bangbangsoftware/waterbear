@@ -18,9 +18,14 @@ const comp = {
     };
   },
   computed: {
-    complete: function() {
-      const state = util.backlogState(this.project);
-      return state.complete;
+    complete: {
+      get: function() {
+        const state = util.backlogState(this.project);
+        return state.complete;
+      },
+      set: function(what) {
+        console.log("complete set to ", what);
+      }
     }
   },
   beforeCreate: function() {

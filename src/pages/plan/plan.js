@@ -4,11 +4,11 @@ import store from "../../store.js";
 import loginCheck from "../../loginCheck.js";
 import util from "./util.js";
 
-import task from "./task/task.js";
-import backlog from "./backlog/backlog.js";
+import task from "./task/task.vue";
+import backlog from "./backlog/backlog.vue";
 import selectSprint from "./select/select.vue";
-import sprintBacklog from "./select/backlog.js";
-import sprintCreate from "./select/create.js";
+import sprintBacklog from "./select/backlog.vue";
+import sprintCreate from "./select/create.vue";
 import teamDisplay from "../team/team.vue";
 
 console.log(" CURRENTLY pages/plan/plan.js THIS IS NOT USED?!");
