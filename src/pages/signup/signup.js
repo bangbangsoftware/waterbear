@@ -1,12 +1,14 @@
 import store from "../../store.js";
 
-import "./start/start";
+import Vue from "vue";
+
+import "./start/start.vue";
 import "./project/project.vue";
 import "./summary/summary.vue";
-import "./owner/owner";
-import "./team/team";
+import "./owner/owner.vue";
+import "./team/team.vue";
 
-export default {
+const comp = {
   name: "signup",
   data: function() {
     return {
@@ -18,3 +20,7 @@ export default {
     };
   }
 };
+
+Vue.component("signup", comp);
+
+export default comp;

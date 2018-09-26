@@ -1,7 +1,6 @@
 <template v-if='session.loaded'>
 <div class="middle">
     <v-card class="primary" dark>
-        <!--  <v-card-title> -->
         <div class="header-row">
             <div class="header-column">
                 <div class="summary">
@@ -34,7 +33,6 @@
                 </div>
             </div>
         </div>
-        <!--   </v-card-title> -->
         <v-card-actions class="bottom">
             <v-btn v-if="!sprint.defined" flat color="orange">Define Sprint</v-btn>
         </v-card-actions>
@@ -61,7 +59,7 @@
                 <div class="task-row">
                     <h4>Doing</h4>
                     <v-btn color="blue" v-on:click="unassign(sprint, task)" class="task" :title="task.desc"
-                        v-for="(task,i) in mine" :key="i">
+                        v-for="(task,i) in doing" :key="i">
                         <div class="task-skill">
                             <v-chip color="accent" text-color="white">
                                 <v-avatar class="teal">{{task.est}}</v-avatar>

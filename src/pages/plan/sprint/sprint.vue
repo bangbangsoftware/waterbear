@@ -7,7 +7,7 @@
         <sprint-create></sprint-create>
     </v-flex>
     <v-flex xs6 v-else>
-        <!--        <select-sprint></select-sprint> @TODO commented out for now -->
+         <select-sprint></select-sprint> 
     </v-flex>
     <v-flex xs6 v-if="session.planState === 'task'">
         <task></task>

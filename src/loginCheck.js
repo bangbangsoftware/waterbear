@@ -17,6 +17,10 @@ const checkSession = error => (session, resolve) => {
     error("No Session");
     return;
   }
+  if (!resolve) {
+    error("No resolve");
+    return;
+  }
   const me = session.userCtx;
   if (!me.name) {
     error("There is no me");

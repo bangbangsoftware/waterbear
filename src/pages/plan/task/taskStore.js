@@ -58,7 +58,24 @@ export default {
         "log",
         'Added "' + task.name + '" to story "' + story.title + '"'
       );
+    } else {
+      console.error("No story when storing task???");
     }
     store.commit("clearTask");
+  },
+  sprintTask: (state, task) => {
+    const project = state.session.project;
+    const sprint = project.sprints[project.current.sprintIndex];
+    const storyList = sprint.list.filter(
+      story => story.index === task.storyIndex
+    );
+    if (storyList.length !== 1) {
+      console.error(storyList.length + " Cannot find story for ", task);
+      return;
+    }
+    const story = storyList[0];
+    const tasks = story.tasks.filter(t => t.index !== task.index);
+    tasks.push(task);
+    story.tasks = tasks;
   }
 };

@@ -33,7 +33,8 @@ const comp = {
     if (!sprint.list) {
       return tasks;
     }
-    sprint.list.filter(story => story.tasks).map(story => {
+    const storiesWithTasks = sprint.list.filter(story => story.tasks);
+    storiesWithTasks.forEach(story => {
       const storyTasks = story.tasks.map(t => {
         t.storyIndex = story.index;
         return t;
@@ -54,8 +55,11 @@ const comp = {
     }
     return true;
   },
+  doing: assignedTo => {
+    return comp.exists(assignedTo);
+  },
   mine: (assignedTo, user) => {
-    if (!comp.exists(assignedTo)) {
+    if (!comp.doing(assignedTo)) {
       return false;
     }
     return assignedTo === user.name;
@@ -154,25 +158,30 @@ const comp = {
       tasks
     };
   },
-  taskToDo: sprint => {
+  taskToDo: tasks => {
     // @TODO should this use status????
-    return comp.allTasks(sprint).filter(t => !comp.exists(t.assignedTo));
+    return tasks.filter(t => !comp.doing(t.assignedTo));
   },
-  myTasks: (sprint, user) => {
+  myTasks: (tasks, user) => {
     // @TODO should this use status????
-    return comp.allTasks(sprint).filter(t => comp.mine(t.assignedTo, user));
+    return tasks.filter(t => comp.mine(t.assignedTo, user));
   },
-  tasksDone: sprint => {
+  tasksDoing: tasks => {
     // @TODO should this use status????
-    return comp.allTasks(sprint).filter(t => {
+    return tasks.filter(t => comp.doing(t.assignedTo));
+  },
+  tasksDone: tasks => {
+    // @TODO should this use status????
+    return tasks.filter(t => {
       // const state = comp.taskState(t) // @TODO THIS SHOULD HAVE USER?????!!!!
       // return state.finished
       return t.finished;
     });
   },
   tasksDonePercentage: sprint => {
-    const done = comp.tasksDone(sprint).length;
-    const all = comp.allTasks(sprint).length;
+    const allTasks = comp.allTasks(sprint);
+    const all = allTasks.length;
+    const done = comp.tasksDone(allTasks).length;
     const one = all / 100;
     return done * one;
   }

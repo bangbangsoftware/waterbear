@@ -8,14 +8,11 @@ const getAssignedTasks = (taks, user) => {
 };
 
 const comp = {
-  taskToDo: sprint => tasks.taskToDo(sprint),
-  mine: (sprint, user) => tasks.myTasks(sprint, user),
   contingency: (sprint, members, now = new Date()) => {
     // skillBalance
     const all = tasks.allTasks(sprint);
     return contingency(sprint, members, now, all);
   },
-  tasksDone: sprint => tasks.tasksDone(sprint),
   tasksDonePercent: sprint => tasks.tasksDonePercent(sprint),
   state: (sprint, user, now = new Date()) => {
     const fail = is.invalid(sprint, now);

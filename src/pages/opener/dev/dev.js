@@ -12,6 +12,8 @@ import tasks from "../../../common/stats/tasks";
 
 import util from "../../plan/util";
 
+import tasklist from "./tasklist/tasklist.vue";
+
 const sprintless = session => {
   const owner = session.project.members.filter(m => m.owner);
   const name = session.user.owner
@@ -80,9 +82,21 @@ const current = session => {
   return noSprint ? sprintless(session) : sprint(session);
 };
 
+const donetest = [];
+
+const currentTasks = () => {
+  const currentSprint = current(store.state.session);
+  const ts = tasks.allTasks(currentSprint);
+  console.log("sprint", currentSprint);
+  console.log("tasks", currentSprint.list.length);
+  console.log("tasks", currentSprint.list);
+  return ts;
+};
+
 const comp = {
   name: "opendev",
   components: {
+    tasklist,
     blockers,
     condition
   },
@@ -90,16 +104,35 @@ const comp = {
     check();
   },
   computed: {
-    todo: function() {
+    tasks: function() {
       const currentSprint = current(store.state.session);
-      return sprintStat.taskToDo(currentSprint);
+      const all = tasks.allTasks(currentSprint).map((task, i) => {
+        const block = task;
+        block.id = i;
+        block.title = task.name;
+        block.status = task.assigned ? "Doing" : "Todo";
+        return block;
+      });
+      return all;
+    },
+    todo: function() {
+      const todos = tasks.taskToDo(currentTasks());
+      console.log("Todos", todos.length);
+      return todos;
     },
     mine: function() {
-      const currentSprint = current(store.state.session);
-      return sprintStat.mine(currentSprint, store.state.session.user);
+      const mine = tasks.myTasks(currentTasks(), store.state.session.user);
+      console.log("mine", mine.length);
+      console.log("mine", mine);
+      return mine;
+    },
+    doing: function() {
+      const doing = tasks.tasksDoing(currentTasks());
+      console.log("doing", doing.length);
+      return doing;
     },
     done: function() {
-      return [];
+      return donetest;
     }
   },
   data: function() {
@@ -114,11 +147,13 @@ const comp = {
     const oneDay = 24 * 60 * 60 * 1000;
     const days = Math.round(Math.abs((endDate - now) / oneDay));
     const daysLeft = endDate < now ? -days : days;
+    const stages = ["Todo", "Doing", "Done"];
     return {
       session,
       sprint: currentSprint,
       progressList: progressList(currentSprint, stat),
       stat,
+      stages,
       daysLeft
     };
   },
@@ -139,7 +174,7 @@ const comp = {
         user
       };
       task.history.push(history);
-      store.commit("task", task);
+      store.commit("sprintTask", task);
       util.storeSprintTask(task);
     },
     unassign: function(sprint, task) {
@@ -154,7 +189,7 @@ const comp = {
         user
       };
       task.history.push(history);
-      store.commit("task", task);
+      store.commit("sprintTask", task);
       util.storeSprintTask(task);
     }
   }

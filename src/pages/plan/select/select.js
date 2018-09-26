@@ -33,6 +33,7 @@ const comp = {
             store.state.session.project.current.sprintIndex
           ];
     sprint.startDate = new Date(sprint.startDate);
+    sprint.startDateString = sprint.startDate;
     sprint.startTime =
       sprint.startDate.getHours() + ":" + sprint.startDate.getMinutes();
     return {

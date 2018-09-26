@@ -4,7 +4,7 @@ import store from "../../store.js";
 import "./menu.css";
 
 const comp = {
-  name: "menu",
+  name: "main-menu",
   data: function() {
     return {
       session: store.state.session

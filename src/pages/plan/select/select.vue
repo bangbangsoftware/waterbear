@@ -44,11 +44,13 @@
                                     </v-flex>
                                     <v-flex xs6>
                                             <small>Start Date</small>
-                                        <v-date-picker color="teal white--text" full-width landscape class="mt-3" v-model="sprint.startDate"></v-date-picker>
+                                            <!--
+                                        <v-date-picker color="teal white--text" full-width landscape class="mt-3" v-model="sprint.startDateString"></v-date-picker>
+                                            -->
                                      </v-flex>
                                     <v-flex xs6>
                                         <small>Start time</small>
-                                        <v-time-picker  color="teal white--text" v-model="sprint.startTime" :landscape="landscape"></v-time-picker>
+                                        <v-time-picker  color="teal white--text" v-model="sprint.startTime" landscape></v-time-picker>
                                     </v-flex>
                                     <v-flex xs12>
                                         <v-text-field type="number" label="How many days" class="mt-5" v-model="sprint.days" id="days" required></v-text-field>
