@@ -10,18 +10,24 @@ const comp = {
   data: function() {
     const session = store.state.session;
     const project = session.project;
-    const reasons = [
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-      "ten"
-    ];
+    const reasons =
+      project.defaults.blockers === undefined
+        ? ["broken machine", "vague requirement"]
+        : project.defaults.blockers;
+    /**        
+            const reasons = [
+              "one",
+              "two",
+              "three",
+              "four",
+              "five",
+              "six",
+              "seven",
+              "eight",
+              "nine",
+              "ten"
+            ];
+        **/
     const blocker = "";
     return {
       session,
@@ -36,6 +42,10 @@ const comp = {
     },
     onChange(value) {
       this.value = value;
+      console.log("changed " + this.value);
+    },
+    post(blocker) {
+      console.log("posted " + blocker);
     }
   }
 };

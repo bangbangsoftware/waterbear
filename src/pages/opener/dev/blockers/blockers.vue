@@ -3,8 +3,8 @@
     <v-flex xs12>
         <v-card>
             <v-card-title primary-title>
-                <v-autocomplete v-model="blocker" hint="What is stopping you?" :items="reasons"
-                    label="Blockers" persistent-hint prepend-icon="mdi-city">
+                    {{blocker}}
+                <v-autocomplete no-data-text="Not found - New blocker" v-model="blocker" hint="What is stopping you?" :items="reasons" label="Blockers" persistent-hint prepend-icon="mdi-city">
 
                     <v-slide-x-reverse-transition mode="out-in" slot="append-outer">
                         <v-icon color="info" v-text="'mdi-check-outline'" ></v-icon>
@@ -13,7 +13,7 @@
 
             </v-card-title>
             <v-card-actions>
-                <v-btn flat class="margin-left" color="orange">Post</v-btn>
+                <v-btn v-on:click="post(blocker)" flat class="margin-left" color="orange">Post</v-btn>
             </v-card-actions>
         </v-card>
     </v-flex>

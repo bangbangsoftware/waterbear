@@ -1,39 +1,46 @@
 <template>
-<v-card>
-    <v-toolbar class="teal white--text"  dark>
-        <v-toolbar-title>Task </v-toolbar-title>
-    </v-toolbar>
-    <v-card-text>
-        <span class="title">
+<v-hover>
+    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto"
+        width="90%" >
+
+        <v-toolbar class="teal white--text" dark>
+            <v-toolbar-title>Task </v-toolbar-title>
+        </v-toolbar>
+        <v-card-text>
+            <span class="title">
                 <h5 v-if="session.story.tasks">Task for {{session.story.title}} ({{session.story.tasks.length}}) </h5>
                 <h5 v-else>Task for {{session.story.title}}</h5>
         </span>
-        <h6 v-if="session.error" class="errorMessage"> {{ session.error }}</h6>
-        <form>
-            <v-text-field autofocus label="Task name" class="mt-5" v-model="session.task.name"
-                id="name" required></v-text-field>
-            <v-text-field label="Task desc" class="mt-5" v-model="session.task.desc" id="desc"
-                required></v-text-field>
-            <v-text-field type="number" label="Task estimation" class="mt-5" v-model="session.task.est"
-                id="est" required></v-text-field>
-            <v-select v-bind:items="skills" v-model="session.task.skill" label="Skill" class="input-group--focused" item-value="text"></v-select>
-        </form>
-    </v-card-text>
-    <v-card-actions>
-        <!--
+            <h6 v-if="session.error" class="errorMessage"> {{ session.error }}</h6>
+            <form>
+                <v-text-field autofocus label="Task name" class="mt-5" v-model="session.task.name"
+                    id="name" required></v-text-field>
+                <v-text-field label="Task desc" class="mt-5" v-model="session.task.desc" id="desc"
+                    required></v-text-field>
+                <v-text-field type="number" label="Task estimation" class="mt-5" v-model="session.task.est"
+                    id="est" required></v-text-field>
+                  <span class="skill">
+                    <v-select v-bind:items="skills" v-model="session.task.skill" label="Skill" class="input-group--focused"
+                                                                                           item-value="text"></v-select>
+                    <button class="raised primary">+</button>
+                  </span>
+            </form>
+        </v-card-text>
+        <v-card-actions>
+            <!--
         <v-btn v-on:click="exit()" align="start">
             Return
         </v-btn>
             -->
 
-        <v-btn v-on:click="postTask(session.task)">
-            Add Task
-        </v-btn>
+            <v-btn v-on:click="postTask(session.task)">
+                Add Task
+            </v-btn>
 
-    </v-card-actions>
+        </v-card-actions>
 
-    <v-list three-line v-if='session.story.tasks'>
-        <span v-for="(task,t) in session.story.tasks" v-bind:key="t">
+        <v-list three-line v-if='session.story.tasks'>
+            <span v-for="(task,t) in session.story.tasks" v-bind:key="t">
             <v-divider></v-divider>
             <v-subheader>[{{task.skill}}] {{t+1}}. {{task.name}}</v-subheader>
             <v-list-tile>
@@ -45,10 +52,11 @@
               </v-list-tile-content>
             </v-list-tile>
           </span>
-    </v-list>
+        </v-list>
 
-</v-card>
-<!--
+    </v-card>
+</v-hover>
+        <!--
 <div id="session.task">
     <div>
         <card>

@@ -14,6 +14,14 @@ const dev = (user, project) => {
 };
 
 const service = (user, project) => {
+  if (typeof user.days === "undefined" || user.days.length === 0) {
+    return "member";
+  }
+
+  if (typeof project.stories === "undefined" || project.stories.length === 0) {
+    return "devopen"; // "story"
+  }
+
   if (user.role === "Frontend Dev") {
     return dev(user, project);
   }

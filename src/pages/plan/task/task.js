@@ -5,6 +5,8 @@ import store from "../../../store.js";
 import valid from "./valid";
 import util from "../util.js";
 
+import "./task.css";
+
 const comp = {
   name: "task",
   beforeCreate: () => {

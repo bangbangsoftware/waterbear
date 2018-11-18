@@ -41,6 +41,11 @@
     align-self: right;
 }
 
+.direction {
+    min-width: 1px;
+    max-width: 1px;
+}
+
 .summary {
     justify-self: center;
 }
@@ -54,7 +59,16 @@
 
 .task-row {
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: 18% auto;
+}
+
+.item-row {
+    max-width: 1px;
+    background-color: white;
+}
+
+.blur {    
+    filter: blur(2px);
 }
 
 .task-row-countdown {
@@ -65,7 +79,6 @@
 
 
 .task {
-    width: auto;
     display: grid;
     grid-template-columns: 15% auto;
     justify-self: left;

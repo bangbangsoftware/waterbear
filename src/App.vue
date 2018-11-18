@@ -107,6 +107,11 @@ export default {
           title: "Assessment",
           route: "assess",
           icon: "assessment"
+        },
+        {
+          title: "Raw Data",
+          route: "data",
+          icon: "assessment"
         }
       ],
       mini: false,

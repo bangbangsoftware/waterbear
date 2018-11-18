@@ -4,6 +4,7 @@ import signup from "../pages/signup/signup.vue";
 import story from "../pages/story/story.vue";
 import login from "../pages/login/login.vue";
 import member from "../pages/member/member.vue";
+import data from "../pages/data/data.vue";
 import plan from "../pages/plan/plan.vue";
 import sprint from "../pages/plan/sprint/sprint.vue";
 import refine from "../pages/refine/refine.vue";
@@ -38,6 +39,11 @@ export default new Router({
       path: "/team",
       name: "team",
       component: team
+    },
+    {
+      path: "/data",
+      name: "rawdata",
+      component: data
     },
     {
       path: "/member",

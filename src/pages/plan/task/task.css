@@ -1,0 +1,4 @@
+.skills {
+    display: grid;
+    grid-auto-columns: auto, 1%;
+}

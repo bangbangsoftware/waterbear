@@ -17,12 +17,13 @@ a {
     color: #42b983;
 }
 
-.error {
-    color: red;
+.line {
+  display: grid;
+  grid-template-rows: auto; 
 }
 
-.title {
-    width: 200%
+.error {
+    color: red;
 }
 
 .fade-enter-active,
