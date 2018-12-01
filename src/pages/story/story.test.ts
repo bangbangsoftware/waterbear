@@ -27,7 +27,7 @@ describe("story.test.js", () => {
           resolve(project);
         });
       },
-      put: prj => {
+      put: (prj:any) => {
         return new Promise(resolve => {
           console.log(prj);
           resolve(prj);

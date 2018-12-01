@@ -24,7 +24,7 @@
                         <v-hover>
                             <v-card v-if="member.diary[index]" :class="member.diary[index].colour" @contextmenu="show" slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto" width="90%">
 
-                                <v-card-text @click='toggle(m,index)'>
+                                <v-card-text @click='toggle(m,index,session)'>
                                     {{member.diary[index].display}}
                                     <v-menu offset-y v-model="showMenu" :position-absolutely="true" :position-x="x"
                                         :position-y="y">

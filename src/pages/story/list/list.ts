@@ -16,8 +16,9 @@ const comp = {
     storyCard: StoryCard
   },
   methods: {
-    navigateTo: function(nav) {
-      this.$router.go({
+    navigateTo: function(nav: string) {
+      const vue = <any> this;
+      vue.$router.go({
         path: nav
       });
     }

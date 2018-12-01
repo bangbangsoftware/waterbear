@@ -1,4 +1,4 @@
-import store from "../../store.js";
+import store from "../../store";
 // import Vue from 'vue'
 
 import "./tags/tags.vue";
@@ -21,10 +21,11 @@ export default {
     };
   },
   methods: {
+    $router:{go:(a:any)=>{}},
     clearStory: function() {
       store.commit("clearStory");
     },
-    postStory: function(story) {
+          postStory: function(story:any) {
       var ok = valid(story);
       if (!ok) {
         console.log("invalid story...");
@@ -38,16 +39,16 @@ export default {
       console.log(prj);
       const db = store.state.db;
       db.get(prj._id)
-        .then(p => {
+        .then((p:any) => {
           p.stories = prj.stories;
           return db.put(p);
         })
-        .catch(err => console.error(err));
+        .catch((err:any) => console.error(err));
     },
-    whatsNeeded: function(story) {
+          whatsNeeded: function(story:any) {
       valid(story);
     },
-    navigateTo: function(nav) {
+    navigateTo: function(nav:any) {
       this.$router.go({
         path: nav
       });

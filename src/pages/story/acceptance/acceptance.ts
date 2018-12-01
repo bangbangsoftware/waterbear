@@ -13,12 +13,13 @@ const comp = {
     };
   },
   methods: {
-    navigateTo: function(nav) {
-      this.$router.go({
+    navigateTo: function(nav:string) {
+      const vue = <any> this;
+      vue.$router.go({
         path: nav
       });
     },
-    addCriteria: function(ac) {
+    addCriteria: function(ac: Array<any>) {
       if (ac && ac.length > 0) {
         store.commit("acceptance", ac);
       }
@@ -34,7 +35,7 @@ const comp = {
         error: ""
       };
     },
-    removeCriteria: function(acNo) {
+    removeCriteria: function(acNo: number) {
       store.commit("removeAcceptance", acNo);
       const acs = store.state.session.story.acs;
       return {

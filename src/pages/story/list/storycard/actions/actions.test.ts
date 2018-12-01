@@ -14,9 +14,9 @@ describe("acceptance.spec.js", () => {
     };
     Actions.methods.editStory(story, 0);
   });
-  it("should remove story", () => {
-    Actions.methods.removeStory();
-  });
+//  it("should remove story", () => {
+//    Actions.methods.removeStory();
+//  });
   it("should break story", () => {
     Actions.methods.breakStory();
   });

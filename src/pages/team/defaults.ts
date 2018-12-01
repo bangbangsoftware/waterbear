@@ -50,7 +50,7 @@ const DS = [
   }
 ];
 
-const defaultHours = (name, off) => {
+const defaultHours = (name:string, off:boolean) => {
   const dayHours = [
     "7am",
     "8am",
@@ -125,7 +125,7 @@ const defaultDays = () => {
     "Saturday"
   ];
 
-  const results = days.map(name => {
+  const results = days.map((name:string) => {
     const off = name === "Saturday" || name === "Sunday";
     return defaultHours(name, off);
   });

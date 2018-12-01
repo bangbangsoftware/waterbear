@@ -1,29 +1,30 @@
+import {Member} from './user/member';
 export default {
-  loaded: (state, l) => {
-    console.log("Loaded? " + l);
+  loaded: (state: any, l: boolean) => {
+    console.log('Loaded? ' + l);
     state.session.loaded = l;
   },
-  stage: (state, newStage) => {
+  stage: (state: any, newStage: any) => {
     state.signup.stages.push(newStage);
   },
-  db: (state, database) => {
+  db: (state: any, database: any) => {
     state.db = database;
   },
-  error: (state, error) => {
-    console.log("session now has this error:" + error);
+  error: (state: any, error: any) => {
+    console.log('session now has this error:' + error);
     state.session.error = error;
   },
-  project: (state, prj) => {
+  project: (state: any, prj: any) => {
     state.session.project = prj;
   },
-  user: (state, user) => {
+  user: (state: any, user: Member) => {
     state.session.user = user;
   },
-  log: (state, message) => {
+  log: (state: any, message: string) => {
     const item = {
       date: new Date(),
-      message
+      message,
     };
     state.feeds.push(item);
-  }
+  },
 };

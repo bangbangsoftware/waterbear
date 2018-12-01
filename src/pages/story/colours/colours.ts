@@ -1,4 +1,4 @@
-import store from "../../../store.js";
+import store from "../../../store";
 import Vue from "vue";
 import "./colours.css";
 
@@ -12,13 +12,14 @@ const comp = {
     };
   },
   methods: {
-    changeColour: no => {
+    changeColour: (no:number) => {
       console.log("Selecting colour " + no);
       store.commit("colour", no);
       return no;
     },
-    navigateTo: function(nav) {
-      this.$router.go({
+    navigateTo: function(nav:string) {
+      const vue = <any> this;
+      vue.$router.go({
         path: nav
       });
     }

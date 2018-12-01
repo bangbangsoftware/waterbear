@@ -1,21 +1,23 @@
-import storyStore from "./storyStore.js";
+import storyStore from './storyStore.js';
 
 const story = {
-  title: "The last story",
-  descAs: "A story writer",
-  descWant: "to be able to start with a blank story",
-  descThat: "for convenience and clairty",
-  tags: ["STORY"],
+  title: 'The last story',
+  descAs: 'A story writer',
+  descWant: 'to be able to start with a blank story',
+  descThat: 'for convenience and clairty',
+  tags: ['STORY'],
   colourNo: 40,
-  acs: ["Must have all fields cleared"],
-  valid: true
+  acs: ['Must have all fields cleared'],
+  valid: true,
+  selected: false,
+  index: -1,
 };
 
-it("If clear story mutates story to have blank values", () => {
+it('If clear story mutates story to have blank values', () => {
   const state = {
     session: {
-      story
-    }
+      story,
+    },
   };
   storyStore.clearStory(state);
   expect(state.session.story.title.length).toBe(0);
@@ -28,32 +30,34 @@ it("If clear story mutates story to have blank values", () => {
   expect(state.session.story.valid).toBe(false);
 });
 
-it("Should be able to select a story", () => {
+it('Should be able to select a story', () => {
   const state = {
     session: {
       project: {
-        stories: [story]
-      }
-    }
+        stories: [story],
+      },
+    },
   };
   storyStore.selectStory(state, 0);
   expect(story.selected).toBe(true);
 });
 
-it("Should be able to set current story", () => {
+it('Should be able to set current story', () => {
   const state = {
-    session: {}
+    session: {story: {title: 'NO'}},
   };
   storyStore.currentStory(state, story);
-  expect(state.session.story.title).toBe("The last story");
+  expect(state.session.story.title).toBe('The last story');
 });
 
-it("Should be able post a story", () => {
+it('Should be able post a story', () => {
   const state = {
     session: {
-      project: {},
-      story
-    }
+      project: {
+        stories: [{index: -12, title: 'WHAT'}],
+      },
+      story,
+    },
   };
   storyStore.clearStory(state);
   storyStore.postStory(state);
@@ -65,86 +69,86 @@ it("Should be able post a story", () => {
   expect(state.session.project.stories.length).toBe(2);
   expect(state.session.project.stories[0].index).toBe(1);
 
-  state.session.story.title = "Edited story";
+  state.session.story.title = 'Edited story';
   storyStore.postStory(state);
   expect(state.session.project.stories.length).toBe(2);
   expect(state.session.project.stories[0].index).toBe(1);
-  expect(state.session.project.stories[0].title).toBe("Edited story");
+  expect(state.session.project.stories[0].title).toBe('Edited story');
 });
 
-it("Should be a able to add title to main story", () => {
+it('Should be a able to add title to main story', () => {
   const state = {
-    session: {}
+    session: {story: {title: 'JHgjh'}},
   };
   storyStore.clearStory(state);
-  storyStore.title(state, "eak");
-  expect(state.session.story.title).toBe("eak");
+  storyStore.title(state, 'eak');
+  expect(state.session.story.title).toBe('eak');
 });
-it("Should be a able to add title to main story", () => {
+it('Should be a able to add title to main story', () => {
   const state = {
     session: {
-      story: {}
-    }
+            story: {descAs: '', descWant: '', descThat:''},
+    },
   };
   storyStore.clearStory(state);
   const desc = {
-    as: "as a sleepy person",
-    want: "to sleep",
-    that: "that I feel better"
+    as: 'as a sleepy person',
+    want: 'to sleep',
+    that: 'that I feel better',
   };
   storyStore.desc(state, desc);
   expect(state.session.story.descAs).toBe(desc.as);
   expect(state.session.story.descWant).toBe(desc.want);
   expect(state.session.story.descThat).toBe(desc.that);
 });
-it("Should be a able remove acceptance", () => {
+it('Should be a able remove acceptance', () => {
   const state = {
     session: {
-      story: {}
-    }
+            story: {descAs: '', descWant: '', descThat:''},
+    },
   };
   storyStore.clearStory(state);
   const desc = {
-    as: "as a sleepy person",
-    want: "to sleep",
-    that: "that I feel better"
+    as: 'as a sleepy person',
+    want: 'to sleep',
+    that: 'that I feel better',
   };
   storyStore.desc(state, desc);
   expect(state.session.story.descAs).toBe(desc.as);
   expect(state.session.story.descWant).toBe(desc.want);
   expect(state.session.story.descThat).toBe(desc.that);
 });
-it("Should be a able to remove acceptance", () => {
+it('Should be a able to remove acceptance', () => {
   const state = {
     session: {
       story: {
-        acs: ["A bad acceptance"]
-      }
-    }
+        acs: ['A bad acceptance'],
+      },
+    },
   };
   storyStore.clearStory(state);
   storyStore.removeAcceptance(state, 0);
   expect(state.session.story.acs.length).toBe(0);
 });
 
-it("Should be a able to add acceptance", () => {
+it('Should be a able to add acceptance', () => {
   const state = {
     session: {
       story: {
-        acs: []
-      }
-    }
+        acs: [],
+      },
+    },
   };
   storyStore.clearStory(state);
-  storyStore.acceptance(state, "be able to test");
+  storyStore.acceptance(state, 'be able to test');
   expect(state.session.story.acs.length).toBe(1);
 });
 
-it("Should be a able to add change colour", () => {
+it('Should be a able to add change colour', () => {
   const state = {
     session: {
-      story: {}
-    }
+      story: {colourNo: -1},
+    },
   };
   storyStore.colour(state, 66);
   expect(state.session.story.colourNo).toBe(66);

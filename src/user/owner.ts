@@ -1,16 +1,16 @@
-import store from "./../store.js";
-import state from "./../persist/state.js";
+import store from './../store';
+import state from './../persist/state';
 
-import util from "./util.js";
+import {Member} from './member';
 
-const updateOwnerInMembers = (prj, owner) => {
+const updateOwnerInMembers = (prj: any, owner: any) => {
   let found = false;
   if (!prj.members) {
     prj.members = [owner];
   }
-  const members = prj.members.map(member => {
+  const members = prj.members.map((member: Member) => {
     if (owner.name === member.name) {
-      const cleanOwner = util.cleanUser(owner);
+      const cleanOwner = owner;
       cleanOwner.owner = true;
       found = true;
       return cleanOwner;
@@ -20,59 +20,59 @@ const updateOwnerInMembers = (prj, owner) => {
   });
   if (!found) {
     owner.owner = true;
-    members.push(util.cleanUser(owner));
+    members.push(owner);
   }
   return members;
 };
 
-const updateOwnerAndDefaults = (prj, owner) => {
+const updateOwnerAndDefaults = (prj: any, owner: any) => {
   prj.members = updateOwnerInMembers(prj, owner);
   prj.defaults = store.state.defaults;
   return state.save(prj);
 };
 
-const updateOwner = (prj, owner) => {
+const updateOwner = (prj: any, owner: any) => {
   prj.members = updateOwnerInMembers(prj, owner);
   return state.save(prj);
 };
 
 const service = {
-  ownerAndDefaults: owner => {
+  ownerAndDefaults: (owner: any) => {
     return new Promise((resolve, reject) => {
-      let prj = store.state.session.project;
+      let prj:any = store.state.session.project;
       state
         .save(prj.id)
-        .then(p => {
+        .then((p: any) => {
           prj = p;
           updateOwnerAndDefaults(prj, owner);
         })
-        .catch(err => reject(err))
+        .catch((err: any) => reject(err))
         .then(() => {
-          console.log("Owner owner to state -  " + prj.id);
-          console.log("And added defaults");
-          store.commit("project", prj);
+          console.log('Owner owner to state -  ' + prj.id);
+          console.log('And added defaults');
+          store.commit('project', prj);
           resolve(prj);
         })
-        .catch(err => reject(err));
+        .catch((err: any) => reject(err));
     });
   },
-  owner: (owner, prj) => {
+  owner: (owner: any, prj: any) => {
     return new Promise((resolve, reject) => {
       state
         .load(prj._id)
-        .then(p => {
+        .then((p: any) => {
           prj = p;
           updateOwner(prj, owner);
         })
-        .catch(err => reject(err))
+        .catch((err: any) => reject(err))
         .then(() => {
-          console.log("Owner owner to state -  " + prj._id);
-          store.commit("project", prj);
+          console.log('Owner owner to state -  ' + prj._id);
+          store.commit('project', prj);
           resolve(owner);
         })
-        .catch(err => reject(err));
+        .catch((err: any) => reject(err));
     });
-  }
+  },
 };
 
 export default service;

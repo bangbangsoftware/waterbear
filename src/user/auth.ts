@@ -1,6 +1,6 @@
 import gotoNext from "../direct.js";
 import db from "../dbase.js";
-import state from "..//persist/state.js";
+import state from "../persist/state";
 
 const metadata = {
   nick: "",
@@ -14,21 +14,21 @@ const metadata = {
 };
 
 const service = {
-  login: (email, pw, database = db) => {
+   login: (email:string, pw:string, database = db) => {
     return new Promise((resolve, reject) => {
       console.log("About to logout then in");
       console.log(database);
       database
         .logOut()
         .then(database.logIn(email, pw))
-        .catch(err => reject(err))
+        .catch((err:any) => reject(err))
         .then(() => gotoNext({ name: email }))
-        .catch(err => reject(err))
-        .then(here => resolve(here))
-        .catch(err => reject(err));
+        .catch((err:any) => reject(err))
+        .then((here:string) => resolve(here))
+        .catch((err:any) => reject(err));
     });
   },
-  signup: (email, pw) => {
+        signup: (email:string, pw:string) => {
     return state.signup(email, pw, {
       metadata
     });

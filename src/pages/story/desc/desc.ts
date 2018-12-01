@@ -9,10 +9,10 @@ const comp = {
     };
   },
   methods: {
-    storeTitle: title => {
+    storeTitle: (title:string) => {
       store.commit("title", title);
     },
-    storeDesc: (as, want, that) => {
+    storeDesc: (as:string, want:string, that:string) => {
       if (typeof as === "undefined") {
         as = "";
       }

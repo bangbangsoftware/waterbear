@@ -2,7 +2,7 @@ import store from "../../../../store.js";
 import Actions from "./actions/actions";
 import AcceptanceCriteriaList from "./acceptanceCriteriaList/acceptanceCriteriaList";
 
-const movement = (index, newIndex) => {
+const movement = (index:number, newIndex:number) => {
   console.log("Moving Story");
   store.commit("moveStory", {
     index,
@@ -11,11 +11,11 @@ const movement = (index, newIndex) => {
   const prj = store.state.session.project;
   const db = store.state.db;
   db.get(prj._id)
-    .then(p => {
+    .then((p:any) => {
       p.stories = prj.stories;
       return db.put(p);
     })
-    .catch(err => console.error(err));
+    .catch((err:any) => console.error(err));
 };
 
 export default {
@@ -31,22 +31,23 @@ export default {
     };
   },
   methods: {
-    show(e) {
+    show(e:any) {
       e.preventDefault();
-      this.showMenu = true;
-      this.x = e.clientX;
-      this.y = e.clientY;
-    },
-    moveTop(i) {
+      const vue = <any> this;
+      vue.showMenu = true;
+      vue.x = e.clientX;
+      vue.y = e.clientY;
+   },
+    moveTop(i:number) {
       movement(i, 0);
     },
-    moveBottom(i) {
+    moveBottom(i:number) {
       movement(i, store.state.session.project.stories.length - 1);
     },
-    moveDown(i) {
+    moveDown(i:number) {
       movement(i, i + 1);
     },
-    moveUp(i) {
+    moveUp(i:number) {
       movement(i, i - 1);
     }
   },

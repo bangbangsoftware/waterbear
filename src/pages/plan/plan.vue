@@ -1,15 +1,15 @@
 <template>
-<v-layout id="plan" v-if='session.loaded'>
-
+  <v-layout id="plan" v-if="session.loaded">
+    <v-flex xs6> <backlog></backlog> </v-flex>
     <v-flex xs6>
-        <backlog></backlog>
+      <sprint-backlog
+        v-if="session.planState === 'sprintSelect'"
+      ></sprint-backlog>
+      <sprint-create
+        v-if="session.planState === 'sprintCreate'"
+      ></sprint-create>
+      <task v-if="session.planState === 'task'"></task>
     </v-flex>
-    <v-flex xs6>
-        <sprint-backlog v-if="session.planState === 'sprintSelect'"></sprint-backlog>
-        <sprint-create v-if="session.planState === 'sprintCreate'"></sprint-create>
-        <task v-if="session.planState === 'task'"></task>
-    </v-flex>
-</v-layout>
+  </v-layout>
 </template>
-<script src='./plan.js'>
-</script>
+<script src="./plan.ts"></script>

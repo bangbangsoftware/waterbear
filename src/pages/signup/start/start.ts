@@ -7,7 +7,7 @@ import user from "../../../user.js";
 
 import "./start.css";
 
-const oops = (err, email, where) => {
+const oops = (err:any, email:string, where:string) => {
   if (typeof err === "undefined") {
     return "";
   }
@@ -28,7 +28,7 @@ const oops = (err, email, where) => {
   return error;
 };
 
-const register = email => {
+const register = (email:string) => {
   if (store.state.session.error) {
     console.error("Can't register due to :" + store.state.session.error);
     return;
@@ -44,12 +44,12 @@ const register = email => {
   store.commit("stage", me);
 };
 
-const signInReg = (email, pw) => {
+const signInReg = (email:string, pw:string) => {
   user
     .signup(email, pw)
-    .catch(err => oops(err, email, "signup"))
+    .catch((err:any) => oops(err, email, "signup"))
     .then(() => db.login(email, pw))
-    .catch(err => oops(err, email, "login"))
+    .catch((err:any) => oops(err, email, "login"))
     .then(() => register(email));
 };
 
@@ -67,11 +67,11 @@ const comp = {
     };
   },
   create: () => {
-    const element = document.getElementById("email");
+    const element = <any> document.getElementById("email");
     element.focus();
   },
   methods: {
-    createUser: (email, pw) => {
+    createUser: (email:string, pw:string) => {
       store.commit("error", "");
       if (email.length === 0) {
         const emailElement = document.getElementById("email");
@@ -96,7 +96,7 @@ const comp = {
       }
       db.logout()
         .then(() => signInReg(email, pw))
-        .catch(err => {
+        .catch((err:any) => {
           console.error(err);
           signInReg(email, pw);
         });

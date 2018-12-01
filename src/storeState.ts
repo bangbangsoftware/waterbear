@@ -26,8 +26,9 @@ const session = {
   },
   sprints: [],
   project: {
+    _id: -1,
     stories: [],
-    members: [],
+    members: <any>[],
     defaults: [],
     sprints: [],
     current: {
@@ -43,10 +44,12 @@ const session = {
 const signup = {
   stages: []
 };
+const db: any = { put: () => {} };
 
 export default {
+  menu: false,
   feeds: [],
-  db: null,
+  db,
   members: [],
   signup,
   session,
