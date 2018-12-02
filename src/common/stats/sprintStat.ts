@@ -2,19 +2,20 @@ import is from "../valid/validSprint";
 import util from "../util";
 import tasks from "./tasks.js";
 import contingency from "./contingency.js";
+import { Member} from '../../user/member';
 
-const getAssignedTasks = (taks, user) => {
+const getAssignedTasks = (taks:Array<any>, user:Member) => {
   return taks.filter(t => t.assignedTo && t.assignedTo.name === user.name);
 };
 
 const comp = {
-  contingency: (sprint, members, now = new Date()) => {
+  contingency: (sprint:any, members:Array<any>, now = new Date()) => {
     // skillBalance
     const all = tasks.allTasks(sprint);
     return contingency(sprint, members, now, all);
   },
-  tasksDonePercent: sprint => tasks.tasksDonePercent(sprint),
-  state: (sprint, user, now = new Date()) => {
+  tasksDonePercent: (sprint:any) => tasks.tasksDonePercent(sprint),
+  state: (sprint:any, user:Member, now = new Date()) => {
     const fail = is.invalid(sprint, now);
     if (fail) {
       return fail;
@@ -34,12 +35,12 @@ const comp = {
     // paused
     return {};
   },
-  hoursLeft: (sprint, members, now = Date()) => {
+  hoursLeft: (sprint:any, members: Array<Member>, now = Date()) => {
     return members
       .map(user => util.hoursLeftInSprint(sprint, user, now))
       .reduce((t, c) => t + c);
   },
-  tasksStat: tsks => {
+  tasksStat: (tsks:Array<any>) => {
     return {
       qty: tsks.length,
       est: tsks.map(t => t.est).reduce((t, c) => t + c),

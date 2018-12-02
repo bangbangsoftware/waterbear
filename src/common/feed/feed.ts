@@ -1,7 +1,7 @@
-import store from "../../store.js";
+import store from "../../store";
 import Vue from "vue";
 
-const zeroFill = val => {
+const zeroFill = (val:number) => {
   if (val < 10) {
     return "0" + val;
   } else {
@@ -17,7 +17,7 @@ const feedComp = {
     };
   },
   filters: {
-    time: date => {
+    time: (date:Date) => {
       return (
         zeroFill(date.getHours()) +
         ":" +

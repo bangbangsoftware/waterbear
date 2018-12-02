@@ -1,11 +1,12 @@
 // import router from './router/index.js'
-import store from "./store.js";
-import db from "./dbase.js";
-import userService from "./user.js";
-import director from "./director.js";
-import state from "./persist/state.js";
+import store from "./store";
+import db from "./dbase";
+import userService from "./user";
+import { Member} from "./user/member";
+import director from "./director";
+import state from "./persist/state";
 
-const register = (user, project, resolve) => {
+const register = (user : Member, project:any, resolve:any) => {
   console.log("Found...", project, "For...", user);
   store.commit("project", project);
   store.commit("log", user.name + " logged on");
@@ -16,25 +17,25 @@ const register = (user, project, resolve) => {
   whereNow(project, projectsUser, resolve);
 };
 
-const whereNow = (project, user, resolve) => {
+const whereNow = (project:any, user:Member, resolve:any) => {
   const next = director(user, project);
   resolve(next);
 };
 
-const unfoundProject = (me, err, resolve) => {
+const unfoundProject = (me:Member, err:any, resolve:any) => {
   console.error('Cannot find "' + me.currentProject + '".');
   console.error(err);
   resolve("start/" + me.currentProject);
 };
 
-const goProject = (me, resolve, reject) => {
+const goProject = (me:Member, resolve:any, reject:any) => {
   state
     .load(me.currentProject)
-    .then(p => register(me, p, resolve, reject))
-    .catch(err => unfoundProject(me, err, resolve));
+    .then((p:any) => register(me, p, resolve))
+    .catch((err:any) => unfoundProject(me, err, resolve));
 };
 
-const goodUser = (user, resolve, reject) => {
+const goodUser = (user:Member, resolve:any, reject:any) => {
   if (typeof user.currentProject === "undefined") {
     store.commit("error", "Need to define a project");
     resolve("start");
@@ -43,19 +44,19 @@ const goodUser = (user, resolve, reject) => {
   }
 };
 
-const badUser = (error, reject) => {
+const badUser = (error:any, reject:any) => {
   console.error(error);
   reject(error);
 };
 
-const loadUser = (me, resolve, reject) => {
+const loadUser = (me:Member, resolve:any, reject:any) => {
   state
     .getUser(me.name)
-    .then(user => goodUser(user, resolve, reject))
-    .catch(error => badUser(error, reject));
+    .then((user:Member) => goodUser(user, resolve, reject))
+    .catch((error:any) => badUser(error, reject));
 };
 
-const service = (me, database = db) => {
+const service = (me:Member, database = db) => {
   store.commit("db", database);
   return new Promise((resolve, reject) => {
     console.log(me);

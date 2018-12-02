@@ -11,12 +11,12 @@ const comp = {
     };
   },
   methods: {
-    go: function(where) {
+    go: function(where:string) {
       // !!! to use 'this', don't use => !!!!
       if (!where) {
         store.commit("loaded", false);
       }
-      const that = this;
+      const that = <any> this;
       if (that.$refs) {
         that.$refs.sidenav.close();
       }

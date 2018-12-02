@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 //
 
-import App from "./App";
+import App from "./App.vue";
 import router from "./router";
 import Vue from "vue";
 
@@ -14,7 +14,7 @@ import "../node_modules/vuetify/dist/vuetify.min.css";
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
 
-Vue.filter("truncate", function(value) {
+Vue.filter("truncate", function(value: string) {
   if (!value) {
     return "";
   }

@@ -1,6 +1,6 @@
 import store from "./store.js";
 
-const error = err => console.error(err);
+const error = (err:any) => console.error(err);
 const name = "waterbear";
 const remoteCoach = store.state.session.couchURL + name;
 const pouchOpts = {
