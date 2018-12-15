@@ -45,7 +45,7 @@ const testData:Member = {
 };
 export {testData};
 
-const MemberService = {
+const MemberService:any = {
   updateMembers: (
     members: Array<Member>,
     prj: any = store.state.session.project,

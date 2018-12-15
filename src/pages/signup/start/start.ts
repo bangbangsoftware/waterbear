@@ -49,7 +49,7 @@ const signInReg = (email:string, pw:string) => {
   user
     .signup(email, pw)
     .catch((err:any) => oops(err, email, "signup"))
-    .then(() => db.login(email, pw))
+    .then(() => db.logIn(email, pw))
     .catch((err:any) => oops(err, email, "login"))
     .then(() => register(email));
 };
@@ -95,7 +95,7 @@ const comp = {
         }
         return oops("Missing password", "", "no password");
       }
-      db.logout()
+      db.logOut()
         .then(() => signInReg(email, pw))
         .catch((err:any) => {
           console.error(err);

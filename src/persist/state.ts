@@ -7,7 +7,9 @@ const remote = {
   user: (name: string, data: any) => {
     return db.putUser(name, data);
   },
-  signup: (email: string, pw: string, data: any) => db.signUp(email, pw, data),
+  signup: (email: string, pw: string, data: any):Promise<any> =>
+  // db.signUp(email, pw, data),
+   db.signUp(email, pw),
   getUser: (name: string):Promise<any> => db.getUser(name),
   load: (projectID: string) => db.get(projectID)
 };
@@ -18,7 +20,7 @@ const state = {
   save: (project: any): Promise<any> => {
     return remote.save(project);
   },
-  signup: (email: string, pw: string, data: any) =>
+  signup: (email: string, pw: string, data: any):Promise<any> =>
     remote.signup(email, pw, data),
   putUser: (name: string, data: any) => {
     remote.user(name, data);

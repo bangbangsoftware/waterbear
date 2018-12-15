@@ -45,7 +45,7 @@ const service = {
     );
   },
   currentProject: (user: Member, projectName: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<Member>((resolve, reject) => {
       console.log(
         'Setting current project for ' + user.name + ' to ' + projectName,
       );
@@ -53,7 +53,7 @@ const service = {
         .getUser(user.name)
         .then((usr: Member) => setProject(usr, projectName))
         .catch((err: any) => reject(err))
-        .then((u: Member) => resolve(u))
+        .then((u: any) => resolve(u))
         .catch((err: any) => reject(err));
     });
   },

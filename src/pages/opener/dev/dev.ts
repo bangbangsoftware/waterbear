@@ -107,7 +107,7 @@ const comp = {
   computed: {
     tasks: function() {
       const currentSprint = current(store.state.session);
-      const all = tasks.allTasks(currentSprint).map((task, i) => {
+      const all = tasks.allTasks(currentSprint).map((task:any, i:number) => {
         const block = task;
         block.id = i;
         block.title = task.name;
@@ -121,7 +121,7 @@ const comp = {
       console.log("Todos", todos.length);
       return todos;
     },
-    mine: function() {
+    mine: function() { 
       const mine = tasks.myTasks(currentTasks(), store.state.session.user);
       console.log("mine", mine.length);
       console.log("mine", mine);

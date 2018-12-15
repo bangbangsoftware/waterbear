@@ -1,10 +1,11 @@
 import tasks from "./tasks.js";
 import dataOne from "../test.data.js";
+import {Member} from '../../user/member';
 
 describe("tasks.test.js: How is a member doing", () => {
   it("should describe started task by hours", () => {
     const data = dataOne();
-    const user = data.member;
+    const user = <Member> data.member;
     const task = {
       name: "start button",
       desc: "Make the start button do something",
@@ -13,8 +14,8 @@ describe("tasks.test.js: How is a member doing", () => {
       valid: true,
       start: new Date(2018, 7, 21, 12, 20, 0, 0)
     };
-    const now = new Date(2018, 7, 22, 13, 10, 0, 0);
-    const state = tasks.taskState(task, user, now);
+    const nowDate = new Date(2018, 7, 22, 13, 10, 0, 0);
+    const state = tasks.taskState(task, user, nowDate);
     expect(state.done).toBe(9);
     expect(state.left).toBe(1);
     expect(state.finished).toBe(false);

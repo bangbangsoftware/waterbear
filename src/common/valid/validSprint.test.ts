@@ -36,21 +36,21 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
 
   it("Should be handle a empty sprint", () => {
     const mockSprint = {};
-    const summary = sprint.invalid(mockSprint);
+    const summary = <any> sprint.invalid(mockSprint);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("Nothing in the sprint");
   });
 
   it("Should be handle a undefined sprint", () => {
     const mockSprint = undefined;
-    const summary = sprint.invalid(mockSprint);
+    const summary =<any>  sprint.invalid(mockSprint);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("Nothing in the sprint");
   });
 
   it("Should be handle a null sprint", () => {
     const mockSprint = null;
-    const summary = sprint.invalid(mockSprint);
+    const summary =<any>  sprint.invalid(mockSprint);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("Nothing in the sprint");
   });
@@ -63,7 +63,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
     const mockSprint = {
       list: [story]
     };
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint has not started yet");
   });
 
@@ -71,7 +71,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
     const mockSprint = {
       startDate: date
     };
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("No stories in the sprint");
   });
@@ -81,7 +81,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
       startDate: date,
       list: []
     };
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("No stories in the sprint");
   });
@@ -92,7 +92,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
       startDate: date,
       list: [story]
     };
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("No tasks in the stories");
   });
@@ -107,7 +107,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
     };
     console.log(mockSprint);
 
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint is not defined yet");
     expect(summary.description).toBe("No tasks in the stories");
   });
@@ -124,7 +124,7 @@ describe("validSprint.test.js: The summary text of a sprint", () => {
       startDate: five,
       list: [story]
     };
-    const summary = sprint.invalid(mockSprint, now);
+    const summary =<any>  sprint.invalid(mockSprint, now);
     expect(summary.state).toBe("The sprint has a false start");
     expect(summary.description).toBe(
       "It started 5 days ago but no task have started yet"

@@ -5,7 +5,7 @@ import {Member} from './user/member';
 
 describe("redirect.spec.js", () => {
   it("should handle a user that is associated with a missing projects  ", done => {
-    const failFakeDB = {
+    const failFakeDB = <any> {
       get: (prj:any) => {
         console.log("fail fakeDB get called with :" + prj);
         return new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ describe("redirect.spec.js", () => {
   });
 
   it("should handle direct a project owner without hours to member screen", done => {
-    const fakeDB = {
+    const fakeDB = <any> {
       get: () => {
         console.log("fakeDB get called");
         return new Promise(resolve => {
