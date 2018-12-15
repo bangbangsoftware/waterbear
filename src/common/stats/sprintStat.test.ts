@@ -30,7 +30,7 @@ describe("sprintStat.test.js: Describe how the sprint is doing", () => {
     const member = data.member;
     const now = data.startDate;
 
-    const summary = sprint.state(mockSprint, member, now);
+    const summary = <any> sprint.state(mockSprint, member, now);
     expect(summary.state).toBe("PICK_TASK");
     expect(summary.timeLeft).toBe(50);
 

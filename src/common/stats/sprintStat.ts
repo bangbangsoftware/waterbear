@@ -14,7 +14,7 @@ const comp = {
     const all = tasks.allTasks(sprint);
     return contingency(sprint, members, now, all);
   },
-  tasksDonePercent: (sprint:any) => tasks.tasksDonePercent(sprint),
+  tasksDonePercent: (sprint:any) => tasks.tasksDonePercentage(sprint),
   state: (sprint:any, user:Member, now = new Date()) => {
     const fail = is.invalid(sprint, now);
     if (fail) {
@@ -35,7 +35,7 @@ const comp = {
     // paused
     return {};
   },
-  hoursLeft: (sprint:any, members: Array<Member>, now = Date()) => {
+  hoursLeft: (sprint:any, members: Array<Member>, now = new Date()) => {
     return members
       .map(user => util.hoursLeftInSprint(sprint, user, now))
       .reduce((t, c) => t + c);

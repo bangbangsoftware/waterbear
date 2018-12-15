@@ -1,3 +1,5 @@
+import {Day, Hour} from '../../user/member';
+
 const dayHours = [
   "7am",
   "8am",
@@ -27,9 +29,9 @@ const nightHours = [
   "6am"
 ];
 
-const days = off => {
+const days = (off:boolean) => {
   let on = false;
-  return dayHours.map(h => {
+  return dayHours.map((h:string):Hour => {
     if (off) {
       return {
         name: h,
@@ -63,7 +65,7 @@ const nights = () => {
   });
 };
 
-const defaultHours = (name, off) => {
+const defaultHours = (name:string, off:boolean) => {
   const day = days(off);
   const night = nights();
   return {

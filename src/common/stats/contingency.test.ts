@@ -6,7 +6,7 @@ const freshData = JSON.parse(JSON.stringify(sprintData));
 
 describe("contingency.test.js: Should be able to give contingency", () => {
   it("be able to give contingency for a health sprint", () => {
-    sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0);
+    /// ??? sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0);
     const now = new Date(2018, 7, 2, 12, 20, 0, 0);
     const another = JSON.parse(JSON.stringify(memberData));
     const state = contingency(sprintData, [memberData, another], now);
@@ -27,7 +27,7 @@ describe("contingency.test.js: Should be able to give contingency", () => {
   });
 
   it("be able to give contingency for an over sprint", () => {
-    sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0);
+    // ???? sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0);
     const bigTask = {
       name: "The big one",
       desc: "This big one is going to break the sprint",
@@ -37,7 +37,7 @@ describe("contingency.test.js: Should be able to give contingency", () => {
       valid: true,
       index: 0
     };
-    sprintData.list[0].tasks.push(bigTask);
+    // ??? sprintData.list[0].tasks.push(bigTask);
 
     const now = new Date(2018, 7, 2, 12, 20, 0, 0);
     const another = JSON.parse(JSON.stringify(memberData));

@@ -8,7 +8,7 @@ export interface MemberTime {
       skills: Array<string> 
 }
 export interface MemberRemain {
-  memberTimes: Array<MemberRemain>,
+  memberTimes: Array<MemberTime>,
   remainder: number
 }
 export interface Track {
@@ -93,7 +93,7 @@ const comp = (sprint:any, members :Array<Member>, now:Date, work = tasks.allTask
 
   // how much tasks are left to do??
   const taskMap = <any> {};
-  work.forEach(task => {
+  work.forEach((task:any) => {
     const skill = task.skill;
     if (task.end) {
       return;

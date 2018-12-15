@@ -65,7 +65,7 @@ const comp = {
     }
     return assignedTo === user.name;
   },
-  taskState: (task:any, user:Member, now = Date()) => {
+  taskState: (task:any, user:Member, now = new Date()) => {
     const skilled = user.skills
       ? user.skills.filter(s => s === task.skill).length > 0
       : false;
