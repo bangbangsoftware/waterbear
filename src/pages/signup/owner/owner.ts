@@ -2,6 +2,7 @@ import store from "../../../store.js";
 import user from "../../../user.js";
 import Vue from "vue";
 import defaults from "../../../common/setup/hours.js";
+import { Member, Diary, Day } from "../../../user/member";
 
 const comp = {
   name: "owner",
@@ -14,11 +15,11 @@ const comp = {
     };
   },
   mounted: () => {
-    const element = document.getElementById("ownername");
+    const element = <any>document.getElementById("ownername");
     element.focus();
   },
   methods: {
-    owner: (nick, role) => {
+    owner: (nick: string, role: string) => {
       if (nick.length === 0) {
         const element = document.getElementById("ownername");
         if (element) {
@@ -26,14 +27,27 @@ const comp = {
         }
         return "What's your name?";
       }
-      const email = store.state.signup.stages[0].name;
+      const stage = <any>store.state.signup.stages[0];
+      const email = stage.name;
       store.commit("log", "Hi " + nick + " (" + email + ")");
-      user.ownerAndDefaults({
+      const skills = new Array<string>();
+      const asperations = new Array<string>();
+      const holidays = new Array<Date>();
+      const diary = new Array<Diary>();
+      const owner:Member = {
         nick,
         name: email,
         role,
-        days: defaults()
-      });
+        skills,
+        days: defaults(),
+        owner: true,
+        birthday: new Date(),
+        currentProject: "",
+        asperations,
+        holidays,
+        diary
+      };
+      user.ownerAndDefaults(owner);
       store.commit("stage", {
         name,
         email,

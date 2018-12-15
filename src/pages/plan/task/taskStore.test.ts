@@ -3,7 +3,7 @@ import store from "./taskStore.js";
 it("task error can be set", () => {
   const state = {
     session: {
-      task: {}
+      task: {valid:true,error:''}
     }
   };
   store.taskError(state, "hello");
@@ -14,7 +14,7 @@ it("task error can be set", () => {
 it("task ok can be set", () => {
   const state = {
     session: {
-      task: {}
+      task: {valid:true,error:''}
     }
   };
   store.taskOk(state);
@@ -25,7 +25,7 @@ it("task ok can be set", () => {
 it("task can be cleared", () => {
   const state = {
     session: {
-      task: {}
+      task: {valid:true,name:'dddd'}
     }
   };
   store.clearTask(state);
@@ -36,7 +36,7 @@ it("task can be cleared", () => {
 it("task name can be set", () => {
   const state = {
     session: {
-      task: {}
+      task: {valid:true,name:'dddd'}
     }
   };
   store.clearTask(state);
@@ -48,7 +48,8 @@ it("task desc can be set", () => {
   const state = {
     session: {
       task: {
-        name: "ringo"
+        name: "ringo",
+        desc:"lllll"
       }
     }
   };
@@ -63,7 +64,8 @@ it("task desc can be set", () => {
   const state = {
     session: {
       task: {
-        name: "ringo"
+        name: "ringo",
+        desc:"jjj"
       }
     }
   };
@@ -76,7 +78,11 @@ it("task desc can be set", () => {
 it("task skill can be set", () => {
   const state = {
     session: {
-      task: {}
+       task: {
+        name: "ringo",
+        desc:"jjj",
+        skill:''
+      }
     }
   };
   store.clearTask(state);
@@ -90,7 +96,12 @@ it("task skill can be set", () => {
 it("task est can be set", () => {
   const state = {
     session: {
-      task: {}
+      task: {
+         name: "ringo",
+        desc:"jjj",
+        skill:"kkk",
+        est:-1
+      }
     }
   };
   store.clearTask(state);
@@ -104,7 +115,12 @@ it("task est can be set", () => {
 it("can select a task", () => {
   const state = {
     session: {
-      task: {}
+       task: {
+         name: "ringo",
+        desc:"jjj",
+        skill:"kkk",
+        est:-1
+      }
     }
   };
   store.clearTask(state);
@@ -120,11 +136,16 @@ it("can select a task", () => {
 it("can add a task", () => {
   const state = {
     session: {
-      task: {},
+        task: {
+         name: "ringo",
+        desc:"jjj",
+        skill:"kkk",
+        est:-1
+      },
       project: {
         stories: [
           {
-            tasks: []
+            tasks: [{name:''}]
           }
         ]
       },

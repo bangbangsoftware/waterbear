@@ -2,6 +2,7 @@ import store from "../../../store.js";
 import Vue from "vue";
 import user from "../../../user.js";
 import defaults from "../../../common/setup/hours.js";
+import {Member, Diary} from '../../../user/member';
 
 const comp = {
   name: "team",
@@ -50,12 +51,20 @@ const comp = {
         return errorState;
       }
 
-      const newMember = {
+      const newMember:Member = {
         nick: name,
         role,
         name: email,
-        days: defaults()
+        days: defaults(),
+        skills: Array<string>(),
+        owner: false,
+        birthday: null,
+        currentProject: null,
+        asperations: Array<string>(),
+        holidays: Array<Date>(),
+        diary: Array<Diary>()
       };
+
       let newList = store.state.session.project.members;
       if (typeof newList === "undefined") {
         newList = <any>[];

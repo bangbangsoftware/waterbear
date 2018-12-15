@@ -1,11 +1,12 @@
 import direct from "./direct.js";
 import store from "./store.js";
 import Vue from "vue";
+import {Member} from './user/member';
 
 describe("redirect.spec.js", () => {
   it("should handle a user that is associated with a missing projects  ", done => {
     const failFakeDB = {
-      get: prj => {
+      get: (prj:any) => {
         console.log("fail fakeDB get called with :" + prj);
         return new Promise((resolve, reject) => {
           console.log(prj + ": fake DB direct has come back.....");
@@ -16,7 +17,7 @@ describe("redirect.spec.js", () => {
       nb: "This a failing fakeDB"
     };
 
-    const user = {
+    const user = <Member> {
       currentProject: "redirectSpecProject"
     };
     direct(user, failFakeDB)
@@ -50,17 +51,17 @@ describe("redirect.spec.js", () => {
     };
     console.log(fakeDB);
 
-    const user = {
+    const user = <Member> {
       currentProject: "bingo",
-      email: "fred@fred.com",
-      hours: undefined
     };
+    user.name ="fred@fred.com",
     direct(user, fakeDB);
     Vue.nextTick(() => {
       console.log("THE END");
-      expect(store.state.project.owner.email).toBe("FAILfred@fred.com");
-      expect(store.state.feed[0]).toBe("fred@fred.com logged on");
-      expect(store.state.session.user.email).equal("freiid@fred.com");
+      const state = <any> store.state;
+      expect(state.project.owner.email).toBe("FAILfred@fred.com");
+      expect(state.feed[0]).toBe("fred@fred.com logged on");
+      expect(state.session.user.name).toBe("freiid@fred.com");
       done();
     });
   });

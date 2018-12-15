@@ -1,5 +1,6 @@
 import Vue from "vue";
-import Password from "vue-password-strength-meter";
+// import Password from "vue-password-strength-meter";
+import "vue-password-strength-meter";
 
 import store from "../../../store.js";
 import db from "../../../dbase.js";
@@ -55,9 +56,9 @@ const signInReg = (email:string, pw:string) => {
 
 const comp = {
   name: "start",
-  components: {
-    Password
-  },
+//  components: {
+//    Password
+//  },
   data() {
     return {
       error: "",

@@ -23,19 +23,19 @@ const comp = {
     });
   },
   methods: {
-    toggleDay: (day, hour) => {
+    toggleDay: (day:any, hour:any) => {
       store.commit("toggleDay", {
         day,
         hour
       });
     },
-    toggleNight: (day, hour) => {
+    toggleNight: (day:any, hour:any) => {
       store.commit("toggleNight", {
         day,
         hour
       });
     },
-    colour: value => {
+    colour: (value:string) => {
       if (value === "on") {
         return "green";
       }

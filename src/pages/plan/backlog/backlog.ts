@@ -20,24 +20,26 @@ const comp = {
   computed: {
     complete: {
       get: function() {
-        const state = util.backlogState(this.project);
+        const that = <any> this;
+        const state = util.backlogState(that.project);
         return state.complete;
       },
-      set: function(what) {
+      set: function(what:any) {
         console.log("complete set to ", what);
       }
     }
   },
   beforeCreate: function() {
     const state = util.backlogState(store.state.session.project);
-    this.complete = state.complete;
+    const that = <any> this;
+    that.complete = state.complete;
   },
   methods: {
     save: () => {
-      const session = store.state.session;
+      const session = <any> store.state.session;
       user.updateUser(session.user, session.project);
     },
-    newTask: i => {
+    newTask: (i:number) => {
       console.log("story selected is number " + i);
       store.commit("clearTask");
       store.commit("selectStory", i);
@@ -46,7 +48,7 @@ const comp = {
     refine: () => {
       window.location.href = "#/refine";
     },
-    selectTask: (i, task) => {
+    selectTask: (i:number, task:any) => {
       console.log("story selected is number " + i);
       console.log("task selected...");
       console.log(task);
@@ -54,7 +56,7 @@ const comp = {
       store.commit("selectTask", task);
       store.commit("planState", "task");
     },
-    addToSprint: function(index) {
+    addToSprint: function(index:number) {
       store.commit("addToSprint", index);
       util.updateSprints();
       store.commit("planState", "sprint");

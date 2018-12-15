@@ -1,6 +1,6 @@
 import {Member} from './user/member';
 
-const dev = (useri:Member, project:any) => {
+const dev = (user:Member, project:any) => {
   const now = new Date();
   const started = project.sprints.filter(() => now);
   if (started.length === 0) {

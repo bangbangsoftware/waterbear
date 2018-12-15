@@ -3,7 +3,7 @@ import db from "./dbase.js";
 
 import resolveUser from "./direct.js";
 
-const runaway = (jump, reject) => message => {
+const runaway = (reject:Function, jump = true) => (message:string) => {
   store.commit("loaded", false);
   store.commit("error", "Need to login");
   if (window && jump) {
@@ -12,7 +12,7 @@ const runaway = (jump, reject) => message => {
   reject(message);
 };
 
-const checkSession = error => (session, resolve) => {
+const checkSession = (error:any) => (session:any, resolve:Function) => {
   if (!session) {
     error("No Session");
     return;
@@ -38,18 +38,18 @@ const checkSession = error => (session, resolve) => {
     });
 };
 
-const noDatabase = (resolve, reject, checker) => {
+const noDatabase = (resolve:Function, reject:Function, checker:Function) => {
   console.error("No database");
   store.commit("user", false);
   db.getSession()
-    .then(session => checker(session))
-    .catch(err => runaway(reject, err));
+    .then((session:any) => checker(session))
+    .catch((err:any) => runaway(reject)(err));
 };
 
 const service = function(jump = true) {
   store.commit("loaded", false);
   return new Promise((resolve, reject) => {
-    const error = runaway(jump, reject);
+    const error = runaway(reject, jump);
     const checker = checkSession(error);
     if (store.state.db === null) {
       noDatabase(resolve, reject, checker);

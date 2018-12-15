@@ -1,4 +1,4 @@
-const nextState = hour => {
+const nextState = (hour:any) => {
   if (hour.state !== undefined && hour.state === "on") {
     return "off";
   }
@@ -8,7 +8,7 @@ const nextState = hour => {
   return "wfh";
 };
 
-const toggle = hour => {
+const toggle = (hour:any) => {
   const name = hour.label ? hour.label : hour.name;
   hour.label = name;
   hour.state = nextState(hour);
@@ -19,36 +19,38 @@ const toggle = hour => {
 
 // @TODO the hour is the index not the value needs remapping where restoring the label
 export default {
-  nick: (state, name) => {
+  nick: (state:any, name:string) => {
     state.session.user.nick = name;
   },
-  toggleNight: (state, time) => {
+  toggleNight: (state:any, time:any) => {
     const oldHour = state.session.user.days[time.day].night[time.hour];
-    const hour = toggle(oldHour, time);
+//    const hour = toggle(oldHour, time);
+    const hour = toggle(oldHour);
     state.session.user.days[time.day].night[time.hour] = hour;
     state.session.change = time;
     return hour;
   },
-  toggleDay: (state, time) => {
+  toggleDay: (state:any, time:any) => {
     const oldHour = state.session.user.days[time.day].day[time.hour];
-    const hour = toggle(oldHour, time);
+//    const hour = toggle(oldHour, time);
+    const hour = toggle(oldHour);
     state.session.user.days[time.day].day[time.hour] = hour;
     state.session.change = time;
     return hour;
   },
-  day: (state, hours) => {
+  day: (state:any, hours:any) => {
     if (!state.session.user.days) {
       state.session.user.days = [];
     }
     state.session.user.days.push(hours);
   },
-  addMember: (state, member) => {
+  addMember: (state:any, member:any) => {
     state.members.push(member);
   },
-  replaceMembers: (state, members) => {
+  replaceMembers: (state:any, members:any) => {
     state.members = members;
   },
-  updateMember: (state, memData) => {
+  updateMember: (state:any, memData:any) => {
     state.members[memData.memberNo] = memData.member;
   }
 };

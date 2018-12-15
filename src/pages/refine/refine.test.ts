@@ -27,6 +27,7 @@ const storyTwo = {
 };
 
 const storyThree = {
+  name:"WHAT!",
   title: "Story number three",
   descAs: "",
   descWant: "",
@@ -72,6 +73,7 @@ const storyFour = {
 };
 
 const storyFive = {
+  name:"COME ON!!",
   title: "Story number five",
   descAs: "",
   descWant: "",
@@ -121,7 +123,7 @@ describe("refined.test.js", () => {
           resolve(project);
         });
       },
-      put: prj => {
+      put: (prj:any) => {
         return new Promise(resolve => {
           console.log(prj);
           resolve(prj);

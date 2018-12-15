@@ -22,15 +22,15 @@ const comp = {
     };
   },
   methods: {
-    storeTask: task => util.storeTask(task),
-    storeName: value => store.commit("taskName", value),
-    storeDesc: desc => store.commit("taskDesc", desc),
-    storeSkill: value => store.commit("taskSkill", value),
-    storeEst: value => {
+    storeTask: (task: any) => util.storeTask(task),
+    storeName: (value: string) => store.commit("taskName", value),
+    storeDesc: (desc: string) => store.commit("taskDesc", desc),
+    storeSkill: (value: string) => store.commit("taskSkill", value),
+    storeEst: (value: string) => {
       const num = parseInt(value);
       store.commit("taskEst", num);
     },
-    postTask: function(task) {
+    postTask: function(task: any) {
       var ok = valid(task);
       if (!ok) {
         console.log("invalid task...");
@@ -42,7 +42,8 @@ const comp = {
       comp.methods.storeTask(task);
     },
     exit: function() {
-      const state = util.next(this.session);
+      const that = <any>this;
+      const state = util.next(that.session);
       store.commit("planState", state);
     }
   }

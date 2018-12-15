@@ -3,7 +3,7 @@ import Vue from "vue";
 import { Bar } from "vue-chartjs";
 import store from "../../../../store.js";
 
-const generate = data => {
+const generate = (data:any) => {
   return {
     labels: data.skills,
     datasets: [
@@ -31,17 +31,20 @@ const comp = {
   watch: {
     session: {
       handler: function() {
-        const graph = generate(this.session.planChartData.balance);
-        this._chart.data.datasets = graph.datasets;
-        this._chart.data.labels = graph.labels;
-        this._chart.update();
+        const that = <any> this;
+        const graph = generate(that.session.planChartData.balance);
+        that._chart.data.datasets = graph.datasets;
+        that._chart.data.labels = graph.labels;
+        that._chart.update();
       },
       deep: true
     }
   },
   mounted() {
-    const graph = generate(store.state.session.planChartData.balance);
-    this.renderChart(graph, {
+    const that = <any> this;
+    const session = <any> store.state.session;
+    const graph = generate(session.planChartData.balance);
+    that.renderChart(graph, {
       responsive: true,
       maintainAspectRatio: false
     });

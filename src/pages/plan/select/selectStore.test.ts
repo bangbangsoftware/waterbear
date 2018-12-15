@@ -9,7 +9,8 @@ it("if can be selected", () => {
     }
   };
   store.selectSprint(state, 45);
-  expect(state.session.project.current.sprintIndex).toBe(45);
+  const current = <any> state.session.project.current;
+  expect(current.sprintIndex).toBe(45);
 });
 
 it("Sprint can set sprint name", () => {
@@ -19,7 +20,8 @@ it("Sprint can set sprint name", () => {
     }
   };
   store.sprintName(state, "Bug fix");
-  expect(state.session.sprint.name).toBe("Bug fix");
+  const sprint = <any> state.session.sprint;
+  expect(sprint.name).toBe("Bug fix");
 });
 
 it("can set sprint days", () => {
@@ -31,8 +33,9 @@ it("can set sprint days", () => {
     }
   };
   store.sprintDays(state, ["A Bug fix"]);
-  console.log(state.session.sprint);
-  expect(state.session.sprint.days[0]).toBe("A Bug fix");
+  const sprint = <any> state.session.sprint;
+  console.log(sprint);
+  expect(sprint.days[0]).toBe("A Bug fix");
 });
 
 it("can set sprint days", () => {
@@ -42,8 +45,9 @@ it("can set sprint days", () => {
     }
   };
   store.sprintDays(state, ["A Bug fix"]);
-  console.log(state.session.sprint);
-  expect(state.session.sprint.days[0]).toBe("A Bug fix");
+  const sprint = <any> state.session.sprint;
+  console.log(sprint);
+  expect(sprint.days[0]).toBe("A Bug fix");
 });
 
 it("can set sprint error", () => {
@@ -53,8 +57,9 @@ it("can set sprint error", () => {
     }
   };
   store.sprintError(state, "Wrong");
-  expect(state.session.sprint.error).toBe("Wrong");
-  expect(state.session.sprint.valid).toBe(false);
+  const sprint = <any> state.session.sprint;
+  expect(sprint.error).toBe("Wrong");
+  expect(sprint.valid).toBe(false);
 });
 
 it("can set sprint to be ok", () => {
@@ -64,8 +69,9 @@ it("can set sprint to be ok", () => {
     }
   };
   store.sprintOk(state);
-  expect(state.session.sprint.error).toBe("");
-  expect(state.session.sprint.valid).toBe(true);
+  const sprint = <any> state.session.sprint;
+  expect(sprint.error).toBe("");
+  expect(sprint.valid).toBe(true);
 });
 
 it("can post sprint", () => {
@@ -78,7 +84,8 @@ it("can post sprint", () => {
     name: "fred"
   };
   store.postSprint(state, sprint);
-  expect(state.session.project.sprints[0].name).toBe("fred");
+  const project = <any> state.session.project;
+  expect(project.sprints[0].name).toBe("fred");
 });
 
 it("if can take from sprint", () => {
@@ -104,5 +111,6 @@ it("if can take from sprint", () => {
   store.takeFromSprint(state, 0);
   expect(state.session.project.sprints[0].list.length).toBe(0);
   expect(state.session.project.stories.length).toBe(1);
-  expect(state.session.project.stories[0].index).toBe(-1);
+  const first  = <any> state.session.project.stories[0];
+  expect(first.index).toBe(-1);
 });

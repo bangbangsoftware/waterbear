@@ -1,6 +1,6 @@
 import store from "../../../store.js";
 
-const service = sprint => {
+const service = (sprint:any) => {
   if (!sprint.name || sprint.name.length === 0) {
     store.commit("sprintError", "invalid sprint - missing name");
     return false;

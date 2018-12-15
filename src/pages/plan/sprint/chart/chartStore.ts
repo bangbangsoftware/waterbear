@@ -1,9 +1,9 @@
-import service from "./skills.js";
+import {SkillService} from "./skills.js";
 
 const defaultSprint = {};
 
 export default {
-  sprintSkills: state => {
+  sprintSkills: (state:any) => {
     const sprint =
       state.session.project.sprints === undefined
         ? defaultSprint
@@ -13,16 +13,16 @@ export default {
     if (!state.session.skills) {
       state.session.skills = {};
     }
-    state.session.skills.sprint = service.sprintSkills(sprint);
+    state.session.skills.sprint = SkillService.sprintSkills(sprint);
   },
-  memberSkills: (state, startDate, endDate) => {
-    if (!state.session.skills) {
-      state.session.skills = {};
-    }
-    const members = service.memberSkills(startDate, endDate, members);
-    state.session.skills.members = members;
-  },
-  planChart: (state, both) => {
+//  memberSkills: (state:any, startDate:Date, endDate:Date) => {
+//    if (!state.session.skills) {
+//      state.session.skills = {};
+//    }
+//    const members = SkillService.memberSkills(startDate, endDate, members);
+//    state.session.skills.members = members;
+//  },
+  planChart: (state:any, both: any) => {
     state.session.planChartData = both;
   }
 };

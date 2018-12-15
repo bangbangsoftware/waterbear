@@ -12,24 +12,27 @@ const comp = {
   },
   watch: {
     session: {
-      handler: function(val) {
+      handler: function(val:any) {
         const graph = val.planChartData.spareSkills;
-        this._chart.data.datasets = [
+        const that:any = this;
+        that._chart.data.datasets = [
           {
             label: "spare",
             backgroundColor: "#180079",
             data: graph.gots
           }
         ];
-        this._chart.data.labels = graph.skills;
-        this._chart.update();
+        that._chart.data.labels = graph.skills;
+        that._chart.update();
       },
       deep: true
     }
   },
   mounted() {
-    const display = store.state.session.planChartData.spareSkills;
-    this.renderChart(
+    const session:any = store.state.session;
+    const that:any = this;
+    const display = session.planChartData.spareSkills;
+    that.renderChart(
       {
         labels: display.skills,
         datasets: [

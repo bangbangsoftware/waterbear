@@ -1,8 +1,9 @@
 import director from "./director";
+import {Member} from './user/member';
 
 describe("director.spec.js", () => {
   it("should direct users of different roles to different places ", done => {
-    const dev = {
+    const dev = <Member> {
       role: "Frontend Dev"
     };
     const prj = {
@@ -13,7 +14,7 @@ describe("director.spec.js", () => {
   });
 
   it("should direct users of different roles to different places ", done => {
-    const dev = {
+    const dev = <Member> {
       role: "Scrum Master"
     };
     const prj = {

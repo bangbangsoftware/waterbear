@@ -1,11 +1,13 @@
 import store from "../../../../store.js";
 
-import skills from "./skills.js";
+import {SkillService, Balance} from "./skills.js";
 
-const getBoth = (skills, results) => {
-  const just = {};
+
+
+const getBoth = (skills:Array<string>, results:any) => {
+  const just = new Map<String,Balance>();
   skills.forEach(skill => {
-    just[skill] = results[skill];
+    just.set(skill, results[skill]);
   });
 
   const needs = Object.values(just).map(r => r.need);
@@ -17,7 +19,7 @@ const getBoth = (skills, results) => {
   };
 };
 
-const debug = (what, out) => {
+const debug = (what:string, out:any) => {
   console.log("%s gots %o", what, out.gots);
   console.log("%s needs %o", what, out.needs);
 };
@@ -30,14 +32,14 @@ const comp = {
         ? {}
         : project.sprints[store.state.session.project.current.sprintIndex];
     const members = project.members ? project.members : [];
-    const results = skills.skillBalance(members, from, to, sprint);
+    const results = SkillService.skillBalance(members, from, to, sprint);
 
-    const sprintSkills = skills.sprint(sprint);
+    const sprintSkills = SkillService.sprint(sprint);
     const balance = getBoth(sprintSkills, results);
     debug("balance", balance);
     const allSkills = Object.keys(results);
-    const memberSkills = [];
-    allSkills.forEach(key => {
+    const memberSkills = Array<string>();
+    allSkills.forEach((key:string) => {
       if (sprintSkills.indexOf(key) === -1) {
         memberSkills.push(key);
       }

@@ -1,5 +1,6 @@
+import { Member } from "../user/member";
 const comp = {
-  addTime: (h, map, total, end = 23) => {
+  addTime: (h: any, map: any, total: number, end = 23): number => {
     if (h > end || map[h] === undefined) {
       return total;
     }
@@ -12,7 +13,7 @@ const comp = {
   },
 
   today: (date: Date, now = new Date()) => {
-    const d = typeof date === 'string' ? new Date(date) : date;
+    const d = typeof date === "string" ? new Date(date) : date;
 
     if (now.getUTCDate() !== d.getUTCDate()) {
       return false;
@@ -26,16 +27,16 @@ const comp = {
     return true;
   },
 
-  hours: (user, now = Date()) => {
-    const days = user.diary.filter(d => {
+  hours: (user: Member, now = new Date()) => {
+    const days = user.diary.filter((d: any) => {
       return comp.today(d.date, now);
     });
     const day =
-      days.length > 0
+      <any>days.length > 0
         ? days[0]
         : {
             off: false,
-            hours: 8,
+            hours: 8
           };
     if (day.off) {
       return 0;
@@ -43,7 +44,7 @@ const comp = {
     return comp.hoursLeftToday(now, user);
   },
 
-  hoursDoneToday: (now, user) => {
+  hoursDoneToday: (now: Date, user: Member) => {
     const dayIndex = now.getDay();
     const dayHours = user.days[dayIndex];
     const current24Hour = now.getHours();
@@ -52,16 +53,16 @@ const comp = {
     const total = comp.addTime(0, map, start, current24Hour);
     return total;
   },
-  currentHours: (now, user) => {
+  currentHours: (now: Date, user: Member) => {
     const done = comp.hoursDoneToday(now, user);
     const left = comp.hoursLeftToday(now, user);
     return {
       done,
-      left,
+      left
     };
   },
 
-  hoursLeftToday: (now, user) => {
+  hoursLeftToday: (now: Date, user: Member) => {
     const dayIndex = now.getDay();
     const dayHours = user.days[dayIndex];
     const current24Hour = now.getHours();
@@ -70,11 +71,11 @@ const comp = {
     return total;
   },
 
-  hourMap: dayHours => {
+  hourMap: (dayHours: any) => {
     const hours = [];
     hours.push(...dayHours.day);
     hours.push(...dayHours.night);
-    const map = {};
+    const map = <any>{};
     hours.forEach(h => {
       const key = comp.mapper(h.name);
       map[key] = h;
@@ -82,17 +83,22 @@ const comp = {
     return map;
   },
 
-  mapper: v => {
+  mapper: (v: string) => {
     const posfix = v.substring(v.length - 2);
     const value = parseInt(v.substring(0, v.length - 2));
-    const result = posfix === 'pm' ? value + 12 : value;
+    const result = posfix === "pm" ? value + 12 : value;
     if (result > 23) {
       return 0;
     }
     return result;
   },
 
-  hoursLeftInSprint: (sprint, user, now = Date(), total = 0) => {
+  hoursLeftInSprint: (
+    sprint: any,
+    user: Member,
+    now = new Date(),
+    total = 0
+  ) => {
     const start = new Date(sprint.startDate);
     const dd = start.getUTCDate();
     const mm = start.getUTCMonth();
@@ -106,7 +112,7 @@ const comp = {
       }
     }
     return total;
-  },
+  }
 };
 
 export default comp;

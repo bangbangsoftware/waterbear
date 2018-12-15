@@ -7,7 +7,7 @@ import util from "../util.js";
 //import moment from "moment";
 import dateFns from "date-fns";
 
-Vue.filter("formatDate", function(value) {
+Vue.filter("formatDate", function(value:any) {
   if (!value) {
     return "";
   }
@@ -16,7 +16,7 @@ Vue.filter("formatDate", function(value) {
   return dateFns.format(d, "DD MMM YYYY");
 });
 
-const getTime = date => {
+const getTime = (date:string) => {
   return {
     hours: parseInt(date.substring(0, 2)),
     minutes: parseInt(date.substring(3, 5))
@@ -27,13 +27,13 @@ const comp = {
   name: "selectSprint",
   data: () => {
     const sprint =
-      store.state.session.project.sprints === undefined
-        ? {}
+      <any>store.state.session.project.sprints === undefined
+        ? { startDate: new Date(), startTime: "", startDateString: "" }
         : store.state.session.project.sprints[
             store.state.session.project.current.sprintIndex
           ];
     sprint.startDate = new Date(sprint.startDate);
-    sprint.startDateString = sprint.startDate;
+    sprint.startDateString = "" + sprint.startDate;
     sprint.startTime =
       sprint.startDate.getHours() + ":" + sprint.startDate.getMinutes();
     return {
@@ -51,19 +51,22 @@ const comp = {
     },
     startSprint: function() {
       store.commit("planState", "sprintSelect");
-      this.dialog = false;
+      const that = <any> this;
+      that.dialog = false;
       const i = store.state.session.project.current.sprintIndex;
-      const time = getTime(store.state.session.project.sprints[i].startTime);
+      const sprint = <any> store.state.session.project.sprints[i];
+      const time = getTime(sprint.startTime);
       // @TODO This looks wrong... dates... grrrrr
-      store.state.session.project.sprints[i].startDate.setHours(time.hours + 1);
-      store.state.session.project.sprints[i].startDate.setMinutes(time.minutes);
+      sprint.startDate.setHours(time.hours + 1);
+      sprint.startDate.setMinutes(time.minutes);
       util.updateSprints();
     },
     toggleNameEdit: function() {
-      this.editName = !this.editName;
+      const that = <any> this;
+      that.editName = !that.editName;
       store.commit("planState", "sprintCreate");
     },
-    removeFromSprint: function(story, index) {
+    removeFromSprint: function(story:any, index:any) {
       store.commit("takeFromSprint", index);
       util.updateSprints();
     }

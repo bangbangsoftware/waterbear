@@ -11,11 +11,12 @@ import sprintStat from "../../../common/stats/sprintStat";
 import tasks from "../../../common/stats/tasks";
 
 import util from "../../plan/util";
+import {Member} from "../../../user/member";
 
 import tasklist from "./tasklist/tasklist.vue";
 
-const sprintless = session => {
-  const owner = session.project.members.filter(m => m.owner);
+const sprintless = (session:any) => {
+  const owner = session.project.members.filter((m:Member) => m.owner);
   const name = session.user.owner
     ? "You need to start a sprint!"
     : "There is no sprint running, talk to " + owner.nick;
@@ -27,14 +28,14 @@ const sprintless = session => {
   return needSprint;
 };
 
-const sprint = session => {
+const sprint = (session :any)=> {
   const spt = session.project.sprints[session.project.current.sprintIndex];
   spt.defined = true;
   return spt;
 };
 
 // This is wrong it should be total member hours (100%) over hour many member hours left
-const percent = stat => {
+const percent = (stat:any) => {
   const totalHours = stat.totalHours;
   const percent = totalHours / 100;
   const hoursLeft = stat.unplannedHoursLeft;
@@ -48,13 +49,13 @@ const percent = stat => {
   //    return done * percent * 100
 };
 
-const colour = timePercent =>
+const colour = (timePercent:number) =>
   timePercent < 30 ? "success" : timePercent < 70 ? "warning" : "error";
 
-const reverseColour = timePercent =>
+const reverseColour = (timePercent :number)=>
   timePercent > 70 ? "success" : timePercent > 30 ? "warning" : "error";
 
-const progress = (name, percent, colour) => {
+const progress = (name:string, percent:number, colour:string) => {
   return {
     name,
     percent,
@@ -62,10 +63,10 @@ const progress = (name, percent, colour) => {
   };
 };
 
-const progressList = (currentSprint, stat) => {
+const progressList = (currentSprint :any, stat:number) => {
   const progressList = [];
   const timePercentage = percent(stat);
-  progressList.push(progress("Time", timePercentage, colour(percent)));
+  progressList.push(progress("Time", timePercentage, colour(timePercentage)));
   const taskPercent = tasks.tasksDonePercentage(currentSprint);
   progressList.push(progress("Tasks", taskPercent, reverseColour(taskPercent)));
   progressList.push(
@@ -74,7 +75,7 @@ const progressList = (currentSprint, stat) => {
   return progressList;
 };
 
-const current = session => {
+const current = (session:any) => {
   const noSprint =
     session.project.current.sprintIndex < 0 ||
     session.project.sprints === undefined ||
@@ -82,7 +83,7 @@ const current = session => {
   return noSprint ? sprintless(session) : sprint(session);
 };
 
-const donetest = [];
+const donetest = <any>[];
 
 const currentTasks = () => {
   const currentSprint = current(store.state.session);
@@ -141,7 +142,7 @@ const comp = {
     const project = session.project;
     const members = project.members;
     const currentSprint = current(session);
-    const stat = sprintStat.contingency(currentSprint, members);
+    const stat = <any> sprintStat.contingency(currentSprint, members);
     const endDate = tasks.endDate(currentSprint).getTime();
     const now = new Date().getTime();
     const oneDay = 24 * 60 * 60 * 1000;
@@ -158,16 +159,17 @@ const comp = {
     };
   },
   methods: {
-    endDate: sprint => tasks.endDate(sprint),
-    assign: function(sprint, task) {
+    endDate: (sprint:any) => tasks.endDate(sprint),
+    assign: function(sprint:any, task:any) {
+      const that = <any> this;
       console.log("You have selected", task);
-      task.assignedTo = this.session.user.name;
+      task.assignedTo = that.session.user.name;
       if (!task.history) {
         task.history = [];
       }
       const date = new Date();
       const action = "assigned";
-      const user = this.session.user.name;
+      const user = that.session.user.name;
       const history = {
         date,
         action,
@@ -177,12 +179,13 @@ const comp = {
       store.commit("sprintTask", task);
       util.storeSprintTask(task);
     },
-    unassign: function(sprint, task) {
+    unassign: function(sprinti:any, task:any) {
       console.log("You have selected", task);
       task.assignedTo = undefined;
       const date = new Date();
       const action = "unassigned";
-      const user = this.session.user.name;
+      const that = <any> this;
+      const user = that.session.user.name;
       const history = {
         date,
         action,

@@ -12,4 +12,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./plan.ts"></script>
+<script src="./plan">
+</script>

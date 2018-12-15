@@ -1,4 +1,5 @@
 import defaults from "./defaults.js";
+import {Member} from './user/member';
 
 const story = {
   title: "",
@@ -28,7 +29,7 @@ const session = {
   project: {
     _id: -1,
     stories: [],
-    members: <any>[],
+    members: Array<Member>(),
     defaults: [],
     sprints: [],
     current: {

@@ -1,6 +1,26 @@
 // import sprint from '../../../../common/stats/sprintStat.js'
 
-const getDates = (startDate, stopDate) => {
+import { Member, Hour } from "../../../../user/member";
+import { NORMAL } from '@/common/setup/defaults';
+
+export interface Balance {
+  need: number;
+  got: number;
+  diff: number;
+}
+
+export interface SkillHour {
+  hours: number,
+  skills: Array<string>,
+}
+
+export interface TeamSkill  {
+          hours: number
+          skills: Array<string>,
+          weight: number
+}
+
+const getDates = (startDate: Date, stopDate: Date) => {
   const dateArray = [];
   let currentDate = startDate;
   while (currentDate <= stopDate) {
@@ -10,16 +30,17 @@ const getDates = (startDate, stopDate) => {
   return dateArray;
 };
 
-const getDayHours = (date, member) => {
+const getDayHours = (date: Date, member: Member) => {
   const index = date.getDay();
   const fullday = member.days[index];
-  const dayHours = fullday.day.filter(hour => hour.on).length;
-  const nightHours = fullday.night.filter(hour => hour.on).length;
-  const together = parseInt(dayHours) + parseInt(nightHours);
+  const dayHours = fullday.day.filter((hour: Hour) => hour.on).length;
+  const nightHours = fullday.night.filter((hour: Hour) => hour.on).length;
+  // const together = parseInt(dayHours) + parseInt(nightHours);
+  const together = dayHours + nightHours;
   return together;
 };
 
-const append = (list, item) => {
+const append = (list: any, item: any) => {
   if (list.indexOf(item) > -1) {
     return list;
   }
@@ -27,11 +48,12 @@ const append = (list, item) => {
   return list;
 };
 
-const service = {
-  sprintSkills: (sprt, now) => {
+const SkillService = {
+  sprintSkills: (sprt: any, now = sprt.startDate):Map<string,number> => {
+    const skillMap = new Map<string,number>();
     if (sprt === undefined) {
       console.log("No sprint as of yet");
-      return;
+      return skillMap;
     }
     if (now === undefined) {
       now = sprt.startDate;
@@ -39,28 +61,29 @@ const service = {
     const stories = sprt.list;
     if (stories === undefined) {
       console.log("Nothing in sprint as of yet");
-      return;
+      return skillMap;
     }
-    const tasks = [];
-    stories.forEach(story => {
+    const tasks = <any>[];
+    stories.forEach((story: any) => {
       const newTasks = story.tasks;
       tasks.push.apply(tasks, newTasks);
     });
-    const skillMap = {};
-    tasks.filter(task => typeof task !== "undefined").forEach(task => {
-      console.log("task", task);
-      console.log("sprint", sprt);
-      let qty = skillMap[task.skill];
-      if (typeof qty === "undefined" || qty === -1) {
-        qty = 0;
-      }
-      qty = qty + parseInt(task.est);
-      skillMap[task.skill] = parseInt(qty);
-    });
+    tasks
+      .filter((task: any) => typeof task !== "undefined")
+      .forEach((task: any) => {
+        console.log("task", task);
+        console.log("sprint", sprt);
+        let qty = skillMap.get(task.skill);
+        if (typeof qty === "undefined" || qty === -1) {
+          qty = 0;
+        }
+        qty = qty + parseInt(task.est);
+        skillMap.set(task.skill, qty);
+      });
 
     return skillMap;
   },
-  getAvailability: (member, startDate, endDate) => {
+  getAvailability: (member: Member, startDate: Date, endDate: Date) => {
     // what day is the start Day
     // for members how many skill/hours
     // skillMap[skill] = qty
@@ -75,28 +98,29 @@ const service = {
 
     return total;
   },
-  getSkillHours: (member, hours) => {
+  getSkillHours: (member: Member, hours: number):SkillHour => {
     return {
       hours,
       skills: member.skills
     };
   },
-  getWeight: skillHours => {
+  getWeight: (skillHours: any) => {
     if (skillHours.skills === undefined) {
       skillHours.skills = [];
     }
     return skillHours.hours * skillHours.skills.length;
   },
-  getTeamSkills: (members, startDate, endDate) => {
+  getTeamSkills: (members: Array<Member>, startDate: Date, endDate: Date)
+  :Array<TeamSkill> => {
     return members
       .filter(m => m !== undefined)
       .map(member => {
         const start = new Date(startDate);
         const end = new Date(endDate);
-        const hours = service.getAvailability(member, start, end);
-        const skillHours = service.getSkillHours(member, hours);
-        const weight = service.getWeight(skillHours);
-        const withWeight = {
+        const hours = SkillService.getAvailability(member, start, end);
+        const skillHours = SkillService.getSkillHours(member, hours);
+        const weight = SkillService.getWeight(skillHours);
+        const withWeight:TeamSkill = {
           hours,
           skills: skillHours.skills,
           weight
@@ -105,11 +129,11 @@ const service = {
       })
       .sort((a, b) => a.weight - b.weight);
   },
-  useSkill: (teamSkill, skill, hours) => {
+  useSkill: (teamSkill: any, skill: any, hours: number): any => {
     let taken = false;
     let timeLeft = hours;
     const newTeamSkill = teamSkill
-      .map(member => {
+      .map((member: Member) => {
         if (member.skills.indexOf(skill) === -1) {
           return member; // Doesn't have the skill
         }
@@ -117,6 +141,9 @@ const service = {
           return member; // Doesn't have the time
         }
         taken = true;
+        if (member.hours === undefined) {
+          member.hours = 0;
+        }
 
         if (member.hours >= timeLeft) {
           member.hours = member.hours - timeLeft;
@@ -125,10 +152,21 @@ const service = {
           timeLeft = timeLeft - member.hours;
           member.hours = 0;
         }
-        member.weight = service.getWeight(member);
+        member.weight = SkillService.getWeight(member);
         return member;
       })
-      .sort((a, b) => a.weight - b.weight);
+      .sort((a: Member, b: Member) => {
+        if (!a.weight && !b.weight) {
+          return 0;
+        }
+        if (!a.weight) {
+          return -1;
+        }
+        if (!b.weight) {
+          return 1;
+        }
+        return a.weight - b.weight;
+      });
 
     // If no skill / time in team.... it should just fail, right?
     //      if (!taken) {
@@ -140,32 +178,39 @@ const service = {
       failed: !taken
     };
   },
-  sprint: (sprt, allUnique = []) => {
+  sprint: (sprt: any, allUnique = []): Array<string> => {
     if (sprt === undefined || sprt.list === undefined) {
       return allUnique;
     }
     sprt.list
-      .filter(story => story.tasks !== undefined)
-      .forEach(story =>
-        story.tasks.forEach(task => append(allUnique, task.skill))
+      .filter((story: any) => story.tasks !== undefined)
+      .forEach((story: any) =>
+        story.tasks.forEach((task: any) => append(allUnique, task.skill))
       );
     return allUnique;
   },
-  members: (members, allUnique = []) => {
-    if (members.list === undefined) {
-      return allUnique;
-    }
+  members: (
+    members: Array<Member>,
+    allUnique = Array<string>()
+  ): Array<string> => {
+    //    if (members.list === undefined) {
+    //      return allUnique;
+    //    }
     members.forEach(memb => {
       memb.skills.forEach(skill => append(allUnique, skill));
     });
     return allUnique;
   },
-  toList: (members, sprt) => {
-    return service.members(members, service.sprint(sprt, []));
+  toList: (members: Array<Member>, sprt: any) => {
+    return SkillService.members(members, SkillService.sprint(sprt, []));
   },
-  getAverages: teamSkills => {
-    const average = {};
-    teamSkills.forEach(member => {
+  getAverages: (teamSkills: any) => {
+    const average: any = {};
+    teamSkills.forEach((member: Member) => {
+      if (member.hours === undefined) {
+        member.hours = 0;
+      }
+
       const split = member.hours / member.skills.length;
       member.skills.forEach(skill => {
         let total = average[skill];
@@ -178,44 +223,65 @@ const service = {
     });
     return average;
   },
-  getAverage: (teamSkills, skill) => {
-    const avs = service.getAverages(teamSkills);
+  getAverage: (teamSkills: any, skill: any) => {
+    const avs = SkillService.getAverages(teamSkills);
     if (avs && typeof avs[skill] === "number") {
       return avs[skill];
     }
     return 0;
   },
-  skillBalance: (members, startDate, endDate, sprt) => {
-    let teamSkills = service.getTeamSkills(members, startDate, endDate);
-    const sprintHours = service.sprintSkills(sprt);
-    const skills = service.toList(members, sprt);
-    const results = {};
+  skillBalance: (
+    members: Array<Member>,
+    startDate: Date,
+    endDate: Date,
+    sprt: any
+  ):Map<string,Balance> => {
+    let teamSkills = SkillService.getTeamSkills(members, startDate, endDate);
+    const sprintHours = SkillService.sprintSkills(sprt);
+    const skills = SkillService.toList(members, sprt);
+    const results = new Map<string, Balance>();
     skills.forEach(skill => {
-      results[skill] = {
-        need: 0,
-        got: 0
-      };
-      let plan = {
-        failed: true
-      };
-      if (sprintHours[skill]) {
-        results[skill].need = sprintHours[skill];
-        plan = service.useSkill(teamSkills, skill, sprintHours[skill]);
-      }
-      if (plan.failed) {
-        results[skill].got = 0;
-      } else {
-        teamSkills = plan.skillsLeft;
-        results[skill].got = sprintHours[skill];
-      }
+      const owt = sprintHours.get(skill);
+      const hour = (owt)? owt: 0;
+      populateBalance(skill, results, hour, teamSkills)
     });
     skills.forEach(skill => {
-      let total = results[skill].got;
-      results[skill].got = total + service.getAverage(teamSkills, skill);
-      results[skill].diff = results[skill].got - results[skill].need;
+      const bal = results.get(skill)
+      let total = (bal)? bal.got :0;
+      const need = (bal)? bal.need: 0;
+      const got = total + SkillService.getAverage(teamSkills, skill);
+      const diff = got - need;
+      if (bal){
+        bal.got = got;
+        bal.diff = diff;
+      }
     });
     return results;
   }
 };
 
-export default service;
+const populateBalance = (skill:string,results:Map<string,Balance>, sprintHours:number, teamSkills:any) => {
+      const balance =  {
+        need: 0,
+        got: 0,
+        diff: 0
+      };
+      let plan = {
+        failed: true,
+        skill: null,
+        skillsLeft: []
+      };
+      if (sprintHours) {
+        balance.need = sprintHours;
+        plan = SkillService.useSkill(teamSkills, skill, sprintHours);
+      }
+      if (plan.failed) {
+        balance.got = 0;
+      } else {
+        teamSkills = plan.skillsLeft;
+        balance.got = sprintHours;
+      }
+      results.set(skill, balance); 
+}
+
+export {SkillService};

@@ -17,10 +17,8 @@ it("can add to sprint", () => {
     }
   };
   store.addToSprint(state, 0);
-  expect(
-    state.session.project.sprints[state.session.project.current.sprintIndex]
-      .list[0]
-  ).toBe("This isn't real");
+  const sprint = <any> state.session.project.sprints[state.session.project.current.sprintIndex]
+  expect( sprint.list[0]).toBe("This isn't real");
 });
 
 it("can add to sprint", () => {
@@ -36,8 +34,6 @@ it("can add to sprint", () => {
     }
   };
   store.addToSprint(state, 0);
-  expect(
-    state.session.project.sprints[state.session.project.current.sprintIndex]
-      .list[0]
-  ).toBe("This isn't real");
+  const sprint = <any> state.session.project.sprints[state.session.project.current.sprintIndex]
+  expect( sprint.list[0]).toBe("This isn't real");
 });

@@ -3,7 +3,7 @@ import memberStore from "./memberStore.js";
 it("That nick name can be stored", () => {
   const state = {
     session: {
-      user: {}
+      user: {nick:"sdjh"}
     }
   };
   memberStore.nick(state, "fred");
@@ -72,7 +72,8 @@ it("Should be able to add an array of hours", () => {
       }
     ]
   });
-  expect(state.session.user.days[0].day[0].on).toBe(true);
+  const user = <any> state.session.user;
+  expect(user.days[0].day[0].on).toBe(true);
 });
 
 it("Should be able to add a member", () => {

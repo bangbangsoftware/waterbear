@@ -1,9 +1,18 @@
 import store from '../store';
 import state from '../persist/state';
 
-export interface Day {}
+export interface Hour {
+  name: string,
+  on:boolean
+}
 
-export interface Diary {}
+export interface Day {
+  name: string,
+  day: Array<Hour>;
+  night: Array<Hour>;
+}
+
+export interface Diary { off?: boolean}
 
 export interface Member {
   nick: string;
@@ -12,11 +21,13 @@ export interface Member {
   skills: Array<string>;
   days: Array<Day>;
   owner: boolean;
-  birthday: Date;
-  currentProject: string; // Not a great idea using a string as unique reference....
+  birthday: Date | null;
+  currentProject: string | null; // Not a great idea using a string as unique reference....
   asperations: Array<string>;
   holidays: Array<Date>;
   diary: Array<Diary>;
+  hours?: number;
+  weight?: number;
 }
 const birthday = new Date(2000, 7, 21, 8, 2);
 const testData:Member = {
@@ -27,7 +38,7 @@ const testData:Member = {
   days: [],
   owner: false,
   birthday,
-  currentProject: "tardigrade",
+  currentProject: "tardigade",
   asperations: [],
   holidays: [],
   diary: [],

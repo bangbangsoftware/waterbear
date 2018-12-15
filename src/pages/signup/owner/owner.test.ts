@@ -10,13 +10,13 @@ beforeEach(() => {
   };
   store.commit("project", project);
   const fakeDB = {
-    get: id => {
+    get: (id:number) => {
       return new Promise(resolve => {
         console.log(id);
         resolve(project);
       });
     },
-    put: prj => {
+    put: (prj:any) => {
       return new Promise(resolve => {
         console.log(prj);
         resolve(prj);
@@ -52,13 +52,14 @@ it("should validate owner's name", () => {
   const poster = owner.methods.owner;
   expect(poster("Fred", "")).toBe("");
   Vue.nextTick(() => {
-    expect(store.state.project.owner).toBe("Fred");
+    const state = <any> store.state;
+    expect(state.project.owner).toBe("Fred");
     const defaults = store.state.defaults.roles;
-    expect(store.state.project.defaults.roles.length).toBe(defaults.length);
-    expect(store.state.stages.length).toBe(1);
-    expect(store.state.stages[0].name).toBe("Fred");
-    expect(store.state.feed.length).toBe(1);
-    expect(store.state.feed[0].message).toBe("Hi Fred");
+    expect(state.project.defaults.roles.length).toBe(defaults.length);
+    expect(state.stages.length).toBe(1);
+    expect(state.stages[0].name).toBe("Fred");
+    expect(state.feed.length).toBe(1);
+    expect(state.feed[0].message).toBe("Hi Fred");
   });
 });
 
@@ -66,12 +67,13 @@ it("should validate owner's name and role", () => {
   const poster = owner.methods.owner;
   expect(poster("Dick", "Superman")).toBe("");
   Vue.nextTick(() => {
+    const state = <any> store.state;
     const defaults = store.state.defaults.roles;
-    expect(store.state.project.defaults.roles.length).toBe(defaults.length);
-    expect(store.state.stages.length).toBe(1);
-    expect(store.state.stages[0].name).toBe("Dick");
-    expect(store.state.stages[0].role).toBe("Superman");
-    expect(store.state.feed.length).toBe(1);
-    expect(store.state.feed[0].message).toBe("Hi Dick");
+    expect(state.project.defaults.roles.length).toBe(defaults.length);
+    expect(state.stages.length).toBe(1);
+    expect(state.stages[0].name).toBe("Dick");
+    expect(state.stages[0].role).toBe("Superman");
+    expect(state.feed.length).toBe(1);
+    expect(state.feed[0].message).toBe("Hi Dick");
   });
 });

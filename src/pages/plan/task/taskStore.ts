@@ -2,15 +2,15 @@ import validTask from "./valid.js";
 import store from "../../../store.js";
 
 export default {
-  taskError: (state, message) => {
+  taskError: (state:any, message:string) => {
     state.session.task.error = message;
     state.session.task.valid = false;
   },
-  taskOk: state => {
+  taskOk: (state:any) => {
     state.session.task.error = "";
     state.session.task.valid = true;
   },
-  clearTask: state => {
+  clearTask: (state:any) => {
     state.session.task = {
       error: "",
       name: "",
@@ -20,34 +20,34 @@ export default {
       valid: false
     };
   },
-  taskName: (state, name) => {
+  taskName: (state:any, name:string) => {
     state.session.task.name = name;
     validTask(state.session.task);
   },
-  taskDesc: (state, desc) => {
+  taskDesc: (state:any, desc:string) => {
     state.session.task.desc = desc;
     validTask(state.session.task);
   },
-  taskSkill: (state, skill) => {
+  taskSkill: (state:any, skill:any) => {
     state.session.task.skill = skill;
     validTask(state.session.task);
   },
-  taskEst: (state, est) => {
+  taskEst: (state:any, est:number) => {
     state.session.task.est = est;
     validTask(state.session.task);
   },
-  selectTask: (state, task) => {
+  selectTask: (state:any, task:any) => {
     state.session.task = task;
     validTask(state.session.task);
   },
-  task: (state, task) => {
+  task: (state:any, task:any) => {
     const project = state.session.project;
     const stories = project.stories;
     const storyIndex = state.session.story.index;
     const story = stories[storyIndex];
     let tasks = [];
     if (story && story.tasks) {
-      tasks = story.tasks.filter(t => t.name !== task.name);
+      tasks = story.tasks.filter((t:any) => t.name !== task.name);
     } else {
       task.index = tasks.length;
     }
@@ -63,18 +63,18 @@ export default {
     }
     store.commit("clearTask");
   },
-  sprintTask: (state, task) => {
+  sprintTask: (state:any, task:any) => {
     const project = state.session.project;
     const sprint = project.sprints[project.current.sprintIndex];
     const storyList = sprint.list.filter(
-      story => story.index === task.storyIndex
+      (storyi:any) => story.index === task.storyIndex
     );
     if (storyList.length !== 1) {
       console.error(storyList.length + " Cannot find story for ", task);
       return;
     }
     const story = storyList[0];
-    const tasks = story.tasks.filter(t => t.index !== task.index);
+    const tasks = story.tasks.filter((t:any) => t.index !== task.index);
     tasks.push(task);
     story.tasks = tasks;
   }

@@ -2,9 +2,9 @@ import Vue from "vue";
 
 import { Bar } from "vue-chartjs";
 
-import store from "store";
+import store from "../../../../store";
 
-import skills from "./skills.js";
+import {SkillService, TeamSkill} from "./skills.js";
 
 const comp = {
   extends: Bar,
@@ -14,10 +14,11 @@ const comp = {
     const members = project.members;
     const now = new Date();
     const fortnightAway = new Date(+new Date() + 12096e5);
-    const teamSkills = skills.getTeamSkills(members, now, fortnightAway);
+    const teamSkills = SkillService.getTeamSkills(members, now, fortnightAway);
     const names = members.map(member => member.nick); // too big + ' [' + member.skills + ']')
-    const hours = teamSkills.map(ts => ts.hours);
-    this.renderChart({
+    const hours = teamSkills.map((ts:TeamSkill) => ts.hours);
+    const that = <any> this;
+    that.renderChart({
       labels: names,
       datasets: [
         {

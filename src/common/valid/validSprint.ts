@@ -1,4 +1,4 @@
-const empty = obj => {
+const empty = (obj:any) => {
   if (!obj) {
     return true;
   }
@@ -12,7 +12,7 @@ const empty = obj => {
   return false;
 };
 
-const unfinished = sprint => {
+const unfinished = (sprint:any) => {
   if (empty(sprint)) {
     return "Nothing in the sprint";
   }
@@ -26,9 +26,9 @@ const unfinished = sprint => {
   }
 
   const allTasks = sprint.list
-    .filter(story => story.tasks)
-    .map(story => story.tasks)
-    .filter(tasks => tasks.length > 0);
+    .filter((story:any) => story.tasks)
+    .map((story :any)=> story.tasks)
+    .filter((tasks: Array<any>) => tasks.length > 0);
   //        .filter(task => Object.keys(task).length > 0 || task.constructor !== Object)
 
   console.log(allTasks);
@@ -40,22 +40,22 @@ const unfinished = sprint => {
   return false;
 };
 
-const howManyDays = (dateString, now) => {
+const howManyDays = (dateString:string, now:Date) => {
   const date = new Date(dateString);
   var timeDiff = Math.abs(now.getTime() - date.getTime());
   var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
   return diffDays;
 };
 
-const noTaskStarted = sprint => {
-  const stories = sprint.list.filter(story => {
-    const startedTasks = story.tasks.filter(task => task.startDate);
+const noTaskStarted = (sprint:any) => {
+  const stories = sprint.list.filter((story:any) => {
+    const startedTasks = story.tasks.filter((task:any) => task.startDate);
     return startedTasks.length > 0;
   });
   return stories.length === 0;
 };
 
-const invalid = (sprint, now = new Date()) => {
+const invalid = (sprint:any, now = new Date()) => {
   const fail = unfinished(sprint);
   if (fail) {
     console.log(fail);

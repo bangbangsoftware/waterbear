@@ -37,7 +37,7 @@ const comp = {
     };
   },
   watch: {
-    session: function(val) {
+    session: function(val:any) {
       this.session = val;
     }
   },

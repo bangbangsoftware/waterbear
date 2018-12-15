@@ -27,7 +27,7 @@ it("Can post tasks", () => {
       Promise.resolve({
         stories: [{}]
       }),
-    put: p => {
+    put: (p:any) => {
       proj = p;
     }
   };
@@ -56,7 +56,7 @@ it("Can store task desc", () => {
 });
 
 it("Can store task est", () => {
-  comp.methods.storeEst(10);
+  comp.methods.storeEst("10");
 });
 
 it("Can store task skill", () => {

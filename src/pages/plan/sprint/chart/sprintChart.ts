@@ -2,12 +2,12 @@ import Vue from "vue";
 
 import { Bar } from "vue-chartjs";
 
-import store from "store";
+import store from "../../../../store";
 
-import skills from "./skills.js";
+import { SkillService } from "./skills.js";
 
-const generate = sprint => {
-  const sprintSkills = skills.sprintSkills(sprint);
+const generate = (sprint:any) => {
+  const sprintSkills = SkillService.sprintSkills(sprint);
   return {
     labels: Object.keys(sprintSkills),
     datasets: Object.values(sprintSkills)
@@ -23,18 +23,19 @@ const comp = {
   },
   watch: {
     session: {
-      handler: function(sess) {
+      handler: function(sess:any) {
         const sprint = sess.project.sprints[sess.project.current.sprintIndex];
         const data = generate(sprint);
-        this._chart.data.datasets = [
+        const that = <any> this;
+        that._chart.data.datasets = [
           {
             label: "Sprint",
             backgroundColor: "#f87979",
             data: data.datasets
           }
         ];
-        this._chart.data.labels = data.labels;
-        this._chart.update();
+        that._chart.data.labels = data.labels;
+        that._chart.update();
       },
       deep: true
     }
@@ -45,7 +46,8 @@ const comp = {
     const sprint =
       project.sprints[store.state.session.project.current.sprintIndex];
     const data = generate(sprint);
-    this.renderChart({
+    const that = <any> this;
+    that.renderChart({
       labels: data.labels,
       datasets: [
         {

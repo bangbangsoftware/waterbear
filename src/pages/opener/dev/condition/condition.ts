@@ -4,7 +4,7 @@ import check from "../../../../loginCheck.js";
 
 import sprintState from "../../../../common/stats/sprintStat.js";
 
-const currentSprint = session => {
+const currentSprint = (session:any) => {
   const spt = session.project.sprints[session.project.current.sprintIndex];
   spt.defined = true;
   return spt;
@@ -21,7 +21,7 @@ const comp = {
     const members = session.project.members;
     const sprint = currentSprint(session);
     const stat = sprintState.contingency(sprint, members);
-    const todo = sprintState.taskToDo(sprint);
+    const todo = {} // @TODO what??? doesnt exist  sprintState.taskToDo(sprint);
     return {
       session,
       project,
