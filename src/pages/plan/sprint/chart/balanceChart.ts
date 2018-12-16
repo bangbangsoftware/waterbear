@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import { Bar } from "vue-chartjs";
-import store from "../../../../store.js";
+import store from "../../../../store";
 
 const generate = (data:any) => {
   return {

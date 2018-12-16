@@ -7,9 +7,9 @@ import "./colours/colours.vue";
 import "./acceptance/acceptance.vue";
 import "./desc/desc.vue";
 
-import beforeCreate from "../../loginCheck.js";
+import beforeCreate from "../../loginCheck";
 
-import valid from "./valid.js";
+import valid from "./valid";
 
 export default {
   name: "story",

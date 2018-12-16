@@ -1,9 +1,9 @@
 import Vue from "vue";
 
-import store from "../../store.js";
-import beforeCreate from "../../loginCheck.js";
+import store from "../../store";
+import beforeCreate from "../../loginCheck";
 
-import user from "../../user.js";
+import user from "../../user";
 import "./member.css";
 
 import "./name/name.vue";

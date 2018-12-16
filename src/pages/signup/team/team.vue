@@ -40,5 +40,5 @@
     </v-layout>
 </v-container>
 </template>
-<script src='./team.js'>
+<script src='./team'>
 </script>

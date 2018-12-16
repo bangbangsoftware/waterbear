@@ -3,10 +3,10 @@ import Vue from "vue";
 import "./backlog.css";
 // import '../../../../node_modules/vue-material/dist/components/mdList/index.css'
 
-import store from "../../../store.js";
-import user from "../../../user.js";
+import store from "../../../store";
+import user from "../../../user";
 
-import util from "./../util.js";
+import util from "./../util";
 
 const comp = {
   name: "backlog",

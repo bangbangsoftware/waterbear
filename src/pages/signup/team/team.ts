@@ -1,7 +1,7 @@
-import store from "../../../store.js";
+import store from "../../../store";
 import Vue from "vue";
-import user from "../../../user.js";
-import defaults from "../../../common/setup/hours.js";
+import user from "../../../user";
+import defaults from "../../../common/setup/hours";
 import {Member, Diary} from '../../../user/member';
 
 const comp = {

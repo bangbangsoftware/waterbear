@@ -24,5 +24,5 @@
     </v-card>
 </v-flex>
 </template>
-<script src='./project.js'>
+<script src='./project'>
 </script>

@@ -27,5 +27,5 @@
     </v-card>
 </v-container>
 </template>
-<script src='./member.js'>
+<script src='./member'>
 </script>

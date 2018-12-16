@@ -1,5 +1,5 @@
-import gotoNext from "../direct.js";
-import db from "../dbase.js";
+import gotoNext from "../direct";
+import db from "../dbase";
 import state from "../persist/state";
 import { Day, Diary, Member} from "./member";
 
@@ -46,7 +46,7 @@ const service = {
         .catch((err:any) => reject(err));
     });
   },
-        signup: (email:string, pw:string) => {
+        signup: (email:string, pw:string):Promise<any> => {
     return state.signup(email, pw, {
       metadata
     });

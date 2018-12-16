@@ -1,4 +1,4 @@
-import store from "../../store.js";
+import store from "../../store";
 
 const service = (story:any) => {
   if (story.title.length === 0) {

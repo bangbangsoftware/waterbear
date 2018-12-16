@@ -66,4 +66,4 @@
     </v-card>
 </v-container>
 </template>
-<script src='./team.js' />
+<script src='./team' />

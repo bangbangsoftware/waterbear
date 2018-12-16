@@ -1,7 +1,7 @@
-import store from "../../../store.js";
+import store from "../../../store";
 import Vue from "vue";
 import "./hours.css";
-import defaults from "../../../common/setup/hours.js";
+import defaults from "../../../common/setup/hours";
 
 const comp = {
   name: "hours",

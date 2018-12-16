@@ -1,4 +1,4 @@
-import {SkillService} from "./skills.js";
+import {SkillService} from "./skills";
 
 const defaultSprint = {};
 

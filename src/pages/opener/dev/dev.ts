@@ -1,7 +1,7 @@
-import store from "../../../store.js";
+import store from "../../../store";
 import Vue from "vue";
 
-import check from "../../../loginCheck.js";
+import check from "../../../loginCheck";
 import "./time/time.vue";
 import blockers from "./blockers/blockers.vue";
 import condition from "./condition/condition.vue";

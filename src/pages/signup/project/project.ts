@@ -1,5 +1,5 @@
-import store from "../../../store.js";
-import user from "../../../user.js";
+import store from "../../../store";
+import user from "../../../user";
 import Vue from "vue";
 
 const register = (proj:any) => {

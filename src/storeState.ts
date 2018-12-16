@@ -1,5 +1,5 @@
-import defaults from "./defaults.js";
-import {Member, MemberService} from './user/member';
+import defaults from "./defaults";
+import { Member, MemberService } from "./user/member";
 
 const story = {
   title: "",
@@ -36,7 +36,7 @@ const session = {
       sprintIndex: -1
     }
   },
-  user: new MemberService(),
+  user: <Member>{},
   couchURL: "http://localhost:5984/"
 };
 

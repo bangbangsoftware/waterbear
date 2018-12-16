@@ -2,9 +2,9 @@ import Vue from "vue";
 // import Password from "vue-password-strength-meter";
 import "vue-password-strength-meter";
 
-import store from "../../../store.js";
-import db from "../../../dbase.js";
-import user from "../../../user.js";
+import store from "../../../store";
+import db from "../../../dbase";
+import user from "../../../user";
 
 import "./start.css";
 

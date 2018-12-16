@@ -1,6 +1,6 @@
 import util from "../util";
-import tasks from "./tasks.js";
-import {Member} from '../..//user/member'
+import tasks from "./tasks";
+import {Member} from '../../user/member'
 
 export interface MemberTime {
       details:Member,

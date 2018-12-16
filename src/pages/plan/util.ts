@@ -1,6 +1,6 @@
-import store from "../../store.js";
+import store from "../../store";
 
-import data from "./sprint/chart/data.js";
+import data from "./sprint/chart/data";
 
 const incompleteFilter = (story:any) =>
   story.tasks === undefined ||

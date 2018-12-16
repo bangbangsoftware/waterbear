@@ -1,12 +1,12 @@
 import Vue from "vue";
 
-import store from "../../store.js";
-import user from "../../user.js";
+import store from "../../store";
+import user from "../../user";
 
 import "./login.css";
 
-import alreadyLoggedIn from "../../loginCheck.js";
-import direct from "../../direct.js";
+import alreadyLoggedIn from "../../loginCheck";
+import direct from "../../direct";
 
 const error = (err:any) => console.error(err);
 const name = "waterbear";

@@ -14,4 +14,4 @@
     </v-layout>
 </div>
 </template>
-<script src='./desc.js' />
+<script src='./desc' />

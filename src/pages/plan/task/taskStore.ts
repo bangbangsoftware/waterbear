@@ -1,5 +1,5 @@
-import validTask from "./valid.js";
-import store from "../../../store.js";
+import validTask from "./valid";
+import store from "../../../store";
 
 export default {
   taskError: (state:any, message:string) => {

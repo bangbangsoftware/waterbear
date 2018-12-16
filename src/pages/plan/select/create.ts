@@ -1,7 +1,7 @@
 import Vue from "vue";
 
-import store from "../../../store.js";
-import util from "../util.js";
+import store from "../../../store";
+import util from "../util";
 
 const storeSprint = (sprint:any) => {
   const prj = store.state.session.project;

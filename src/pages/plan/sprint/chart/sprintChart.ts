@@ -4,7 +4,7 @@ import { Bar } from "vue-chartjs";
 
 import store from "../../../../store";
 
-import { SkillService } from "./skills.js";
+import { SkillService } from "./skills";
 
 const generate = (sprint:any) => {
   const sprintSkills = SkillService.sprintSkills(sprint);

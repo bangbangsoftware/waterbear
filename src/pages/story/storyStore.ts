@@ -1,5 +1,5 @@
-import validStory from "./valid.js";
-import store from "../../store.js";
+import validStory from "./valid";
+import store from "../../store";
 
 export default {
         storyError: (state:any, message:string) => {

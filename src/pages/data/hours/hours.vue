@@ -9,4 +9,4 @@
     </div>
 </div>
 </template>
-<script src='./hours.js' />
+<script src='./hours' />

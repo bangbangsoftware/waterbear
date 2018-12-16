@@ -1,7 +1,7 @@
 import is from "../valid/validSprint";
 import util from "../util";
-import tasks from "./tasks.js";
-import contingency from "./contingency.js";
+import tasks from "./tasks";
+import contingency from "./contingency";
 import { Member} from '../../user/member';
 
 const getAssignedTasks = (taks:Array<any>, user:Member) => {

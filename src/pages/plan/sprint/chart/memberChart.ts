@@ -4,7 +4,7 @@ import { Bar } from "vue-chartjs";
 
 import store from "../../../../store";
 
-import {SkillService, TeamSkill} from "./skills.js";
+import { SkillService, TeamSkill } from "./skills";
 
 const comp = {
   extends: Bar,
@@ -16,8 +16,8 @@ const comp = {
     const fortnightAway = new Date(+new Date() + 12096e5);
     const teamSkills = SkillService.getTeamSkills(members, now, fortnightAway);
     const names = members.map(member => member.nick); // too big + ' [' + member.skills + ']')
-    const hours = teamSkills.map((ts:TeamSkill) => ts.hours);
-    const that = <any> this;
+    const hours = teamSkills.map((ts: TeamSkill) => ts.hours);
+    const that = <any>this;
     that.renderChart({
       labels: names,
       datasets: [

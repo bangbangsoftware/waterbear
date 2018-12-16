@@ -1,8 +1,8 @@
-import store from "../../../../store.js";
+import store from "../../../../store";
 import Vue from "vue";
-import check from "../../../../loginCheck.js";
+import check from "../../../../loginCheck";
 
-import sprintState from "../../../../common/stats/sprintStat.js";
+import sprintState from "../../../../common/stats/sprintStat";
 
 const currentSprint = (session:any) => {
   const spt = session.project.sprints[session.project.current.sprintIndex];

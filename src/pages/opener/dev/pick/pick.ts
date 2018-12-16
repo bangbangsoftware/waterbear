@@ -1,7 +1,7 @@
-import store from "../../../../store.js";
+import store from "../../../../store";
 import Vue from "vue";
 
-import check from "../../../../loginCheck.js";
+import check from "../../../../loginCheck";
 
 const comp = {
   name: "pick-work",

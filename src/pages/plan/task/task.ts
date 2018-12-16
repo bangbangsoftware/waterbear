@@ -1,9 +1,9 @@
 import Vue from "vue";
 
-import store from "../../../store.js";
+import store from "../../../store";
 
 import valid from "./valid";
-import util from "../util.js";
+import util from "../util";
 
 import "./task.css";
 

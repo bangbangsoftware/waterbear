@@ -1,5 +1,5 @@
-import validSprint from "./valid.js";
-import store from "../../../store.js";
+import validSprint from "./valid";
+import store from "../../../store";
 
 export default {
   selectSprint: (state:any, i:number) => {

@@ -1,4 +1,4 @@
-import db from "../dbase.js";
+import db from "../dbase";
 
 const remote = {
         save: (project:any) => db.put(project),

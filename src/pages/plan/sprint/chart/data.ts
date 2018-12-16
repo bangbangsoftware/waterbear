@@ -1,6 +1,6 @@
-import store from "../../../../store.js";
+import store from "../../../../store";
 
-import {SkillService, Balance} from "./skills.js";
+import {SkillService, Balance} from "./skills";
 
 
 

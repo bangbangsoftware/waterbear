@@ -1,14 +1,14 @@
-import store from "../../store.js";
+import store from "../../store";
 import Vue from "vue";
 
 import "../story/tags/tags.vue";
 import "../story/colours/colours.vue";
 import "../story/acceptance/acceptance.vue";
 import "../story/desc/desc.vue";
-import valid from "../story/valid.js";
+import valid from "../story/valid";
 
-import check from "../../loginCheck.js";
-import util from "../plan/util.js";
+import check from "../../loginCheck";
+import util from "../plan/util";
 
 const jumpIncomplete = (project:any, amount:number) => {
   const state = comp.methods.backlogState(project);

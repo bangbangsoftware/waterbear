@@ -1,7 +1,7 @@
-import store from "./store.js";
-import db from "./dbase.js";
+import store from "./store";
+import db from "./dbase";
 
-import resolveUser from "./direct.js";
+import resolveUser from "./direct";
 
 const runaway = (reject:Function, jump = true) => (message:string) => {
   store.commit("loaded", false);

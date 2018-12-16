@@ -1,16 +1,16 @@
 import Vue from "vue";
 
-import store from "../../../store.js";
-import util from "../util.js";
+import store from "../../../store";
+import util from "../util";
 
-import loginCheck from "../../../loginCheck.js";
+import loginCheck from "../../../loginCheck";
 
-import "./chart/memberChart.js";
-import "./chart/sprintChart.js";
-import balance from "./chart/balanceChart.js";
-import "./chart/spareChart.js";
+import "./chart/memberChart";
+import "./chart/sprintChart";
+import balance from "./chart/balanceChart";
+import "./chart/spareChart";
 
-import data from "./chart/data.js";
+import data from "./chart/data";
 
 const comp = {
   components: {

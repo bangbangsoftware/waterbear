@@ -1,4 +1,4 @@
-import store from "../../../store.js";
+import store from "../../../store";
 import Vue from "vue";
 import "../colours/colours.css";
 import "./list.css";
