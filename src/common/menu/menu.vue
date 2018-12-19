@@ -1,6 +1,5 @@
 <template>
 <div class="menu">
-    "
     <v-app height="415px" dark id="e3" standalone>
         <v-navigation-drawer class="pb-0" persistent absolute height="100%" clipped enable-resize-watcher
             v-model="drawer">

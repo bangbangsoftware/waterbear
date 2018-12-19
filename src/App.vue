@@ -1,29 +1,165 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app id="waterbear" toolbar>
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <v-navigation-drawer app v-if="session.loaded" light :mini-variant.sync="mini" v-model="drawer" overflow>
+      <v-toolbar flat class="transparent">
+        <v-list class="pa-0">
+          <v-list-tile avatar tag="div">
+            <v-list-tile-avatar>
+              <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>{{session.project._id}}</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon @click.native.stop="mini = !mini">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-list class="pt-0" dense>
+        <v-divider></v-divider>
+  
+        <v-list-tile v-for="item in items" :key="item.title" @click.native="drawer = go(item.route)">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar v-if="session.loaded" fixed class="indigo darken-4" dark>
+      <!-- v-toolbar-side-icon v-on:click="toggle()"></v-toolbar-side-icon -->
+      <v-toolbar-side-icon @click.stop="toggle()"></v-toolbar-side-icon>
+      <v-toolbar-title>Waterbear</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-side-icon  v-on:click="go('')"> 
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+      </v-toolbar-side-icon>
+    </v-toolbar>
+    <main>
+      <v-container fluid>
+<br>
+<br>
+        <router-view></router-view>
+      </v-container>
+    </main>
+  </v-app>
+
+
+<!--
+<div id="app">d
+  <main-menu v-if="session.loaded"></main-menu> 
+  <router-view></router-view>
+</div>
+-->
+
 </template>
 
-<style lang="scss">
+
+<script>
+import Vue from "vue";
+import "./common/menu/menu.ts";
+import store from "./store";
+export default {
+  data: function() {
+    return {
+      session: store.state.session,
+      state: store.state,
+      drawer: false,
+      items: [
+        {
+          title: "Your details",
+          route: "member",
+          icon: "account_box"
+        },
+        {
+          title: "The Team",
+          route: "team",
+          icon: "motorcycle"
+        },
+        {
+          title: "Project",
+          route: "todo",
+          icon: "grade"
+        },
+        {
+          title: "Story Creation",
+          route: "story",
+          icon: "create"
+        },
+        {
+          title: "Backlog Refinement",
+          route: "refine",
+          icon: "compare_arrows"
+        },
+        {
+          title: "Sprint Planning",
+          route: "sprint/" + store.state.session.project.current.sprintIndex,
+          icon: "assignment"
+        },
+        {
+          title: "Assessment",
+          route: "assess",
+          icon: "assessment"
+        }
+      ],
+      mini: false,
+      right: null
+    };
+  },
+  name: "app",
+  methods: {
+    toggle: function() {
+      console.log("toggled: " + this.drawer);
+      this.drawer = !this.drawer;
+    },
+    go: function(where) {
+      // !!! to use 'this', don't use => !!!!
+      console.log(where);
+      if (!where) {
+        store.commit("loaded", false);
+        store.commit("db", null);
+        if (this.state.db) {
+          this.state.db.logout();
+        }
+      }
+      this.drawer = false;
+      this.mini = false;
+      if (window) {
+        Vue.nextTick(() => {
+          window.location.href = "#/" + where;
+          this.drawer = false;
+          this.mini = false;
+        });
+      }
+      /**
+            if (this.$router.go) {
+               console.log('Going to ' + where)
+               this.$router.go({
+                 name: where
+               })
+            } else if (window) {
+               window.location.href = '#/' + where
+            }
+            **/
+      return this.drawer;
+    }
+  }
+};
+</script>
+
+<style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  margin-top: 0px;
 }
 </style>
