@@ -2,7 +2,7 @@ import Vuex from "vuex";
 import Vue from "vue";
 
 //import mutations from "./storeMutations";
-import {Member} from './user/member';
+import { Member } from "./user/member";
 import taskMutations from "./pages/plan/task/taskStore";
 import memberMutations from "./pages/member/memberStore";
 import storyMutations from "./pages/story/storyStore";
@@ -16,9 +16,9 @@ import state from "./storeState";
 
 Vue.use(Vuex);
 
-const mutations:any = {
+const mutations: any = {
   loaded: (state: any, l: boolean) => {
-    console.log('Loaded? ' + l);
+    console.log("Loaded? " + l);
     state.session.loaded = l;
   },
   stage: (state: any, newStage: any) => {
@@ -28,7 +28,7 @@ const mutations:any = {
     state.db = database;
   },
   error: (state: any, error: any) => {
-    console.log('session now has this error:' + error);
+    console.log("session now has this error:" + error);
     state.session.error = error;
   },
   project: (state: any, prj: any) => {
@@ -40,13 +40,13 @@ const mutations:any = {
   log: (state: any, message: string) => {
     const item = {
       date: new Date(),
-      message,
+      message
     };
     state.feeds.push(item);
-  },
+  }
 };
 
-const addToMutations = (newMutes:any) => {
+const addToMutations = (newMutes: any) => {
   for (let key in newMutes) {
     mutations[key] = newMutes[key];
   }
@@ -60,7 +60,14 @@ addToMutations(sprintMutations);
 addToMutations(chartMutations);
 addToMutations(refineMutations);
 
-export default new Vuex.Store({
+const getters = {
+  user: (user: any) => state.session.user
+};
+
+const store = new Vuex.Store({
   state,
-  mutations
+  mutations,
+  getters
 });
+console.log(store.getters.user);
+export default store;

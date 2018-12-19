@@ -34,7 +34,7 @@ const comp = {
       const asperations = new Array<string>();
       const holidays = new Array<Date>();
       const diary = new Array<Diary>();
-      const owner:Member = {
+      const owner: Member = {
         nick,
         name: email,
         role,

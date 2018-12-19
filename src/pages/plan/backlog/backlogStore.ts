@@ -1,7 +1,7 @@
 import store from "../../../store";
 
 export default {
-  addToSprint: (state:any, index:number) => {
+  addToSprint: (state: any, index: number) => {
     let sprint = state.session.project.sprints
       ? state.session.project.sprints[state.session.project.current.sprintIndex]
       : false;

@@ -21,11 +21,11 @@ export default {
     };
   },
   methods: {
-    $router:{go:(a:any)=>{}},
+    $router: { go: (a: any) => {} },
     clearStory: function() {
       store.commit("clearStory");
     },
-          postStory: function(story:any) {
+    postStory: function(story: any) {
       var ok = valid(story);
       if (!ok) {
         console.log("invalid story...");
@@ -39,16 +39,16 @@ export default {
       console.log(prj);
       const db = store.state.db;
       db.get(prj._id)
-        .then((p:any) => {
+        .then((p: any) => {
           p.stories = prj.stories;
           return db.put(p);
         })
-        .catch((err:any) => console.error(err));
+        .catch((err: any) => console.error(err));
     },
-          whatsNeeded: function(story:any) {
+    whatsNeeded: function(story: any) {
       valid(story);
     },
-    navigateTo: function(nav:any) {
+    navigateTo: function(nav: any) {
       this.$router.go({
         path: nav
       });

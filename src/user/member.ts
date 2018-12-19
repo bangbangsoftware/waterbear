@@ -1,18 +1,20 @@
-import store from '../store';
-import state from '../persist/state';
+import store from "../store";
+import state from "../persist/state";
 
 export interface Hour {
-  name: string,
-  on:boolean
+  name: string;
+  on: boolean;
 }
 
 export interface Day {
-  name: string,
+  name: string;
   day: Array<Hour>;
   night: Array<Hour>;
 }
 
-export interface Diary { off?: boolean}
+export interface Diary {
+  off?: boolean;
+}
 
 export interface Member {
   nick: string;
@@ -30,32 +32,32 @@ export interface Member {
   weight?: number;
 }
 const birthday = new Date(2000, 7, 21, 8, 2);
-const testData:Member = {
-  nick: 'fred',
-  name: 'fred@fred.com',
-  role: 'Scrum Master',
-  skills: ['vuejs', 'css', 'jenkins'],
+const testData: Member = {
+  nick: "fred",
+  name: "fred@fred.com",
+  role: "Scrum Master",
+  skills: ["vuejs", "css", "jenkins"],
   days: [],
   owner: false,
   birthday,
   currentProject: "tardigade",
   asperations: [],
   holidays: [],
-  diary: [],
+  diary: []
 };
-export {testData};
+export { testData };
 
-const MemberService:any = {
+const MemberService: any = {
   updateMembers: (
     members: Array<Member>,
-    prj: any = store.state.session.project,
+    prj: any = store.state.session.project
   ) => {
     prj.members = members;
     return state.save(prj);
   },
   replaceMember: (memberList: Array<Member>, replacement: Member) => {
     const newList = memberList.filter(
-      member => member.name !== replacement.name,
+      member => member.name !== replacement.name
     );
     newList.push(replacement);
     return new Promise(
@@ -63,16 +65,16 @@ const MemberService:any = {
         const prj: any = store.state.session.project;
         try {
           const p = await state.load(prj._id);
-          console.log('Members owner to state -  ' + prj._id);
-          store.commit('project', p);
+          console.log("Members owner to state -  " + prj._id);
+          store.commit("project", p);
           await MemberService.updateMembers(newList, p);
           resolve(p);
         } catch (err) {
           reject(err);
         }
-      },
+      }
     );
-  },
+  }
 };
 
-export {MemberService};
+export { MemberService };

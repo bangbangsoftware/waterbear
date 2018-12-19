@@ -1,7 +1,7 @@
-import store from './../store';
-import state from './../persist/state';
+import store from "./../store";
+import state from "./../persist/state";
 
-import {Member} from './member';
+import { Member } from "./member";
 
 const updateOwnerInMembers = (prj: any, owner: any) => {
   let found = false;
@@ -39,7 +39,7 @@ const updateOwner = (prj: any, owner: any) => {
 const service = {
   ownerAndDefaults: (owner: any) => {
     return new Promise((resolve, reject) => {
-      let prj:any = store.state.session.project;
+      let prj: any = store.state.session.project;
       state
         .save(prj.id)
         .then((p: any) => {
@@ -48,9 +48,9 @@ const service = {
         })
         .catch((err: any) => reject(err))
         .then(() => {
-          console.log('Owner owner to state -  ' + prj.id);
-          console.log('And added defaults');
-          store.commit('project', prj);
+          console.log("Owner owner to state -  " + prj.id);
+          console.log("And added defaults");
+          store.commit("project", prj);
           resolve(prj);
         })
         .catch((err: any) => reject(err));
@@ -66,13 +66,13 @@ const service = {
         })
         .catch((err: any) => reject(err))
         .then(() => {
-          console.log('Owner owner to state -  ' + prj._id);
-          store.commit('project', prj);
+          console.log("Owner owner to state -  " + prj._id);
+          store.commit("project", prj);
           resolve(owner);
         })
         .catch((err: any) => reject(err));
     });
-  },
+  }
 };
 
 export default service;

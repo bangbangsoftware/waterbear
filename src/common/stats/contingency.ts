@@ -1,30 +1,30 @@
 import util from "../util";
 import tasks from "./tasks";
-import {Member} from '../../user/member'
+import { Member } from "../../user/member";
 
 export interface MemberTime {
-      details:Member,
-      left : number,
-      skills: Array<string> 
+  details: Member;
+  left: number;
+  skills: Array<string>;
 }
 export interface MemberRemain {
-  memberTimes: Array<MemberTime>,
-  remainder: number
+  memberTimes: Array<MemberTime>;
+  remainder: number;
 }
 export interface Track {
-  name: string,
-  onTrack: boolean,
-  hoursOver: number
+  name: string;
+  onTrack: boolean;
+  hoursOver: number;
 }
 
-const addTask = (map:any, skill: string, qty:string ) => {
+const addTask = (map: any, skill: string, qty: string) => {
   const amount = parseInt(qty);
   const total = map[skill];
   const newTotal = total === undefined ? amount : total + amount;
   map[skill] = newTotal;
 };
 
-const hasSkill = (m:MemberTime, skill:string) => {
+const hasSkill = (m: MemberTime, skill: string) => {
   const skills = m.skills;
   const index = skills.indexOf(skill);
   return index > -1;
@@ -45,16 +45,19 @@ const update = (memberTime: MemberTime, take: number) => {
   };
 };
 
-const totalTime = (memberTimes:Array<MemberTime>, skill: string) => {
-  const skillBase = memberTimes.filter((m:MemberTime) => hasSkill(m, skill));
+const totalTime = (memberTimes: Array<MemberTime>, skill: string) => {
+  const skillBase = memberTimes.filter((m: MemberTime) => hasSkill(m, skill));
   if (skillBase.length === 0) {
     return 0;
   }
   return skillBase.map(m => m.left).reduce((t, c) => t + c);
 };
 
-const fill = (memberTimes:Array<MemberTime>, skill:string, amount:number)
-:MemberRemain => {
+const fill = (
+  memberTimes: Array<MemberTime>,
+  skill: string,
+  amount: number
+): MemberRemain => {
   if (totalTime(memberTimes, skill) < 1) {
     return {
       memberTimes,
@@ -68,7 +71,7 @@ const fill = (memberTimes:Array<MemberTime>, skill:string, amount:number)
     };
   }
   let balance = amount;
-  const newMemberTime = memberTimes.map((m:MemberTime) => {
+  const newMemberTime = memberTimes.map((m: MemberTime) => {
     if (hasSkill(m, skill)) {
       const newState = update(m, balance);
       balance = newState.remainder;
@@ -79,8 +82,12 @@ const fill = (memberTimes:Array<MemberTime>, skill:string, amount:number)
   return fill(newMemberTime, skill, balance);
 };
 
-const comp = (sprint:any, members :Array<Member>, now:Date, work = tasks.allTasks(sprint)) => {
-
+const comp = (
+  sprint: any,
+  members: Array<Member>,
+  now: Date,
+  work = tasks.allTasks(sprint)
+) => {
   // how much time does each member have left in the sprint????
   let memberTimes = members.map(details => {
     const left = util.hoursLeftInSprint(sprint, details, now);
@@ -92,8 +99,8 @@ const comp = (sprint:any, members :Array<Member>, now:Date, work = tasks.allTask
   });
 
   // how much tasks are left to do??
-  const taskMap = <any> {};
-  work.forEach((task:any) => {
+  const taskMap = <any>{};
+  work.forEach((task: any) => {
     const skill = task.skill;
     if (task.end) {
       return;

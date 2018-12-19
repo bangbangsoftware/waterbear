@@ -17,7 +17,7 @@ const comp = {
   },
   methods: {
     navigateTo: function(nav: string) {
-      const vue = <any> this;
+      const vue = <any>this;
       vue.$router.go({
         path: nav
       });

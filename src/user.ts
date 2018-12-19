@@ -1,8 +1,8 @@
-import db from './dbase';
-import ownerService from './user/owner';
-import details from './user/details';
-import {MemberService, Member} from './user/member';
-import auth from './user/auth';
+import db from "./dbase";
+import ownerService from "./user/owner";
+import details from "./user/details";
+import { MemberService, Member } from "./user/member";
+import auth from "./user/auth";
 
 const service = {
   ownerAndDefaults: (o: Member) => ownerService.ownerAndDefaults(o),
@@ -17,7 +17,7 @@ const service = {
   storeMembers: (members: Member[]) => MemberService.updateMembers(members),
   login: (email: string, pw: string, database = db) =>
     auth.login(email, pw, database),
-  signup: (email: string, pw: string) => auth.signup(email, pw),
+  signup: (email: string, pw: string) => auth.signup(email, pw)
 };
 
 export default service;

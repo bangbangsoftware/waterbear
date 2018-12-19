@@ -1,7 +1,7 @@
-import {Member} from './user/member';
+import { Member } from "./user/member";
 export default {
   loaded: (state: any, l: boolean) => {
-    console.log('Loaded? ' + l);
+    console.log("Loaded? " + l);
     state.session.loaded = l;
   },
   stage: (state: any, newStage: any) => {
@@ -11,7 +11,7 @@ export default {
     state.db = database;
   },
   error: (state: any, error: any) => {
-    console.log('session now has this error:' + error);
+    console.log("session now has this error:" + error);
     state.session.error = error;
   },
   project: (state: any, prj: any) => {
@@ -23,8 +23,8 @@ export default {
   log: (state: any, message: string) => {
     const item = {
       date: new Date(),
-      message,
+      message
     };
     state.feeds.push(item);
-  },
+  }
 };

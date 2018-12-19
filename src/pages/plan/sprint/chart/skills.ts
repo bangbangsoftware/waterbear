@@ -1,7 +1,7 @@
 // import sprint from '../../../../common/stats/sprintStat.js'
 
 import { Member, Hour } from "../../../../user/member";
-import { NORMAL } from '@/common/setup/defaults';
+import { NORMAL } from "@/common/setup/defaults";
 
 export interface Balance {
   need: number;
@@ -10,14 +10,14 @@ export interface Balance {
 }
 
 export interface SkillHour {
-  hours: number,
-  skills: Array<string>,
+  hours: number;
+  skills: Array<string>;
 }
 
-export interface TeamSkill  {
-          hours: number
-          skills: Array<string>,
-          weight: number
+export interface TeamSkill {
+  hours: number;
+  skills: Array<string>;
+  weight: number;
 }
 
 const getDates = (startDate: Date, stopDate: Date) => {
@@ -49,8 +49,8 @@ const append = (list: any, item: any) => {
 };
 
 const SkillService = {
-  sprintSkills: (sprt: any, now = sprt.startDate):Map<string,number> => {
-    const skillMap = new Map<string,number>();
+  sprintSkills: (sprt: any, now = sprt.startDate): Map<string, number> => {
+    const skillMap = new Map<string, number>();
     if (sprt === undefined) {
       console.log("No sprint as of yet");
       return skillMap;
@@ -98,7 +98,7 @@ const SkillService = {
 
     return total;
   },
-  getSkillHours: (member: Member, hours: number):SkillHour => {
+  getSkillHours: (member: Member, hours: number): SkillHour => {
     return {
       hours,
       skills: member.skills
@@ -110,8 +110,11 @@ const SkillService = {
     }
     return skillHours.hours * skillHours.skills.length;
   },
-  getTeamSkills: (members: Array<Member>, startDate: Date, endDate: Date)
-  :Array<TeamSkill> => {
+  getTeamSkills: (
+    members: Array<Member>,
+    startDate: Date,
+    endDate: Date
+  ): Array<TeamSkill> => {
     return members
       .filter(m => m !== undefined)
       .map(member => {
@@ -120,7 +123,7 @@ const SkillService = {
         const hours = SkillService.getAvailability(member, start, end);
         const skillHours = SkillService.getSkillHours(member, hours);
         const weight = SkillService.getWeight(skillHours);
-        const withWeight:TeamSkill = {
+        const withWeight: TeamSkill = {
           hours,
           skills: skillHours.skills,
           weight
@@ -235,23 +238,23 @@ const SkillService = {
     startDate: Date,
     endDate: Date,
     sprt: any
-  ):Map<string,Balance> => {
+  ): Map<string, Balance> => {
     let teamSkills = SkillService.getTeamSkills(members, startDate, endDate);
     const sprintHours = SkillService.sprintSkills(sprt);
     const skills = SkillService.toList(members, sprt);
     const results = new Map<string, Balance>();
     skills.forEach(skill => {
       const owt = sprintHours.get(skill);
-      const hour = (owt)? owt: 0;
-      populateBalance(skill, results, hour, teamSkills)
+      const hour = owt ? owt : 0;
+      populateBalance(skill, results, hour, teamSkills);
     });
     skills.forEach(skill => {
-      const bal = results.get(skill)
-      let total = (bal)? bal.got :0;
-      const need = (bal)? bal.need: 0;
+      const bal = results.get(skill);
+      let total = bal ? bal.got : 0;
+      const need = bal ? bal.need : 0;
       const got = total + SkillService.getAverage(teamSkills, skill);
       const diff = got - need;
-      if (bal){
+      if (bal) {
         bal.got = got;
         bal.diff = diff;
       }
@@ -260,28 +263,33 @@ const SkillService = {
   }
 };
 
-const populateBalance = (skill:string,results:Map<string,Balance>, sprintHours:number, teamSkills:any) => {
-      const balance =  {
-        need: 0,
-        got: 0,
-        diff: 0
-      };
-      let plan = {
-        failed: true,
-        skill: null,
-        skillsLeft: []
-      };
-      if (sprintHours) {
-        balance.need = sprintHours;
-        plan = SkillService.useSkill(teamSkills, skill, sprintHours);
-      }
-      if (plan.failed) {
-        balance.got = 0;
-      } else {
-        teamSkills = plan.skillsLeft;
-        balance.got = sprintHours;
-      }
-      results.set(skill, balance); 
-}
+const populateBalance = (
+  skill: string,
+  results: Map<string, Balance>,
+  sprintHours: number,
+  teamSkills: any
+) => {
+  const balance = {
+    need: 0,
+    got: 0,
+    diff: 0
+  };
+  let plan = {
+    failed: true,
+    skill: null,
+    skillsLeft: []
+  };
+  if (sprintHours) {
+    balance.need = sprintHours;
+    plan = SkillService.useSkill(teamSkills, skill, sprintHours);
+  }
+  if (plan.failed) {
+    balance.got = 0;
+  } else {
+    teamSkills = plan.skillsLeft;
+    balance.got = sprintHours;
+  }
+  results.set(skill, balance);
+};
 
-export {SkillService};
+export { SkillService };

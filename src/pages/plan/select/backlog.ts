@@ -11,7 +11,7 @@ const comp = {
     };
   },
   methods: {
-    selectSprint: (i:number) => {
+    selectSprint: (i: number) => {
       console.log("sprint selected is number " + i);
       if (window) {
         Vue.nextTick(() => {

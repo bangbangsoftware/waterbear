@@ -14,7 +14,7 @@ const comp = {
   name: "member",
   beforeCreate,
   create: () => {
-    const user = <any>comp.data().session.user
+    const user = <any>comp.data().session.user;
     user.picked = true;
   },
   data: () => {
@@ -25,7 +25,7 @@ const comp = {
   },
   methods: {
     save: () => {
-      const session = <any> store.state.session;
+      const session = <any>store.state.session;
       user.updateUser(session.user, session.project);
     }
   }

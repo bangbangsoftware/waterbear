@@ -1,7 +1,7 @@
-import store from '../../store';
-import {Member} from '../../user/member';
+import store from "../../store";
+import { Member } from "../../user/member";
 
-import {DOW, MOY, NORMAL, OFF, DS} from './defaults';
+import { DOW, MOY, NORMAL, OFF, DS } from "./defaults";
 
 export interface DisplayDay {
   format: string;
@@ -10,7 +10,7 @@ export interface DisplayDay {
   colour: string;
 }
 
-const getPostfix = (dom: number) => 'th';
+const getPostfix = (dom: number) => "th";
 
 const comp = {
   createData: (day: number, now: Date, lastMonth: string) => {
@@ -22,23 +22,23 @@ const comp = {
     const moy = MOY[date.getMonth()];
     const newMonth = lastMonth === moy ? false : moy;
     lastMonth = moy;
-    const format = ' ' + DOW[date.getDay()] + ' the ' + dom + getPostfix(dom);
-    const colour = day === 0 ? 'green' : day < 0 ? 'grey' : 'white';
+    const format = " " + DOW[date.getDay()] + " the " + dom + getPostfix(dom);
+    const colour = day === 0 ? "green" : day < 0 ? "grey" : "white";
     const data: DisplayDay = {
       format,
       date,
       newMonth,
-      colour,
+      colour
     };
     return {
       data,
-      lastMonth,
+      lastMonth
     };
   },
 
   setup: (members: Array<Member>, now = new Date()) => {
     const days = new Array<DisplayDay>();
-    let lastMonth = '';
+    let lastMonth = "";
     for (let day = -5; day < 15; day++) {
       const both = comp.createData(day, now, lastMonth);
       lastMonth = both.lastMonth;
@@ -50,7 +50,7 @@ const comp = {
     }
     const list = JSON.parse(JSON.stringify(members));
     const membersWithDiary = comp
-      .makeUnique(list, 'name')
+      .makeUnique(list, "name")
       .map((member: Member) => {
         if (member.diary) {
           return member;
@@ -63,11 +63,11 @@ const comp = {
       });
     return {
       days,
-      members: membersWithDiary,
+      members: membersWithDiary
     };
   },
 
-  dayState: (date: Date, days: any[], colour = 'white') => {
+  dayState: (date: Date, days: any[], colour = "white") => {
     const wd = date.getDay();
     const day = days[wd];
     const nightHours = day.night
@@ -82,11 +82,11 @@ const comp = {
       const off = JSON.parse(JSON.stringify(DS[OFF]));
       off.date = date;
       off.hours = 0;
-      off.display = total + ' hours';
+      off.display = total + " hours";
       return off;
     }
     const normal = JSON.parse(JSON.stringify(DS[NORMAL]));
-    normal.display = total + ' hours';
+    normal.display = total + " hours";
     // normal.hours = total + ' hours'
     normal.hours = total;
     normal.colour = colour;
@@ -113,13 +113,13 @@ const comp = {
     const keys = new Array<any>();
     return list.filter(item => {
       if (keys.indexOf(item[key]) > -1) {
-        console.log('conflict:' + item[key]);
+        console.log("conflict:" + item[key]);
         return false;
       }
       keys.push(item[key]);
       return true;
     });
-  },
+  }
 };
 
 export default comp;

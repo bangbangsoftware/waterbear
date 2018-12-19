@@ -1,6 +1,6 @@
 import store from "../../store";
 
-const service = (story:any) => {
+const service = (story: any) => {
   if (story.title.length === 0) {
     store.commit("storyError", "invalid story - missing title");
     return false;

@@ -2,15 +2,15 @@ import validStory from "./valid";
 import store from "../../store";
 
 export default {
-        storyError: (state:any, message:string) => {
+  storyError: (state: any, message: string) => {
     state.session.story.error = message;
     state.session.story.valid = false;
   },
-        storyOk: (state:any) => {
+  storyOk: (state: any) => {
     state.session.story.error = "";
     state.session.story.valid = true;
   },
-        clearStory: (state:any) => {
+  clearStory: (state: any) => {
     state.session.story = {
       title: "",
       descAs: "",
@@ -23,9 +23,9 @@ export default {
       index: -1
     };
   },
-        selectStory: (state:any, selected:number) => {
+  selectStory: (state: any, selected: number) => {
     const stories = state.session.project.stories;
-    const selectedStories = stories.map((story:any, i:number) => {
+    const selectedStories = stories.map((story: any, i: number) => {
       story.selected = i === selected;
       return story;
     });
@@ -34,14 +34,14 @@ export default {
     theStory.index = selected;
     store.commit("currentStory", theStory);
   },
-        currentStory: (state:any, story:any) => {
+  currentStory: (state: any, story: any) => {
     state.session.story = story;
   },
-        deleteStory: (state:any, selected:number) => {
+  deleteStory: (state: any, selected: number) => {
     // this doesnt seem right?? is this right?
     store.state.session.project.stories.splice(selected, 1);
   },
-        postStory: (state:any) => {
+  postStory: (state: any) => {
     if (!state.session.project.stories) {
       state.session.project.stories = [];
     }
@@ -56,7 +56,7 @@ export default {
     }
     store.commit("clearStory");
   },
-        moveStory: (state:any, movement:any) => {
+  moveStory: (state: any, movement: any) => {
     if (!state.session.project.stories) {
       state.session.project.stories = [];
     }
@@ -68,25 +68,25 @@ export default {
     state.session.project.stories.splice(movement.index, 1);
     state.session.project.stories.splice(newIndex, 0, mover);
   },
-        title: (state:any, t:string) => {
+  title: (state: any, t: string) => {
     state.session.story["title"] = t;
     validStory(state.session.story);
   },
-        desc: (state:any, desc:any) => {
+  desc: (state: any, desc: any) => {
     state.session.story.descAs = desc.as;
     state.session.story.descWant = desc.want;
     state.session.story.descThat = desc.that;
     validStory(state.session.story);
   },
-        removeAcceptance: (state:any, index:number) => {
+  removeAcceptance: (state: any, index: number) => {
     state.session.story.acs.splice(index, 1);
     validStory(state.session.story);
   },
-        acceptance: (state:any, crit:string) => {
+  acceptance: (state: any, crit: string) => {
     state.session.story.acs.push(crit);
     validStory(state.session.story);
   },
-        colour: (state:any, no:number) => {
+  colour: (state: any, no: number) => {
     state.session.story.colourNo = no;
   }
 };

@@ -1,6 +1,9 @@
 import Vue from "vue";
 
 import store from "../../store";
+console.log("login", store);
+console.log("login", store.state);
+
 import user from "../../user";
 
 import "./login.css";
@@ -8,7 +11,7 @@ import "./login.css";
 import alreadyLoggedIn from "../../loginCheck";
 import direct from "../../direct";
 
-const error = (err:any) => console.error(err);
+const error = (err: any) => console.error(err);
 const name = "waterbear";
 const pouchOpts = {
   skipSetup: true,
@@ -17,7 +20,7 @@ const pouchOpts = {
 import PouchDB from "pouchdb";
 PouchDB.plugin(require("pouchdb-authentication"));
 
-const oops = (err:any, email:string, where:string) => {
+const oops = (err: any, email: string, where: string) => {
   console.error(where);
   console.error(err);
   let error = err.error + " " + err.reason + " (" + err.status + ")";
@@ -41,6 +44,7 @@ const oops = (err:any, email:string, where:string) => {
 const comp = {
   name: "login",
   data() {
+    const session = store.state.session ? store.state.session : {};
     return {
       error: "",
       email: "",
@@ -52,8 +56,9 @@ const comp = {
     alreadyLoggedIn(false)
       .then(() => {
         console.log("Already Logged in");
-        const that = <any> this;
-        direct(that.session.user).then(go => {
+        const that = <any>this;
+        const user = that.session.user;
+        direct(user).then(go => {
           if (window) {
             window.location.href = "#/" + go;
           }
@@ -65,11 +70,11 @@ const comp = {
   },
   create: () => {
     store.commit("loaded", false);
-    const element = <any> document.getElementById("email");
+    const element = <any>document.getElementById("email");
     element.focus();
   },
   methods: {
-    login: function(email:string, pw:string) {
+    login: function(email: string, pw: string) {
       if (email.length === 0) {
         const emailElement = document.getElementById("email");
         if (emailElement) {
@@ -91,13 +96,13 @@ const comp = {
         }
         return "Missing password";
       }
-      const that = <any> this;
+      const that = <any>this;
       const remoteCoach = that.session.couchURL + name;
       const db =
-//        typeof PouchDB.plugin === FunctionA?
-//           new PouchDB(remoteCoach, pouchOpts, error);
-           new PouchDB(remoteCoach);
-//           :PouchDB(remoteCoach, pouchOpts, error);
+        //        typeof PouchDB.plugin === FunctionA?
+        //           new PouchDB(remoteCoach, pouchOpts, error);
+        new PouchDB(remoteCoach);
+      //           :PouchDB(remoteCoach, pouchOpts, error);
       store.commit("db", db);
       user
         .login(email, pw, db)

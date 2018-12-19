@@ -13,7 +13,7 @@ import teamDisplay from "../team/team.vue";
 
 console.log(" CURRENTLY pages/plan/plan.ts THIS IS NOT USED?!");
 
-const comp = {
+const planService = {
   components: {
     task,
     backlog,
@@ -37,13 +37,13 @@ const comp = {
     };
   },
   watch: {
-    session: function(val:any) {
+    session: function(val: any) {
       this.session = val;
     }
   },
   methods: {}
 };
 
-Vue.component("plan", comp);
+Vue.component("plan", planService);
 
-export default comp;
+export default planService;

@@ -7,7 +7,7 @@ module.exports = {
     "jest/globals": true
   },
 
-  extends: ["plugin:vue/essential", "@vue/prettier"],
+  extends: ["plugin:vue/essential", "@vue/prettier", "@vue/typescript"],
 
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
@@ -15,12 +15,6 @@ module.exports = {
   },
 
   parserOptions: {
-    parser: 'typescript-eslint-parser'
-  },
-
-  'extends': [
-    'plugin:vue/essential',
-    '@vue/prettier',
-    '@vue/typescript'
-  ]
+    parser: "typescript-eslint-parser"
+  }
 };

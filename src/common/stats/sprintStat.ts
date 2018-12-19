@@ -2,20 +2,20 @@ import is from "../valid/validSprint";
 import util from "../util";
 import tasks from "./tasks";
 import contingency from "./contingency";
-import { Member} from '../../user/member';
+import { Member } from "../../user/member";
 
-const getAssignedTasks = (taks:Array<any>, user:Member) => {
+const getAssignedTasks = (taks: Array<any>, user: Member) => {
   return taks.filter(t => t.assignedTo && t.assignedTo.name === user.name);
 };
 
 const comp = {
-  contingency: (sprint:any, members:Array<any>, now = new Date()) => {
+  contingency: (sprint: any, members: Array<any>, now = new Date()) => {
     // skillBalance
     const all = tasks.allTasks(sprint);
     return contingency(sprint, members, now, all);
   },
-  tasksDonePercent: (sprint:any) => tasks.tasksDonePercentage(sprint),
-  state: (sprint:any, user:Member, now = new Date()) => {
+  tasksDonePercent: (sprint: any) => tasks.tasksDonePercentage(sprint),
+  state: (sprint: any, user: Member, now = new Date()) => {
     const fail = is.invalid(sprint, now);
     if (fail) {
       return fail;
@@ -35,12 +35,12 @@ const comp = {
     // paused
     return {};
   },
-  hoursLeft: (sprint:any, members: Array<Member>, now = new Date()) => {
+  hoursLeft: (sprint: any, members: Array<Member>, now = new Date()) => {
     return members
       .map(user => util.hoursLeftInSprint(sprint, user, now))
       .reduce((t, c) => t + c);
   },
-  tasksStat: (tsks:Array<any>) => {
+  tasksStat: (tsks: Array<any>) => {
     return {
       qty: tsks.length,
       est: tsks.map(t => t.est).reduce((t, c) => t + c),

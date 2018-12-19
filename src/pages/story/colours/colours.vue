@@ -21,4 +21,5 @@
     </div>
   </div>
 </template>
-<script src="./colours.ts"></script>
+<script src="./colours.ts">
+</script>

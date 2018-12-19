@@ -9,7 +9,7 @@ const comp = {
     };
   },
   methods: {
-    newNick: (name:string) => {
+    newNick: (name: string) => {
       console.log("New nick");
       store.commit("nick", name);
     }

@@ -5,6 +5,7 @@
 import App from "./App.vue";
 import router from "./router";
 import Vue from "vue";
+import Vuex from "vuex";
 
 console.log("Hello from %cTardigrade", "font-size:300%; color:orange");
 
@@ -13,6 +14,10 @@ import "../node_modules/vuetify/dist/vuetify.min.css";
 
 import Vuetify from "vuetify";
 Vue.use(Vuetify);
+
+import store from "./store";
+console.log("main", store);
+console.log("main", store.state);
 
 Vue.filter("truncate", function(value: string) {
   if (!value) {

@@ -10,7 +10,7 @@ import valid from "../story/valid";
 import check from "../../loginCheck";
 import util from "../plan/util";
 
-const jumpIncomplete = (project:any, amount:number) => {
+const jumpIncomplete = (project: any, amount: number) => {
   const state = comp.methods.backlogState(project);
   const lastIndex = state.incomplete.length - 1;
 
@@ -23,7 +23,7 @@ const jumpIncomplete = (project:any, amount:number) => {
     store.commit("incomplete", 0);
     return;
   }
-  const session = <any> store.state.session;
+  const session = <any>store.state.session;
   if (session.incomplete === undefined) {
     console.log("Setting incomplete index is missing, setting it to zero");
     store.commit("incomplete", 0);
@@ -46,7 +46,7 @@ const jumpIncomplete = (project:any, amount:number) => {
   return next;
 };
 
-const jump = (project:any, amount:number) => {
+const jump = (project: any, amount: number) => {
   const current = jumpIncomplete(project, amount);
   if (current === undefined) {
     return;
@@ -70,10 +70,10 @@ const comp = {
     };
   },
   methods: {
-    selectStory: function(story:any) {
+    selectStory: function(story: any) {
       store.commit("story", story);
     },
-    updateStory: function(story:any) {
+    updateStory: function(story: any) {
       var ok = valid(story);
       if (!ok) {
         console.log("invalid story...");
@@ -87,43 +87,43 @@ const comp = {
       console.log(prj);
       const db = store.state.db;
       db.get(prj._id)
-        .then((p:any) => {
+        .then((p: any) => {
           p.stories = prj.stories;
           return db.put(p);
         })
-        .catch((err:any) => console.error(err))
+        .catch((err: any) => console.error(err))
         .then(() => this.startIncomplete(prj));
     },
-    whatsNeeded: function(story:any) {
+    whatsNeeded: function(story: any) {
       valid(story);
     },
-    startIncomplete: function(project:any) {
+    startIncomplete: function(project: any) {
       const state = this.backlogState(project);
       if (state.incomplete.length === 0) {
         console.log("All stories are complete!");
         return;
       }
       store.commit("incomplete", 0);
-      const session = <any> store.state.session;
+      const session = <any>store.state.session;
       const first = state.incomplete[session.incomplete];
       store.commit("currentStory", first);
       return first;
     },
-    lastIncomplete: function(project:any) {
+    lastIncomplete: function(project: any) {
       return jump(project, -1);
     },
-    nextIncomplete: function(project:any) {
+    nextIncomplete: function(project: any) {
       return jump(project, 1);
     },
-    todo: function(project:any) {
+    todo: function(project: any) {
       const states = this.backlogState(project);
       return states.incomplete.length;
     },
-    backlogState: function(project:any) {
+    backlogState: function(project: any) {
       return util.backlogState(project);
     },
-    navigateTo: function(nav:string) {
-      const that = <any> this;
+    navigateTo: function(nav: string) {
+      const that = <any>this;
       that.$router.go({
         path: nav
       });

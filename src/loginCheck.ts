@@ -3,7 +3,7 @@ import db from "./dbase";
 
 import resolveUser from "./direct";
 
-const runaway = (reject:Function, jump = true) => (message:string) => {
+const runaway = (reject: Function, jump = true) => (message: string) => {
   store.commit("loaded", false);
   store.commit("error", "Need to login");
   if (window && jump) {
@@ -12,7 +12,7 @@ const runaway = (reject:Function, jump = true) => (message:string) => {
   reject(message);
 };
 
-const checkSession = (error:any) => (session:any, resolve:Function) => {
+const checkSession = (error: Function) => (session: any, resolve: Function) => {
   if (!session) {
     error("No Session");
     return;
@@ -38,12 +38,24 @@ const checkSession = (error:any) => (session:any, resolve:Function) => {
     });
 };
 
-const noDatabase = (resolve:Function, reject:Function, checker:Function) => {
+const noDatabase = (resolve: Function, reject: Function, checker: Function) => {
   console.error("No database");
   store.commit("user", false);
   db.getSession()
-    .then((session:any) => checker(session))
-    .catch((err:any) => runaway(reject)(err));
+    .then((session: any) => checker(session))
+    .catch((err: any) => runaway(reject)(err));
+};
+
+const empty = (what: Object): boolean => {
+  if (!what || what === null || what === undefined) {
+    return true;
+  }
+  const keys = Object.keys(store.state.db);
+  if (keys && keys.length === 1 && keys[0] === "put") {
+    // Just an observable..
+    return true;
+  }
+  return false;
 };
 
 const service = function(jump = true) {
@@ -51,7 +63,9 @@ const service = function(jump = true) {
   return new Promise((resolve, reject) => {
     const error = runaway(reject, jump);
     const checker = checkSession(error);
-    if (store.state.db === null) {
+    console.log(store.state.db);
+
+    if (empty(store.state.db)) {
       noDatabase(resolve, reject, checker);
     } else {
       store.commit("error", "");

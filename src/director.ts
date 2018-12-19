@@ -1,6 +1,6 @@
-import {Member} from './user/member';
+import { Member } from "./user/member";
 
-const dev = (user:Member, project:any) => {
+const dev = (user: Member, project: any) => {
   const now = new Date();
   const started = project.sprints.filter(() => now);
   if (started.length === 0) {
@@ -15,7 +15,7 @@ const dev = (user:Member, project:any) => {
   return "devopen";
 };
 
-const service = (user:Member, project:any) => {
+const service = (user: Member, project: any) => {
   if (typeof user.days === "undefined" || user.days.length === 0) {
     return "member";
   }

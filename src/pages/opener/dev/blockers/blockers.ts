@@ -10,11 +10,11 @@ const comp = {
   data: function() {
     const session = store.state.session;
     const project = session.project;
-    const defaults = <any> project.defaults;
+    const defaults = <any>project.defaults;
     const reasons =
       defaults.blockers === undefined
         ? ["broken machine", "vague requirement"]
-        :defaults.blockers;
+        : defaults.blockers;
     /**        
             const reasons = [
               "one",
@@ -38,16 +38,16 @@ const comp = {
     };
   },
   methods: {
-    onSelect(value:string) {
-      const that = <any> this;
+    onSelect(value: string) {
+      const that = <any>this;
       that.value = value;
     },
-    onChange(value:string) {
-      const that = <any> this;
+    onChange(value: string) {
+      const that = <any>this;
       that.value = value;
       console.log("changed " + that.value);
     },
-    post(blocker:any) {
+    post(blocker: any) {
       console.log("posted " + blocker);
     }
   }

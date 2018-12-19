@@ -3,6 +3,7 @@ import Vue from "vue";
 import { Bar } from "vue-chartjs";
 
 import store from "../../../../store";
+import { Member } from "../../../../user/member";
 
 import { SkillService, TeamSkill } from "./skills";
 
@@ -15,7 +16,7 @@ const comp = {
     const now = new Date();
     const fortnightAway = new Date(+new Date() + 12096e5);
     const teamSkills = SkillService.getTeamSkills(members, now, fortnightAway);
-    const names = members.map(member => member.nick); // too big + ' [' + member.skills + ']')
+    const names = members.map((member: Member) => member.nick); // too big + ' [' + member.skills + ']')
     const hours = teamSkills.map((ts: TeamSkill) => ts.hours);
     const that = <any>this;
     that.renderChart({

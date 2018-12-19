@@ -31,4 +31,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./blockers"></script>
+<script src="./blockers">
+</script>

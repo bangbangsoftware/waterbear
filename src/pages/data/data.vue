@@ -41,4 +41,5 @@
     </v-card>
   </v-container>
 </template>
-<script src="./data.ts"></script>
+<script src="./data.ts">
+</script>

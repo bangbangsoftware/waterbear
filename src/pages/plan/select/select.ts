@@ -7,7 +7,7 @@ import util from "../util.js";
 //import moment from "moment";
 import dateFns from "date-fns";
 
-Vue.filter("formatDate", function(value:any) {
+Vue.filter("formatDate", function(value: any) {
   if (!value) {
     return "";
   }
@@ -16,7 +16,7 @@ Vue.filter("formatDate", function(value:any) {
   return dateFns.format(d, "DD MMM YYYY");
 });
 
-const getTime = (date:string) => {
+const getTime = (date: string) => {
   return {
     hours: parseInt(date.substring(0, 2)),
     minutes: parseInt(date.substring(3, 5))
@@ -51,10 +51,10 @@ const comp = {
     },
     startSprint: function() {
       store.commit("planState", "sprintSelect");
-      const that = <any> this;
+      const that = <any>this;
       that.dialog = false;
       const i = store.state.session.project.current.sprintIndex;
-      const sprint = <any> store.state.session.project.sprints[i];
+      const sprint = <any>store.state.session.project.sprints[i];
       const time = getTime(sprint.startTime);
       // @TODO This looks wrong... dates... grrrrr
       sprint.startDate.setHours(time.hours + 1);
@@ -62,11 +62,11 @@ const comp = {
       util.updateSprints();
     },
     toggleNameEdit: function() {
-      const that = <any> this;
+      const that = <any>this;
       that.editName = !that.editName;
       store.commit("planState", "sprintCreate");
     },
-    removeFromSprint: function(story:any, index:any) {
+    removeFromSprint: function(story: any, index: any) {
       store.commit("takeFromSprint", index);
       util.updateSprints();
     }

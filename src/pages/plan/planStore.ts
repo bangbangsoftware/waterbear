@@ -1,5 +1,5 @@
 export default {
-  planState: (state:any, newState:string) => {
+  planState: (state: any, newState: string) => {
     state.session.planState = newState;
   }
 };

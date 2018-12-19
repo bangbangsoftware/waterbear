@@ -132,4 +132,5 @@
     </v-flex>
   </div>
 </template>
-<script src="./dev.ts"></script>
+<script src="./dev.ts">
+</script>

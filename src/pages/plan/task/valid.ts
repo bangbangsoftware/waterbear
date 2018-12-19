@@ -1,6 +1,6 @@
 import store from "../../../store";
 
-const service = (task:any) => {
+const service = (task: any) => {
   if (task.name.length === 0) {
     store.commit("taskError", "invalid task - missing name");
     return false;

@@ -1,11 +1,9 @@
 import store from "../../../../store";
 
-import {SkillService, Balance} from "./skills";
+import { SkillService, Balance } from "./skills";
 
-
-
-const getBoth = (skills:Array<string>, results:any) => {
-  const just = new Map<String,Balance>();
+const getBoth = (skills: Array<string>, results: any) => {
+  const just = new Map<String, Balance>();
   skills.forEach(skill => {
     just.set(skill, results[skill]);
   });
@@ -19,7 +17,7 @@ const getBoth = (skills:Array<string>, results:any) => {
   };
 };
 
-const debug = (what:string, out:any) => {
+const debug = (what: string, out: any) => {
   console.log("%s gots %o", what, out.gots);
   console.log("%s needs %o", what, out.needs);
 };
@@ -39,7 +37,7 @@ const comp = {
     debug("balance", balance);
     const allSkills = Object.keys(results);
     const memberSkills = Array<string>();
-    allSkills.forEach((key:string) => {
+    allSkills.forEach((key: string) => {
       if (sprintSkills.indexOf(key) === -1) {
         memberSkills.push(key);
       }

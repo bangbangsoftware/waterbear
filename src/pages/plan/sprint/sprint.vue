@@ -18,4 +18,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./sprint"></script>
+<script src="./sprint">
+</script>

@@ -1,11 +1,16 @@
 import util from "../util";
-import {Member} from '../../user/member';
+import { Member } from "../../user/member";
 
-const getTasksOfStatus = (sprint:any, status:string) => {
+const getTasksOfStatus = (sprint: any, status: string) => {
   const tasks = comp.allTasks(sprint);
-  return tasks.filter((t:any) => t.status && t.status === status);
+  return tasks.filter((t: any) => t.status && t.status === status);
 };
-const rangeState = (current:Date, end:Date, user:Member, results:number):number => {
+const rangeState = (
+  current: Date,
+  end: Date,
+  user: Member,
+  results: number
+): number => {
   const next = nextDay(current, 1, end.getHours(), end.getMinutes());
   if (next.getTime() > end.getTime()) {
     return results;
@@ -17,7 +22,7 @@ const rangeState = (current:Date, end:Date, user:Member, results:number):number 
 };
 
 const nextDay = (
-  current:Date,
+  current: Date,
   plus = 1,
   hh = current.getHours(),
   mins = current.getMinutes()
@@ -29,14 +34,14 @@ const nextDay = (
 };
 
 const comp = {
-  allTasks: (sprint:any) => {
+  allTasks: (sprint: any) => {
     const tasks = <any>[];
     if (!sprint.list) {
       return tasks;
     }
-    const storiesWithTasks = sprint.list.filter((story:any) => story.tasks);
-    storiesWithTasks.forEach((story :any)=> {
-      const storyTasks = story.tasks.map((t:any) => {
+    const storiesWithTasks = sprint.list.filter((story: any) => story.tasks);
+    storiesWithTasks.forEach((story: any) => {
+      const storyTasks = story.tasks.map((t: any) => {
         t.storyIndex = story.index;
         return t;
       });
@@ -44,7 +49,7 @@ const comp = {
     });
     return tasks;
   },
-  exists: (what:any) => {
+  exists: (what: any) => {
     if (what === undefined) {
       return false;
     }
@@ -56,16 +61,16 @@ const comp = {
     }
     return true;
   },
-  doing: (assignedTo:string) => {
+  doing: (assignedTo: string) => {
     return comp.exists(assignedTo);
   },
-  mine: (assignedTo:string, user:Member) => {
+  mine: (assignedTo: string, user: Member) => {
     if (!comp.doing(assignedTo)) {
       return false;
     }
     return assignedTo === user.name;
   },
-  taskState: (task:any, user:Member, now = new Date()) => {
+  taskState: (task: any, user: Member, now = new Date()) => {
     const skilled = user.skills
       ? user.skills.filter(s => s === task.skill).length > 0
       : false;
@@ -79,7 +84,7 @@ const comp = {
       left: parseInt(task.est),
       finished,
       paused,
-      reason:null,
+      reason: null,
       abandoned
     };
     if (abandoned) {
@@ -100,7 +105,9 @@ const comp = {
         ? task.paused
         : now;
     const blocked = task.blockers
-      ? task.blockers.map((blocker:any) => blocker.hours).reduce((t:number, c:number) => t + c)
+      ? task.blockers
+          .map((blocker: any) => blocker.hours)
+          .reduce((t: number, c: number) => t + c)
       : 0;
     const state = util.currentHours(start, user);
     const today = util.today(start, until);
@@ -115,18 +122,18 @@ const comp = {
     result.left = task.est - result.done;
     return result;
   },
-  skillHoursLeft: (sprint:any) => {
+  skillHoursLeft: (sprint: any) => {
     // ??? const tasks = sprint.tasks
-    const mapper = <any> {};
-    const notStartedHours = comp.allTasks(sprint).filter((t:any) => !t.start);
-    notStartedHours.forEach((t :any)=> {
+    const mapper = <any>{};
+    const notStartedHours = comp.allTasks(sprint).filter((t: any) => !t.start);
+    notStartedHours.forEach((t: any) => {
       const qty = mapper[t.skill];
       mapper[t.skill] = qty === undefined ? t.est : qty + t.est;
     });
     comp
       .allTasks(sprint)
-      .filter((t:any) => t.start && !t.end)
-      .forEach((task:any) => {
+      .filter((t: any) => t.start && !t.end)
+      .forEach((task: any) => {
         // ???? const state = comp.taskState(task, task.assignedTo, now)
         const qty = mapper[task.skill];
         mapper[task.skill] = qty === undefined ? task.est : qty + task.est;
@@ -139,24 +146,24 @@ const comp = {
       };
     });
   },
-  endDate: (sprint:any) => {
+  endDate: (sprint: any) => {
     const date = new Date(sprint.startDate);
     date.setDate(date.getDate() + sprint.days);
     return date;
   },
-  tasksNotStarted: (sprint:any) => {
+  tasksNotStarted: (sprint: any) => {
     return comp.tasksStat(getTasksOfStatus(sprint, "todo"));
   },
-  tasksOnGoing: (sprint:any) => {
+  tasksOnGoing: (sprint: any) => {
     return comp.tasksStat(getTasksOfStatus(sprint, "ongoing"));
   },
-  tasksCompleted: (sprint :any)=> {
+  tasksCompleted: (sprint: any) => {
     return comp.tasksStat(getTasksOfStatus(sprint, "done"));
   },
-  tasksStat: (tasks :any)=> {
+  tasksStat: (tasks: any) => {
     return {
       qty: tasks.length,
-      est: tasks.map((t:any) => t.est).reduce((t:number, c:number) => t + c),
+      est: tasks.map((t: any) => t.est).reduce((t: number, c: number) => t + c),
       tasks
     };
   },
@@ -164,15 +171,15 @@ const comp = {
     // @TODO should this use status????
     return tasks.filter(t => !comp.doing(t.assignedTo));
   },
-  myTasks: (tasks: Array<any>, user:Member) => {
+  myTasks: (tasks: Array<any>, user: Member) => {
     // @TODO should this use status????
     return tasks.filter(t => comp.mine(t.assignedTo, user));
   },
-  tasksDoing:(tasks:Array<any>) => {
+  tasksDoing: (tasks: Array<any>) => {
     // @TODO should this use status????
     return tasks.filter(t => comp.doing(t.assignedTo));
   },
-  tasksDone:(tasks:Array<any>) => {
+  tasksDone: (tasks: Array<any>) => {
     // @TODO should this use status????
     return tasks.filter(t => {
       // const state = comp.taskState(t) // @TODO THIS SHOULD HAVE USER?????!!!!
@@ -180,7 +187,7 @@ const comp = {
       return t.finished;
     });
   },
-  tasksDonePercentage: (sprint:any) => {
+  tasksDonePercentage: (sprint: any) => {
     const allTasks = comp.allTasks(sprint);
     const all = allTasks.length;
     const done = comp.tasksDone(allTasks).length;

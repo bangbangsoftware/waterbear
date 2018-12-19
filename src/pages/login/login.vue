@@ -33,5 +33,5 @@
     </v-flex>
 </v-layout>
 </template>
-<script src='./login'>
+<script src='./login.ts'>
 </script>

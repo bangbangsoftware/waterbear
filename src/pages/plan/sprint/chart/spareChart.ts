@@ -12,9 +12,9 @@ const comp = {
   },
   watch: {
     session: {
-      handler: function(val:any) {
+      handler: function(val: any) {
         const graph = val.planChartData.spareSkills;
-        const that:any = this;
+        const that: any = this;
         that._chart.data.datasets = [
           {
             label: "spare",
@@ -29,8 +29,8 @@ const comp = {
     }
   },
   mounted() {
-    const session:any = store.state.session;
-    const that:any = this;
+    const session: any = store.state.session;
+    const that: any = this;
     const display = session.planChartData.spareSkills;
     that.renderChart(
       {

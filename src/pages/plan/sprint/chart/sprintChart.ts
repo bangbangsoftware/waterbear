@@ -6,7 +6,7 @@ import store from "../../../../store";
 
 import { SkillService } from "./skills";
 
-const generate = (sprint:any) => {
+const generate = (sprint: any) => {
   const sprintSkills = SkillService.sprintSkills(sprint);
   return {
     labels: Object.keys(sprintSkills),
@@ -23,10 +23,10 @@ const comp = {
   },
   watch: {
     session: {
-      handler: function(sess:any) {
+      handler: function(sess: any) {
         const sprint = sess.project.sprints[sess.project.current.sprintIndex];
         const data = generate(sprint);
-        const that = <any> this;
+        const that = <any>this;
         that._chart.data.datasets = [
           {
             label: "Sprint",
@@ -46,7 +46,7 @@ const comp = {
     const sprint =
       project.sprints[store.state.session.project.current.sprintIndex];
     const data = generate(sprint);
-    const that = <any> this;
+    const that = <any>this;
     that.renderChart({
       labels: data.labels,
       datasets: [

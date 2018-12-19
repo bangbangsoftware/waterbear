@@ -3,13 +3,13 @@ import Vue from "vue";
 import store from "../../../store";
 import util from "../util";
 
-const storeSprint = (sprint:any) => {
+const storeSprint = (sprint: any) => {
   const prj = store.state.session.project;
   console.log("Adding sprint to project");
   console.log(prj);
   const db = store.state.db;
   db.get(prj._id)
-    .then((p:any) => {
+    .then((p: any) => {
       let sprints = p.sprints;
       if (!sprints) {
         sprints = [];
@@ -18,7 +18,7 @@ const storeSprint = (sprint:any) => {
       p.sprints = sprints;
       return db.put(p);
     })
-    .catch((err:any) => console.error(err));
+    .catch((err: any) => console.error(err));
 };
 
 const comp = {
@@ -30,10 +30,10 @@ const comp = {
     };
   },
   methods: {
-    storeName: (name:string) => {
+    storeName: (name: string) => {
       store.commit("sprintName", name);
     },
-    storeDays: (days:Array<any>) => {
+    storeDays: (days: Array<any>) => {
       store.commit("sprintDays", days);
     },
     changeState: function() {

@@ -6,8 +6,10 @@
   rel="stylesheet"
   href="//fonts.googleapis.com/icon?family=Material+Icons"
 />
-<style scoped src="./signup.css"></style>
-<script src="./signup.ts"></script>
+<style scoped src="./signup.css">
+</style>
+<script src="./signup.ts">
+</script>
 <template>
   <v-container fluid grid-list-md class="grey lighten-4">
     <v-layout row wrap>

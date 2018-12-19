@@ -3,7 +3,7 @@ import diary from "./setup/diary.js";
 
 import defaults from "./setup/hours.js";
 
-import {Member} from '../user/member';
+import { Member } from "../user/member";
 
 const dataOne = () => {
   const startDate = new Date(2018, 7, 21, 9, 0, 0, 0);
@@ -14,13 +14,13 @@ const dataOne = () => {
 
   const days = defaults();
   const members = new Array<Member>();
-  const mick = <Member> {};
+  const mick = <Member>{};
   mick.name = "mick";
   mick.days = days;
-  const fred = <Member> {};
+  const fred = <Member>{};
   fred.name = "fred";
   fred.days = days;
-  members.push(mick);  
+  members.push(mick);
   members.push(fred);
   const both = diary.setup(members, startDate);
   const member = both.members[0];

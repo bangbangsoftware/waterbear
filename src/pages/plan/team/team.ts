@@ -6,7 +6,7 @@ import user from "../../../user.js";
 const comp = {
   name: "team-display",
   beforeCreate: function() {
-    const that = <any> this;
+    const that = <any>this;
     that.members = store.state.session.project.members;
   },
   data: () => {
@@ -17,7 +17,7 @@ const comp = {
   },
   methods: {
     save: () => {
-      const session = <any> store.state.session;
+      const session = <any>store.state.session;
       user.updateUser(session.user, session.project);
     }
   }

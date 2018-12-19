@@ -2,9 +2,9 @@ import store from "../../../store";
 import user from "../../../user";
 import Vue from "vue";
 
-const register = (proj:any) => {
+const register = (proj: any) => {
   console.log("user....");
-  const state = <any> store.state;
+  const state = <any>store.state;
   user.currentProject(state.session.user, proj.id);
   store.commit("project", proj);
   store.commit("log", proj.id + " project has begun");
@@ -13,9 +13,9 @@ const register = (proj:any) => {
   });
 };
 
-const oops = (err:any, name:string) => {
+const oops = (err: any, name: string) => {
   console.error(err);
-  const nameElement = <any> document.getElementById("projectName");
+  const nameElement = <any>document.getElementById("projectName");
   nameElement.focus();
   let error = err.error + " " + err.reason + " (" + err.status + ")";
   if (err.status === 409) {
@@ -42,18 +42,18 @@ const comp = {
   },
   mounted: () => {
     store.commit("error", "");
-    const element = <any> document.getElementById("projectName");
+    const element = <any>document.getElementById("projectName");
     element.focus();
   },
   methods: {
-    project: (name:string, desc:string) => {
+    project: (name: string, desc: string) => {
       if (name.length === 0) {
-        const element = <any> document.getElementById("projectName");
+        const element = <any>document.getElementById("projectName");
         element.focus();
         return "Missing project name";
       }
       if (desc.length === 0) {
-        const element = <any> document.getElementById("projectDesc");
+        const element = <any>document.getElementById("projectDesc");
         element.focus();
         return "Missing project description";
       }
@@ -63,8 +63,8 @@ const comp = {
       };
       store.state.db
         .put(project)
-        .then((prj:any) => register(prj))
-        .catch((err:any)=> oops(err, name));
+        .then((prj: any) => register(prj))
+        .catch((err: any) => oops(err, name));
       return "";
     }
   }

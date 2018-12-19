@@ -1,16 +1,19 @@
 import db from "../dbase";
 // import store from "../store.js";
-import {Member} from '../user/member';
+import { Member } from "../user/member";
 
 const remote = {
   save: (project: any): Promise<any> => db.put(project),
   user: (name: string, data: any) => {
     return db.putUser(name, data);
   },
-  signup: (email: string, pw: string, data: any):Promise<any> =>
-  // db.signUp(email, pw, data),
-   db.signUp(email, pw),
-  getUser: (name: string):Promise<any> => db.getUser(name),
+  signup: (email: string, pw: string, data: any): Promise<any> =>
+    // db.signUp(email, pw, data),
+    db.signUp(email, pw),
+  getUser: (name: string): Promise<any> => {
+    console.log("get user (" + name + ")");
+    return db.getUser(name);
+  },
   load: (projectID: string) => db.get(projectID)
 };
 
@@ -20,12 +23,12 @@ const state = {
   save: (project: any): Promise<any> => {
     return remote.save(project);
   },
-  signup: (email: string, pw: string, data: any):Promise<any> =>
+  signup: (email: string, pw: string, data: any): Promise<any> =>
     remote.signup(email, pw, data),
   putUser: (name: string, data: any) => {
     remote.user(name, data);
   },
-  getUser: (name: string):Promise<Member> => remote.getUser(name),
+  getUser: (name: string): Promise<Member> => remote.getUser(name),
   load: (pid: string | null) => {
     return pid === null
       ? Promise.reject("No project defined")

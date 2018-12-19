@@ -12,13 +12,13 @@ const comp = {
     };
   },
   methods: {
-    changeColour: (no:number) => {
+    changeColour: (no: number) => {
       console.log("Selecting colour " + no);
       store.commit("colour", no);
       return no;
     },
-    navigateTo: function(nav:string) {
-      const vue = <any> this;
+    navigateTo: function(nav: string) {
+      const vue = <any>this;
       vue.$router.go({
         path: nav
       });

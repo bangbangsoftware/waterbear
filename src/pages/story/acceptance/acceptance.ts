@@ -13,8 +13,8 @@ const comp = {
     };
   },
   methods: {
-    navigateTo: function(nav:string) {
-      const vue = <any> this;
+    navigateTo: function(nav: string) {
+      const vue = <any>this;
       vue.$router.go({
         path: nav
       });

@@ -8,7 +8,7 @@ import user from "../../../user";
 
 import "./start.css";
 
-const oops = (err:any, email:string, where:string) => {
+const oops = (err: any, email: string, where: string) => {
   if (typeof err === "undefined") {
     return "";
   }
@@ -29,7 +29,7 @@ const oops = (err:any, email:string, where:string) => {
   return error;
 };
 
-const register = (email:string) => {
+const register = (email: string) => {
   if (store.state.session.error) {
     console.error("Can't register due to :" + store.state.session.error);
     return;
@@ -45,20 +45,20 @@ const register = (email:string) => {
   store.commit("stage", me);
 };
 
-const signInReg = (email:string, pw:string) => {
+const signInReg = (email: string, pw: string) => {
   user
     .signup(email, pw)
-    .catch((err:any) => oops(err, email, "signup"))
+    .catch((err: any) => oops(err, email, "signup"))
     .then(() => db.logIn(email, pw))
-    .catch((err:any) => oops(err, email, "login"))
+    .catch((err: any) => oops(err, email, "login"))
     .then(() => register(email));
 };
 
 const comp = {
   name: "start",
-//  components: {
-//    Password
-//  },
+  //  components: {
+  //    Password
+  //  },
   data() {
     return {
       error: "",
@@ -68,11 +68,11 @@ const comp = {
     };
   },
   create: () => {
-    const element = <any> document.getElementById("email");
+    const element = <any>document.getElementById("email");
     element.focus();
   },
   methods: {
-    createUser: (email:string, pw:string) => {
+    createUser: (email: string, pw: string) => {
       store.commit("error", "");
       if (email.length === 0) {
         const emailElement = document.getElementById("email");
@@ -97,7 +97,7 @@ const comp = {
       }
       db.logOut()
         .then(() => signInReg(email, pw))
-        .catch((err:any) => {
+        .catch((err: any) => {
           console.error(err);
           signInReg(email, pw);
         });

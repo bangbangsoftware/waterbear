@@ -19,7 +19,7 @@ const comp = {
   name: "sprint",
   beforeCreate: function() {
     loginCheck().then(() => {
-      const that = <any> this;
+      const that = <any>this;
       const id = parseInt(that.$route.params.id);
       console.log(new Date() + " sprint planning -#" + id);
       if (id > -1) {

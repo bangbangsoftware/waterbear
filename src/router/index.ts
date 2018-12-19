@@ -48,9 +48,9 @@ routes.push({
   component: member
 });
 //routes.push({
- // path: "/story",
- // name: "story",
- // component: story
+// path: "/story",
+// name: "story",
+// component: story
 //});
 routes.push({
   path: "/refine",
