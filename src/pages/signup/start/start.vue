@@ -32,4 +32,4 @@
     </v-layout>
 </v-container>
 </template>
-<script src='./start' />
+<script src='./start.ts' />

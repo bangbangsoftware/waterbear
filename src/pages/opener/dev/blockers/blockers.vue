@@ -31,5 +31,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./blockers">
+<script src="./blockers.ts">
 </script>

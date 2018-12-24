@@ -18,4 +18,4 @@
 
 </v-card>
 </template>
-<script src='./create.js' />
+<script src='./create.ts' />

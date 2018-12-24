@@ -78,5 +78,5 @@
 
 </v-layout>
 </template>
-<script src='./select.js'>
+<script src='./select.ts'>
 </script>

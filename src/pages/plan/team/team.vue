@@ -26,3 +26,5 @@
         </div>
     </whiteframe>
 </div>
+<script src='team.ts'>
+</script>

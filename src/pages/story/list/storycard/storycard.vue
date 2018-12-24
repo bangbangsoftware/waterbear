@@ -39,4 +39,4 @@
     <v-spacer></v-spacer>
 </div>
 </template>
-<script src='./storycard.js' />
+<script src='./storycard.ts' />

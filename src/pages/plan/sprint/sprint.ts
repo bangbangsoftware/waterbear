@@ -35,7 +35,6 @@ const comp = {
   data: () => {
     return {
       session: store.state.session,
-      project: store.state.session.project
     };
   }
 };

@@ -118,4 +118,4 @@
 </div>
 -->
 </template>
-<script src='./task.js' />
+<script src='./task.ts' />

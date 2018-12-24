@@ -103,4 +103,4 @@
 
 </div>
 </template>
-<script src='./menu.js' />
+<script src='./menu.ts' />

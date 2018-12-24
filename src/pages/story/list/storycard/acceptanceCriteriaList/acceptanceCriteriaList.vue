@@ -5,4 +5,4 @@
     </ul>
 </div>
 </template>
-<script src='./acceptanceCriteriaList.js' />
+<script src='./acceptanceCriteriaList.ts' />

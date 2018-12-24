@@ -47,4 +47,4 @@
     </v-layout>
   </v-container>
 </template>
-<script src="./owner" />
+<script src="./owner.ts" />

@@ -53,5 +53,5 @@
     </v-flex>
 </v-layout>
 </template>
-<script src='./condition'>
+<script src='./condition.ts'>
 </script>

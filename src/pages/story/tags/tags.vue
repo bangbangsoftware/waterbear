@@ -5,4 +5,4 @@
     </v-chips>
 </div>
 </template>
-<script src='./tags' />
+<script src='./tags.ts' />

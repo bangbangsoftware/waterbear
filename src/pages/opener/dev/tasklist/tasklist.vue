@@ -13,4 +13,4 @@
     </v-btn>
 </div>
 </template>
-<script src='./tasklist' />
+<script src='./tasklist.ts' />

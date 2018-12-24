@@ -28,4 +28,4 @@
     </v-text-field>
   </div>
 </template>
-<script src="./acceptance" />
+<script src="./acceptance.ts" />

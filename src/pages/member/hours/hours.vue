@@ -23,4 +23,4 @@
     </div>
   </div>
 </template>
-<script src="./hours" />
+<script src="./hours.ts" />

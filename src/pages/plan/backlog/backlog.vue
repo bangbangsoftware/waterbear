@@ -35,4 +35,4 @@
     </v-card>
 </div>
 </template>
-<script src='./backlog.js' />
+<script src='./backlog.ts' />

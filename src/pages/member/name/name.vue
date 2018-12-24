@@ -4,4 +4,4 @@
     <v-text-field label='Your email' id="email" v-model="session.user.name" placeholder="Email"></v-text-field>
 </div>
 </template>
-<script src='./name.js' />
+<script src='./name.ts' />

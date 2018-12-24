@@ -2,6 +2,6 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
 <style scoped src="./story.css">
 </style>
-<script src="./story.js">
+<script src="./story.ts">
 </script>
 <template src="./story.html"></template>

@@ -20,5 +20,5 @@
     </v-flex>
   </v-layout>
 </template>
-<script src="./summary">
+<script src="./summary.ts">
 </script>

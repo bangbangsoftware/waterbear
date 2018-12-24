@@ -2,8 +2,8 @@ import Vue from "vue";
 
 import "./select.css";
 
-import store from "../../../store.js";
-import util from "../util.js";
+import store from "../../../store";
+import util from "../util";
 //import moment from "moment";
 import dateFns from "date-fns";
 

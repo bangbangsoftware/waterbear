@@ -3,4 +3,4 @@
     <v-select multiple v-on:change="changed()" v-bind:items="skills" v-model="session.user.skills" label="Skill" class="input-group--focused" item-value="text"></v-select>
 </div>
 </template>
-<script src='./skills' />
+<script src='./skills.ts' />
