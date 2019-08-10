@@ -14,6 +14,10 @@
     padding-bottom: 10px
 }
 
+.direction {
+    margin: -10px;
+}
+
 .countdown {
     border-radius: 50%;
     width: 110px;
@@ -68,7 +72,7 @@
 }
 
 .blur {    
-    filter: blur(2px);
+    filter: blur(1px);
 }
 
 .task-row-countdown {
@@ -83,9 +87,18 @@
     grid-template-columns: 15% auto;
     justify-self: left;
     word-wrap: true;
+    margin: 0px;
 }
 
-.task-skill {}
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+    background-color: #f5f5f5;
+    margin-left: -5px;
+    margin-right: 3px;
+}
+
+.task-skill {
+    margin: -3px;
+}
 
 .task-name {
     padding-top: 2%;
@@ -98,3 +111,11 @@
 .progress-label {
     padding-top: 15px;
 }
+
+.foreground {
+    padding-top: 9px;
+    padding-bottom: 10px;
+    padding-right: 0px;
+    background-color: #888888;
+    box-shadow: 5px 10px 8px #888888;
+  }

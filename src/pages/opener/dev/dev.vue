@@ -4,27 +4,19 @@
       <div class="header-row">
         <div class="header-column">
           <div class="summary">
-            <h3 class="headline greeting">
-              Greetings {{ session.user.nick }}.
-            </h3>
+            <h3 class="headline greeting">Greetings {{ session.user.nick }}.</h3>
             <v-divider></v-divider>
             <div>
-              {{ sprint.days }} days <b>{{ sprint.name }}</b> sprint from
+              {{ sprint.days }} days
+              <b>{{ sprint.name }}</b>
+              sprint from
               {{ sprint.startDate | formatDate }} to
               {{ endDate(sprint) | formatDate }}
             </div>
-            <div
-              v-for="progress in progressList"
-              :key="progress.name"
-              class="progress-grid"
-            >
+            <div v-for="progress in progressList" :key="progress.name" class="progress-grid">
               <div class="progress-label">{{ progress.name }}</div>
               <!-- ({{progress.percent}}%) -->
-              <v-progress-linear
-                :value="progress.percent"
-                height="20"
-                :color="progress.colour"
-              ></v-progress-linear>
+              <v-progress-linear :value="progress.percent" height="20" :color="progress.colour"></v-progress-linear>
             </div>
           </div>
           <div class="task-row-countdown">
@@ -55,12 +47,13 @@
     <v-flex v-if="sprint.defined" xs12>
       <h1 v-if="mine.length === 0">Please choose a task...</h1>
       <h1 v-if="mine.length > 0">&nbsp;</h1>
+      <v-card>
       <div class="header-row">
         <div class="header-column">
           <div class="task-row">
             <h4>TO DO:</h4>
             <span v-for="(task, i) in todo" :key="i">
-              <span v-bind:class="[i === 1 ? 'blur' : '']" class="item-row">
+              <span v-bind:class="[i === 1 ? 'blur' : 'foreground']" class="item-row">
                 <v-btn color="blue" class="task" :title="task.desc">
                   <div class="task-skill">
                     <v-chip color="accent" text-color="white">
@@ -79,30 +72,26 @@
 
           <div class="task-row">
             <h4>Doing</h4>
-            <div v-for="(task, i) in doing" :key="i">
-              <span>
-                <v-btn
-                  class="direction"
-                  v-on:click="unassign(sprint, task);"
-                  color="orange"
-                >
-                  <v-icon>chevron_left</v-icon></v-btn
-                >
-                <v-btn color="blue" class="task" :title="task.desc">
-                  <div class="task-skill">
-                    <v-chip color="accent" text-color="white">
-                      <v-avatar class="teal">{{ task.est }}</v-avatar>
-                      {{ task.skill }}
-                    </v-chip>
-                  </div>
-                  <div class="task-name">{{ task.name }}</div>
-                  <v-avatar>
-                    <img :src="task.assignedIcon" :alt="task.assiginedTo" />
-                  </v-avatar>
-                </v-btn>
-                <v-btn v-on:click="unassign(sprint, task);" color="orange">
-                  <v-icon>chevron_right</v-icon>
-                </v-btn>
+            <div class="task-buts" v-for="(task, i) in doing" :key="i">
+              <span v-bind:class="[i === 1 ? 'blur' : 'foreground']" class="item-row">
+              <v-btn class="direction" v-on:click="unassign(sprint, task);" color="orange">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+              <v-btn color="blue" class="task" :title="task.desc">
+                <div class="task-skill">
+                  <v-chip color="accent" text-color="white">
+                    <v-avatar class="teal">{{ task.est }}</v-avatar>
+                    {{ task.skill }}
+                  </v-chip>
+                </div>
+                <div class="task-name">{{ task.name }}</div>
+                <v-avatar>
+                  <img :src="task.assignedIcon" :alt="task.assiginedTo">
+                </v-avatar>
+              </v-btn>
+              <v-btn v-on:click="unassign(sprint, task);" color="orange">
+                <v-icon>chevron_right</v-icon>
+              </v-btn>
               </span>
             </div>
           </div>
@@ -128,7 +117,10 @@
           </div>
         </div>
       </div>
-      <div v-if="mine.length > 0" class="task-row"><blockers></blockers></div>
+      </v-card>
+      <div v-if="mine.length > 0" class="task-row">
+        <blockers></blockers>
+      </div>
     </v-flex>
   </div>
 </template>

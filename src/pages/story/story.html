@@ -36,18 +36,20 @@
                         </v-layout>
                         <v-card-actions>
                             <v-btn v-on:click="postStory(story)" light v-on:mouseover="whatsNeeded(story)"
-                                align="end" :disabled="!story.valid">
+                                :disabled="!story.valid">
                                 Add Story
                             </v-btn>
-                            <v-btn align="start" v-on:click="clearStory()">Clear Story</v-btn>
+                            <v-btn  v-on:click="clearStory()">Clear Story</v-btn>
                         </v-card-actions>
                     </v-card-text>
                 </v-card>
             </v-hover>
-            <v-spacer></v-spacer>
+       <!--
+                <v-spacer></v-spacer>
            </br>
            </br>
             <feed></feed>
+        -->
         </v-flex>
         <v-flex xs6>
             <v-hover>

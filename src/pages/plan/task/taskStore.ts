@@ -67,7 +67,7 @@ export default {
     const project = state.session.project;
     const sprint = project.sprints[project.current.sprintIndex];
     const storyList = sprint.list.filter(
-      (storyi: any) => story.index === task.storyIndex
+      (story: any) => story.index === task.storyIndex
     );
     if (storyList.length !== 1) {
       console.error(storyList.length + " Cannot find story for ", task);

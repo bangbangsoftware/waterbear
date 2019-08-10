@@ -21,7 +21,7 @@
                         </v-card>
                     </v-flex>
                     <v-flex xs2 v-if="index > 1" v-for="(member,m) in session.project.members" :key="m" >
-                        <v-card v-if="member.diary[index]" :class="member.diary[index].colour" @contextmenu="show">
+                        <v-card v-if="member.diary[index]" :class="member.diary[index].colour" >
                             <v-card-text @click='toggle(m,index)'>
                                     {{member.diary[index].display}}
                                 <v-menu offset-y v-model="showMenu"

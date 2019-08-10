@@ -33,3 +33,9 @@ a {
 {
     opacity: 0
 }
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 155% 10%;
+    justify-items: center;
+}

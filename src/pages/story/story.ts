@@ -1,5 +1,5 @@
 import store from "../../store";
-// import Vue from 'vue'
+import Vue from "vue";
 
 import "./tags/tags.vue";
 import "./list/list.vue";
@@ -11,17 +11,19 @@ import beforeCreate from "../../loginCheck";
 
 import valid from "./valid";
 
-export default {
+const story = {
   name: "story",
   beforeCreate,
   data: function() {
+    const story =  store.state.session.story;
+    const session = store.state.session;
     return {
-      story: store.state.session.story,
-      session: store.state.session
+      story,
+      session
     };
   },
   methods: {
-    $router: { go: (a: any) => {} },
+    //$router: { go: (a: any) => {} },
     clearStory: function() {
       store.commit("clearStory");
     },
@@ -49,9 +51,14 @@ export default {
       valid(story);
     },
     navigateTo: function(nav: any) {
-      this.$router.go({
+      const that = <any>this;
+      that.$router.go({
         path: nav
       });
     }
   }
 };
+
+Vue.component("story", story);
+
+export default story;

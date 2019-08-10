@@ -47,11 +47,11 @@ routes.push({
   name: "member",
   component: member
 });
-//routes.push({
-// path: "/story",
-// name: "story",
-// component: story
-//});
+routes.push({
+  path: "/story",
+  name: "story",
+  component: story
+});
 routes.push({
   path: "/refine",
   name: "refine",
