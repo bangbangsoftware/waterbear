@@ -8,6 +8,7 @@
         :key="hour.name"
         v-bind:id="i + '-amToggle'"
         v-on:click="toggleDay(hoursIndex, i);"
+        v-class="mw58"
       >
         {{ hour.name }}
       </v-btn>
@@ -17,6 +18,7 @@
         :key="hour.name"
         v-bind:id="i + '-pmToggle'"
         v-on:click="toggleNight(hoursIndex, i);"
+        class="mw58"
       >
         {{ hour.name }}
       </v-btn>

@@ -33,3 +33,8 @@ a {
 {
     opacity: 0
 }
+
+.accept {
+    background-color: rgb(192, 245, 227);
+    width: 100%;
+}

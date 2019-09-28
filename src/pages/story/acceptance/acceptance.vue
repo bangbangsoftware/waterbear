@@ -1,5 +1,15 @@
 <template>
-  <div>
+  <div class="accept">
+
+    <h6 v-if="state.error" class="errorMessage">{{ state.error }}</h6>
+
+    <v-text-field
+      id="newAc"
+      label="Acceptance Criteria"
+      v-on:keyup.enter="addCriteria(state.newAc);"
+      v-model="state.newAc"
+    >
+    </v-text-field>
     <v-list>
       <v-list-tile
         avatar
@@ -17,15 +27,6 @@
       </v-list-tile>
     </v-list>
 
-    <h6 v-if="state.error" class="errorMessage">{{ state.error }}</h6>
-
-    <v-text-field
-      id="newAc"
-      label="Acceptance Criteria"
-      v-on:keyup.enter="addCriteria(state.newAc);"
-      v-model="state.newAc"
-    >
-    </v-text-field>
   </div>
 </template>
 <script src="./acceptance.ts" />
