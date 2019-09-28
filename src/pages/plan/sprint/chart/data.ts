@@ -8,8 +8,8 @@ const getBoth = (skills: Array<string>, results: any) => {
     just.set(skill, results[skill]);
   });
 
-  const needs = Object.values(just).map((r:Balance) => r.need);
-  const gots = Object.values(just).map((r:Balance) => r.got);
+  const needs = Object.values(just).map((r: Balance) => r.need);
+  const gots = Object.values(just).map((r: Balance) => r.got);
   return {
     needs,
     gots,

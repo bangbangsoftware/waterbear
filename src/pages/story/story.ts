@@ -15,7 +15,7 @@ const story = {
   name: "story",
   beforeCreate,
   data: function() {
-    const story =  store.state.session.story;
+    const story = store.state.session.story;
     const session = store.state.session;
     return {
       story,

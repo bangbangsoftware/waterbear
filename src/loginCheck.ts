@@ -18,7 +18,7 @@ const checkSession = (error: Function) => (session: any, resolve: Function) => {
     return;
   }
   if (!resolve) {
-    resolve = () =>{};
+    resolve = () => {};
   }
   const me = session.userCtx;
   if (!me.name) {

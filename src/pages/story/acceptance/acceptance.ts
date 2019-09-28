@@ -28,7 +28,7 @@ const comp = {
       const element = document.getElementById("newAc");
       if (element) {
         element.focus();
-        const that = <any> this;
+        const that = <any>this;
         that.state.newAc = "";
       }
       const acs = store.state.session.story.acs;
