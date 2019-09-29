@@ -6,14 +6,25 @@ import App from "./App.vue";
 import router from "./router";
 import Vue from "vue";
 import Vuex from "vuex";
+import '@mdi/font/css/materialdesignicons.css';
+
 
 console.log("Hello from %cTardigrade", "font-size:300%; color:orange");
 
 import "font-awesome/css/font-awesome.css";
 import "../node_modules/vuetify/dist/vuetify.min.css";
 
-import Vuetify from "vuetify";
-Vue.use(Vuetify);
+import Vuetify from 'vuetify';
+
+Vue.use(Vuetify)
+/*
+export default new Vuetify({
+  icons: {
+    iconfont: 'mdi', // default - only for display purposes
+  },
+})
+
+*/
 
 import store from "./store";
 console.log("main", store);

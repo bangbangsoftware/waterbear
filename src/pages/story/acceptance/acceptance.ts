@@ -20,7 +20,7 @@ const comp = {
         path: nav
       });
     },
-    addCriteria: function(ac: Array<any>) {
+    addCriteria: function(ac: string) {
       if (ac && ac.length > 0) {
         store.commit("acceptance", ac);
       }
