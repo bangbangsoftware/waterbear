@@ -53,7 +53,7 @@
         <br />
         <br />
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs12>
         <v-hover>
           <v-card
             slot-scope="{ hover }"

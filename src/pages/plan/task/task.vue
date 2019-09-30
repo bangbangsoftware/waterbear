@@ -49,7 +49,6 @@
               class="input-group--focused"
               item-value="text"
             ></v-select>
-            <button class="raised primary">+</button>
           </span>
         </form>
       </v-card-text>
