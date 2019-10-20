@@ -4,7 +4,7 @@
 
     <v-text-field
       id="newAc"
-      label="Acceptance Criteria"
+      label="Acceptance Criteria [Enter to post]"
       v-on:keyup.enter="addCriteria(state.newAc);"
       v-model="state.newAc"
     ></v-text-field>

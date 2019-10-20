@@ -11,6 +11,8 @@ import sprintBacklog from "./select/backlog.vue";
 import sprintCreate from "./select/create.vue";
 import teamDisplay from "../team/team.vue";
 
+import "./plan.css";
+
 console.log(" CURRENTLY pages/plan/plan.ts THIS IS NOT USED?!");
 
 const planService = {
