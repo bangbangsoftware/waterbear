@@ -33,3 +33,10 @@ a {
 {
     opacity: 0
 }
+
+.name {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 20px;
+    width: 90%;
+}

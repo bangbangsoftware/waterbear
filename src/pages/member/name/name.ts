@@ -1,5 +1,6 @@
 import store from "../../../store";
 import Vue from "vue";
+import "./name.css";
 
 const comp = {
   name: "name",

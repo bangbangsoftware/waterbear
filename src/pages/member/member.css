@@ -33,3 +33,17 @@ a {
 {
     opacity: 0
 }
+
+#detail-title {
+    padding-top: 10px;
+}
+
+#save-but {
+    float: right;
+}
+
+#member-tb {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    width: 100%
+}
