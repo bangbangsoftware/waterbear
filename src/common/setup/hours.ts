@@ -1,4 +1,4 @@
-import { Day, Hour } from "../../user/member";
+import { Hour } from "@/waterbear3";
 
 const dayHours = [
   "7am",

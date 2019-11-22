@@ -11,9 +11,9 @@ import sprintStat from "../../../common/stats/sprintStat";
 import tasks from "../../../common/stats/tasks";
 
 import util from "../../plan/util";
-import { Member } from "../../../user/member";
 
 import tasklist from "./tasklist/tasklist.vue";
+import { Member } from "@/waterbear3";
 
 const sprintless = (session: any) => {
   const owner = session.project.members.filter((m: Member) => m.owner);
@@ -111,7 +111,7 @@ const comp = {
         const block = task;
         block.id = i;
         block.title = task.name;
-        block.status = task.assigned ? "Doing" : "Todo";
+        block.status = task.assignedTo ? "Doing" : "Todo";
         return block;
       });
       return all;

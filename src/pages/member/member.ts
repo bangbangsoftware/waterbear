@@ -9,12 +9,13 @@ import "./member.css";
 import "./name/name.vue";
 import "./hours/hours.vue";
 import "./skills/skills.vue";
+import { Member, Session } from "@/waterbear3";
 
 const comp = {
   name: "member",
   beforeCreate,
   create: () => {
-    const user = <any>comp.data().session.user;
+    const user = <Member>comp.data().session.user;
     user.picked = true;
   },
   data: () => {
@@ -25,7 +26,7 @@ const comp = {
   },
   methods: {
     save: () => {
-      const session = <any>store.state.session;
+      const session = <Session>store.state.session;
       user.updateUser(session.user, session.project);
     }
   }

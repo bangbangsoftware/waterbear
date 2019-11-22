@@ -1,7 +1,7 @@
 import direct from "./direct.js";
 import store from "./store.js";
 import Vue from "vue";
-import {Member} from './user/member';
+import { Member } from '@/waterbear3';
 
 describe("redirect.spec.js", () => {
   it("should handle a user that is associated with a missing projects  ", done => {

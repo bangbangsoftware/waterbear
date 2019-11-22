@@ -1,9 +1,8 @@
 import store from "./../store";
 import state from "./../persist/state";
+import { Project, Member } from "@/waterbear3";
 
-import { Member } from "./member";
-
-const updateOwnerInMembers = (prj: any, owner: any) => {
+const updateOwnerInMembers = (prj: Project, owner: Member) => {
   let found = false;
   if (!prj.members) {
     prj.members = [owner];
@@ -25,24 +24,24 @@ const updateOwnerInMembers = (prj: any, owner: any) => {
   return members;
 };
 
-const updateOwnerAndDefaults = (prj: any, owner: any) => {
+const updateOwnerAndDefaults = (prj: Project, owner: Member) => {
   prj.members = updateOwnerInMembers(prj, owner);
   prj.defaults = store.state.defaults;
   return state.save(prj);
 };
 
-const updateOwner = (prj: any, owner: any) => {
+const updateOwner = (prj: Project, owner: Member) => {
   prj.members = updateOwnerInMembers(prj, owner);
   return state.save(prj);
 };
 
 const service = {
-  ownerAndDefaults: (owner: any) => {
+  ownerAndDefaults: (owner: Member) => {
     return new Promise((resolve, reject) => {
       let prj: any = store.state.session.project;
       state
         .save(prj.id)
-        .then((p: any) => {
+        .then((p: Project) => {
           prj = p;
           updateOwnerAndDefaults(prj, owner);
         })
@@ -56,12 +55,12 @@ const service = {
         .catch((err: any) => reject(err));
     });
   },
-  owner: (owner: any, prj: any) => {
+  owner: (owner: Member, prj: Project) => {
     return new Promise((resolve, reject) => {
       state
         .load(prj._id)
         .then((p: any) => {
-          prj = p;
+          prj = <Project>p;
           updateOwner(prj, owner);
         })
         .catch((err: any) => reject(err))

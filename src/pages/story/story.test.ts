@@ -1,4 +1,4 @@
-import story from "./story";
+import story from "./story.js";
 import store from "../../store.js";
 
 const blankStory = () => {

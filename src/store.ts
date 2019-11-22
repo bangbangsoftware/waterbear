@@ -2,7 +2,6 @@ import Vuex from "vuex";
 import Vue from "vue";
 
 //import mutations from "./storeMutations";
-import { Member } from "./user/member";
 import taskMutations from "./pages/plan/task/taskStore";
 import memberMutations from "./pages/member/memberStore";
 import storyMutations from "./pages/story/storyStore";
@@ -13,31 +12,32 @@ import chartMutations from "./pages/plan/sprint/chart/chartStore";
 import refineMutations from "./pages/refine/refineStore";
 
 import state from "./storeState";
+import { Member, State, Project, Database } from "@/waterbear3";
 
 Vue.use(Vuex);
 
 const mutations: any = {
-  loaded: (state: any, l: boolean) => {
+  loaded: (state: State, l: boolean) => {
     console.log("Loaded? " + l);
     state.session.loaded = l;
   },
-  stage: (state: any, newStage: any) => {
+  stage: (state: State, newStage: string) => {
     state.signup.stages.push(newStage);
   },
-  db: (state: any, database: any) => {
+  db: (state: State, database: Database) => {
     state.db = database;
   },
-  error: (state: any, error: any) => {
+  error: (state: State, error: string) => {
     console.log("session now has this error:" + error);
     state.session.error = error;
   },
-  project: (state: any, prj: any) => {
+  project: (state: State, prj: Project) => {
     state.session.project = prj;
   },
-  user: (state: any, user: Member) => {
+  user: (state: State, user: Member) => {
     state.session.user = user;
   },
-  log: (state: any, message: string) => {
+  log: (state: State, message: string) => {
     const item = {
       date: new Date(),
       message

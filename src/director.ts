@@ -1,4 +1,4 @@
-import { Member } from "./user/member";
+import { Member } from "@/waterbear3";
 
 const dev = (user: Member, project: any) => {
   const now = new Date();

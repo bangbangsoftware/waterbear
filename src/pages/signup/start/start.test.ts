@@ -1,4 +1,4 @@
-import start from "./start";
+import start from "./start.js";
 import store from "../../../store.js";
 import Vue from "vue";
 

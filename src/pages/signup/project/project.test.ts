@@ -1,4 +1,4 @@
-import project from "./project";
+import project from "./project.js";
 import store from "../../../store.js";
 
 describe("project.spec.js", () => {

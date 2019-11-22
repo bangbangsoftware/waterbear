@@ -49,7 +49,8 @@ const howManyDays = (dateString: string, now: Date) => {
 
 const noTaskStarted = (sprint: any) => {
   const stories = sprint.list.filter((story: any) => {
-    const startedTasks = story.tasks.filter((task: any) => task.startDate);
+    //   const startedTasks = story.tasks.filter((task: any) => task.startDate);
+    const startedTasks = story.tasks.filter((task: any) => task.start);
     return startedTasks.length > 0;
   });
   return stories.length === 0;

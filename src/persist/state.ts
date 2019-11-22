@@ -1,6 +1,6 @@
 import db from "../dbase";
+import { Project, Member } from "@/waterbear3";
 // import store from "../store.js";
-import { Member } from "../user/member";
 
 const remote = {
   save: (project: any): Promise<any> => db.put(project),
@@ -20,7 +20,7 @@ const remote = {
 // This should abstract all the vuex store stuff away and couchdb load/save stuff.
 
 const state = {
-  save: (project: any): Promise<any> => {
+  save: (project: Project): Promise<any> => {
     return remote.save(project);
   },
   signup: (email: string, pw: string, data: any): Promise<any> =>

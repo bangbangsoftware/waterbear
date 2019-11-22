@@ -2,7 +2,7 @@ import store from "../../../store";
 import user from "../../../user";
 import Vue from "vue";
 import defaults from "../../../common/setup/hours";
-import { Member, Diary, Day } from "../../../user/member";
+import { Diary, Member } from "@/waterbear3";
 
 const comp = {
   name: "owner",

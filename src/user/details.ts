@@ -1,6 +1,7 @@
 import state from "../persist/state";
 
-import { Member, MemberService } from "./member";
+import { MemberService } from "./member";
+import { Member, Project } from "@/waterbear3";
 
 const setProject = (user: Member, projectName: string) => {
   const metadata = user;
@@ -12,7 +13,7 @@ const setProject = (user: Member, projectName: string) => {
 };
 
 const service = {
-  loadUser: (user: Member, project: any) => {
+  loadUser: (user: Member, project: Project) => {
     const memberList = project.members.filter(
       (m: Member) => m.name === user.name
     );
@@ -24,7 +25,7 @@ const service = {
       return memberList[0];
     }
   },
-  updateUser: (user: Member, project: any): Promise<Member> => {
+  updateUser: (user: Member, project: Project): Promise<Member> => {
     return new Promise(async (resolve, reject) => {
       const memberList = project.members.filter(
         (m: Member) => m.name === user.name

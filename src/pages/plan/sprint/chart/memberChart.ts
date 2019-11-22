@@ -3,9 +3,9 @@ import Vue from "vue";
 import { Bar } from "vue-chartjs";
 
 import store from "../../../../store";
-import { Member } from "../../../../user/member";
 
-import { SkillService, TeamSkill } from "./skills";
+import { SkillService } from "./skills";
+import { Member, TeamSkill } from "@/waterbear3";
 
 const comp = {
   extends: Bar,

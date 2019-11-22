@@ -2,8 +2,7 @@ import diary from "./setup/diary.js";
 // import util from "./util.js";
 
 import defaults from "./setup/hours.js";
-
-import { Member } from "../user/member";
+import { Member } from "@/waterbear3";
 
 const dataOne = () => {
   const startDate = new Date(2018, 7, 21, 9, 0, 0, 0);

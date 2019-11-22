@@ -1,7 +1,7 @@
 import gotoNext from "../direct";
 import db from "../dbase";
 import state from "../persist/state";
-import { Day, Diary, Member } from "./member";
+import { Member, Day, Diary } from "@/waterbear3";
 
 const metadata = {
   nick: "",

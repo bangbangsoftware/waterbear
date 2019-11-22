@@ -1,49 +1,62 @@
 import defaults from "./defaults";
-import { Member, MemberService } from "./user/member";
+import { Story, Task, Member, Session, Project, Database } from "@/waterbear3";
 
-const story = {
+const story: Story = {
+  id: -1,
+  index: -1,
   title: "",
   descAs: "",
   descWant: "",
   descThat: "",
-  tags: [],
-  colourNo: 6,
-  acs: [],
-  valid: false
+
+  tasks: Array<Task>(),
+
+  tags: new Array<String>(),
+  colourNo: 8,
+  acs: new Array<String>(),
+
+  points: -1,
+
+  valid: false,
+  error: "",
+  selected: ""
 };
 
-const session = {
+const session: Session = {
   planState: "sprintSelect",
   loaded: false,
   story,
-  task: {},
-  menu: false,
+  task: false,
   error: "",
-  currentStory: -1,
   sprint: {
-    name: "",
-    from: "",
-    to: ""
+    startDate: new Date(),
+    startTime: "",
+    name: ""
   },
-  sprints: [],
-  project: {
-    _id: -1,
+  project: <Project>{
+    _id: "-1",
+    name: "",
     stories: [],
     members: Array<Member>(),
-    defaults: [],
+    defaults,
     sprints: [],
     current: {
       sprintIndex: -1
     }
   },
   user: <Member>{},
-  couchURL: "http://localhost:5984/"
+  couchURL: "http://localhost:5984/",
+  planChartData: false,
+  skills: false,
+  userCtx: "",
+  change: false,
+  incomplete: false
 };
 
 const signup = {
   stages: []
 };
-const db: any = { put: () => {} };
+const db: Database = { get: () => {}, put: () => {} };
 
 export default {
   menu: false,

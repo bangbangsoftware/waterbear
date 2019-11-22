@@ -1,21 +1,6 @@
 import util from "../util";
 import tasks from "./tasks";
-import { Member } from "../../user/member";
-
-export interface MemberTime {
-  details: Member;
-  left: number;
-  skills: Array<string>;
-}
-export interface MemberRemain {
-  memberTimes: Array<MemberTime>;
-  remainder: number;
-}
-export interface Track {
-  name: string;
-  onTrack: boolean;
-  hoursOver: number;
-}
+import { MemberTime, MemberRemain, Member, Track } from "@/waterbear3";
 
 const addTask = (map: any, skill: string, qty: string) => {
   const amount = parseInt(qty);

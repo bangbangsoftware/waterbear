@@ -18,6 +18,7 @@ const pouchOpts = {
   live: true
 };
 import PouchDB from "pouchdb";
+import { Session } from "@/waterbear3";
 PouchDB.plugin(require("pouchdb-authentication"));
 
 const oops = (err: any, email: string, where: string) => {
@@ -44,12 +45,14 @@ const oops = (err: any, email: string, where: string) => {
 const comp = {
   name: "login",
   data() {
-    const session = store.state.session ? store.state.session : {};
+    const session: Session = store.state.session
+      ? store.state.session
+      : <Session>{};
     return {
       error: "",
       email: "",
       pw: "",
-      session: store.state.session
+      session
     };
   },
   beforeCreate: function() {

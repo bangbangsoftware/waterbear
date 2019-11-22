@@ -1,14 +1,6 @@
 import store from "../../store";
-import { Member } from "../../user/member";
 
-import { DOW, MOY, NORMAL, OFF, DS } from "./defaults";
-
-export interface DisplayDay {
-  format: string;
-  date: Date;
-  newMonth: boolean | string;
-  colour: string;
-}
+import { DisplayDay, Member, MOY, DOW, DS, OFF, NORMAL } from "@/waterbear3";
 
 const getPostfix = (dom: number) => "th";
 

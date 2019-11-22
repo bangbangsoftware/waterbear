@@ -1,6 +1,7 @@
 import store from "../../../../store";
 
-import { SkillService, Balance } from "./skills";
+import { SkillService } from "./skills";
+import { Balance } from "@/waterbear3";
 
 const getBoth = (skills: Array<string>, results: any) => {
   const just = new Map<String, Balance>();

@@ -9,8 +9,7 @@ import "./team.css";
 
 import dairy from "../../common/setup/diary";
 import util from "../../common/util";
-
-import { DS } from "../../common/setup/defaults";
+import * as cxb from "@/waterbear3";
 
 const comp = {
   name: "team",
@@ -77,8 +76,8 @@ const comp = {
     }
   },
   cycle: (current: any) => {
-    const next = current.state + 1 === DS.length ? 0 : current.state + 1;
-    const newState = JSON.parse(JSON.stringify(DS[next]));
+    const next = current.state + 1 === cxb.DS.length ? 0 : current.state + 1;
+    const newState = JSON.parse(JSON.stringify(cxb.DS[next]));
     newState.hours = current.hours;
     newState.date = current.date;
     if (newState.state === 0) {

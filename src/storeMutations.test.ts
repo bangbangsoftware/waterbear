@@ -1,38 +1,41 @@
 import mut from './storeMutations.js';
+import { State, Session, Project } from '@/waterbear3';
 
+const session:Session = <Session> {loaded: false};
+
+const state:State = <State>{
+  session
+};
 it('set loaded state', () => {
-  const state = {
-    session: {loaded: false},
-  };
+
   mut.loaded(state, true);
   expect(state.session.loaded).toBe(true);
 });
 
 it('Should be able to push a new stage', () => {
-  const state = {
-    signup: {
-      stages: [],
-    },
-  };
+  state.signup = {stages: []};
   mut.stage(state, 'bang');
   expect(state.signup.stages[0]).toBe('bang');
 });
 
 it('Should be able to set a database', () => {
-  const state = {db: {}};
-  mut.db(state, 'teeth');
-  expect(state.db).toBe('teeth');
+  state.db =  {get: () => { return "NOSE"}, put: () => {}};
+  const mydb = {get: () => { return "teeth"}, put: () => {}};
+  mut.db(state, mydb);
+  expect(state.db.get()).toBe('teeth');
 });
 
 it('Should be able to set an error', () => {
-  const state = {session: {error: ''}};
+  state.session.error = '';
   mut.error(state, 'bad');
   expect(state.session.error).toBe('bad');
 });
 
 it('Should be able to set a project', () => {
-  const state = {session: {project: ''}};
-  mut.project(state, 'Waterbear');
-  expect(state.session.project).toBe('Waterbear');
+  state.session.project =  <Project> {};
+  const prj:Project = <Project> {};
+  prj.name = "Waterbear";
+  mut.project(state, prj);
+  expect(state.session.project.name).toBe('Waterbear');
 });
 

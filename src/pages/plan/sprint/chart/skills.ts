@@ -1,24 +1,6 @@
 // import sprint from '../../../../common/stats/sprintStat.js'
 
-import { Member, Hour } from "../../../../user/member";
-import { NORMAL } from "@/common/setup/defaults";
-
-export interface Balance {
-  need: number;
-  got: number;
-  diff: number;
-}
-
-export interface SkillHour {
-  hours: number;
-  skills: Array<string>;
-}
-
-export interface TeamSkill {
-  hours: number;
-  skills: Array<string>;
-  weight: number;
-}
+import { Member, Hour, SkillHour, TeamSkill, Balance } from "@/waterbear3";
 
 const getDates = (startDate: Date, stopDate: Date) => {
   const dateArray = [];

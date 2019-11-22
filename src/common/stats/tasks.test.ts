@@ -1,6 +1,6 @@
 import tasks from "./tasks.js";
 import dataOne from "../test.data.js";
-import {Member} from '../../user/member';
+import { Member } from '@/waterbear3.js';
 
 describe("tasks.test.js: How is a member doing", () => {
   it("should describe started task by hours", () => {

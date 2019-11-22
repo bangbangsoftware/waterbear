@@ -1,4 +1,4 @@
-import refine from "./refine";
+import refine from "./refine.js";
 import store from "../../store.js";
 
 const storyOne = {

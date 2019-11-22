@@ -1,5 +1,5 @@
 import director from "./director";
-import {Member} from './user/member';
+import { Member } from '@/waterbear3';
 
 describe("director.spec.js", () => {
   it("should direct users of different roles to different places ", done => {

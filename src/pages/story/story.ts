@@ -10,13 +10,14 @@ import "./desc/desc.vue";
 import beforeCreate from "../../loginCheck";
 
 import valid from "./valid";
+import { Story, Session } from "@/waterbear3";
 
 const story = {
   name: "story",
   beforeCreate,
   data: function() {
-    const story = store.state.session.story;
-    const session = store.state.session;
+    const story: Story = store.state.session.story;
+    const session: Session = <Session>(<unknown>store.state.session);
     return {
       story,
       session

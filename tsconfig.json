@@ -38,6 +38,8 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/waterbear3.d.ts"
+
   ]
 }

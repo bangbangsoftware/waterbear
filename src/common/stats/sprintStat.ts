@@ -2,7 +2,7 @@ import is from "../valid/validSprint";
 import util from "../util";
 import tasks from "./tasks";
 import contingency from "./contingency";
-import { Member } from "../../user/member";
+import { Member } from "@/waterbear3";
 
 const getAssignedTasks = (taks: Array<any>, user: Member) => {
   return taks.filter(t => t.assignedTo && t.assignedTo.name === user.name);

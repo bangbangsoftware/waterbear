@@ -1,5 +1,5 @@
 import util from "../util";
-import { Member } from "../../user/member";
+import { Member } from "@/waterbear3";
 
 const getTasksOfStatus = (sprint: any, status: string) => {
   const tasks = comp.allTasks(sprint);

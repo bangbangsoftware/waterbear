@@ -2,9 +2,9 @@
 import store from "./store";
 import db from "./dbase";
 import userService from "./user";
-import { Member } from "./user/member";
 import director from "./director";
 import state from "./persist/state";
+import { Member } from "@/waterbear3";
 
 const register = (user: Member, project: any, resolve: any) => {
   console.log("Found...", project, "For...", user);
@@ -13,6 +13,10 @@ const register = (user: Member, project: any, resolve: any) => {
   store.commit("log", "entering project " + project._id);
 
   const projectsUser = userService.loadUser(user, project);
+  if (projectsUser === undefined) {
+    console.error("Could not load users");
+    return;
+  }
   store.commit("user", projectsUser);
   whereNow(project, projectsUser, resolve);
 };

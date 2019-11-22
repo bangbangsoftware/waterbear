@@ -1,26 +1,27 @@
-import { Member } from "./user/member";
+import { State, Database, Project, Member } from "@/waterbear3";
+
 export default {
-  loaded: (state: any, l: boolean) => {
+  loaded: (state: State, l: boolean) => {
     console.log("Loaded? " + l);
     state.session.loaded = l;
   },
-  stage: (state: any, newStage: any) => {
+  stage: (state: State, newStage: string) => {
     state.signup.stages.push(newStage);
   },
-  db: (state: any, database: any) => {
+  db: (state: State, database: Database) => {
     state.db = database;
   },
-  error: (state: any, error: any) => {
+  error: (state: State, error: string) => {
     console.log("session now has this error:" + error);
     state.session.error = error;
   },
-  project: (state: any, prj: any) => {
+  project: (state: State, prj: Project) => {
     state.session.project = prj;
   },
-  user: (state: any, user: Member) => {
+  user: (state: State, user: Member) => {
     state.session.user = user;
   },
-  log: (state: any, message: string) => {
+  log: (state: State, message: string) => {
     const item = {
       date: new Date(),
       message

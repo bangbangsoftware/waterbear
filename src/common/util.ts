@@ -1,4 +1,5 @@
-import { Member } from "../user/member";
+import { Member } from "@/waterbear3";
+
 const comp = {
   addTime: (h: any, map: any, total: number, end = 23): number => {
     if (h > end || map[h] === undefined) {

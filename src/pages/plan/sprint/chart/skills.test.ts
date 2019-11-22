@@ -1,5 +1,4 @@
 import { SkillService} from "./skills.js";
-import { Diary, Member } from "../../../../user/member";
 
 const nick = "";
 const name = "";
@@ -118,6 +117,7 @@ it("Should be able to get all skills totals from all tasks in all stories in a s
 
 import { DAYS } from "../../../team/defaults.js";
 import colors from "vuetify/es5/util/colors";
+import { Diary, Member } from '@/waterbear3';
 it("Should be able to get get availability for a team member", () => {
 
   const startDate = new Date(2017, 5, 11); // which is actually June

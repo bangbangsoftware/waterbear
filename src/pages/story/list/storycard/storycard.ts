@@ -1,6 +1,6 @@
 import store from "../../../../store";
 import Actions from "./actions/actions";
-import AcceptanceCriteriaList from "./acceptanceCriteriaList/acceptanceCriteriaList";
+import AcceptanceCriteriaList from "./acceptanceCriteriaList/acceptanceCriteriaList.vue";
 
 const movement = (index: number, newIndex: number) => {
   console.log("Moving Story");
