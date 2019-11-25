@@ -13,29 +13,40 @@ import tasks from "../../../common/stats/tasks";
 import util from "../../plan/util";
 
 import tasklist from "./tasklist/tasklist.vue";
-import { Member } from "@/waterbear3";
+import { Member, Session, Sprint, Task, Stat } from "@/waterbear3";
 
-const sprintless = (session: any) => {
-  const owner = session.project.members.filter((m: Member) => m.owner);
-  const name = session.user.owner
+const getName = (session:Session):string => {
+  const owner = session.project.members.find((m: Member) => m.owner);
+  if (!owner){
+    console.log("Cannot find owner");
+    return "There is no sprint running or project owner?!";
+  }
+  return session.user.owner
     ? "You need to start a sprint!"
     : "There is no sprint running, talk to " + owner.nick;
+}
+
+const getSession = () => <Session> store.state.session;
+
+const sprintless = (session: Session):Sprint => {
+  const name = getName(session);
   const defined = false;
-  const needSprint = {
+  const needSprint:Sprint = {
     name,
+    list: [],
     defined
   };
   return needSprint;
 };
 
-const sprint = (session: any) => {
+const sprint = (session: Session):Sprint => {
   const spt = session.project.sprints[session.project.current.sprintIndex];
   spt.defined = true;
   return spt;
 };
 
 // This is wrong it should be total member hours (100%) over hour many member hours left
-const percent = (stat: any) => {
+const percent = (stat: Stat) => {
   const totalHours = stat.totalHours;
   const percent = totalHours / 100;
   const hoursLeft = stat.unplannedHoursLeft;
@@ -63,7 +74,7 @@ const progress = (name: string, percent: number, colour: string) => {
   };
 };
 
-const progressList = (currentSprint: any, stat: number) => {
+const progressList = (currentSprint: Sprint, stat: Stat) => {
   const progressList = [];
   const timePercentage = percent(stat);
   progressList.push(progress("Time", timePercentage, colour(timePercentage)));
@@ -75,8 +86,8 @@ const progressList = (currentSprint: any, stat: number) => {
   return progressList;
 };
 
-const current = (session: any) => {
-  const noSprint =
+const current = (session: Session):Sprint => {
+  const noSprint:boolean =
     session.project.current.sprintIndex < 0 ||
     session.project.sprints === undefined ||
     session.project.sprints.length === 0;
@@ -86,7 +97,7 @@ const current = (session: any) => {
 const donetest = <any>[];
 
 const currentTasks = () => {
-  const currentSprint = current(store.state.session);
+  const currentSprint:Sprint = current(getSession());
   const ts = tasks.allTasks(currentSprint);
   console.log("sprint", currentSprint);
   console.log("tasks", currentSprint.list.length);
@@ -106,11 +117,11 @@ const comp = {
   },
   computed: {
     tasks: function() {
-      const currentSprint = current(store.state.session);
-      const all = tasks.allTasks(currentSprint).map((task: any, i: number) => {
+      const currentSprint = current(getSession());
+      const all = tasks.allTasks(currentSprint).map((task: Task, i: number) => {
         const block = task;
         block.id = i;
-        block.title = task.name;
+        block.name = task.name;
         block.status = task.assignedTo ? "Doing" : "Todo";
         return block;
       });
@@ -137,12 +148,12 @@ const comp = {
     }
   },
   data: function() {
-    const session = store.state.session;
+    const session: Session = getSession();
     console.log(session.user);
     const project = session.project;
     const members = project.members;
     const currentSprint = current(session);
-    const stat = <any>sprintStat.contingency(currentSprint, members);
+    const stat = <Stat> sprintStat.contingency(currentSprint, members);
     const endDate = tasks.endDate(currentSprint).getTime();
     const now = new Date().getTime();
     const oneDay = 24 * 60 * 60 * 1000;
@@ -159,8 +170,8 @@ const comp = {
     };
   },
   methods: {
-    endDate: (sprint: any) => tasks.endDate(sprint),
-    assign: function(sprint: any, task: any) {
+    endDate: (sprint: Sprint) => tasks.endDate(sprint),
+    assign: function(sprint: Sprint, task: Task) {
       const that = <any>this;
       console.log("You have selected", task);
       task.assignedTo = that.session.user.name;
@@ -179,7 +190,7 @@ const comp = {
       store.commit("sprintTask", task);
       util.storeSprintTask(task);
     },
-    unassign: function(sprinti: any, task: any) {
+    unassign: function(sprint: Sprint, task: Task) {
       console.log("You have selected", task);
       task.assignedTo = undefined;
       const date = new Date();

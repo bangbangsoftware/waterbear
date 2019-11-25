@@ -23,6 +23,13 @@ export const MOY = [
   "December"
 ];
 
+export interface DS_STATE {
+  state: number;
+  display: string;
+  colour?: string;
+  off: boolean;
+}
+
 export const NORMAL = 0;
 export const OFF = 2;
 
@@ -56,6 +63,11 @@ export interface Database {
   get: Function;
 }
 
+export interface Stat {
+  totalHours : number;
+  unplannedHoursLeft: number;
+}
+
 export interface State {
   session: Session;
   feeds: Array<Feed>;
@@ -81,6 +93,7 @@ export interface Defaults {
 }
 
 export interface Project {
+  id?: string,
   _id: string;
   name: string;
   defaults: Defaults;
@@ -96,10 +109,13 @@ export interface PlanChartData {}
 
 export interface Skills {}
 export interface Sprint {
-  startDate: Date;
-  startTime: string;
+  startDate?: Date;
+  startTime?: string;
   name: string;
+  defined?: boolean;
+  list: Array<Task>;
 }
+
 export interface Feed {}
 
 export interface Session {
@@ -210,7 +226,9 @@ export interface Task {
   est: number;
   skill: string;
 
-  assignedTo: Member;
+  status: string;
+
+  assignedTo?: Member;
 
   start: Date;
   end: Date;

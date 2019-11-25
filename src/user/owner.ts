@@ -38,7 +38,7 @@ const updateOwner = (prj: Project, owner: Member) => {
 const service = {
   ownerAndDefaults: (owner: Member) => {
     return new Promise((resolve, reject) => {
-      let prj: any = store.state.session.project;
+      let prj: Project = store.state.session.project;
       state
         .save(prj.id)
         .then((p: Project) => {

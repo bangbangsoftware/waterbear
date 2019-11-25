@@ -1,6 +1,6 @@
 import store from "../store";
 import state from "../persist/state";
-import { Member } from "@/waterbear3";
+import { Member, Project } from "@/waterbear3";
 
 const birthday = new Date(2000, 7, 21, 8, 2);
 const testData: Member = {
@@ -22,7 +22,7 @@ export { testData };
 const MemberService: any = {
   updateMembers: (
     members: Array<Member>,
-    prj: any = store.state.session.project
+    prj: Project = store.state.session.project
   ) => {
     prj.members = members;
     return state.save(prj);

@@ -15,7 +15,7 @@ module.exports = {
       .tap(options => {
         options.transpileOnly = false;
         options.happyPackMode = false;
-
+        options.allowTsInNodeModules = true;
         return options;
       });
   }

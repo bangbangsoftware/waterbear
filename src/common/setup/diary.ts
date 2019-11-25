@@ -1,8 +1,43 @@
 import store from "../../store";
 
-import { DisplayDay, Member, MOY, DOW, DS, OFF, NORMAL } from "@/waterbear3";
+//import { DisplayDay, Member, MOY, DOW, DS_STATE, OFF, NORMAL } from "watertype";
+
+import {
+  DisplayDay,
+  Member,
+  MOY,
+  DOW,
+  DS_STATE,
+  OFF,
+  NORMAL
+} from "@/waterbear3";
 
 const getPostfix = (dom: number) => "th";
+
+const DS: Array<DS_STATE> = [
+  {
+    state: 0,
+    display: "",
+    off: false
+  },
+  {
+    state: 1,
+    display: "WFH",
+    off: false
+  },
+  {
+    state: 2,
+    display: "OFF",
+    colour: "grey",
+    off: true
+  },
+  {
+    state: 3,
+    display: "SICK",
+    colour: "grey",
+    off: true
+  }
+];
 
 const comp = {
   createData: (day: number, now: Date, lastMonth: string) => {

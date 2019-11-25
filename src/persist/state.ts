@@ -3,7 +3,7 @@ import { Project, Member } from "@/waterbear3";
 // import store from "../store.js";
 
 const remote = {
-  save: (project: any): Promise<any> => db.put(project),
+  save: (project: Project): Promise<any> => db.put(project),
   user: (name: string, data: any) => {
     return db.putUser(name, data);
   },
@@ -23,7 +23,7 @@ const state = {
   save: (project: Project): Promise<any> => {
     return remote.save(project);
   },
-  signup: (email: string, pw: string, data: any): Promise<any> =>
+  signup: (email: string, pw: string, data: any): Promise<Project> =>
     remote.signup(email, pw, data),
   putUser: (name: string, data: any) => {
     remote.user(name, data);
