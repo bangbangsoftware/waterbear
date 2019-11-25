@@ -31,6 +31,7 @@ const session: Session = {
   sprint: {
     startDate: new Date(),
     startTime: "",
+    list: [],
     name: ""
   },
   project: <Project>{

@@ -64,7 +64,7 @@ export interface Database {
 }
 
 export interface Stat {
-  totalHours : number;
+  totalHours: number;
   unplannedHoursLeft: number;
 }
 
@@ -93,7 +93,7 @@ export interface Defaults {
 }
 
 export interface Project {
-  id?: string,
+  id?: string;
   _id: string;
   name: string;
   defaults: Defaults;
@@ -109,8 +109,8 @@ export interface PlanChartData {}
 
 export interface Skills {}
 export interface Sprint {
-  startDate?: Date;
-  startTime?: string;
+  startDate: Date;
+  startTime: string;
   name: string;
   defined?: boolean;
   list: Array<Task>;

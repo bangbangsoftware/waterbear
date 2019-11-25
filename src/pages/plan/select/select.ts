@@ -6,6 +6,7 @@ import store from "../../../store";
 import util from "../util";
 //import moment from "moment";
 import dateFns from "date-fns";
+import { Sprint } from "@/waterbear3";
 
 Vue.filter("formatDate", function(value: any) {
   if (!value) {
@@ -26,9 +27,9 @@ const getTime = (date: string) => {
 const comp = {
   name: "selectSprint",
   data: () => {
-    const sprint =
+    const sprint: Sprint =
       <any>store.state.session.project.sprints === undefined
-        ? { startDate: new Date(), startTime: "", startDateString: "" }
+        ? { startDate: new Date(), startTime: "", name: "", list: [] }
         : store.state.session.project.sprints[
             store.state.session.project.current.sprintIndex
           ];

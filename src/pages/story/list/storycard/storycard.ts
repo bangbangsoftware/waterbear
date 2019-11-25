@@ -1,6 +1,7 @@
 import store from "../../../../store";
 import Actions from "./actions/actions";
 import AcceptanceCriteriaList from "./acceptanceCriteriaList/acceptanceCriteriaList.vue";
+import { Project } from "@/waterbear3";
 
 const movement = (index: number, newIndex: number) => {
   console.log("Moving Story");
@@ -8,10 +9,10 @@ const movement = (index: number, newIndex: number) => {
     index,
     newIndex
   });
-  const prj = store.state.session.project;
+  const prj = <Project>store.state.session.project;
   const db = store.state.db;
   db.get(prj._id)
-    .then((p: any) => {
+    .then((p: Project) => {
       p.stories = prj.stories;
       return db.put(p);
     })

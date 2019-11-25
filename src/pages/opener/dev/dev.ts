@@ -15,23 +15,25 @@ import util from "../../plan/util";
 import tasklist from "./tasklist/tasklist.vue";
 import { Member, Session, Sprint, Task, Stat } from "@/waterbear3";
 
-const getName = (session:Session):string => {
+const getName = (session: Session): string => {
   const owner = session.project.members.find((m: Member) => m.owner);
-  if (!owner){
+  if (!owner) {
     console.log("Cannot find owner");
     return "There is no sprint running or project owner?!";
   }
   return session.user.owner
     ? "You need to start a sprint!"
     : "There is no sprint running, talk to " + owner.nick;
-}
+};
 
-const getSession = () => <Session> store.state.session;
+const getSession = () => <Session>store.state.session;
 
-const sprintless = (session: Session):Sprint => {
+const sprintless = (session: Session): Sprint => {
   const name = getName(session);
   const defined = false;
-  const needSprint:Sprint = {
+  const needSprint: Sprint = {
+    startDate: new Date(),
+    startTime: "",
     name,
     list: [],
     defined
@@ -39,7 +41,7 @@ const sprintless = (session: Session):Sprint => {
   return needSprint;
 };
 
-const sprint = (session: Session):Sprint => {
+const sprint = (session: Session): Sprint => {
   const spt = session.project.sprints[session.project.current.sprintIndex];
   spt.defined = true;
   return spt;
@@ -86,8 +88,8 @@ const progressList = (currentSprint: Sprint, stat: Stat) => {
   return progressList;
 };
 
-const current = (session: Session):Sprint => {
-  const noSprint:boolean =
+const current = (session: Session): Sprint => {
+  const noSprint: boolean =
     session.project.current.sprintIndex < 0 ||
     session.project.sprints === undefined ||
     session.project.sprints.length === 0;
@@ -97,7 +99,7 @@ const current = (session: Session):Sprint => {
 const donetest = <any>[];
 
 const currentTasks = () => {
-  const currentSprint:Sprint = current(getSession());
+  const currentSprint: Sprint = current(getSession());
   const ts = tasks.allTasks(currentSprint);
   console.log("sprint", currentSprint);
   console.log("tasks", currentSprint.list.length);
@@ -153,7 +155,7 @@ const comp = {
     const project = session.project;
     const members = project.members;
     const currentSprint = current(session);
-    const stat = <Stat> sprintStat.contingency(currentSprint, members);
+    const stat = <Stat>sprintStat.contingency(currentSprint, members);
     const endDate = tasks.endDate(currentSprint).getTime();
     const now = new Date().getTime();
     const oneDay = 24 * 60 * 60 * 1000;
