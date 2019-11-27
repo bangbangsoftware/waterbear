@@ -10,13 +10,13 @@ import "./desc/desc.vue";
 import beforeCreate from "../../loginCheck";
 
 import valid from "./valid";
-import { Story, Session } from "@/waterbear3";
+import { Story, Session, Project } from "@/waterbear3";
 
 const story = {
   name: "story",
   beforeCreate,
   data: function() {
-    const story: Story = store.state.session.story;
+    const story: Story = <Story>(<unknown>store.state.session.story);
     const session: Session = <Session>(<unknown>store.state.session);
     return {
       story,
@@ -28,7 +28,7 @@ const story = {
     clearStory: function() {
       store.commit("clearStory");
     },
-    postStory: function(story: any) {
+    postStory: function(story: Story) {
       var ok = valid(story);
       if (!ok) {
         console.log("invalid story...");
@@ -42,13 +42,13 @@ const story = {
       console.log(prj);
       const db = store.state.db;
       db.get(prj._id)
-        .then((p: any) => {
-          p.stories = prj.stories;
+        .then((p: Project) => {
+          p.stories = <Array<Story>>(<unknown>prj.stories);
           return db.put(p);
         })
         .catch((err: any) => console.error(err));
     },
-    whatsNeeded: function(story: any) {
+    whatsNeeded: function(story: Story) {
       valid(story);
     },
     navigateTo: function(nav: any) {

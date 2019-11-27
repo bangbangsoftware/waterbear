@@ -2,6 +2,7 @@ import gotoNext from "../direct";
 import db from "../dbase";
 import state from "../persist/state";
 import { Member, Day, Diary } from "@/waterbear3";
+import { Project } from "@/waterbear3";
 
 const metadata = {
   nick: "",
@@ -47,7 +48,7 @@ const service = {
         .catch((err: any) => reject(err));
     });
   },
-  signup: (email: string, pw: string): Promise<any> => {
+  signup: (email: string, pw: string): Promise<Project> => {
     return state.signup(email, pw, {
       metadata
     });

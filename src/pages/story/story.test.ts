@@ -1,11 +1,28 @@
 import story from "./story.js";
 import store from "../../store.js";
+import { Story, Task } from '@/waterbear3.js';
 
 const blankStory = () => {
-  const myStory = {
+  const myStory:Story = {
+    id: -1,
+    index: -1,
     title: "",
-    desc: "",
-    acs: []
+    descAs: "",
+    descWant: "",
+    descThat: "",
+  
+    tasks: new Array<Task>(),
+  
+    tags: new Array<String>(),
+    colourNo: -1,
+    acs: new Array<String>(),
+  
+    points: -1,
+      
+    valid: false,
+    error: "",
+    selected: false,
+  
   };
   store.commit("clearStory");
   store.commit("story", myStory);
@@ -54,14 +71,14 @@ describe("story.test.js", () => {
 
   it("should NOT add an invalid story with one field filled in", () => {
     store.commit("title", "tester");
-    story.methods.postStory(store.state.session.story);
+    story.methods.postStory(<Story> <unknown>store.state.session.story);
     expect(store.state.session.project.stories.length).toBe(0);
   });
 
   it("should NOT add an invalid story with two field filled in", () => {
     store.commit("title", "tester");
     store.commit("desc", "tesc desc");
-    story.methods.postStory(store.state.session.story);
+    story.methods.postStory(<Story> <unknown>store.state.session.story);
     expect(store.state.session.project.stories.length).toBe(0);
   });
 
@@ -75,7 +92,7 @@ describe("story.test.js", () => {
     });
     var crit = {};
     store.commit("acceptance", crit);
-    story.methods.postStory(store.state.session.story);
+    story.methods.postStory(<Story> <unknown>store.state.session.story);
     expect(store.state.session.project.stories.length).toBe(1);
   });
 });

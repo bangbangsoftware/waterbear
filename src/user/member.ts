@@ -22,7 +22,7 @@ export { testData };
 const MemberService: any = {
   updateMembers: (
     members: Array<Member>,
-    prj: Project = store.state.session.project
+    prj: Project = <Project>(<unknown>store.state.session.project)
   ) => {
     prj.members = members;
     return state.save(prj);
@@ -34,7 +34,7 @@ const MemberService: any = {
     newList.push(replacement);
     return new Promise(
       async (resolve, reject): Promise<any> => {
-        const prj: any = store.state.session.project;
+        const prj: Project = <Project>(<unknown>store.state.session.project);
         try {
           const p = await state.load(prj._id);
           console.log("Members owner to state -  " + prj._id);

@@ -58,6 +58,11 @@ export const DS = [
   }
 ];
 
+export interface Movement {
+  index: number;
+  newIndex: number;
+}
+
 export interface Database {
   put: Function;
   get: Function;
@@ -66,6 +71,12 @@ export interface Database {
 export interface Stat {
   totalHours: number;
   unplannedHoursLeft: number;
+}
+
+export interface StoryDesc {
+  as: string;
+  that: string;
+  want: string;
 }
 
 export interface State {
@@ -226,7 +237,7 @@ export interface Task {
   est: number;
   skill: string;
 
-  status: string;
+  status?: string;
 
   assignedTo?: Member;
 
@@ -261,5 +272,5 @@ export interface Story {
 
   valid: boolean;
   error: string;
-  selected: string;
+  selected: boolean;
 }

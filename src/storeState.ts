@@ -19,7 +19,7 @@ const story: Story = {
 
   valid: false,
   error: "",
-  selected: ""
+  selected: false
 };
 
 const session: Session = {

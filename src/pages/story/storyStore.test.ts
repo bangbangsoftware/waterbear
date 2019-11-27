@@ -1,6 +1,8 @@
 import storyStore from './storyStore.js';
+import { Story, State, Session } from '@/waterbear3.js';
 
-const story = {
+const story:Story = {
+  id: 0,
   title: 'The last story',
   descAs: 'A story writer',
   descWant: 'to be able to start with a blank story',
@@ -11,10 +13,13 @@ const story = {
   valid: true,
   selected: false,
   index: -1,
+  points: 10,
+  error: "",
+  tasks: []
 };
 
 it('If clear story mutates story to have blank values', () => {
-  const state = {
+  const state:State = <State>{
     session: {
       story,
     },
@@ -31,7 +36,7 @@ it('If clear story mutates story to have blank values', () => {
 });
 
 it('Should be able to select a story', () => {
-  const state = {
+  const state = <State> {
     session: {
       project: {
         stories: [story],
@@ -43,7 +48,7 @@ it('Should be able to select a story', () => {
 });
 
 it('Should be able to set current story', () => {
-  const state = {
+  const state = <State> {
     session: {story: {title: 'NO'}},
   };
   storyStore.currentStory(state, story);
@@ -51,7 +56,7 @@ it('Should be able to set current story', () => {
 });
 
 it('Should be able post a story', () => {
-  const state = {
+  const state = <State> {
     session: {
       project: {
         stories: [{index: -12, title: 'WHAT'}],
@@ -77,7 +82,7 @@ it('Should be able post a story', () => {
 });
 
 it('Should be a able to add title to main story', () => {
-  const state = {
+  const state = <State> {
     session: {story: {title: 'JHgjh'}},
   };
   storyStore.clearStory(state);
@@ -85,7 +90,7 @@ it('Should be a able to add title to main story', () => {
   expect(state.session.story.title).toBe('eak');
 });
 it('Should be a able to add title to main story', () => {
-  const state = {
+  const state = <State> {
     session: {
             story: {descAs: '', descWant: '', descThat:''},
     },
@@ -102,7 +107,7 @@ it('Should be a able to add title to main story', () => {
   expect(state.session.story.descThat).toBe(desc.that);
 });
 it('Should be a able remove acceptance', () => {
-  const state = {
+  const state = <State> {
     session: {
             story: {descAs: '', descWant: '', descThat:''},
     },
@@ -119,12 +124,11 @@ it('Should be a able remove acceptance', () => {
   expect(state.session.story.descThat).toBe(desc.that);
 });
 it('Should be a able to remove acceptance', () => {
-  const state = {
+  story.acs = ['A bad acceptance'];
+  const state = <State> {
     session: {
-      story: {
-        acs: ['A bad acceptance'],
-      },
-    },
+            story 
+          }
   };
   storyStore.clearStory(state);
   storyStore.removeAcceptance(state, 0);
@@ -132,11 +136,10 @@ it('Should be a able to remove acceptance', () => {
 });
 
 it('Should be a able to add acceptance', () => {
-  const state = {
-    session: {
-      story: {
-        acs: [],
-      },
+  story.acs = ['A bad acceptance'];
+  const state = <State> {
+    session: <Session>{
+      story
     },
   };
   storyStore.clearStory(state);
@@ -145,7 +148,7 @@ it('Should be a able to add acceptance', () => {
 });
 
 it('Should be a able to add change colour', () => {
-  const state = {
+  const state = <State> {
     session: {
       story: {colourNo: -1},
     },

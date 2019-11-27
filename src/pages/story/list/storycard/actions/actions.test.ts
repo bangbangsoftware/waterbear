@@ -1,4 +1,5 @@
 import Actions from "./actions.js";
+import { Story } from '@/waterbear3';
 
 describe("acceptance.spec.js", () => {
   it("should have a bunch of functions  ", done => {
@@ -9,7 +10,7 @@ describe("acceptance.spec.js", () => {
   });
 
   it("should edit story", () => {
-    const story = {
+    const story = <Story>{
       title: "BOOM"
     };
     Actions.methods.editStory(story, 0);
