@@ -1,5 +1,13 @@
 import defaults from "./defaults";
-import { Story, Task, Member, Session, Project, Database } from "@/waterbear3";
+import {
+  Story,
+  Task,
+  Member,
+  Session,
+  Project,
+  Database,
+  Time
+} from "@/waterbear3";
 
 const story: Story = {
   id: -1,
@@ -50,7 +58,7 @@ const session: Session = {
   planChartData: false,
   skills: false,
   userCtx: "",
-  change: false,
+  change: <Time>{},
   incomplete: false
 };
 

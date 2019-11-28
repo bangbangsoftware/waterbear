@@ -1,4 +1,4 @@
-import { Hour } from "@/waterbear3";
+import { Hour, Day } from "@/waterbear3";
 
 const dayHours = [
   "7am",
@@ -77,7 +77,7 @@ const defaultHours = (name: string, off: boolean) => {
   };
 };
 
-export default () => {
+export default (): Array<Day> => {
   const days = [
     "Sunday",
     "Monday",

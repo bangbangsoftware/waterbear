@@ -141,7 +141,7 @@ export interface Session {
   userCtx: string;
   planState: string;
   task: Task | false;
-  change: boolean;
+  change: Time;
   loaded: boolean;
   incomplete: boolean;
 }
@@ -187,7 +187,14 @@ export interface Track {
 
 export interface Hour {
   name: string;
+  label?: string;
+  state?: string;
   on: boolean;
+}
+
+export interface Time {
+  day: number;
+  hour: number;
 }
 
 export interface Day {

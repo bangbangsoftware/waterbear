@@ -1,4 +1,6 @@
-const nextState = (hour: any) => {
+import { Hour, State, Time, Member, Day } from "@/waterbear3";
+
+const nextState = (hour: Hour) => {
   if (hour.state !== undefined && hour.state === "on") {
     return "off";
   }
@@ -8,7 +10,7 @@ const nextState = (hour: any) => {
   return "wfh";
 };
 
-const toggle = (hour: any) => {
+const toggle = (hour: Hour) => {
   const name = hour.label ? hour.label : hour.name;
   hour.label = name;
   hour.state = nextState(hour);
@@ -19,10 +21,10 @@ const toggle = (hour: any) => {
 
 // @TODO the hour is the index not the value needs remapping where restoring the label
 export default {
-  nick: (state: any, name: string) => {
+  nick: (state: State, name: string) => {
     state.session.user.nick = name;
   },
-  toggleNight: (state: any, time: any) => {
+  toggleNight: (state: State, time: Time) => {
     const oldHour = state.session.user.days[time.day].night[time.hour];
     //    const hour = toggle(oldHour, time);
     const hour = toggle(oldHour);
@@ -30,7 +32,7 @@ export default {
     state.session.change = time;
     return hour;
   },
-  toggleDay: (state: any, time: any) => {
+  toggleDay: (state: State, time: Time) => {
     const oldHour = state.session.user.days[time.day].day[time.hour];
     //    const hour = toggle(oldHour, time);
     const hour = toggle(oldHour);
@@ -38,19 +40,16 @@ export default {
     state.session.change = time;
     return hour;
   },
-  day: (state: any, hours: any) => {
-    if (!state.session.user.days) {
-      state.session.user.days = [];
-    }
-    state.session.user.days.push(hours);
+  day: (state: State, days: Array<Day>) => {
+    state.session.user.days = days;
   },
-  addMember: (state: any, member: any) => {
+  addMember: (state: State, member: Member) => {
     state.members.push(member);
   },
-  replaceMembers: (state: any, members: any) => {
+  replaceMembers: (state: State, members: Array<Member>) => {
     state.members = members;
   },
-  updateMember: (state: any, memData: any) => {
+  updateMember: (state: State, memData: any) => {
     state.members[memData.memberNo] = memData.member;
   }
 };
