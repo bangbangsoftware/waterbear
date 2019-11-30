@@ -1,7 +1,11 @@
 import refine from "./refine.js";
 import store from "../../store.js";
+import { Project, Story, Task } from "@/waterbear3.js";
 
-const storyOne = {
+const storyOne = <Story>{
+  id: 2,
+  index: 1,
+  selected: false,
   title: "Story number one",
   descAs: "",
   descWant: "",
@@ -10,10 +14,15 @@ const storyOne = {
   colourNo: 4,
   acs: [],
   valid: true,
-  error: ""
+  error: "",
+  points: 8,
+  tasks: []
 };
 
-const storyTwo = {
+const storyTwo = <Story>{
+  id: 2,
+  index: 2,
+  selected: false,
   title: "Story number two",
   descAs: "",
   descWant: "",
@@ -22,12 +31,15 @@ const storyTwo = {
   colourNo: 4,
   acs: [],
   valid: true,
-  points: 3,
-  error: ""
+  error: "",
+  points: 8,
+  tasks: []
 };
 
-const storyThree = {
-  name:"WHAT!",
+const storyThree = <Story>{
+  id: 3,
+  index: 3,
+  selected: false,
   title: "Story number three",
   descAs: "",
   descWant: "",
@@ -39,7 +51,7 @@ const storyThree = {
   error: "",
   points: 8,
   tasks: [
-    {
+    <Task>{
       error: "",
       name: "Do a load of vuejs",
       desc: "",
@@ -50,7 +62,11 @@ const storyThree = {
   ]
 };
 
-const storyFour = {
+const storyFour = <Story>{
+  id: 4,
+  index: 4,
+  selected: false,
+  points: 0,
   title: "Story number four",
   descAs: "",
   descWant: "",
@@ -61,7 +77,7 @@ const storyFour = {
   valid: true,
   error: "",
   tasks: [
-    {
+    <Task>{
       error: "",
       name: "Do more  vuejs",
       desc: "",
@@ -72,8 +88,10 @@ const storyFour = {
   ]
 };
 
-const storyFive = {
-  name:"COME ON!!",
+const storyFive = <Story>{
+  id: 5,
+  index: 5,
+  selected: false,
   title: "Story number five",
   descAs: "",
   descWant: "",
@@ -85,7 +103,7 @@ const storyFive = {
   error: "",
   points: 3,
   tasks: [
-    {
+    <Task>{
       error: "",
       name: "Do more  vuejs",
       desc: "",
@@ -96,7 +114,7 @@ const storyFive = {
   ]
 };
 
-const project = {
+const project = <Project>{
   _id: "faker",
   stories: [storyOne, storyTwo, storyThree, storyFour, storyFive]
 };
@@ -123,7 +141,7 @@ describe("refined.test.js", () => {
           resolve(project);
         });
       },
-      put: (prj:any) => {
+      put: (prj: any) => {
         return new Promise(resolve => {
           console.log(prj);
           resolve(prj);
@@ -143,17 +161,33 @@ describe("refined.test.js", () => {
 
   it("3a. Should be able to set session to first incomplete ", () => {
     const first = refine.methods.startIncomplete(project);
-    expect(first.name).toBe(storyThree.name);
+    if (!first) {
+      expect("No story").toBe(false);
+    } else {
+      expect(first.title).toBe(storyThree.title);
+    }
   });
 
   it("3b. Should be to get next incomplete", () => {
     const next = refine.methods.nextIncomplete(project);
-    expect(next.name).toBe(storyFive.name);
+    if (!next) {
+      expect("No story").toBe(false);
+    } else {
+      expect(next.title).toBe(storyFive.title);
+    }
 
     const andAgain = refine.methods.nextIncomplete(project);
-    expect(andAgain.name).toBe(storyThree.name);
+    if (!andAgain) {
+      expect("No story").toBe(false);
+    } else {
+      expect(andAgain.title).toBe(storyThree.title);
+    }
 
     const onceAgain = refine.methods.nextIncomplete(project);
-    expect(onceAgain.name).toBe(storyFive.name);
+    if (!onceAgain) {
+      expect("No story").toBe(false);
+    } else {
+      expect(onceAgain.title).toBe(storyFive.title);
+    }
   });
 });

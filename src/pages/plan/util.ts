@@ -1,6 +1,7 @@
 import store from "../../store";
 
 import data from "./sprint/chart/data";
+import { Story, BacklogState } from '@/waterbear3';
 
 const incompleteFilter = (story: any) =>
   story.tasks === undefined ||
@@ -98,8 +99,8 @@ export default {
       })
       .catch((err: any) => console.error(err));
   },
-  backlogState: (project: any) => {
-    const stories = project.stories
+  backlogState: (project: any): BacklogState => {
+    const stories:Array<Story> = project.stories
       .filter((s: any) => s !== undefined)
       .filter((s: any) => s !== null)
       .map((story: any, i: number) => {
@@ -109,8 +110,8 @@ export default {
         }
         return story;
       });
-    const incomplete = stories.filter((story: any) => incompleteFilter(story));
-    const complete = stories.filter((story: any) => completeFilter(story));
+    const incomplete:Array<Story> = stories.filter((story: any) => incompleteFilter(story));
+    const complete:Array<Story> = stories.filter((story: any) => completeFilter(story));
     return {
       incomplete,
       complete

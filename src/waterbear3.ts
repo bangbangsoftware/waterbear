@@ -143,7 +143,7 @@ export interface Session {
   task: Task | false;
   change: Time;
   loaded: boolean;
-  incomplete: boolean;
+  incomplete: number;
 }
 
 export interface Balance {
@@ -259,6 +259,11 @@ export interface Task {
   error: string;
 
   history: Array<History>;
+}
+
+export interface BacklogState {
+  incomplete :Array<Story>;
+  complete :Array<Story>;
 }
 
 export interface Story {

@@ -59,7 +59,7 @@ const session: Session = {
   skills: false,
   userCtx: "",
   change: <Time>{},
-  incomplete: false
+  incomplete: 0
 };
 
 const signup = {
