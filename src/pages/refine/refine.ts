@@ -9,9 +9,9 @@ import valid from "../story/valid";
 
 import check from "../../loginCheck";
 import util from "../plan/util";
-import { Project, Story, Session, Database, BacklogState } from '@/waterbear3';
+import { Project, Story, Session, Database, BacklogState } from "@/waterbear3";
 
-const jumpIncomplete = (project: Project, amount: number): Story| false => {
+const jumpIncomplete = (project: Project, amount: number): Story | false => {
   const state = comp.methods.backlogState(project);
   const lastIndex = state.incomplete.length - 1;
 
@@ -47,7 +47,7 @@ const jumpIncomplete = (project: Project, amount: number): Story| false => {
   return next;
 };
 
-const jump = (project: Project, amount: number): Story| false => {
+const jump = (project: Project, amount: number): Story | false => {
   const current = jumpIncomplete(project, amount);
   if (current === undefined) {
     return false;
@@ -83,7 +83,7 @@ const comp = {
       }
       console.log("posting Story");
       store.commit("postStory");
-      const prj:Project = store.state.session.project;
+      const prj: Project = store.state.session.project;
       console.log("Adding stories to..");
       console.log(prj);
       const db: Database = store.state.db;

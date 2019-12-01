@@ -10,6 +10,7 @@ import "font-awesome/css/font-awesome.css";
 import "../node_modules/vuetify/dist/vuetify.min.css";
 import Vuetify from "vuetify";
 import store from "./store";
+import "babel-polyfill";
 
 console.log("Hello from %cTardigrade", "font-size:300%; color:orange");
 console.log("main", store);

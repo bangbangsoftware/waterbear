@@ -262,8 +262,8 @@ export interface Task {
 }
 
 export interface BacklogState {
-  incomplete :Array<Story>;
-  complete :Array<Story>;
+  incomplete: Array<Story>;
+  complete: Array<Story>;
 }
 
 export interface Story {

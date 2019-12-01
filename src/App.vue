@@ -73,7 +73,7 @@ export default {
       drawer: false,
       items: [
         {
-          title: "Your details",
+          title: "Details",
           route: "member",
           icon: "account_box"
         },

@@ -11,6 +11,8 @@ import "./hours/hours.vue";
 import "./skills/skills.vue";
 import { Member, Session } from "@/waterbear3";
 
+import state from "../../persist/state";
+
 const comp = {
   name: "member",
   beforeCreate,
@@ -28,6 +30,7 @@ const comp = {
     save: () => {
       const session = <Session>store.state.session;
       user.updateUser(session.user, session.project);
+      state.save(session.project);
     }
   }
 };

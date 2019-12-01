@@ -7,7 +7,7 @@ import store from "../../../store";
 import user from "../../../user";
 
 import util from "./../util";
-import { BacklogState } from '@/waterbear3';
+import { BacklogState } from "@/waterbear3";
 
 const comp = {
   name: "backlog",
@@ -22,7 +22,7 @@ const comp = {
     complete: {
       get: function() {
         const that = <any>this;
-        const state:BacklogState = util.backlogState(that.project);
+        const state: BacklogState = util.backlogState(that.project);
         return state.complete;
       },
       set: function(what: any) {
@@ -31,7 +31,7 @@ const comp = {
     }
   },
   beforeCreate: function() {
-    const state:BacklogState = util.backlogState(store.state.session.project);
+    const state: BacklogState = util.backlogState(store.state.session.project);
     const that = <any>this;
     that.complete = state.complete;
   },
@@ -63,7 +63,9 @@ const comp = {
       store.commit("planState", "sprint");
     },
     completeStories: function() {
-      const state:BacklogState = util.backlogState(store.state.session.project);
+      const state: BacklogState = util.backlogState(
+        store.state.session.project
+      );
       return state.complete;
     }
   }
