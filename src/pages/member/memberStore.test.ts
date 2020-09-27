@@ -1,4 +1,4 @@
-import memberStore from "./memberStore.js";
+import memberStore from "./memberStore";
 
 it("That nick name can be stored", () => {
   const state = {

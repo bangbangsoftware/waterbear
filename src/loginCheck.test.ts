@@ -1,5 +1,5 @@
-import store from "./store.js";
-import check from "./loginCheck.js";
+import store from "./store";
+import check from "./loginCheck";
 import Vue from "vue";
 
 describe("login check depends on db", () => {

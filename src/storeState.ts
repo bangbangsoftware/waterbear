@@ -6,7 +6,8 @@ import {
   Session,
   Project,
   Database,
-  Time
+  Time,
+  Sprint
 } from "@/waterbear3";
 
 const story: Story = {
@@ -30,6 +31,20 @@ const story: Story = {
   selected: false
 };
 
+const project = <Project>{
+  _id: "-1",
+  name: "",
+  stories: [],
+  members: Array<Member>(),
+  defaults,
+  sprints: [],
+  current: {
+    sprintIndex: -1
+  },
+  gitPrefix: "WP",
+  git: { todo: [], done: [] },
+};
+
 const session: Session = {
   planState: "sprintSelect",
   loaded: false,
@@ -40,32 +55,24 @@ const session: Session = {
     startDate: new Date(),
     startTime: "",
     list: [],
-    name: ""
-  },
-  project: <Project>{
-    _id: "-1",
     name: "",
-    stories: [],
-    members: Array<Member>(),
-    defaults,
-    sprints: [],
-    current: {
-      sprintIndex: -1
-    }
+    defined: true
   },
+  project,
   user: <Member>{},
-  couchURL: "http://localhost:5984/",
+//  couchURL: "http://localhost:5984/",
+  couchURL: "http://pop/watebase/",
   planChartData: false,
   skills: false,
   userCtx: "",
   change: <Time>{},
-  incomplete: 0
+  incomplete: 0,
 };
 
 const signup = {
   stages: []
 };
-const db: Database = { get: () => {}, put: () => {} };
+const db: Database = { get: () => {}, put: () => {}, changes: () => {} };
 
 export default {
   menu: false,

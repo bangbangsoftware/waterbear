@@ -1,5 +1,5 @@
-import feedComp from "./feed.js";
-import store from "../../store.js";
+import feedComp from "./feed";
+import store from "../../store";
 
 describe("feed.spec.js", () => {
   it("should have a feed array", () => {

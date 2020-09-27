@@ -1,8 +1,8 @@
-import diary from "./setup/diary.js";
-// import util from "./util.js";
+import diary from "./setup/diary";
+// import util from "./util";
 
-import defaults from "./setup/hours.js";
-import { Member } from "@/waterbear3";
+import defaults from "./setup/hours";
+import { Member, Sprint, Story, Task } from "@/waterbear3";
 
 const dataOne = () => {
   const startDate = new Date(2018, 7, 21, 9, 0, 0, 0);
@@ -24,31 +24,85 @@ const dataOne = () => {
   const both = diary.setup(members, startDate);
   const member = both.members[0];
 
-  const taskOne = {
+  const taskOne = <Task>{
+    id: 1,
+    storyIndex: 1,
+ 
     name: "Go go go!",
-    status: "todo",
-    skill: "bang",
+    desc: "trust me",
     est: 2,
-    assignedTo: {
-      id: 3
-    }
-  };
-  const taskTwo = {
-    name: "Go on then",
-    status: "todo",
-    est: 8,
     skill: "bang",
-    assignedTo: {
-      id: 0
-    }
+
+    status: "todo",
+    assignedTo: <Member> <unknown>{
+      id: 3
+    },
+
+    blockers: [],
+  
+    valid: true,
+    error: "",
+  
+    history: []
   };
-  const story = {
-    tasks: [taskOne, taskTwo]
+
+  const taskTwo = <Task>{
+    id: 2,
+    storyIndex: 1,
+ 
+    name: "Go on then",
+    desc: "blar",
+    est: 2,
+    skill: "bang",
+
+    status: "todo",
+    assignedTo: <Member> <unknown>{
+      id: 3
+    },
+
+    blockers: [],
+  
+    valid: true,
+    error: "",
+  
+    history: []
   };
-  const sprint = {
+
+
+
+  const tasks = new Array<Task>();
+  tasks.push(taskOne);
+  tasks.push(taskTwo);
+
+  const story = <Story> {
+    id: 1,
+    index: 1,
+    title: "",
+    descAs: "",
+    descWant: "",
+    descThat: "",
+  
+    tasks,
+  
+    tags: [],
+    colourNo: 2,
+    acs: [],
+  
+    points: 10,
+  
+    valid: false,
+    error: "",
+    selected: false
+  };
+
+  const list = new Array<Story>();
+  list.push(story);
+
+  const sprint = <Sprint> {
+    startTime: "10:10",
+    name: "a sprint",
     startDate,
-    list: [story],
-    days: 10
+    list,
   };
 
   return {

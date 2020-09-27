@@ -1,4 +1,4 @@
-import comp from "./team.js";
+import comp from "./team";
 
 it("should have a toggle method", () => {
   const app = comp.methods;

@@ -1,5 +1,5 @@
-import util from "./util.js";
-import dataOne from "./test.data.js";
+import util from "./util";
+import dataOne from "./test.data";
 
 describe("sprintStat.test.js: How time works with the sprint and members", () => {
   it("Should be able tell how many hours a member has on a given day", () => {

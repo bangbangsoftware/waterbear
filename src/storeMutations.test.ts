@@ -1,4 +1,4 @@
-import mut from './storeMutations.js';
+import mut from './storeMutations';
 import { State, Session, Project } from '@/waterbear3';
 
 const session:Session = <Session> {loaded: false};
@@ -19,8 +19,8 @@ it('Should be able to push a new stage', () => {
 });
 
 it('Should be able to set a database', () => {
-  state.db =  {get: () => { return "NOSE"}, put: () => {}};
-  const mydb = {get: () => { return "teeth"}, put: () => {}};
+  state.db =  {get: () => { return "NOSE"}, put: () => {}, changes: () => {}};
+  const mydb = {get: () => { return "teeth"}, put: () => {}, changes: () => {}};
   mut.db(state, mydb);
   expect(state.db.get()).toBe('teeth');
 });

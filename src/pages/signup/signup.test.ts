@@ -1,5 +1,5 @@
 // import Vue from 'vue'
-import signup from "./signup.js";
+import signup from "./signup";
 // import signup from 'src/pages/signup/signup.vue'
 
 describe("signup.vue", () => {

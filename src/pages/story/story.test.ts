@@ -1,6 +1,6 @@
-import story from "./story.js";
-import store from "../../store.js";
-import { Story, Task } from '@/waterbear3.js';
+import story from "./story";
+import store from "../../store";
+import { Story, Task } from '@/waterbear3';
 
 const blankStory = () => {
   const myStory:Story = {
@@ -29,7 +29,7 @@ const blankStory = () => {
   return myStory;
 };
 
-describe("story.test.js", () => {
+describe("story.test", () => {
   beforeEach(() => {
     // store setup
     const project = {

@@ -1,7 +1,7 @@
-import project from "./project.js";
-import store from "../../../store.js";
+import project from "./project";
+import store from "../../../store";
 
-describe("project.spec.js", () => {
+describe("project.spec", () => {
   it("should have empy fields to start with ", () => {
     store.commit("db", {
       fakedb: "true"

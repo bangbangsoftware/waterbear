@@ -1,8 +1,8 @@
-import sprint from "./sprintStat.js";
+import sprint from "./sprintStat";
 
-import dataOne from "../test.data.js";
+import dataOne from "../test.data";
 
-describe("sprintStat.test.js: How time works with the sprint and members", () => {
+describe("sprintStat.test: How time works with the sprint and members", () => {
   it("Should tell many hours left in sprint for two members", () => {
     const data = dataOne();
     const hours = sprint.hoursLeft(data.sprint, data.members, data.startDate);
@@ -23,7 +23,7 @@ describe("sprintStat.test.js: How time works with the sprint and members", () =>
 // Need to describe how the sprint is doing by with % behind/infront.
 // What tasks are dragging
 // What tasks where done quickly
-describe("sprintStat.test.js: Describe how the sprint is doing", () => {
+describe("sprintStat.test: Describe how the sprint is doing", () => {
   xit("Should be able to tell how far behind a sprint is", () => {
     const data = dataOne();
     const mockSprint = data.sprint;

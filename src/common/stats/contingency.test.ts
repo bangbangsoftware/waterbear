@@ -1,10 +1,10 @@
-import contingency from "./contingency.js";
+import contingency from "./contingency";
 
-import memberData from "./test.member.js";
-import sprintData from "./test.sprint.js";
+import memberData from "./test.member";
+import sprintData from "./test.sprint";
 const freshData = JSON.parse(JSON.stringify(sprintData));
 
-describe("contingency.test.js: Should be able to give contingency", () => {
+describe("contingency.test: Should be able to give contingency", () => {
   it("be able to give contingency for a health sprint", () => {
     /// ??? sprintData.startDate = new Date(2018, 7, 21, 12, 20, 0, 0);
     const now = new Date(2018, 7, 2, 12, 20, 0, 0);

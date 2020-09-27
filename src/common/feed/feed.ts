@@ -1,13 +1,6 @@
 import store from "../../store";
 import Vue from "vue";
 
-const zeroFill = (val: number) => {
-  if (val < 10) {
-    return "0" + val;
-  } else {
-    return val;
-  }
-};
 
 const feedComp = {
   name: "feed",
@@ -26,6 +19,14 @@ const feedComp = {
         zeroFill(date.getSeconds())
       );
     }
+  }
+};
+
+const zeroFill = (val: number) => {
+  if (val < 10) {
+    return "0" + val;
+  } else {
+    return val;
   }
 };
 

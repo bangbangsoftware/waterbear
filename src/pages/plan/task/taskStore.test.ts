@@ -1,4 +1,4 @@
-import store from "./taskStore.js";
+import store from "./taskStore";
 
 it("task error can be set", () => {
   const state = {

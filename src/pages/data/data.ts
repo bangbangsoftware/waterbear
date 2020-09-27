@@ -18,7 +18,6 @@ const comp = {
     user.picked = true;
   },
   data: () => {
-    console.log(store.state);
     const keys = Object.keys(store.state.session);
     return {
       session: store.state.session,

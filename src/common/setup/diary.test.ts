@@ -1,4 +1,4 @@
-import comp from "./diary.js";
+import comp from "./diary";
 
 it("should have some extra functions", () => {
   expect(typeof comp.makeUnique).toBe("function");

@@ -1,6 +1,6 @@
-import valid from "./valid.js";
+import valid from "./valid";
 
-it("valid.spec.js", () => {
+it("valid.spec", () => {
   expect(typeof valid).toBe("function");
 });
 

@@ -8,8 +8,7 @@ abilities and times fit in.
 
 ## Installing / Getting started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
+A quick introduction of the minimal setup you need to get up & running.
 
 ```shell
 # install dependencies
@@ -83,6 +82,15 @@ packagemanager deploy your-project -s server.com -u username -p password
 ```
 
 And again you'd need to tell what the previous code actually does.
+
+## TO DO
+
+* Auto log out problem when no user registered
+* Git details object rendering error
+* Sort out project screen
+* Sort out sprint planning
+* Sort out backlog
+.... start again!
 
 ## Versioning
 

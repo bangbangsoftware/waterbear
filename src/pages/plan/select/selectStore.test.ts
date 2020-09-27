@@ -1,4 +1,4 @@
-import store from "./selectStore.js";
+import store from "./selectStore";
 
 it("if can be selected", () => {
   const state = {

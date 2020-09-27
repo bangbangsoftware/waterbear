@@ -66,6 +66,7 @@ export interface Movement {
 export interface Database {
   put: Function;
   get: Function;
+  changes: Function;
 }
 
 export interface Stat {
@@ -103,6 +104,31 @@ export interface Defaults {
   skills: string[];
 }
 
+
+export interface GitMessage {
+  message: string;
+  prefix: string;
+  command: string;
+  taskNo: number;
+  misc: string;
+}
+
+export interface GitCommit {
+  sha: string;
+  author: { name: string; email: string };
+  date: Date;
+  message: string;
+}
+
+export interface GitProcessFn {
+  (project: Project, gitCommit: GitCommit, gitMessage: GitMessage):Project;
+}
+
+export interface GitPlugin {
+  command: string;
+  process: GitProcessFn;
+}
+
 export interface Project {
   id?: string;
   _id: string;
@@ -114,6 +140,11 @@ export interface Project {
   current: {
     sprintIndex: number;
   };
+  gitPrefix: string;
+  git: {
+    todo: Array<GitCommit>;
+    done: Array<GitCommit>;
+  };
 }
 
 export interface PlanChartData {}
@@ -123,8 +154,8 @@ export interface Sprint {
   startDate: Date;
   startTime: string;
   name: string;
-  defined?: boolean;
-  list: Array<Task>;
+  defined: boolean;
+  list: Array<Story>;
 }
 
 export interface Feed {}
@@ -235,6 +266,21 @@ export interface History {
   user: Member;
 }
 
+export interface Blocker {
+  hours: number;
+  why: string;
+}
+
+export interface TaskState {
+    skilled:boolean;
+    done: number;
+    left: number;
+    finished: boolean;
+    paused: boolean;
+    reason: string;
+    abandoned: boolean;
+} 
+
 export interface Task {
   id: number;
   storyIndex: number;
@@ -248,13 +294,13 @@ export interface Task {
 
   assignedTo?: Member;
 
-  start: Date;
-  end: Date;
-  paused: Date;
+  start?: Date;
+  end?: Date;
+  paused?: Date;
 
-  blockers: Array<string>;
+  blockers: Array<Blocker>;
 
-  abandoned: Abandonded;
+  abandoned?: Abandonded;
   valid: boolean;
   error: string;
 

@@ -1,6 +1,6 @@
-import comp from "./colours.js";
+import comp from "./colours";
 
-describe("colour.spec.js", () => {
+describe("colour.spec", () => {
   it("should have a bunch of functions", done => {
     const app = comp.methods;
     expect(typeof app.navigateTo).toBe("function");

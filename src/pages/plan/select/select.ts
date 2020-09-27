@@ -29,7 +29,7 @@ const comp = {
   data: () => {
     const sprint: Sprint =
       <any>store.state.session.project.sprints === undefined
-        ? { startDate: new Date(), startTime: "", name: "", list: [] }
+        ? { startDate: new Date(), startTime: "", name: "", list: [], defined: false }
         : store.state.session.project.sprints[
             store.state.session.project.current.sprintIndex
           ];

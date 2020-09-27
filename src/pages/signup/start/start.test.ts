@@ -1,5 +1,5 @@
-import start from "./start.js";
-import store from "../../../store.js";
+import start from "./start";
+import store from "../../../store";
 import Vue from "vue";
 
 describe("start.vue", () => {

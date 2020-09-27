@@ -1,6 +1,6 @@
-import comp from "./list.js";
+import comp from "./list";
 
-describe("list.spec.js", () => {
+describe("list.spec", () => {
   it("should have a bunch of functions", done => {
     const app = comp.methods;
     expect(typeof app.navigateTo).toBe("function");

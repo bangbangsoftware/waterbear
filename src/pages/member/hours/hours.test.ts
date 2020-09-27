@@ -1,6 +1,6 @@
-import comp from "./hours.js";
+import comp from "./hours";
 
-describe("hours.spec.js", () => {
+describe("hours.spec", () => {
   it("should have a bunch of functions", done => {
     const app = comp.methods;
     expect(typeof app.toggleDay).toBe("function");

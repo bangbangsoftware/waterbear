@@ -1,4 +1,4 @@
-import Actions from "./actions.js";
+import Actions from "./actions";
 import { Story } from '@/waterbear3';
 
 describe("acceptance.spec.js", () => {

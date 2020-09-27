@@ -1,4 +1,4 @@
-import user from "./user.js";
+import user from "./user";
 
 describe("user.spec.js", () => {
   it("should have a bunch of functions  ", done => {

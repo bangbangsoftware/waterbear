@@ -15,37 +15,9 @@ import util from "../../plan/util";
 import tasklist from "./tasklist/tasklist.vue";
 import { Member, Session, Sprint, Task, Stat } from "@/waterbear3";
 
-const getName = (session: Session): string => {
-  const owner = session.project.members.find((m: Member) => m.owner);
-  if (!owner) {
-    console.log("Cannot find owner");
-    return "There is no sprint running or project owner?!";
-  }
-  return session.user.owner
-    ? "You need to start a sprint!"
-    : "There is no sprint running, talk to " + owner.nick;
-};
+import taskUpdater from '@/common/sprint/taskUpdater';
 
 const getSession = () => <Session>store.state.session;
-
-const sprintless = (session: Session): Sprint => {
-  const name = getName(session);
-  const defined = false;
-  const needSprint: Sprint = {
-    startDate: new Date(),
-    startTime: "",
-    name,
-    list: [],
-    defined
-  };
-  return needSprint;
-};
-
-const sprint = (session: Session): Sprint => {
-  const spt = session.project.sprints[session.project.current.sprintIndex];
-  spt.defined = true;
-  return spt;
-};
 
 // This is wrong it should be total member hours (100%) over hour many member hours left
 const percent = (stat: Stat) => {
@@ -88,18 +60,10 @@ const progressList = (currentSprint: Sprint, stat: Stat) => {
   return progressList;
 };
 
-const current = (session: Session): Sprint => {
-  const noSprint: boolean =
-    session.project.current.sprintIndex < 0 ||
-    session.project.sprints === undefined ||
-    session.project.sprints.length === 0;
-  return noSprint ? sprintless(session) : sprint(session);
-};
-
 const donetest = <any>[];
 
 const currentTasks = () => {
-  const currentSprint: Sprint = current(getSession());
+  const currentSprint: Sprint = taskUpdater.current(getSession());
   const ts = tasks.allTasks(currentSprint);
   console.log("sprint", currentSprint);
   console.log("tasks", currentSprint.list.length);
@@ -119,7 +83,7 @@ const comp = {
   },
   computed: {
     tasks: function() {
-      const currentSprint = current(getSession());
+      const currentSprint = taskUpdater.current(getSession());
       const all = tasks.allTasks(currentSprint).map((task: Task, i: number) => {
         const block = task;
         block.id = i;
@@ -154,7 +118,7 @@ const comp = {
     console.log(session.user);
     const project = session.project;
     const members = project.members;
-    const currentSprint = current(session);
+    const currentSprint = taskUpdater.current(session);
     const stat = <Stat>sprintStat.contingency(currentSprint, members);
     const endDate = tasks.endDate(currentSprint).getTime();
     const now = new Date().getTime();
@@ -175,38 +139,11 @@ const comp = {
     endDate: (sprint: Sprint) => tasks.endDate(sprint),
     assign: function(sprint: Sprint, task: Task) {
       const that = <any>this;
-      console.log("You have selected", task);
-      task.assignedTo = that.session.user.name;
-      if (!task.history) {
-        task.history = [];
-      }
-      const date = new Date();
-      const action = "assigned";
-      const user = that.session.user.name;
-      const history = {
-        date,
-        action,
-        user
-      };
-      task.history.push(history);
-      store.commit("sprintTask", task);
-      util.storeSprintTask(task);
+      taskUpdater.assign(sprint, task, that.session.user);
     },
     unassign: function(sprint: Sprint, task: Task) {
-      console.log("You have selected", task);
-      task.assignedTo = undefined;
-      const date = new Date();
-      const action = "unassigned";
       const that = <any>this;
-      const user = that.session.user.name;
-      const history = {
-        date,
-        action,
-        user
-      };
-      task.history.push(history);
-      store.commit("sprintTask", task);
-      util.storeSprintTask(task);
+      taskUpdater.unassign(sprint, task, that.session.user);
     }
   }
 };

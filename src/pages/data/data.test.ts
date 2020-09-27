@@ -1,4 +1,4 @@
-import comp from "./data.js";
+import comp from "./data";
 
 it("should have a bunch of functions", () => {
   const app = comp.methods;

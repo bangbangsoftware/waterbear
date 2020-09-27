@@ -1,5 +1,5 @@
-import comp from "./task.js";
-import store from "../../../store.js";
+import comp from "./task";
+import store from "../../../store";
 
 it("Can post tasks", () => {
   const mockDB = {

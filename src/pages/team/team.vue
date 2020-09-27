@@ -10,8 +10,8 @@
             <v-layout row wrap>
                 <div class="subhead">Time</div>
             </v-layout>
-            <v-container v-for="(day, index) in days" :key="day.format" grid-list-md text-xs-center>
-                <v-layout row wrap>
+            <v-container  class="team-line" v-for="(day, index) in days" :key="day.format" grid-list-md text-xs-center>
+                <v-layout  row wrap>
                     <v-flex xs12 v-if="day.newMonth">
                         <v-card>{{day.newMonth}}</v-card>
                     </v-flex>
@@ -19,8 +19,9 @@
                         <v-card class="blue" >
                                 <v-card-text>{{day.format}}</v-card-text>
                         </v-card>
-                    </v-flex>
-                    <v-flex xs2 v-if="index > 1" v-for="(member,m) in session.project.members" :key="m" >
+                    </v-flex> 
+                    <div v-if="index > 1">
+                    <v-flex xs2  v-for="(member,m) in session.project.members" :key="m" >
                         <v-card v-if="member.diary[index]" :class="member.diary[index].colour" >
                             <v-card-text @click='toggle(m,index)'>
                                     {{member.diary[index].display}}
@@ -45,6 +46,7 @@
                             </v-card-text>
                         </v-card>
                     </v-flex>
+                    </div>
                     <v-flex v-if="index === 0" xs2>
                         <v-card light class="white">
                             <v-card-text class="px-0">Date</v-card-text>

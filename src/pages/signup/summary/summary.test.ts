@@ -1,5 +1,5 @@
-import summary from "./summary.js";
-import store from "../../../store.js";
+import summary from "./summary";
+import store from "../../../store";
 
 it("should have empy fields to start with ", () => {
   const data = summary.data();

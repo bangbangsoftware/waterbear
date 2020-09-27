@@ -1,6 +1,6 @@
-import refine from "./refine.js";
-import store from "../../store.js";
-import { Project, Story, Task } from "@/waterbear3.js";
+import refine from "./refine";
+import store from "../../store";
+import { Project, Story, Task } from "@/waterbear3";
 
 const storyOne = <Story>{
   id: 2,
@@ -131,7 +131,7 @@ const project = <Project>{
 // 2. Be able to add story points
 // 3. Be able go to next incomplete story
 //
-describe("refined.test.js", () => {
+describe("refined.test", () => {
   beforeEach(() => {
     // store setup
     store.commit("project", project);

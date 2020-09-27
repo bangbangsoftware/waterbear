@@ -1,5 +1,5 @@
-import storyStore from './storyStore.js';
-import { Story, State, Session } from '@/waterbear3.js';
+import storyStore from './storyStore';
+import { Story, State, Session } from '@/waterbear3';
 
 const story:Story = {
   id: 0,

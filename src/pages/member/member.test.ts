@@ -1,4 +1,4 @@
-import comp from "./member.js";
+import comp from "./member";
 
 it("should have a bunch of functions", () => {
   const app = comp.methods;

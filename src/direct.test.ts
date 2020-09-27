@@ -1,5 +1,5 @@
-import direct from "./direct.js";
-import store from "./store.js";
+import direct from "./direct";
+import store from "./store";
 import Vue from "vue";
 import { Member } from '@/waterbear3';
 

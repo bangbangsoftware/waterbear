@@ -13,8 +13,11 @@ import refineMutations from "./pages/refine/refineStore";
 
 import state from "./storeState";
 import { Member, State, Project, Database } from "@/waterbear3";
+import { gitProjectChanges } from './gitChanges';
 
 Vue.use(Vuex);
+
+
 
 const mutations: any = {
   loaded: (state: State, l: boolean) => {
@@ -26,6 +29,26 @@ const mutations: any = {
   },
   db: (state: State, database: Database) => {
     state.db = database;
+
+    state.db.changes({
+      since: 'now',
+      live: true,
+      include_docs: true
+    }).on('change', function (change:any) {
+      // change.id contains the doc id, change.doc contains the doc
+      console.log("COUCH Updated");
+      console.log(change);
+      const project = gitProjectChanges(change.doc);
+      mutations.project(state, project);
+    if (change.deleted) {
+        // document was deleted
+      } else {
+        // document was added/modified
+      }
+    }).on('error', function (err:any) {
+      // handle errors
+      console.error(err);
+    });
   },
   error: (state: State, error: string) => {
     console.log("session now has this error:" + error);

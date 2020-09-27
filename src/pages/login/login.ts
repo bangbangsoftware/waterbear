@@ -99,6 +99,7 @@ const comp = {
         }
         return "Missing password";
       }
+
       const that = <any>this;
       const remoteCoach = that.session.couchURL + name;
       const db =
@@ -106,6 +107,7 @@ const comp = {
         //           new PouchDB(remoteCoach, pouchOpts, error);
         new PouchDB(remoteCoach);
       //           :PouchDB(remoteCoach, pouchOpts, error);
+
       store.commit("db", db);
       user
         .login(email, pw, db)

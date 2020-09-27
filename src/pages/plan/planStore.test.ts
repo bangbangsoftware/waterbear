@@ -1,4 +1,4 @@
-import store from "./planStore.js";
+import store from "./planStore";
 
 it("should be able to change plan state", () => {
   const state = {

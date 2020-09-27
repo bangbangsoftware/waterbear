@@ -1,4 +1,4 @@
-import sprint from "./validSprint.js";
+import sprint from "./validSprint";
 
 describe("validSprint.test.js: calculating days from a date", () => {
   it("Should be tell the difference between one day", () => {

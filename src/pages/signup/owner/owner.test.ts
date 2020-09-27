@@ -1,5 +1,5 @@
-import owner from "./owner.js";
-import store from "../../../store.js";
+import owner from "./owner";
+import store from "../../../store";
 import Vue from "vue";
 
 beforeEach(() => {

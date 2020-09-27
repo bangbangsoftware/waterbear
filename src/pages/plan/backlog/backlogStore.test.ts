@@ -1,4 +1,4 @@
-import store from "./backlogStore.js";
+import store from "./backlogStore";
 
 it("can add to sprint", () => {
   const state = {

@@ -1,6 +1,6 @@
-import comp from "./tags.js";
+import comp from "./tags";
 
-describe("tags.spec.js", () => {
+describe("tags.spec", () => {
   it("should have a functions", done => {
     expect(typeof comp.methods.navigateTo).toBe("function");
     done();
