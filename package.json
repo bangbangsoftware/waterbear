@@ -93,7 +93,7 @@
                 "vuex": "^3.0.1",
                 "watertype": "git+https://github.com/bangbangsoftware/watertype.git",
                 "webpack": "^4.27.1",
-                "webpack-cli": "^3.1.2",
+                "webpack-cli": "^3.3.12",
                 "yarn": "^1.12.3"
         },
         "gitHooks": {
